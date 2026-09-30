@@ -4,60 +4,60 @@ import { Badge } from "@/components/ui/badge";
 import { School, Users, MapPin } from "lucide-react";
 
 const initialData = [
-  { id: 1, type: "sekolah", name: "SD Negeri 1 Tarogong Kidul", address: "Jl. Patriot No. 1, Tarogong Kidul", recipients: 240, posyandu: false },
-  { id: 2, type: "sekolah", name: "SMP Negeri 2 Garut Kota", address: "Jl. Cimanuk No. 100, Garut Kota", recipients: 320, posyandu: false },
-  { id: 3, type: "posyandu", name: "Posyandu Melati Tarogong", address: "Kp. Tarogong RT 01/02", recipients: 85, posyandu: true },
-  { id: 4, type: "posyandu", name: "Posyandu Mawar Sukagalih", address: "Kel. Sukagalih, Tarogong Kidul", recipients: 72, posyandu: true },
-  { id: 5, type: "sekolah", name: "MI Al-Hidayah Cibatu", address: "Ds. Cibatu, Kec. Cibatu", recipients: 180, posyandu: false },
-  { id: 6, type: "posyandu", name: "Posyandu Kenanga Leles", address: "Ds. Leles, Kec. Leles, Garut", recipients: 65, posyandu: true },
+  { id: 1, type: "anggota", name: "Komunitas Warga RT 02/05 Beji", address: "Jl. Ridwan Rais, Beji, Kota Depok", recipients: 240, posyandu: false },
+  { id: 2, type: "anggota", name: "Kelompok Tani Perkotaan Kemiri Muka", address: "Jl. Margonda Raya No. 45, Beji", recipients: 180, posyandu: false },
+  { id: 3, type: "titik_distribusi", name: "Pos Distribusi RW 03 Tanah Baru", address: "Jl. R. Sanim, Tanah Baru, Beji", recipients: 85, posyandu: true },
+  { id: 4, type: "titik_distribusi", name: "Pos Distribusi RW 07 Kukusan", address: "Jl. KH. M. Usman, Kukusan, Beji", recipients: 95, posyandu: true },
+  { id: 5, type: "anggota", name: "Koperasi Warga Sukmajaya Bersatu", address: "Jl. Tole Iskandar, Sukmajaya, Depok", recipients: 320, posyandu: false },
+  { id: 6, type: "titik_distribusi", name: "Pos Layanan Sembako Pancoran Mas", address: "Jl. Raya Sawangan No. 12, Pancoran Mas", recipients: 110, posyandu: true },
 ];
 
 export default function MitraRecipients() {
   const [data] = useState(initialData);
   const [filterType, setFilterType] = useState("all");
 
-  const totalSekolah = data.filter(d => d.type === "sekolah").reduce((a, b) => a + b.recipients, 0);
-  const totalPosyandu = data.filter(d => d.type === "posyandu").reduce((a, b) => a + b.recipients, 0);
-  const total = totalSekolah + totalPosyandu;
+  const totalKomunitas = data.filter(d => d.type === "anggota").reduce((a, b) => a + b.recipients, 0);
+  const totalTitik = data.filter(d => d.type === "titik_distribusi").reduce((a, b) => a + b.recipients, 0);
+  const total = totalKomunitas + totalTitik;
 
   const filtered = data.filter(d => filterType === "all" || d.type === filterType);
 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Jumlah Penerima Bantuan</h2>
-        <p className="text-muted-foreground">Data penerima MBG dari Posyandu & Sekolah mitra SPPG</p>
+        <h2 className="text-2xl font-bold">Data Anggota & Titik Distribusi Wilayah</h2>
+        <p className="text-muted-foreground">Data persebaran anggota terdaftar dan pos distribusi di wilayah kerja Pos KKMP Kota Depok</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0">
+        <Card className="bg-gradient-to-br from-red-600 to-rose-700 text-white border-0">
           <CardContent className="p-5">
             <Users className="w-8 h-8 mb-2 opacity-80" />
             <p className="text-3xl font-bold">{total.toLocaleString("id-ID")}</p>
-            <p className="text-blue-100 text-sm mt-1">Total Penerima Bantuan</p>
+            <p className="text-red-100 text-sm mt-1">Total Anggota Terlayani</p>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white border-0">
+        <Card className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white border-0">
           <CardContent className="p-5">
             <School className="w-8 h-8 mb-2 opacity-80" />
-            <p className="text-3xl font-bold">{totalSekolah.toLocaleString("id-ID")}</p>
-            <p className="text-green-100 text-sm mt-1">Penerima dari Sekolah</p>
+            <p className="text-3xl font-bold">{totalKomunitas.toLocaleString("id-ID")}</p>
+            <p className="text-blue-100 text-sm mt-1">Anggota Kelompok & Komunitas</p>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0">
+        <Card className="bg-gradient-to-br from-emerald-600 to-teal-700 text-white border-0">
           <CardContent className="p-5">
             <Users className="w-8 h-8 mb-2 opacity-80" />
-            <p className="text-3xl font-bold">{totalPosyandu.toLocaleString("id-ID")}</p>
-            <p className="text-purple-100 text-sm mt-1">Penerima dari Posyandu</p>
+            <p className="text-3xl font-bold">{totalTitik.toLocaleString("id-ID")}</p>
+            <p className="text-emerald-100 text-sm mt-1">Warga di Pos Distribusi</p>
           </CardContent>
         </Card>
       </div>
 
       <div className="flex gap-2">
-        {["all", "sekolah", "posyandu"].map(t => (
+        {["all", "anggota", "titik_distribusi"].map(t => (
           <button key={t} onClick={() => setFilterType(t)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${filterType === t ? "bg-primary text-white" : "bg-muted hover:bg-muted/80"}`}>
-            {t === "all" ? "Semua" : t.charAt(0).toUpperCase() + t.slice(1)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${filterType === t ? "bg-orange-600 text-white" : "bg-muted hover:bg-muted/80"}`}>
+            {t === "all" ? "Semua" : t === "anggota" ? "Kelompok Anggota" : "Pos Distribusi"}
           </button>
         ))}
       </div>
@@ -69,8 +69,8 @@ export default function MitraRecipients() {
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <Badge className={item.type === "sekolah" ? "bg-green-100 text-green-700" : "bg-purple-100 text-purple-700"}>
-                      {item.type === "sekolah" ? "Sekolah" : "Posyandu"}
+                    <Badge className={item.type === "anggota" ? "bg-blue-100 text-blue-700" : "bg-emerald-100 text-emerald-700"}>
+                      {item.type === "anggota" ? "Komunitas Anggota" : "Pos Distribusi"}
                     </Badge>
                   </div>
                   <h4 className="font-semibold">{item.name}</h4>
@@ -79,12 +79,12 @@ export default function MitraRecipients() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-primary">{item.recipients}</p>
-                  <p className="text-xs text-muted-foreground">penerima</p>
+                  <p className="text-2xl font-bold text-red-600">{item.recipients}</p>
+                  <p className="text-xs text-muted-foreground">anggota</p>
                 </div>
               </div>
               <div className="mt-3 pt-3 border-t">
-                <p className="text-xs text-muted-foreground">Total penerima bantuan MBG tercatat</p>
+                <p className="text-xs text-muted-foreground">Tercatat aktif dalam jaringan distribusi Pos KKMP</p>
               </div>
             </CardContent>
           </Card>

@@ -6,31 +6,31 @@ import { fetchAllNews } from "@/lib/news";
 
 const FALLBACK_NEWS = [
   {
-    tag: "Kebijakan",
+    tag: "Koperasi",
     color: "emerald",
     time: "2 jam lalu",
-    title: "Pemerintah Tingkatkan Anggaran MBG 2026",
-    summary: "Anggaran program Makan Bergizi Gratis 2026 naik signifikan untuk perluasan jangkauan dapur MBG nasional.",
-    img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=200",
-    url: "https://satudata.garutkab.go.id/artikel/",
+    title: "Koperasi Merah Putih Mekarjaya Buka Jaringan Pasok Baru",
+    summary: "Gudang Pusat Mekarjaya memperluas integrasi pasokan sembako langsung dari gabungan kelompok tani lokal.",
+    img: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=200",
+    url: "/berita",
   },
   {
     tag: "Pasar",
     color: "orange",
     time: "5 jam lalu",
-    title: "Stabilisasi Harga Komoditas Pangan Pokok",
-    summary: "Pemerintah dan supplier berkolaborasi menjaga stabilitas harga beras, telur, dan minyak goreng.",
+    title: "Stabilisasi Harga Komoditas Pangan Pokok Anggota",
+    summary: "Koperasi menjamin kestabilan harga beras, telur, dan minyak goreng bagi seluruh anggota terdaftar.",
     img: "https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=200",
-    url: "https://satudata.garutkab.go.id/artikel/",
+    url: "/berita",
   },
   {
     tag: "Logistik",
     color: "blue",
     time: "1 hari lalu",
-    title: "Optimasi Rute Distribusi di 38 Provinsi",
-    summary: "Sistem logistik terintegrasi mempercepat distribusi komoditas segar ke dapur MBG seluruh Indonesia.",
+    title: "Penguatan Armada Distribusi ke 8 Cabang Depok",
+    summary: "Armada logistik internal KKMP menjadwalkan pengiriman harian dari gudang pusat ke pos cabang kelurahan.",
     img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=200",
-    url: "https://satudata.garutkab.go.id/artikel/",
+    url: "/berita",
   },
 ];
 
@@ -62,12 +62,12 @@ export default function NewsSection() {
     <section>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <Bell className="w-5 h-5 text-emerald-600" />
-          <h2 className="text-lg font-bold text-gray-900">Berita & Update</h2>
+          <Bell className="w-5 h-5 text-red-600" />
+          <h2 className="text-lg font-bold text-gray-900">Berita & Informasi Koperasi</h2>
         </div>
         <button
           onClick={() => navigate("/berita")}
-          className="text-xs font-medium text-emerald-600 hover:underline flex items-center gap-1"
+          className="text-xs font-medium text-red-600 hover:underline flex items-center gap-1"
         >
           Lihat Semua Berita <ArrowRight className="w-3 h-3" />
         </button>

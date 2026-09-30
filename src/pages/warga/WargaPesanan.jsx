@@ -18,7 +18,7 @@ const STATUS_STYLE = {
 export default function WargaPesanan() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
   const [orders, setOrders] = useState(() => getOrders(email));
 
   // Gabungkan Order dari rantai pasok (sumber status nyata) dengan pesanan lokal.
@@ -52,21 +52,21 @@ export default function WargaPesanan() {
     <div className="space-y-5">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Pesanan Saya</h1>
-        <p className="text-sm text-gray-500 mt-0.5">Pantau status belanja & pengiriman Anda</p>
+        <p className="text-sm text-gray-500 mt-0.5">Pantau status belanja anggota & pengiriman pos</p>
       </div>
 
       {orders.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
-          <div className="w-20 h-20 rounded-full bg-emerald-50 flex items-center justify-center">
-            <Package className="w-10 h-10 text-emerald-300" />
+          <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center">
+            <Package className="w-10 h-10 text-red-300" />
           </div>
           <div>
             <h2 className="text-lg font-bold text-gray-900">Belum Ada Pesanan</h2>
-            <p className="text-sm text-gray-500 mt-1">Pesanan yang Anda buat akan muncul di sini.</p>
+            <p className="text-sm text-gray-500 mt-1">Pesanan belanja kebutuhan pokok Anda akan muncul di sini.</p>
           </div>
           <button
             onClick={() => navigate("/marketplace")}
-            className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
+            className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
           >
             <ShoppingBag className="w-4 h-4" /> Mulai Belanja
           </button>
@@ -80,7 +80,7 @@ export default function WargaPesanan() {
               <button
                 key={order.id}
                 onClick={() => navigate(`/warga/pesanan/${order.id}`)}
-                className="w-full text-left bg-white rounded-2xl border border-gray-200 p-4 hover:border-emerald-400 hover:shadow-md transition-all"
+                className="w-full text-left bg-white rounded-2xl border border-gray-200 p-4 hover:border-red-400 hover:shadow-md transition-all"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -105,7 +105,7 @@ export default function WargaPesanan() {
                   <p className="text-xs text-gray-500">
                     {(order.items || []).length} item · {order.payment_method || "-"}
                   </p>
-                  <p className="text-sm font-bold text-emerald-600">{formatRp(order.grand_total)}</p>
+                  <p className="text-sm font-bold text-red-600">{formatRp(order.grand_total)}</p>
                 </div>
               </button>
             );

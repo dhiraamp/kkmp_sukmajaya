@@ -51,9 +51,9 @@ export default function MitraCart() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold flex items-center gap-2">
-          <ShoppingCart className="w-6 h-6 text-primary" /> Keranjang Pesanan
+          <ShoppingCart className="w-6 h-6 text-orange-600" /> Keranjang Pesanan Pos Cabang
         </h2>
-        <p className="text-muted-foreground">Kelola item yang akan dipesan ke supplier</p>
+        <p className="text-muted-foreground">Kelola item komoditas yang akan diajukan ke Gudang Pusat KKMP</p>
       </div>
 
       {cartItems.length === 0 ? (
@@ -61,7 +61,7 @@ export default function MitraCart() {
           <CardContent className="flex flex-col items-center justify-center py-20">
             <Package className="w-12 h-12 text-muted-foreground mb-3" />
             <p className="font-medium">Keranjang masih kosong</p>
-            <p className="text-sm text-muted-foreground">Tambahkan produk dari katalog supplier di Dashboard</p>
+            <p className="text-sm text-muted-foreground">Tambahkan produk dari katalog komoditas Gudang Pusat di Dashboard</p>
           </CardContent>
         </Card>
       ) : (
@@ -142,7 +142,7 @@ export default function MitraCart() {
                   </div>
                   <p className="text-[10px] text-muted-foreground">*Belum termasuk biaya pengiriman</p>
                 </div>
-                <Button className="w-full" onClick={() => setShowCheckout(true)}>
+                <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white" onClick={() => setShowCheckout(true)}>
                   <ArrowRight className="w-4 h-4 mr-2"/>Lanjut Checkout
                 </Button>
                 <Button variant="outline" size="sm" className="w-full text-destructive hover:text-destructive" onClick={clearCart}>

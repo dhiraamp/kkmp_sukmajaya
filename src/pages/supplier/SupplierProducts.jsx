@@ -30,6 +30,10 @@ const VALIDITY_BY_CATEGORY = {
   telur: 14,
   bumbu: 30,
   beras: 90,
+  mentega: 90,
+  kelontong: 180,
+  perawatan: 365,
+  sembako: 180,
   minyak: 180,
   tepung: 180,
   lainnya: 7,
@@ -257,7 +261,7 @@ export default function SupplierProducts() {
         </div>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white"><Plus className="w-4 h-4 mr-1" /> Tambah Produk</Button>
+            <Button className="bg-teal-600 hover:bg-teal-700 text-white"><Plus className="w-4 h-4 mr-1" /> Tambah Produk</Button>
           </DialogTrigger>
           <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
             <DialogHeader><DialogTitle>Tambah Produk Baru</DialogTitle></DialogHeader>
@@ -381,7 +385,7 @@ export default function SupplierProducts() {
                 </div>
               </div>
 
-              <Button onClick={handleSave} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white" disabled={saving}>
+              <Button onClick={handleSave} className="w-full bg-teal-600 hover:bg-teal-700 text-white" disabled={saving}>
                 {saving ? "Menyimpan..." : newForm.promoteRow ? `Simpan & Bayar ${formatRp(getRowPrice(Number(newForm.promoteRow)))}/hari` : "Simpan Produk"}
               </Button>
             </div>
@@ -459,7 +463,7 @@ export default function SupplierProducts() {
                 </div>
               </div>
             )}
-            <Button onClick={handleEditSave} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white" disabled={saving}>
+            <Button onClick={handleEditSave} className="w-full bg-teal-600 hover:bg-teal-700 text-white" disabled={saving}>
               {saving ? "Menyimpan..." : "Simpan Perubahan"}
             </Button>
           </div>

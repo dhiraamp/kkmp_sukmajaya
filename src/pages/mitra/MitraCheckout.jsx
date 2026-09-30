@@ -82,14 +82,14 @@ export default function MitraCheckout({ cartItems, subtotal, baseTotal, serviceF
         const supplierTotal = supplierSubtotal + supplierDeliveryFee;
 
         await base44.entities.Order.create({
-          order_number: `MBG-${ymd}-${String(Math.floor(Math.random() * 9000) + 1000)}`,
+          order_number: `KKMP-${ymd}-${String(Math.floor(Math.random() * 9000) + 1000)}`,
           status: "pending",
           customer_role: "mitra",
           mitra_id: user?.email || "mitra@demo.local",
           mitra_name: customerName,
           mitra_email: user?.email,
           mitra_address: address,
-          delivery_area: user?.district || user?.regency || "Kabupaten Garut",
+          delivery_area: user?.district || user?.regency || "Kota Depok",
           logistic_id: selectedLogistik?.user_email || selectedLogistik?.id || null,
           logistic_name: selectedLogistik?.full_name || selectedLogistik?.organization_name || null,
           driver: selectedLogistik?.full_name || selectedLogistik?.organization_name || null,
@@ -106,19 +106,19 @@ export default function MitraCheckout({ cartItems, subtotal, baseTotal, serviceF
             {
               status: "Menunggu Konfirmasi",
               at: new Date().toISOString(),
-              note: notes || "Pesanan dibuat oleh Mitra SPPG",
+              note: notes || "Pesanan komoditas dibuat oleh Pos Cabang KKMP",
             },
           ],
           created_date: new Date().toISOString(),
         });
       }
 
-      // Notifikasi supplier bahwa ada pesanan baru dari mitra
-      await notifyRoles(["supplier"], {
+      // Notifikasi supplier bahwa ada pesanan baru dari pos cabang
+      await notifyRoles(["supplier", "admin"], {
         type: "new_order",
-        title: "Pesanan Baru dari Mitra",
+        title: "Pesanan Baru dari Pos Cabang KKMP",
         message: `${tx} · ${customerName} · ${formatRp(grandTotal)}`,
-        link: "/supplier/orders",
+        link: "/admin/stock",
       });
 
       // Catat transaksi
@@ -185,7 +185,7 @@ export default function MitraCheckout({ cartItems, subtotal, baseTotal, serviceF
           <CheckCircle className="w-12 h-12 text-green-600" />
         </div>
         <h2 className="text-2xl font-bold text-green-700">Pembayaran Berhasil!</h2>
-        <p className="text-muted-foreground max-w-sm">Pesanan <strong>{paidSummary?.txNumber || txNumber}</strong> telah dikonfirmasi. Supplier dan logistik akan segera memproses pesanan Anda.</p>
+        <p className="text-muted-foreground max-w-sm">Pesanan <strong>{paidSummary?.txNumber || txNumber}</strong> telah dikonfirmasi. Gudang Pusat dan armada logistik KKMP akan segera memproses pengiriman ke pos cabang Anda.</p>
         <div className="bg-green-50 border border-green-200 rounded-xl p-4 w-full max-w-xs space-y-2 text-sm text-left">
           <div className="flex justify-between"><span className="text-muted-foreground">Subtotal Produk</span><span className="font-medium">{formatRp(displaySubtotal)}</span></div>
           <div className="flex justify-between"><span className="text-muted-foreground">Biaya Kirim</span><span className="font-medium">{formatRp(displayDelivery)}</span></div>
@@ -239,7 +239,7 @@ export default function MitraCheckout({ cartItems, subtotal, baseTotal, serviceF
                   <Label>Catatan untuk Supplier</Label>
                   <Input placeholder="Instruksi khusus (opsional)..." value={notes} onChange={e => setNotes(e.target.value)} />
                 </div>
-                <Button className="w-full" onClick={handleConfirmOrder}>Lanjut ke Pembayaran</Button>
+                <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white" onClick={handleConfirmOrder}>Lanjut ke Pembayaran</Button>
               </CardContent>
             </Card>
           )}
@@ -288,7 +288,7 @@ export default function MitraCheckout({ cartItems, subtotal, baseTotal, serviceF
                         <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-medium">Rekening Utama</span>
                       </div>
                       <p className="font-bold text-emerald-800 text-lg tracking-widest">0934 0100 0040 566</p>
-                      <p className="text-emerald-700 font-medium">a.n. TRICON</p>
+                      <p className="text-emerald-700 font-medium">a.n. KKMP MEKARJAYA DEPOK</p>
                     </div>
                     <p className="text-xs text-emerald-500">*Simpan bukti transfer untuk konfirmasi pesanan. Pembayaran dikonfirmasi dalam 1×24 jam.</p>
                   </div>

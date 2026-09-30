@@ -23,14 +23,14 @@ const produkBJBS = [
   },
   {
     nama: "Pembiayaan Modal Kerja iB",
-    desc: "Pembiayaan modal kerja untuk pengadaan bahan pangan SPPG MBG menggunakan akad Mudharabah",
+    desc: "Pembiayaan modal kerja untuk pengadaan komoditas sembako & kebutuhan pos cabang KKMP menggunakan akad Mudharabah",
     plafon: "Rp 50 juta – Rp 500 juta", tenor: "12 – 60 bulan", margin: "1,2% / bulan",
     badge: "Mudharabah", color: "from-blue-500 to-blue-600",
     syarat: ["KTP & KK", "SIUP / NIB", "Laporan Keuangan 2 tahun", "Jaminan aset", "NPWP"],
   },
   {
     nama: "Pembiayaan Investasi iB",
-    desc: "Pembiayaan pengembangan kapasitas produksi dan infrastruktur supplier MBG",
+    desc: "Pembiayaan pengembangan kapasitas armada logistik dan pergudangan pos cabang KKMP",
     plafon: "Rp 500 juta – Rp 5 miliar", tenor: "24 – 120 bulan", margin: "1,0% / bulan",
     badge: "Musyarakah", color: "from-purple-500 to-purple-600",
     syarat: ["Akta Pendirian Perusahaan", "Laporan Keuangan 3 tahun audited", "Agunan", "NPWP Perusahaan"],
@@ -71,10 +71,10 @@ function BJBSPage({ onClose }) {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Badge className="bg-yellow-400 text-blue-900 text-xs font-bold">MITRA RESMI</Badge>
-            <span className="text-xs opacity-80">SMART MBG × BJBS</span>
+            <span className="text-xs opacity-80">KKMP KOTA DEPOK × BJB SYARIAH</span>
           </div>
-          <h2 className="text-2xl font-bold">Pembiayaan BJBS</h2>
-          <p className="text-sm opacity-80 mt-0.5">Bank Jabar Banten Syariah – Solusi Modal Usaha MBG</p>
+          <h2 className="text-2xl font-bold">Pembiayaan BJB Syariah</h2>
+          <p className="text-sm opacity-80 mt-0.5">Bank Jabar Banten Syariah KC Depok – Solusi Modal Kerja Koperasi & Anggota</p>
         </div>
         <div className="text-right">
           <div className="flex gap-0.5 justify-end">
@@ -222,7 +222,7 @@ function BJBSPage({ onClose }) {
                 );
               })}
               <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-700">
-                <strong>Info BJBS Garut:</strong> (0262) 241-8000 | cs.garut@bjbsyariah.co.id
+                <strong>Info BJB Syariah KC Depok:</strong> (021) 7721-8000 | kc.depok@bjbsyariah.co.id
               </div>
             </CardContent>
           </Card>
@@ -288,10 +288,10 @@ export default function DigitalServicesHub() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Badge className="bg-yellow-400 text-blue-900 text-xs font-bold">MITRA RESMI</Badge>
-              <span className="text-xs opacity-80">SMART MBG × BJBS</span>
+              <span className="text-xs opacity-80">KKMP KOTA DEPOK × BJB SYARIAH</span>
             </div>
-            <h3 className="text-xl font-bold">Pembiayaan BJBS</h3>
-            <p className="text-sm opacity-80">Bank Jabar Banten Syariah – Solusi Modal Usaha MBG</p>
+            <h3 className="text-xl font-bold">Pembiayaan BJB Syariah</h3>
+            <p className="text-sm opacity-80">Bank Jabar Banten Syariah KC Depok – Solusi Modal Kerja Koperasi & Anggota</p>
           </div>
           <div className="flex flex-col items-end gap-2">
             <div className="flex gap-0.5">{[1,2,3,4,5].map(s=><Star key={s} className="w-4 h-4 fill-yellow-400 text-yellow-400"/>)}</div>

@@ -20,5 +20,5 @@ const menuItems = [
 ];
 
 export default function LogistikLayout() {
-  return <TopNavLayout menuItems={menuItems} title="Portal Logistik — Pemda Kab. Garut" />;
+  return <TopNavLayout menuItems={menuItems} title="Logistik & Distribusi Internal KKMP Kota Depok" />;
 }

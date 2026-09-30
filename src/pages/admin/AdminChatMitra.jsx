@@ -19,8 +19,8 @@ export default function AdminChatMitra() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Chat Mitra / SPPG</h2>
-        <p className="text-muted-foreground">Komunikasi dengan mitra satuan pangan</p>
+        <h2 className="text-2xl font-bold">Chat Pos Cabang KKMP</h2>
+        <p className="text-muted-foreground">Komunikasi langsung Gudang Pusat Mekarjaya dengan pengurus 8 pos cabang Depok</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -28,7 +28,7 @@ export default function AdminChatMitra() {
         <div className="md:col-span-1 border rounded-xl overflow-hidden bg-card shadow-sm">
           <div className="px-4 py-3 border-b bg-muted/40 flex items-center gap-2">
             <Store className="w-4 h-4 text-primary" />
-            <span className="font-semibold text-sm">Daftar Mitra / SPPG</span>
+            <span className="font-semibold text-sm">Daftar Pos Cabang KKMP</span>
           </div>
           {loading ? (
             <div className="flex justify-center py-10">

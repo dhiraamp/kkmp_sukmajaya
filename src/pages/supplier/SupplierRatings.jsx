@@ -58,7 +58,7 @@ export default function SupplierRatings() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Rating & Ulasan</h2>
-        <p className="text-muted-foreground">Penilaian dari SPPG terhadap layanan Anda</p>
+        <p className="text-muted-foreground">Penilaian dari Pos Cabang & Koperasi Induk Mekarjaya terhadap pasokan komoditas Anda</p>
       </div>
 
       {ratings.length === 0 ? (
@@ -66,7 +66,7 @@ export default function SupplierRatings() {
           <CardContent className="flex flex-col items-center justify-center py-20 text-muted-foreground">
             <Star className="w-12 h-12 mb-3 opacity-30" />
             <p className="font-medium">Belum ada ulasan masuk</p>
-            <p className="text-sm">Ulasan dari SPPG akan muncul di sini setelah pesanan selesai</p>
+            <p className="text-sm">Ulasan dari Pos Cabang dan Koperasi akan muncul di sini setelah komoditas diterima</p>
           </CardContent>
         </Card>
       ) : (

@@ -1,307 +1,201 @@
 // @ts-nocheck
 import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate, Link } from "react-router-dom";
-import {
-  Users,
-  ShoppingCart,
-  Truck,
-  Utensils,
-  Search,
-  Sparkles,
-  MapPin,
-  TrendingUp,
-  Tag,
-  Home,
-  User,
-  ExternalLink,
-  ChevronRight,
-  ShieldCheck,
-  Flame,
-} from "lucide-react";
-import { useAuth } from "@/lib/AuthContext";
-import { useCart } from "@/hooks/useCart";
-import { useProductsQuery } from "@/lib/query-client";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { feedbackToast, triggerHaptic } from "@/lib/feedback";
-import ProductActionDialog from "@/components/marketplace/ProductActionDialog";
 import HomeHeader from "@/components/marketplace/HomeHeader";
-import HeroSearch from "@/components/marketplace/HeroSearch";
-import WeeklyMenuCards from "@/components/marketplace/WeeklyMenuCards";
+import HeroKoperasi from "@/components/marketplace/HeroKoperasi";
+import CategoryGrid from "@/components/marketplace/CategoryGrid";
+import StatsBanner from "@/components/marketplace/StatsBanner";
+import SupplyChainFlow from "@/components/marketplace/SupplyChainFlow";
+import FeaturedProducts, { SAMPLE_PRODUCTS } from "@/components/marketplace/FeaturedProducts";
 import NewsSection from "@/components/marketplace/NewsSection";
-import MarketCarousel from "@/components/marketplace/MarketCarousel";
-import HomeSidebar from "@/components/marketplace/HomeSidebar";
-import AdBanner from "@/components/marketplace/AdBanner";
-import KnowledgeSection from "@/components/marketplace/KnowledgeSection";
-import GisMap from "@/components/marketplace/GisMap";
-
-const FALLBACK_PRODUCTS = [
-  { id: "sample-1", name: "Beras Premium Setra Ramos", supplier_name: "UD. Sumber Rejeki", category: "Beras", price: 15500, stock: 200, unit: "kg", status: "active", image_url: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300" },
-  { id: "sample-2", name: "Beras Merah Organik", supplier_name: "Tani Organik", category: "Beras", price: 22000, stock: 80, unit: "kg", status: "active", image_url: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300" },
-  { id: "sample-3", name: "Ikan Nila Segar", supplier_name: "Nelayan Harapan", category: "Protein", price: 35000, stock: 50, unit: "kg", status: "active", image_url: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=300" },
-  { id: "sample-4", name: "Minyak Goreng Bimoli", supplier_name: "PT. Indofood", category: "Minyak", price: 18000, stock: 150, unit: "liter", status: "active", image_url: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300" },
-  { id: "sample-5", name: "Daging Sapi Segar", supplier_name: "Rumah Potong Sapi", category: "Protein", price: 135000, stock: 30, unit: "kg", status: "active", image_url: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=300" },
-  { id: "sample-6", name: "Telur Ayam Negeri", supplier_name: "Peternakan Maju", category: "Protein", price: 28000, stock: 100, unit: "kg", status: "active", image_url: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=300" },
-  { id: "sample-7", name: "Tahu Putih", supplier_name: "Pabrik Tahu Sejahtera", category: "Olahan", price: 12000, stock: 60, unit: "kg", status: "active", image_url: "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb2c?w=300" },
-  { id: "sample-8", name: "Tempe Kedelai", supplier_name: "Pengrajin Tempe", category: "Olahan", price: 10000, stock: 80, unit: "kg", status: "active", image_url: "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb2c?w=300" },
-  { id: "sample-9", name: "Kangkung Segar", supplier_name: "Petani Hidroponik", category: "Sayur", price: 5000, stock: 40, unit: "ikat", status: "active", image_url: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=300" },
-  { id: "sample-10", name: "Cabai Merah Keriting", supplier_name: "Petani Cabai", category: "Bumbu", price: 45000, stock: 25, unit: "kg", status: "active", image_url: "https://images.unsplash.com/photo-1592137403099-624c888e3f4d?w=300" },
-];
-
-const CATEGORIES = [
-  "Semua Kategori",
-  "Beras",
-  "Protein",
-  "Sayur",
-  "Olahan",
-  "Minyak",
-  "Bumbu",
-];
+import { useProductsQuery } from "@/lib/query-client";
+import { Link } from "react-router-dom";
+import { ShieldCheck, Truck, Percent, Leaf, Heart, ArrowUp } from "lucide-react";
 
 export default function Marketplace() {
-  const navigate = useNavigate();
-  const { isAuthenticated, user } = useAuth();
-  const email = user?.email || "";
-  const role = user?.role || localStorage.getItem("smartmbg_role") || "penerima";
-  const cartUser = { email, id: user?.id || email, role };
-  const { addToCart, cartItems } = useCart(cartUser);
-
-  // TanStack Query Caching Layer (instan 0ms saat navigasi kembali)
-  const { data: rawProducts, isLoading: loadingProducts } = useProductsQuery("all");
-  const products = rawProducts && rawProducts.length > 0 ? rawProducts : FALLBACK_PRODUCTS;
-
-  const [query, setQuery] = useState("");
+  const { data: dbProducts = [] } = useProductsQuery();
   const [selectedCategory, setSelectedCategory] = useState("Semua Kategori");
-  const [activeFilter, setActiveFilter] = useState("Semua Area");
-  const [selected, setSelected] = useState(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const CART_PATH = { penerima: "/warga/keranjang", mitra: "/mitra/cart" };
+  // Gabungkan data dari DB dan Sample
+  const allProducts = useMemo(() => {
+    if (dbProducts && dbProducts.length > 0) {
+      return dbProducts.map((p, idx) => ({
+        id: p.id || `db-${idx}`,
+        name: p.name,
+        category: p.category || "Sembako",
+        supplier_name: p.supplier_name || "Supplier Gudang Pusat Mekarjaya",
+        price: p.price || 15000,
+        member_price: p.member_price || Math.round((p.price || 15000) * 0.9),
+        unit: p.unit || "kg",
+        rating: 4.8,
+        stock: p.stock ?? 100,
+        image_url: p.image_url || SAMPLE_PRODUCTS[idx % SAMPLE_PRODUCTS.length].image_url,
+      }));
+    }
+    return SAMPLE_PRODUCTS;
+  }, [dbProducts]);
 
-  // Filter produk gabungan: text query + category pill
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return products.filter((p) => {
-      const matchSearch =
-        !q ||
-        p.name?.toLowerCase().includes(q) ||
-        p.supplier_name?.toLowerCase().includes(q) ||
-        p.category?.toLowerCase().includes(q);
+  // Filter berdasarkan search query dan kategori yang dipilih
+  const filteredProducts = useMemo(() => {
+    return allProducts.filter((p) => {
+      const pCat = (p.category || "").toLowerCase();
+      const pName = (p.name || "").toLowerCase();
+      const targetCat = selectedCategory.toLowerCase();
 
-      const matchCategory =
+      const matchCat =
         selectedCategory === "Semua Kategori" ||
-        p.category?.toLowerCase() === selectedCategory.toLowerCase();
+        pCat === targetCat ||
+        (selectedCategory === "Sembako" && (pCat.includes("sembako") || pCat.includes("beras") || pName.includes("beras") || pName.includes("gula") || pName.includes("terigu"))) ||
+        (selectedCategory === "Kelontong" && (pCat.includes("kelontong") || pCat.includes("mie") || pCat.includes("kopi") || pCat.includes("teh") || pCat.includes("cuci") || pCat.includes("deterjen") || pCat.includes("umkm") || pName.includes("indomie") || pName.includes("sunlight") || pName.includes("rinso") || pName.includes("kopi"))) ||
+        (selectedCategory === "Minyak & Mentega" && (pCat.includes("mentega") || pCat.includes("minyak") || pName.includes("mentega") || pName.includes("blue band") || pName.includes("minyak"))) ||
+        (selectedCategory === "Perawatan Diri" && (pCat.includes("perawatan") || pCat.includes("shampo") || pCat.includes("sabun") || pName.includes("shampo") || pName.includes("dettol") || pName.includes("pepsodent") || pName.includes("pantene") || pName.includes("lifebuoy"))) ||
+        (selectedCategory === "Bumbu" && (pCat.includes("bumbu") || pName.includes("kecap") || pName.includes("garam") || pName.includes("cabai") || pName.includes("bawang"))) ||
+        (selectedCategory === "Sayuran" && (pCat.includes("sayur") || pCat.includes("pertanian") || pName.includes("sayur") || pName.includes("sop") || pName.includes("wortel") || pName.includes("kentang"))) ||
+        (selectedCategory === "Protein" && (pCat.includes("protein") || pCat.includes("segar") || pCat.includes("telur") || pCat.includes("daging") || pCat.includes("ikan") || pName.includes("telur") || pName.includes("ayam") || pName.includes("sapi") || pName.includes("ikan")));
 
-      return matchSearch && matchCategory;
+      const matchSearch =
+        !searchQuery ||
+        p.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.supplier_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category?.toLowerCase().includes(searchQuery.toLowerCase());
+
+      return matchCat && matchSearch;
     });
-  }, [products, query, selectedCategory]);
+  }, [allProducts, selectedCategory, searchQuery]);
 
-  const normalizeProduct = (p) => ({
-    id: p.id,
-    name: p.name,
-    supplier: p.supplier_name || p.supplier || "",
-    category: p.category || "",
-    price: p.price,
-    base_price: p.base_price ?? p.price,
-    unit: p.unit,
-    stock: p.stock,
-    image: p.image_url || p.image || "",
-  });
-
-  const handleAdd = (p) => {
-    triggerHaptic("light");
-    setSelected(normalizeProduct(p));
-    setDialogOpen(true);
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  const handleAddToCartQty = async (qty) => {
-    if (!isAuthenticated) {
-      feedbackToast.info("Silakan masuk ke Portal terlebih dahulu untuk berbelanja");
-      navigate("/portal");
-      return;
-    }
-    if (!selected) return;
-    await addToCart(selected, qty);
-    feedbackToast.cartAdded(selected.name, qty, selected.unit || "kg");
-    setDialogOpen(false);
-  };
-
-  const handleBuyNowQty = async (qty) => {
-    if (!isAuthenticated) {
-      feedbackToast.info("Silakan masuk ke Portal terlebih dahulu untuk berbelanja");
-      navigate("/portal");
-      return;
-    }
-    if (!selected) return;
-    await addToCart(selected, qty);
-    setDialogOpen(false);
-    navigate(CART_PATH[role] || "/mitra/cart");
-  };
-
-  const totalCartCount = (cartItems || []).reduce((sum, item) => sum + (item.quantity || 1), 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 sm:pb-8 flex flex-col justify-between">
-      <div>
-        <HomeHeader />
+    <div className="min-h-screen bg-slate-50/50 flex flex-col justify-between">
+      {/* 1. Header Koperasi Merah Putih Mekarjaya */}
+      <HomeHeader
+        onSearchClick={() => {
+          const searchEl = document.getElementById("search-input-hero");
+          if (searchEl) {
+            searchEl.focus();
+            searchEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }}
+      />
 
-        {/* Live Bapokting Ticker Bar */}
-        <div className="bg-emerald-900 text-emerald-100 text-xs py-2 px-4 border-b border-emerald-800/60 overflow-x-auto whitespace-nowrap">
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2 shrink-0">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="font-bold text-white">Live Bapokting Garut:</span>
-            </div>
-            <div className="flex items-center gap-6 text-[11px] text-emerald-200">
-              <span>Beras Premium: <strong>Rp 15.500/kg</strong> (Stabil)</span>
-              <span>Daging Ayam: <strong>Rp 38.000/kg</strong> (Stabil)</span>
-              <span>Telur Ayam Ras: <strong>Rp 28.000/kg</strong> (Turun Rp 500)</span>
-              <span>Daging Sapi: <strong>Rp 135.000/kg</strong> (Stabil)</span>
-              <span>Cabai Keriting: <strong>Rp 45.000/kg</strong></span>
-            </div>
-            <div className="shrink-0 hidden md:block">
-              <span className="text-[10px] text-emerald-300">Resmi Disperindag Garut</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Hero Search Section */}
-        <HeroSearch
-          query={query}
-          setQuery={setQuery}
-          activeFilter={activeFilter}
-          setActiveFilter={setActiveFilter}
+      <main className="flex-1">
+        {/* 2. Hero Section: Tagline, Headline, 2 CTA, 4 Pills, Floating Search Bar */}
+        <HeroKoperasi
+          onSearch={(q) => {
+            setSearchQuery(q);
+            const target = document.getElementById("katalog-produk-unggulan");
+            if (target) target.scrollIntoView({ behavior: "smooth" });
+          }}
         />
 
-        {/* Horizontal Quick Category Chips (Mobile & Desktop) */}
-        <div className="max-w-7xl mx-auto px-4 pt-4 pb-1">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-            <span className="text-xs font-semibold text-gray-500 shrink-0 mr-1 flex items-center gap-1">
-              <Tag className="w-3.5 h-3.5" /> Kategori:
-            </span>
-            {CATEGORIES.map((cat) => {
-              const isActive = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => {
-                    triggerHaptic("light");
-                    setSelectedCategory(cat);
-                  }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all shrink-0 ${
-                    isActive
-                      ? "bg-emerald-600 text-white shadow-sm"
-                      : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-100"
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
+        {/* 3. Grid 8 Kategori Komoditas */}
+        <CategoryGrid
+          activeCategory={selectedCategory}
+          onSelectCategory={(cat) => {
+            setSelectedCategory(cat);
+            const target = document.getElementById("katalog-produk-unggulan");
+            if (target) target.scrollIntoView({ behavior: "smooth" });
+          }}
+        />
+
+        {/* 4. Bar Statistik Koperasi & Ajakan Daftar Anggota */}
+        <StatsBanner />
+
+        {/* 5. Diagram Alur Rantai Pasok (Supply Chain Flow) */}
+        <SupplyChainFlow />
+
+        {/* 6. Katalog Produk Unggulan */}
+        <FeaturedProducts
+          products={filteredProducts.length > 0 ? filteredProducts : SAMPLE_PRODUCTS}
+        />
+
+        {/* 7. Berita & Informasi Koperasi Depok (Retained as per guideline) */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+          <NewsSection />
         </div>
+      </main>
 
-        {/* Main Content Layout */}
-        <main className="max-w-7xl mx-auto px-4 py-4">
-          <ProductActionDialog
-            product={selected}
-            open={dialogOpen}
-            onClose={() => setDialogOpen(false)}
-            onAddToCart={handleAddToCartQty}
-            onBuyNow={handleBuyNowQty}
-          />
-
-          {activeFilter === "Semua Area" ? (
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              {/* Kolom Kiri: Berita & Pengumuman */}
-              <div className="lg:col-span-1 order-2 lg:order-1">
-                <NewsSection />
-              </div>
-
-              {/* Kolom Tengah: Produk & Menu */}
-              <div className="lg:col-span-2 space-y-6 order-1 lg:order-2">
-                <AdBanner />
-                <WeeklyMenuCards />
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <div>
-                      <h2 className="text-base sm:text-lg font-bold text-gray-900">
-                        Katalog Komoditas Pangan Garut
-                      </h2>
-                      <p className="text-xs text-muted-foreground">
-                        {filtered.length} komoditas siap dipesan untuk kebutuhan Dapur SPPG
-                      </p>
-                    </div>
-                  </div>
-                  <MarketCarousel products={filtered} loading={loadingProducts} onAdd={handleAdd} />
+      {/* 8. Footer Koperasi Merah Putih Mekarjaya */}
+      <footer className="bg-slate-900 text-white border-t border-slate-800 pt-12 pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
+            {/* Col 1: Identity */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-red-600 flex items-center justify-center font-bold text-white shadow-sm">
+                  <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white">
+                    <path d="M20 6L6 17H11V32H29V17H34L20 6Z" fill="white" />
+                  </svg>
+                </div>
+                <div className="leading-tight">
+                  <p className="text-sm font-black text-red-500 uppercase tracking-wider">KOPERASI MERAH PUTIH</p>
+                  <p className="text-xs font-bold text-white uppercase tracking-widest">MEKARJAYA &bull; DEPOK</p>
                 </div>
               </div>
-
-              {/* Kolom Kanan: Sidebar Dapur & Supplier */}
-              <div className="lg:col-span-1 order-3">
-                <HomeSidebar />
-              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Marketplace resmi Koperasi Kelurahan Merah Putih (KKMP) Kota Depok. Menghubungkan supplier komoditas dengan pos cabang dan seluruh anggota keluarga koperasi.
+              </p>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
-                <KnowledgeSection activeFilter={activeFilter} />
-              </div>
-              <div className="lg:col-span-1">
-                <HomeSidebar />
-              </div>
+
+            {/* Col 2: Navigation */}
+            <div>
+              <h4 className="text-xs font-extrabold uppercase text-slate-300 tracking-wider mb-3">
+                Layanan & Menu
+              </h4>
+              <ul className="space-y-2 text-xs text-slate-400">
+                <li><Link to="/marketplace" className="hover:text-red-400 transition-colors">Marketplace Komoditas</Link></li>
+                <li><Link to="/peta" className="hover:text-red-400 transition-colors">Peta 8 Cabang Depok</Link></li>
+                <li><Link to="/portal" className="hover:text-red-400 transition-colors">Portal Akses Peran</Link></li>
+                <li><Link to="/register/penerima" className="hover:text-red-400 transition-colors">Daftar Anggota Koperasi</Link></li>
+                <li><Link to="/berita" className="hover:text-red-400 transition-colors">Berita & Pengumuman</Link></li>
+              </ul>
             </div>
-          )}
-        </main>
 
-        {/* GIS Map Section */}
-        <div id="gis" className="max-w-7xl mx-auto px-4 py-4">
-          <GisMap />
-        </div>
-      </div>
+            {/* Col 3: 5 Roles */}
+            <div>
+              <h4 className="text-xs font-extrabold uppercase text-slate-300 tracking-wider mb-3">
+                Peran Rantai Pasok
+              </h4>
+              <ul className="space-y-2 text-xs text-slate-400">
+                <li><span className="text-red-400">&bull;</span> Koperasi Induk (Gudang Pusat)</li>
+                <li><span className="text-orange-400">&bull;</span> Koperasi Cabang (8 Pos Depok)</li>
+                <li><span className="text-emerald-400">&bull;</span> Supplier & Pemasok Bahan</li>
+                <li><span className="text-blue-400">&bull;</span> Logistik & Armada Pengiriman</li>
+                <li><span className="text-purple-400">&bull;</span> Anggota Koperasi</li>
+              </ul>
+            </div>
 
-      {/* Floating Bottom Sticky Navigation Bar for Mobile */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200 px-6 py-2 shadow-2xl flex items-center justify-around">
-        <Link
-          to="/"
-          className="flex flex-col items-center gap-0.5 text-emerald-700 hover:text-emerald-800"
-        >
-          <Home className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Beranda</span>
-        </Link>
-
-        <a
-          href="#gis"
-          className="flex flex-col items-center gap-0.5 text-gray-500 hover:text-emerald-700"
-        >
-          <MapPin className="w-5 h-5" />
-          <span className="text-[10px] font-medium">Peta SPPG</span>
-        </a>
-
-        <Link
-          to={CART_PATH[role] || "/warga/keranjang"}
-          className="flex flex-col items-center gap-0.5 text-gray-500 hover:text-emerald-700 relative"
-        >
-          <div className="relative">
-            <ShoppingCart className="w-5 h-5" />
-            {totalCartCount > 0 && (
-              <span className="absolute -top-1.5 -right-2 w-4 h-4 bg-emerald-600 text-white rounded-full text-[9px] font-bold flex items-center justify-center">
-                {totalCartCount}
-              </span>
-            )}
+            {/* Col 4: Contact & Office */}
+            <div>
+              <h4 className="text-xs font-extrabold uppercase text-slate-300 tracking-wider mb-3">
+                Kantor Pusat Mekarjaya
+              </h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Jl. Raya Mekarjaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16411
+              </p>
+              <p className="text-xs text-slate-400 mt-2">
+                Email: <span className="text-slate-300">sekretariat@kkmp-depok.id</span>
+              </p>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Jam Operasional: Senin - Sabtu (08:00 - 17:00 WIB)
+              </p>
+            </div>
           </div>
-          <span className="text-[10px] font-medium">Keranjang</span>
-        </Link>
 
-        <Link
-          to="/portal"
-          className="flex flex-col items-center gap-0.5 text-gray-500 hover:text-emerald-700"
-        >
-          <User className="w-5 h-5" />
-          <span className="text-[10px] font-medium">{isAuthenticated ? "Akun" : "Masuk"}</span>
-        </Link>
-      </div>
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+            <p>&copy; 2026 <strong>Koperasi Kelurahan Merah Putih (KKMP) Mekarjaya</strong> &bull; Kota Depok. Seluruh hak cipta dilindungi.</p>
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
+            >
+              <span>Kembali ke Atas</span>
+              <ArrowUp className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

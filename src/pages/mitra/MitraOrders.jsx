@@ -107,8 +107,8 @@ export default function MitraOrders() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Tracking Pesanan</h2>
-        <p className="text-muted-foreground">Pantau status pengiriman pesanan Anda dari supplier</p>
+        <h2 className="text-2xl font-bold">Tracking Pengiriman Logistik</h2>
+        <p className="text-muted-foreground">Pantau status distribusi komoditas dari Gudang Pusat Mekarjaya ke Pos Cabang</p>
       </div>
 
       {/* Tab status ala Shopee */}
@@ -121,14 +121,14 @@ export default function MitraOrders() {
               key={t.key}
               onClick={() => setTab(t.key)}
               className={`relative shrink-0 px-4 py-3 text-sm font-medium transition-colors ${
-                active ? "text-emerald-700 font-semibold" : "text-gray-500 hover:text-gray-800"
+                active ? "text-orange-700 font-semibold" : "text-gray-500 hover:text-gray-800"
               }`}
             >
               {t.label}
               <span className={`ml-1.5 text-[10px] font-bold rounded-full px-1.5 py-0.5 ${
-                active ? "bg-emerald-600 text-white" : "bg-gray-100 text-gray-500"
+                active ? "bg-orange-600 text-white" : "bg-gray-100 text-gray-500"
               }`}>{count}</span>
-              {active && <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-emerald-600 rounded-full" />}
+              {active && <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-orange-600 rounded-full" />}
             </button>
           );
         })}

@@ -121,26 +121,26 @@ export default function AdminPendaftarBaru() {
       case "mitra":
         return (
           <Badge className="bg-emerald-600/15 text-emerald-800 border-emerald-300 font-medium text-xs gap-1">
-            <Store className="w-3 h-3 text-emerald-600" /> Mitra / SPPG
+            <Store className="w-3 h-3 text-emerald-600" /> Pos Cabang KKMP
           </Badge>
         );
       case "supplier":
         return (
           <Badge className="bg-blue-600/15 text-blue-800 border-blue-300 font-medium text-xs gap-1">
-            <Users className="w-3 h-3 text-blue-600" /> Supplier
+            <Users className="w-3 h-3 text-blue-600" /> Supplier KKMP
           </Badge>
         );
       case "logistik":
         return (
           <Badge className="bg-amber-600/15 text-amber-800 border-amber-300 font-medium text-xs gap-1">
-            <Truck className="w-3 h-3 text-amber-600" /> Logistik
+            <Truck className="w-3 h-3 text-amber-600" /> Armada Logistik
           </Badge>
         );
       case "warga":
       case "penerima":
         return (
-          <Badge className="bg-purple-600/15 text-purple-800 border-purple-300 font-medium text-xs gap-1">
-            <UserCheck className="w-3 h-3 text-purple-600" /> Warga / Penerima
+          <Badge className="bg-red-600/15 text-red-800 border-red-300 font-medium text-xs gap-1">
+            <UserCheck className="w-3 h-3 text-red-600" /> Anggota Koperasi
           </Badge>
         );
       default:
@@ -160,7 +160,7 @@ export default function AdminPendaftarBaru() {
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm">
-            Pantau dan verifikasi setiap pengguna baru yang mendaftar (Mitra, Supplier, Logistik, dan Warga)
+            Pantau dan verifikasi setiap pengguna baru yang mendaftar (Pos Cabang KKMP, Supplier, Logistik, dan Anggota Koperasi)
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={loadData} className="gap-2 shrink-0">
@@ -198,11 +198,11 @@ export default function AdminPendaftarBaru() {
         >
           <CardContent className="p-3 sm:p-4">
             <div className="text-[11px] font-semibold text-emerald-700 uppercase flex items-center justify-between">
-              <span>Mitra / SPPG</span>
+              <span>Pos Cabang</span>
               <Store className="w-3.5 h-3.5" />
             </div>
             <div className="text-xl sm:text-2xl font-bold mt-1 text-emerald-900">{countMitra}</div>
-            <div className="text-[10px] text-muted-foreground mt-0.5">Dapur Satuan Pangan</div>
+            <div className="text-[10px] text-muted-foreground mt-0.5">8 Pos Cabang Depok</div>
           </CardContent>
         </Card>
 
@@ -240,17 +240,17 @@ export default function AdminPendaftarBaru() {
 
         <Card
           onClick={() => setActiveTab("warga")}
-          className={`cursor-pointer transition-all border-l-4 border-l-purple-500 shadow-sm hover:shadow col-span-2 sm:col-span-1 ${
-            activeTab === "warga" ? "ring-2 ring-purple-500" : ""
+          className={`cursor-pointer transition-all border-l-4 border-l-red-500 shadow-sm hover:shadow col-span-2 sm:col-span-1 ${
+            activeTab === "warga" ? "ring-2 ring-red-500" : ""
           }`}
         >
           <CardContent className="p-3 sm:p-4">
-            <div className="text-[11px] font-semibold text-purple-700 uppercase flex items-center justify-between">
-              <span>Warga</span>
+            <div className="text-[11px] font-semibold text-red-700 uppercase flex items-center justify-between">
+              <span>Anggota</span>
               <UserCheck className="w-3.5 h-3.5" />
             </div>
-            <div className="text-xl sm:text-2xl font-bold mt-1 text-purple-900">{countWarga}</div>
-            <div className="text-[10px] text-muted-foreground mt-0.5">Penerima Manfaat</div>
+            <div className="text-xl sm:text-2xl font-bold mt-1 text-red-900">{countWarga}</div>
+            <div className="text-[10px] text-muted-foreground mt-0.5">Anggota Koperasi</div>
           </CardContent>
         </Card>
       </div>
@@ -273,7 +273,7 @@ export default function AdminPendaftarBaru() {
               onClick={() => setActiveTab("mitra")}
               className="text-xs shrink-0"
             >
-              Mitra / SPPG ({countMitra})
+              Pos Cabang ({countMitra})
             </Button>
             <Button
               variant={activeTab === "supplier" ? "default" : "ghost"}
@@ -297,7 +297,7 @@ export default function AdminPendaftarBaru() {
               onClick={() => setActiveTab("warga")}
               className="text-xs shrink-0"
             >
-              Warga ({countWarga})
+              Anggota Koperasi ({countWarga})
             </Button>
           </div>
 

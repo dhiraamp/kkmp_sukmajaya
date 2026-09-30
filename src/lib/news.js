@@ -14,7 +14,7 @@ export function mapGarutNews(data) {
     summary: stripHtml(b.deskripsi).slice(0, 160),
     img: b.gambar || "",
     url: `https://satudata.garutkab.go.id/artikel/${b.slug}`,
-    source: "Satu Data Garut",
+    source: "Portal Berita Daerah",
   }));
 }
 

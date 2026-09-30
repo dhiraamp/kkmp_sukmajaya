@@ -13,40 +13,40 @@ import PodViewModal from "@/components/logistik/PodViewModal";
 
 const FEE_PER_KM = 2500; // Rp 2.500/km
 const PLATFORM_FEE_RATE = 0.05; // 5% dari biaya pengiriman untuk platform
-const STORAGE_KEY = "smartmbg_logistik_deliveries";
+const STORAGE_KEY = "kkmp_logistik_deliveries_v1";
 
 const DEFAULT_DELIVERIES = [
   {
     id: "DEL-001",
-    mitra: "SPPG Garut Kota",
-    area: "Kec. Garut Kota",
+    mitra: "Pos KKMP Beji Depok",
+    area: "Kec. Beji",
     distance: "5 km",
     status: "in_transit",
-    items: "Beras Pandanwangi 50kg, Telur Ayam 20kg",
+    items: "Beras Premium Mekarjaya 50kg, Telur Ayam 20kg",
     date: "16 Sep 2026",
     driver: "Pak Asep Suhendar",
   },
   {
     id: "DEL-002",
-    mitra: "SPPG Tarogong Kidul",
-    area: "Kec. Tarogong Kidul",
-    distance: "12 km",
+    mitra: "Pos KKMP Sukmajaya",
+    area: "Kec. Sukmajaya",
+    distance: "7 km",
     status: "delivered",
     items: "Sayur Bayam, Wortel, Bumbu Dapur",
     date: "15 Sep 2026",
     driver: "Pak Dedi Kusnadi",
     pod_image_url:
-      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%2310b981'/><rect x='20' y='20' width='560' height='360' fill='%23ffffff' rx='16'/><circle cx='300' cy='150' r='60' fill='%23ecfdf5'/><path d='M275 150 L292 167 L325 134' stroke='%23059669' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='300' y='240' font-family='Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='%23065f46'>BUKTI SERAH TERIMA FISIK (POD)</text><text x='300' y='270' font-family='Arial, sans-serif' font-size='14' text-anchor='middle' fill='%234b5563'>Penerimaan Bahan Baku Dapur SPPG Tarogong Kidul</text><rect x='80' y='305' width='440' height='40' fill='%23f3f4f6' rx='8'/><text x='300' y='330' font-family='monospace' font-size='13' text-anchor='middle' fill='%231f2937'>KONDISI: LENGKAP &amp; DITERIMA IBU NINA</text></svg>",
+      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%2310b981'/><rect x='20' y='20' width='560' height='360' fill='%23ffffff' rx='16'/><circle cx='300' cy='150' r='60' fill='%23ecfdf5'/><path d='M275 150 L292 167 L325 134' stroke='%23059669' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='300' y='240' font-family='Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='%23065f46'>BUKTI SERAH TERIMA FISIK (POD)</text><text x='300' y='270' font-family='Arial, sans-serif' font-size='14' text-anchor='middle' fill='%234b5563'>Penerimaan Komoditas Pos Cabang Sukmajaya</text><rect x='80' y='305' width='440' height='40' fill='%23f3f4f6' rx='8'/><text x='300' y='330' font-family='monospace' font-size='13' text-anchor='middle' fill='%231f2937'>KONDISI: LENGKAP &amp; DITERIMA PENGELOLA POS</text></svg>",
     pod_recipient_name: "Ibu Nina Herlina",
-    pod_recipient_role: "Pengelola Dapur SPPG",
-    pod_notes: "Bahan pangan diterima segar, jumlah pas sesuai nota pesanan.",
+    pod_recipient_role: "Pengelola Pos Cabang KKMP",
+    pod_notes: "Bahan pangan diterima segar, jumlah pas sesuai surat jalan.",
     pod_received_at: "2026-09-15T14:30:00.000Z",
   },
   {
     id: "DEL-003",
-    mitra: "SPPG Leles Mandiri",
-    area: "Kec. Leles",
-    distance: "18 km",
+    mitra: "Pos KKMP Pancoran Mas",
+    area: "Kec. Pancoran Mas",
+    distance: "10 km",
     status: "pending",
     items: "Daging Sapi Segar 25kg, Ikan Nila 30kg",
     date: "16 Sep 2026",
@@ -54,9 +54,9 @@ const DEFAULT_DELIVERIES = [
   },
   {
     id: "DEL-004",
-    mitra: "SPPG Bayongbong Sejahtera",
-    area: "Kec. Bayongbong",
-    distance: "25 km",
+    mitra: "Pos KKMP Cimanggis",
+    area: "Kec. Cimanggis",
+    distance: "14 km",
     status: "in_transit",
     items: "Tepung Terigu 40kg, Gula Pasir 20kg",
     date: "16 Sep 2026",
@@ -64,9 +64,9 @@ const DEFAULT_DELIVERIES = [
   },
   {
     id: "DEL-005",
-    mitra: "SPPG Cibatu Hebat",
-    area: "Kec. Cibatu",
-    distance: "30 km",
+    mitra: "Pos KKMP Sawangan",
+    area: "Kec. Sawangan",
+    distance: "18 km",
     status: "pending",
     items: "Minyak Goreng 30L, Beras 60kg",
     date: "17 Sep 2026",
@@ -138,16 +138,16 @@ export default function LogistikOrders() {
           return {
             id: o.order_number || o.id,
             realOrderId: o.id,
-            mitra: o.mitra_name || "Mitra SPPG",
-            area: o.delivery_area || o.mitra_address || "Garut",
-            distance: o.distance || "10 km",
+            mitra: o.mitra_name || "Pos KKMP Beji Depok",
+            area: o.delivery_area || o.mitra_address || "Kota Depok",
+            distance: o.distance || "8 km",
             status: o.status,
             items: itemsStr,
             date: o.created_date ? new Date(o.created_date).toLocaleDateString("id-ID") : "Hari ini",
             driver: o.driver || o.logistic_name || "Pak Asep Suhendar",
             pod_image_url: o.pod_image_url || podData?.pod_image_url,
             pod_recipient_name: o.pod_recipient_name || podData?.recipient_name,
-            pod_recipient_role: o.pod_recipient_role || "Petugas Dapur SPPG",
+            pod_recipient_role: o.pod_recipient_role || "Pengelola Pos Cabang KKMP",
             pod_notes: o.pod_notes || podData?.pod_notes,
             pod_received_at: o.pod_received_at || podData?.time,
           };
@@ -250,7 +250,7 @@ export default function LogistikOrders() {
       await notifyRoles(["mitra", "supplier", "admin"], {
         type: "pod_submitted",
         title: "Pengantaran Selesai (POD)",
-        message: `Bahan baku untuk ${target?.mitra || "Dapur SPPG"} telah tiba dan diserahterimakan kepada ${pod_recipient_name}. Bukti foto POD telah terverifikasi.`,
+        message: `Komoditas untuk ${target?.mitra || "Pos Cabang KKMP"} telah tiba dan diserahterimakan kepada ${pod_recipient_name}. Bukti foto POD telah terverifikasi.`,
         ref_id: deliveryId,
       });
     } catch (notifErr) {

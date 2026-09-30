@@ -20,9 +20,7 @@ import MitraLayout from '@/pages/mitra/MitraLayout';
 import MitraDashboard from '@/pages/mitra/MitraDashboard';
 import MitraProducts from '@/pages/mitra/MitraProducts';
 import MitraOrders from '@/pages/mitra/MitraOrders';
-import MitraMenu from '@/pages/mitra/MitraMenu';
 import MitraKebutuhan from '@/pages/mitra/MitraKebutuhan';
-import MitraNutrition from '@/pages/mitra/MitraNutrition';
 import MitraComplaints from '@/pages/mitra/MitraComplaints';
 import MitraReports from '@/pages/mitra/MitraReports';
 import MitraDigitalServices from '@/pages/mitra/MitraDigitalServices';
@@ -66,8 +64,6 @@ import AdminChatMitra from '@/pages/admin/AdminChatMitra';
 import AdminChatSupplier from '@/pages/admin/AdminChatSupplier';
 import AdminChatLogistik from '@/pages/admin/AdminChatLogistik';
 import AdminNotifications from '@/pages/admin/AdminNotifications';
-import AdminBapokting from '@/pages/admin/AdminBapokting';
-import AdminSppgMenus from '@/pages/admin/AdminSppgMenus';
 import AdminWarga from '@/pages/admin/AdminWarga';
 import AdminPendaftarBaru from '@/pages/admin/AdminPendaftarBaru';
 import MitraRecipients from '@/pages/mitra/MitraRecipients';
@@ -94,7 +90,7 @@ import Pulsa from '@/pages/Pulsa';
 import Tagihan from '@/pages/Tagihan';
 import Bpjs from '@/pages/Bpjs';
 
-// GIS Peta Terintegrasi Disperindag Garut
+// GIS Peta Sebaran Pos Cabang KKMP Kota Depok
 import GisPetaPage from '@/pages/GisPetaPage';
 import AdminGis from '@/pages/admin/AdminGis';
 
@@ -136,9 +132,7 @@ const AuthenticatedApp = () => {
             <Route path="/mitra/dashboard" element={<MitraDashboard />} />
             <Route path="/mitra/products" element={<MitraProducts />} />
             <Route path="/mitra/orders" element={<MitraOrders />} />
-            <Route path="/mitra/menu" element={<MitraMenu />} />
             <Route path="/mitra/kebutuhan" element={<MitraKebutuhan />} />
-            <Route path="/mitra/nutrition" element={<MitraNutrition />} />
             <Route path="/mitra/complaints" element={<MitraComplaints />} />
             <Route path="/mitra/reports" element={<MitraReports />} />
             <Route path="/mitra/digital-services" element={<MitraDigitalServices />} />
@@ -199,8 +193,6 @@ const AuthenticatedApp = () => {
             <Route path="/admin/chat-supplier" element={<AdminChatSupplier />} />
             <Route path="/admin/chat-logistik" element={<AdminChatLogistik />} />
             <Route path="/admin/notifications" element={<AdminNotifications />} />
-            <Route path="/admin/bapokting" element={<AdminBapokting />} />
-            <Route path="/admin/sppg-menus" element={<AdminSppgMenus />} />
           </Route>
         </Route>
 

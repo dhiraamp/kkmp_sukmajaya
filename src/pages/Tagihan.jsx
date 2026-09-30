@@ -37,17 +37,17 @@ export default function Tagihan() {
         <div className="flex items-center gap-3 mb-6">
           <button
             onClick={() => navigate("/")}
-            className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-emerald-600 hover:border-emerald-300 transition-colors"
+            className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-red-600 hover:border-red-300 transition-colors"
             aria-label="Kembali ke Beranda"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <ReceiptText className="w-6 h-6 text-emerald-600" />
+              <ReceiptText className="w-6 h-6 text-red-600" />
               <h1 className="text-2xl font-bold text-gray-900">Bayar Tagihan</h1>
             </div>
-            <p className="text-sm text-gray-500 mt-0.5">Bayar listrik, air, internet, dan TV berbayar.</p>
+            <p className="text-sm text-gray-500 mt-0.5">Bayar listrik PLN, PDAM Depok, internet, dan TV berbayar melalui KKMP Digital.</p>
           </div>
         </div>
 
@@ -65,8 +65,8 @@ export default function Tagihan() {
                   onClick={() => setProvider(p.name)}
                   className={`flex flex-col items-center gap-1.5 p-3 rounded-lg border text-sm font-medium transition-colors ${
                     provider === p.name
-                      ? "border-emerald-600 bg-emerald-50 text-emerald-700"
-                      : "border-gray-200 text-gray-600 hover:border-emerald-300"
+                      ? "border-red-600 bg-red-50 text-red-700"
+                      : "border-gray-200 text-gray-600 hover:border-red-300"
                   }`}
                 >
                   <p.icon className="w-5 h-5" />
@@ -86,11 +86,11 @@ export default function Tagihan() {
               placeholder="Masukkan nomor pelanggan"
               value={billNumber}
               onChange={(e) => setBillNumber(e.target.value)}
-              className="h-11 rounded-xl border-gray-300 focus:border-emerald-500 focus:ring-emerald-500"
+              className="h-11 rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500"
             />
           </div>
 
-          <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 text-emerald-700 text-sm">
+          <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm">
             <CheckCircle2 className="w-4 h-4 shrink-0" />
             <span>
               Pembayaran tagihan <b>{provider}</b> — nomor {billNumber || "-"}
@@ -99,7 +99,7 @@ export default function Tagihan() {
 
           <Button
             type="submit"
-            className="w-full h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold"
+            className="w-full h-11 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold"
           >
             Bayar Sekarang
           </Button>

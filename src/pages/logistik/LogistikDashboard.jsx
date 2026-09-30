@@ -176,8 +176,8 @@ export default function LogistikDashboard() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-2xl font-bold">Dashboard Logistik</h2>
-          <p className="text-muted-foreground">Kelola pengiriman bahan pangan Kabupaten Garut</p>
+          <h2 className="text-2xl font-bold">Dashboard Logistik & Distribusi</h2>
+          <p className="text-muted-foreground">Armada Distribusi Internal Gudang Pusat Mekarjaya ke 8 Pos Cabang Kota Depok</p>
         </div>
 
         {/* Pilih Kendaraan + Tombol Siap Mengantar */}

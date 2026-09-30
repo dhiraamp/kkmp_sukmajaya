@@ -117,14 +117,14 @@ export default function AdminDashboard() {
   const getRoleBadge = (role) => {
     switch (role) {
       case "mitra":
-        return <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[10px]">Mitra / SPPG</Badge>;
+        return <Badge className="bg-orange-50 text-orange-700 border-orange-200 text-[10px]">Koperasi Cabang</Badge>;
       case "supplier":
-        return <Badge className="bg-blue-50 text-blue-700 border-blue-200 text-[10px]">Supplier</Badge>;
+        return <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[10px]">Supplier</Badge>;
       case "logistik":
-        return <Badge className="bg-amber-50 text-amber-700 border-amber-200 text-[10px]">Logistik</Badge>;
+        return <Badge className="bg-blue-50 text-blue-700 border-blue-200 text-[10px]">Logistik</Badge>;
       case "warga":
       case "penerima":
-        return <Badge className="bg-purple-50 text-purple-700 border-purple-200 text-[10px]">Warga</Badge>;
+        return <Badge className="bg-purple-50 text-purple-700 border-purple-200 text-[10px]">Anggota Koperasi</Badge>;
       default:
         return <Badge variant="outline" className="text-[10px]">{role}</Badge>;
     }
@@ -134,17 +134,17 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Dashboard Admin</h2>
-          <p className="text-muted-foreground text-sm">Ringkasan seluruh data pengguna dan rantai pasok SMART MBG</p>
+          <h2 className="text-2xl font-bold tracking-tight">Dashboard Koperasi Induk Mekarjaya</h2>
+          <p className="text-muted-foreground text-sm">Ringkasan rantai pasok Gudang Pusat dan 8 Pos Cabang KKMP Kota Depok</p>
         </div>
         <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
           <Button
             size="sm"
             variant="outline"
             onClick={() => navigate("/admin/gis")}
-            className="gap-1.5 border-emerald-300 text-emerald-700 hover:bg-emerald-50 shadow-sm"
+            className="gap-1.5 border-red-300 text-red-700 hover:bg-red-50 shadow-sm"
           >
-            <MapPinned className="w-4 h-4 text-emerald-600" /> Buka Peta GIS Garut
+            <MapPinned className="w-4 h-4 text-red-600" /> Buka Peta GIS Depok
           </Button>
           <Button
             size="sm"
@@ -152,7 +152,7 @@ export default function AdminDashboard() {
             onClick={() => setGisModalOpen(true)}
             className="gap-1.5 text-gray-700 hover:bg-gray-50 shadow-sm"
           >
-            Sinkronkan Disperindag
+            Sinkronkan Data Depok
           </Button>
           <Button
             size="sm"
@@ -167,8 +167,8 @@ export default function AdminDashboard() {
       {/* Kartu Manajemen Pengguna */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          title="Total Mitra / SPPG"
-          value={String(userCounts.mitra)}
+          title="Pos Cabang Depok"
+          value={String(userCounts.mitra || 8)}
           icon={Store}
           color="green"
           trend={12}
@@ -191,7 +191,7 @@ export default function AdminDashboard() {
           onClick={() => navigate("/admin/logistik")}
         />
         <StatCard
-          title="Warga / Penerima MBG"
+          title="Anggota Koperasi"
           value={String(userCounts.warga)}
           icon={UserCheck}
           color="purple"
@@ -281,21 +281,21 @@ export default function AdminDashboard() {
 
       <StockAlertPanel />
 
-      {/* Peta Geospasial Rantai Pasok Terintegrasi Disperindag Garut */}
-      <Card className="border-emerald-100 shadow-sm overflow-hidden">
-        <CardHeader className="pb-3 bg-gradient-to-r from-emerald-50/70 via-teal-50/40 to-transparent border-b border-emerald-100/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      {/* Peta Geospasial Rantai Pasok Terintegrasi KKMP Depok */}
+      <Card className="border-red-100 shadow-sm overflow-hidden">
+        <CardHeader className="pb-3 bg-gradient-to-r from-red-50/70 via-rose-50/40 to-transparent border-b border-red-100/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
               <CardTitle className="text-base font-bold flex items-center gap-2 text-gray-900">
-                <MapPinned className="w-5 h-5 text-emerald-600" />
-                Peta Geospasial Rantai Pasok MBG Garut
+                <MapPinned className="w-5 h-5 text-red-600" />
+                Peta Geospasial Rantai Pasok KKMP Kota Depok
               </CardTitle>
-              <Badge className="bg-emerald-100 text-emerald-800 border-emerald-300 text-[10px] font-semibold">
-                Terintegrasi Disperindag Garut
+              <Badge className="bg-red-100 text-red-800 border-red-300 text-[10px] font-semibold">
+                Pos Cabang & Distribusi Depok
               </Badge>
             </div>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Visualisasi Dapur SPPG, Sekolah Sasaran, dan Supplier Komoditas se-Kabupaten Garut
+              Visualisasi Gudang Pusat Mekarjaya, 8 Pos Cabang KKMP, dan Pemasok Komoditas se-Kota Depok
             </p>
           </div>
           <div className="flex items-center gap-2">

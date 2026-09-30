@@ -68,7 +68,7 @@ export default function LogistikAgent() {
           <CardTitle className="text-sm flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             <Truck className="w-4 h-4 text-primary" />
-            AI Asisten Logistik SMART MBG
+            AI Asisten Logistik KKMP Kota Depok
           </CardTitle>
         </CardHeader>
         <CardContent className="flex-1 overflow-y-auto p-4 space-y-4" style={{ maxHeight: "55vh" }}>

@@ -53,7 +53,7 @@ export default function MitraTransactions() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold flex items-center gap-2"><Receipt className="w-6 h-6 text-primary"/>Riwayat Transaksi</h2>
+        <h2 className="text-2xl font-bold flex items-center gap-2"><Receipt className="w-6 h-6 text-orange-600"/>Riwayat Transaksi</h2>
         <p className="text-muted-foreground">Semua transaksi pembelian Anda</p>
       </div>
 
@@ -62,7 +62,7 @@ export default function MitraTransactions() {
           <CardContent className="flex flex-col items-center py-20 text-center">
             <Receipt className="w-12 h-12 text-muted-foreground/40 mb-3"/>
             <p className="font-medium">Belum ada transaksi</p>
-            <p className="text-sm text-muted-foreground">Mulai berbelanja dari katalog produk supplier</p>
+            <p className="text-sm text-muted-foreground">Mulai mengajukan pesanan komoditas dari Gudang Pusat KKMP</p>
           </CardContent>
         </Card>
       ) : (

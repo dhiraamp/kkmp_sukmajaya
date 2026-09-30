@@ -28,7 +28,7 @@ export default function AdminGis() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `smartmbg-gis-garut-${new Date().toISOString().slice(0, 10)}.geojson`;
+    a.download = `kkmp-gis-depok-${new Date().toISOString().slice(0, 10)}.geojson`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -46,14 +46,14 @@ export default function AdminGis() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold tracking-tight">Peta Geospasial GIS Rantai Pasok MBG</h2>
-            <Badge className="bg-emerald-50 text-emerald-700 border-emerald-300 gap-1 text-xs">
-              <Globe className="w-3.5 h-3.5 text-emerald-600" />
-              Disperindag Garut
+            <h2 className="text-2xl font-bold tracking-tight">Peta Geospasial Jaringan 8 Cabang KKMP Depok</h2>
+            <Badge className="bg-red-50 text-red-700 border-red-300 gap-1 text-xs">
+              <Globe className="w-3.5 h-3.5 text-red-600" />
+              KKMP Kota Depok
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm mt-1">
-            Manajemen data spasial Dapur SPPG, Sekolah Sasaran, dan Supplier Komoditas se-Kabupaten Garut
+            Manajemen data spasial Gudang Pusat Mekarjaya, 8 Pos Cabang, dan Rute Logistik se-Kota Depok
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export default function AdminGis() {
             variant="outline"
             size="sm"
             onClick={handleExport}
-            className="gap-1.5 text-xs font-medium"
+            className="gap-1.5 text-xs font-medium cursor-pointer"
           >
             <Download className="w-3.5 h-3.5 text-gray-600" /> Ekspor GeoJSON
           </Button>
@@ -70,23 +70,23 @@ export default function AdminGis() {
           <Button
             size="sm"
             onClick={() => setModalOpen(true)}
-            className="gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm"
+            className="gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold shadow-sm cursor-pointer"
           >
-            <SlidersHorizontal className="w-3.5 h-3.5" /> Sinkronkan GIS Disperindag
+            <SlidersHorizontal className="w-3.5 h-3.5" /> Kelola Titik Cabang
           </Button>
         </div>
       </div>
 
       {/* Ringkasan Titik Spasial */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <Card className="border-emerald-200/80 bg-emerald-50/40">
+        <Card className="border-red-200/80 bg-red-50/40">
           <CardContent className="p-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold">
               <Utensils className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground font-medium">Dapur SPPG</p>
-              <p className="text-xl font-bold text-gray-900">{dapurCount} Titik</p>
+              <p className="text-xs text-muted-foreground font-medium">Pos Cabang KKMP</p>
+              <p className="text-xl font-bold text-gray-900">{dapurCount || 8} Titik</p>
             </div>
           </CardContent>
         </Card>
@@ -97,7 +97,7 @@ export default function AdminGis() {
               <School className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground font-medium">Sekolah Sasaran</p>
+              <p className="text-xs text-muted-foreground font-medium">Titik Distribusi Anggota</p>
               <p className="text-xl font-bold text-gray-900">{sekolahCount} Lokasi</p>
             </div>
           </CardContent>

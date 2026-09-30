@@ -12,8 +12,6 @@ import {
   BarChart3,
   Apple,
   Warehouse,
-  ShoppingBasket,
-  CalendarDays,
   UserPlus,
   UserCheck,
   MapPinned,
@@ -21,32 +19,30 @@ import {
 
 const menuItems = [
   { separator: "Menu Utama" },
-  { path: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { path: "/admin/gis", label: "Peta Geospasial GIS", icon: MapPinned },
-  { path: "/admin/stock", label: "Manajemen Stok", icon: Warehouse },
-  { path: "/admin/bapokting", label: "SIHARBATING & MISTER MBG", icon: ShoppingBasket },
+  { path: "/admin/dashboard", label: "Dashboard Induk", icon: LayoutDashboard },
+  { path: "/admin/stock", label: "Gudang Pusat KKMP", icon: Warehouse },
+  { path: "/admin/gis", label: "Peta Jaringan 8 Cabang", icon: MapPinned },
 
-  { separator: "Data Pendaftar & Pengguna" },
+  { separator: "Rantai Pasok & Pengguna" },
+  { path: "/admin/suppliers", label: "Supplier & Pemasok", icon: Users },
+  { path: "/admin/mitra", label: "8 Cabang Koperasi Depok", icon: Store },
+  { path: "/admin/logistik", label: "Logistik & Armada Distribusi", icon: Truck },
+  { path: "/admin/warga", label: "Data Anggota Koperasi", icon: UserCheck },
   { path: "/admin/pendaftar-baru", label: "Pusat Pendaftar Baru", icon: UserPlus },
-  { path: "/admin/mitra", label: "Manajemen Mitra/SPPG", icon: Store },
-  { path: "/admin/suppliers", label: "Manajemen Supplier", icon: Users },
-  { path: "/admin/logistik", label: "Manajemen Logistik", icon: Truck },
-  { path: "/admin/warga", label: "Manajemen Warga/Penerima", icon: UserCheck },
-  { path: "/admin/sppg-menus", label: "Menu Harian SPPG", icon: CalendarDays },
 
-  { separator: "Laporan" },
+  { separator: "Laporan & Analisis" },
   { path: "/admin/financial", label: "Laporan Keuangan", icon: FileBarChart },
-  { path: "/admin/inflation", label: "Laporan Inflasi/Harga", icon: TrendingUp },
-  { path: "/admin/supply-chain", label: "Laporan Rantai Pasok", icon: BarChart3 },
-  { path: "/admin/food-report", label: "Laporan Bahan Pangan", icon: Apple },
+  { path: "/admin/supply-chain", label: "Alur Rantai Pasok", icon: BarChart3 },
+  { path: "/admin/inflation", label: "Monitoring Harga Komoditas", icon: TrendingUp },
+  { path: "/admin/food-report", label: "Laporan Arus Komoditas", icon: Apple },
 
   { separator: "Komunikasi" },
-  { path: "/admin/chat-mitra", label: "Chat Mitra/SPPG", icon: MessageCircle },
+  { path: "/admin/chat-mitra", label: "Chat Pos Cabang", icon: MessageCircle },
   { path: "/admin/chat-supplier", label: "Chat Supplier", icon: MessageCircle },
   { path: "/admin/chat-logistik", label: "Chat Logistik", icon: MessageCircle },
-  { path: "/admin/notifications", label: "Notifikasi Stok", icon: Bell },
+  { path: "/admin/notifications", label: "Notifikasi Sistem", icon: Bell },
 ];
 
 export default function AdminLayout() {
-  return <TopNavLayout menuItems={menuItems} title="Admin Panel" />;
+  return <TopNavLayout menuItems={menuItems} title="Koperasi Induk Mekarjaya (Gudang Pusat)" />;
 }

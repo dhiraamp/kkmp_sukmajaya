@@ -4,11 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { AlertTriangle, Clock, Thermometer } from "lucide-react";
 
 const priorityOrders = [
-  { id: "ORD-P01", items: "Ikan Nila Segar 20kg, Daging Ayam 15kg", mitra: "SPPG Garut Kota", perishable: "cepat_busuk", priority: "urgent", distance: "5 km", eta: "1 jam" },
-  { id: "ORD-P02", items: "Bayam Segar 10kg, Tomat 8kg", mitra: "SPPG Tarogong", perishable: "cepat_busuk", priority: "urgent", distance: "12 km", eta: "2 jam" },
-  { id: "ORD-P03", items: "Telur Ayam 30kg, Tahu 20kg", mitra: "SPPG Leles", perishable: "sedang", priority: "normal", distance: "18 km", eta: "3 jam" },
-  { id: "ORD-P04", items: "Beras Premium 50kg", mitra: "SPPG Bayongbong", perishable: "tahan_lama", priority: "low", distance: "25 km", eta: "5 jam" },
-  { id: "ORD-P05", items: "Susu Segar 10 liter, Yogurt 5kg", mitra: "SPPG Cibatu", perishable: "cepat_busuk", priority: "urgent", distance: "30 km", eta: "4 jam" },
+  { id: "ORD-P01", items: "Ikan Nila Segar 20kg, Daging Ayam 15kg", mitra: "Pos KKMP Beji Depok", perishable: "cepat_busuk", priority: "urgent", distance: "4 km", eta: "45 mnt" },
+  { id: "ORD-P02", items: "Bayam Segar 10kg, Tomat 8kg", mitra: "Pos KKMP Sukmajaya", perishable: "cepat_busuk", priority: "urgent", distance: "3 km", eta: "30 mnt" },
+  { id: "ORD-P03", items: "Telur Ayam 30kg, Tahu 20kg", mitra: "Pos KKMP Pancoran Mas", perishable: "sedang", priority: "normal", distance: "6 km", eta: "1.5 jam" },
+  { id: "ORD-P04", items: "Beras Premium 50kg", mitra: "Pos KKMP Cimanggis", perishable: "tahan_lama", priority: "low", distance: "8 km", eta: "2 jam" },
+  { id: "ORD-P05", items: "Susu Segar 10 liter, Yogurt 5kg", mitra: "Pos KKMP Cilodong", perishable: "cepat_busuk", priority: "urgent", distance: "7 km", eta: "1 jam" },
 ];
 
 const priorityConfig = {

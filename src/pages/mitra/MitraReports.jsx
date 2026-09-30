@@ -29,16 +29,16 @@ export default function MitraReports() {
 
       doc.setFont("helvetica", "bold");
       doc.setFontSize(16);
-      doc.text("Laporan Bulanan Mitra", startX, 20);
+      doc.text("Laporan Bulanan Pos Cabang KKMP", startX, 20);
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10);
-      doc.text("SMART MBG - Sistem Manajemen Rantai Pasok Terintegrasi", startX, 27);
+      doc.text("KKMP KOTA DEPOK - Koperasi Kelurahan Merah Putih Mekarjaya", startX, 27);
 
       let y = 40;
       const cols = ["Bulan", "Pendapatan", "Pengeluaran", "Selisih"];
       doc.setFont("helvetica", "bold");
       doc.setFontSize(10);
-      doc.setFillColor(5, 150, 105);
+      doc.setFillColor(234, 88, 12);
       doc.rect(startX, y - 6, tableW, 7, "F");
       doc.setTextColor(255, 255, 255);
       let x = startX;
@@ -79,7 +79,7 @@ export default function MitraReports() {
       doc.text(`Total Pengeluaran : ${formatRp(totalPengeluaran)}`, startX, y); y += 5;
       doc.text(`Selisih           : ${formatRp(totalPendapatan - totalPengeluaran)}`, startX, y);
 
-      doc.save("laporan_mitra.pdf");
+      doc.save("laporan_pos_cabang_kkmp.pdf");
       toast.success("Berhasil", { description: "File PDF laporan telah diunduh." });
     } catch (err) {
       toast.error("Gagal Mengunduh", { description: err.message || "Terjadi kesalahan." });
@@ -92,10 +92,10 @@ export default function MitraReports() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold">Laporan Bulanan</h2>
-          <p className="text-muted-foreground">Ringkasan pengeluaran dan pembelian bulanan</p>
+          <h2 className="text-2xl font-bold">Laporan Bulanan Pos Cabang</h2>
+          <p className="text-muted-foreground">Ringkasan pengeluaran dan pembelian komoditas bulanan</p>
         </div>
-        <Button onClick={handleDownloadPdf} disabled={generating} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+        <Button onClick={handleDownloadPdf} disabled={generating} className="bg-orange-600 hover:bg-orange-700 text-white">
           {generating ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
           {generating ? "Membuat PDF..." : "Download PDF"}
         </Button>

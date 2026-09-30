@@ -4,7 +4,7 @@
 
 import { PRODUCTS } from "@/lib/marketplace";
 
-const SEED_VERSION = "smb_seed_v5";
+const SEED_VERSION = "kkmp_depok_seed_v3";
 
 const now = () => new Date().toISOString();
 const daysAgo = (n) => new Date(Date.now() - n * 86400000).toISOString();
@@ -75,18 +75,30 @@ const WEEKLY_MENU = {
 
 const COLLECTIONS = {
   users: [
-    { id: "u_warga", email: "adhiramaharani@gmail.com", password: "SmartMBG2026!", full_name: "Adhira Maharani", role: "penerima", verified: true, created_date: now() },
-    { id: "u_mitra", email: "mitra@demo.local", password: "demo1234", full_name: "Mitra SPPG Cikajang", role: "mitra", verified: true, created_date: now() },
-    { id: "u_supplier", email: "supplier@demo.local", password: "demo1234", full_name: "CV Binar Kalasenja", role: "supplier", verified: true, created_date: now() },
-    { id: "u_logistik", email: "logistik@demo.local", password: "demo1234", full_name: "Tim Logistik Pemkab Garut", role: "logistik", verified: true, created_date: now() },
-    { id: "u_admin", email: "admin@demo.local", password: "demo1234", full_name: "Administrator", role: "admin", verified: true, created_date: now() },
+    { id: "u_warga", email: "anggota.depok@kkmp-depok.id", password: "demo1234", full_name: "Adhira Maharani (Anggota Koperasi)", role: "penerima", verified: true, created_date: now() },
+    { id: "u_mitra", email: "cabang.beji@kkmp-depok.id", password: "demo1234", full_name: "Mitra Pos Cabang Beji", role: "mitra", verified: true, created_date: now() },
+    { id: "u_supplier", email: "supplier.pangan@kkmp-depok.id", password: "demo1234", full_name: "Gapoktan Sawangan Mandiri", role: "supplier", verified: true, created_date: now() },
+    { id: "u_logistik", email: "logistik@kkmp-depok.id", password: "demo1234", full_name: "Tim Logistik KKMP Kota Depok", role: "logistik", verified: true, created_date: now() },
+    { id: "u_admin", email: "admin.induk@kkmp-depok.id", password: "demo1234", full_name: "Pengurus KKMP Mekarjaya Depok", role: "admin", verified: true, created_date: now() },
+    // Alias demo.local
+    { id: "u_warga_alt", email: "warga@demo.local", password: "demo1234", full_name: "Adhira Maharani (Anggota Koperasi)", role: "penerima", verified: true, created_date: now() },
+    { id: "u_mitra_alt", email: "mitra@demo.local", password: "demo1234", full_name: "Mitra Pos Cabang Beji", role: "mitra", verified: true, created_date: now() },
+    { id: "u_supplier_alt", email: "supplier@demo.local", password: "demo1234", full_name: "Gapoktan Sawangan Mandiri", role: "supplier", verified: true, created_date: now() },
+    { id: "u_logistik_alt", email: "logistik@demo.local", password: "demo1234", full_name: "Tim Logistik KKMP Kota Depok", role: "logistik", verified: true, created_date: now() },
+    { id: "u_admin_alt", email: "admin@demo.local", password: "demo1234", full_name: "Pengurus KKMP Mekarjaya Depok", role: "admin", verified: true, created_date: now() },
   ],
   UserProfile: [
-    { id: "p_warga", user_id: "u_warga", user_email: "adhiramaharani@gmail.com", full_name: "Adhira Maharani", role: "penerima", is_active: true, phone: "081234567890", address: "Jl. Merdeka No. 12", area: "Garut Kota", created_date: now() },
-    { id: "p_mitra", user_id: "u_mitra", user_email: "mitra@demo.local", full_name: "Mitra SPPG Cikajang", role: "mitra", is_active: true, organization_name: "SPPG Cikajang", phone: "081234567891", address: "Jl. Raya Cikajang", created_date: now() },
-    { id: "p_supplier", user_id: "u_supplier", user_email: "supplier@demo.local", full_name: "CV Binar Kalasenja", role: "supplier", is_active: true, organization_name: "CV Binar Kalasenja", phone: "081234567892", created_date: now() },
-    { id: "p_logistik", user_id: "u_logistik", user_email: "logistik@demo.local", full_name: "Tim Logistik Pemkab Garut", role: "logistik", is_active: true, organization_name: "Dinas Ketahanan Pangan", phone: "081234567893", vehicle_type: "mobil_pickup", is_ready: true, created_date: now() },
-    { id: "p_admin", user_id: "u_admin", user_email: "admin@demo.local", full_name: "Administrator", role: "admin", is_active: true, organization_name: "Dinas Ketahanan Pangan", phone: "081234567894", created_date: now() },
+    { id: "p_warga", user_id: "u_warga", user_email: "anggota.depok@kkmp-depok.id", full_name: "Adhira Maharani (Anggota Koperasi)", role: "penerima", is_active: true, phone: "081234567890", address: "Jl. Bahagia Raya No. 15", area: "Mekarjaya, Sukmajaya, Depok", created_date: now() },
+    { id: "p_mitra", user_id: "u_mitra", user_email: "cabang.beji@kkmp-depok.id", full_name: "Mitra Pos Cabang Beji", role: "mitra", is_active: true, organization_name: "Pos Cabang Beji KKMP", phone: "081234567891", address: "Jl. Ridwan Rais No. 14, Beji", created_date: now() },
+    { id: "p_supplier", user_id: "u_supplier", user_email: "supplier.pangan@kkmp-depok.id", full_name: "Gapoktan Sawangan Mandiri", role: "supplier", is_active: true, organization_name: "Gapoktan Sawangan Mandiri", phone: "081234567892", created_date: now() },
+    { id: "p_logistik", user_id: "u_logistik", user_email: "logistik@kkmp-depok.id", full_name: "Tim Logistik KKMP Kota Depok", role: "logistik", is_active: true, organization_name: "Divisi Distribusi KKMP Depok", phone: "081234567893", vehicle_type: "mobil_pickup", is_ready: true, created_date: now() },
+    { id: "p_admin", user_id: "u_admin", user_email: "admin.induk@kkmp-depok.id", full_name: "Pengurus KKMP Mekarjaya Depok", role: "admin", is_active: true, organization_name: "Koperasi Kelurahan Merah Putih Mekarjaya", phone: "081234567894", created_date: now() },
+    // Alias demo.local
+    { id: "p_warga_alt", user_id: "u_warga_alt", user_email: "warga@demo.local", full_name: "Adhira Maharani (Anggota Koperasi)", role: "penerima", is_active: true, phone: "081234567890", address: "Jl. Bahagia Raya No. 15", area: "Mekarjaya, Sukmajaya, Depok", created_date: now() },
+    { id: "p_mitra_alt", user_id: "u_mitra_alt", user_email: "mitra@demo.local", full_name: "Mitra Pos Cabang Beji", role: "mitra", is_active: true, organization_name: "Pos Cabang Beji KKMP", phone: "081234567891", address: "Jl. Ridwan Rais No. 14, Beji", created_date: now() },
+    { id: "p_supplier_alt", user_id: "u_supplier_alt", user_email: "supplier@demo.local", full_name: "Gapoktan Sawangan Mandiri", role: "supplier", is_active: true, organization_name: "Gapoktan Sawangan Mandiri", phone: "081234567892", created_date: now() },
+    { id: "p_logistik_alt", user_id: "u_logistik_alt", user_email: "logistik@demo.local", full_name: "Tim Logistik KKMP Kota Depok", role: "logistik", is_active: true, organization_name: "Divisi Distribusi KKMP Depok", phone: "081234567893", vehicle_type: "mobil_pickup", is_ready: true, created_date: now() },
+    { id: "p_admin_alt", user_id: "u_admin_alt", user_email: "admin@demo.local", full_name: "Pengurus KKMP Mekarjaya Depok", role: "admin", is_active: true, organization_name: "Koperasi Kelurahan Merah Putih Mekarjaya", phone: "081234567894", created_date: now() },
   ],
   Product: PRODUCTS.map((p, i) => ({
     id: p.id,
@@ -96,25 +108,34 @@ const COLLECTIONS = {
     base_price: p.old_price || p.price,
     unit: p.unit,
     stock: p.stock,
-    origin: p.origin || "",
+    origin: p.origin || "Gudang Induk Mekarjaya, Depok",
     image_url: p.img,
-    supplier_name: "CV Binar Kalasenja",
+    supplier_name: p.origin || "Gudang Induk Mekarjaya, Depok",
     status: "active",
     created_date: daysAgo(i),
   })),
   WarehouseStock: [
-    { id: uid("ws"), product_id: "kentang", product_name: "Kentang Granola", category: "sayuran", quantity: 120, unit: "kg", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "beras", product_name: "Beras Premium Setra Ramos", category: "sembako", quantity: 320, unit: "kg", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "telur", product_name: "Telur Ayam Negeri", category: "protein", quantity: 40, unit: "kg", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "cabai-merah", product_name: "Cabai Merah Keriting", category: "bumbu", quantity: 12, unit: "kg", status: "low", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "beras-5kg", product_name: "Beras Premium Setra Ramos 5kg", category: "sembako", quantity: 350, unit: "sak", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "mentega-blueband", product_name: "Mentega Margarin Blue Band 200g", category: "sembako", quantity: 250, unit: "sachet", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "shampo-lifebuoy", product_name: "Shampo Rambut Lifebuoy 170ml", category: "perawatan diri", quantity: 120, unit: "botol", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "shampo-pantene", product_name: "Shampo Pantene Total Damage 160ml", category: "perawatan diri", quantity: 90, unit: "botol", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "mie-indomie", product_name: "Mie Instan Indomie Goreng (Isi 5)", category: "kelontong", quantity: 400, unit: "paket", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "sabun-cuci-piring", product_name: "Sunlight Jeruk Nipis 750ml", category: "kelontong", quantity: 220, unit: "pouch", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "kopi-kapal-api", product_name: "Kopi Kapal Api Spesial Mix 10 Sachet", category: "kelontong", quantity: 210, unit: "renceng", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "deterjen-rinso", product_name: "Deterjen Rinso Anti Noda 770g", category: "kelontong", quantity: 180, unit: "pack", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "sabun-mandi", product_name: "Sabun Mandi Batang Dettol Original", category: "perawatan diri", quantity: 140, unit: "pack", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "minyak", product_name: "Minyak Goreng Sawit 2 Liter", category: "sembako", quantity: 260, unit: "pouch", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "gula", product_name: "Gula Pasir Kristal Putih 1kg", category: "sembako", quantity: 200, unit: "kg", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "telur", product_name: "Telur Ayam Negeri Segar", category: "protein", quantity: 150, unit: "kg", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "kecap-bango", product_name: "Kecap Manis Bango 520ml", category: "bumbu", quantity: 130, unit: "botol", status: "active", updated_date: now(), created_date: daysAgo(2) },
   ],
   Order: [
     {
       id: uid("order"),
       order_number: "ORD-2026-0001",
       mitra_id: "mitra@demo.local",
-      mitra_name: "Mitra SPPG Cikajang",
-      supplier_name: "CV Binar Kalasenja",
+      mitra_name: "Pos Cabang Beji",
+      supplier_name: "Gapoktan Sawangan Mandiri",
       supplier_id: "supplier@demo.local",
       items: [
         { product_id: "kentang", product_name: "Kentang Granola", quantity: 20, unit: "kg", price: 14000 },
@@ -137,7 +158,7 @@ const COLLECTIONS = {
       id: uid("order"),
       order_number: "ORD-2026-0002",
       mitra_id: "mitra@demo.local",
-      mitra_name: "Mitra SPPG Cikajang",
+      mitra_name: "Pos Cabang Beji",
       supplier_name: "PT Berkah Jaya Supplier",
       supplier_id: "supplier@demo.local",
       items: [
@@ -160,7 +181,7 @@ const COLLECTIONS = {
       id: uid("order"),
       order_number: "ORD-2026-0003",
       mitra_id: "mitra@demo.local",
-      mitra_name: "Mitra SPPG Cikajang",
+      mitra_name: "Pos Cabang Beji",
       supplier_name: "UD Shafira Jaya Abadi",
       supplier_id: "supplier@demo.local",
       items: [
@@ -178,8 +199,8 @@ const COLLECTIONS = {
     },
   ],
   PurchaseOrder: [
-    { id: uid("po"), po_number: "PO-2026-0001", mitra_email: "mitra@demo.local", mitra_name: "Mitra SPPG Cikajang", supplier_email: "supplier@demo.local", supplier_name: "CV Binar Kalasenja", items: [{ product_id: "kentang", product_name: "Kentang Granola", quantity: 20, unit: "kg" }], total: 280000, status: "diproses", has_supplier: true, created_date: daysAgo(1) },
-    { id: uid("po"), po_number: "PO-2026-0002", mitra_email: "mitra@demo.local", mitra_name: "Mitra SPPG Cikajang", supplier_email: "supplier@demo.local", supplier_name: "PT Berkah Jaya Supplier", items: [{ product_id: "ayam", product_name: "Ayam Potong", quantity: 30, unit: "kg" }], total: 1050000, status: "menunggu", has_supplier: true, created_date: daysAgo(1) },
+    { id: uid("po"), po_number: "PO-2026-0001", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang Beji", supplier_email: "supplier@demo.local", supplier_name: "Gapoktan Sawangan Mandiri", items: [{ product_id: "kentang", product_name: "Kentang Granola", quantity: 20, unit: "kg" }], total: 280000, status: "diproses", has_supplier: true, created_date: daysAgo(1) },
+    { id: uid("po"), po_number: "PO-2026-0002", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang Beji", supplier_email: "supplier@demo.local", supplier_name: "PT Berkah Jaya Supplier", items: [{ product_id: "ayam", product_name: "Ayam Potong", quantity: 30, unit: "kg" }], total: 1050000, status: "menunggu", has_supplier: true, created_date: daysAgo(1) },
   ],
   Transaction: [
     {
@@ -191,14 +212,14 @@ const COLLECTIONS = {
       delivery_status: "delivered",
       payment_method: "Transfer Bank",
       items: [
-        { product_id: "kentang", product_name: "Kentang Granola", supplier_name: "CV Binar Kalasenja", quantity: 20, unit: "kg", subtotal: 280000 },
-        { product_id: "telur", product_name: "Telur Ayam Negeri", supplier_name: "CV Binar Kalasenja", quantity: 10, unit: "kg", subtotal: 270000 },
+        { product_id: "kentang", product_name: "Kentang Granola", supplier_name: "Gapoktan Sawangan Mandiri", quantity: 20, unit: "kg", subtotal: 280000 },
+        { product_id: "telur", product_name: "Telur Ayam Negeri", supplier_name: "Gapoktan Sawangan Mandiri", quantity: 10, unit: "kg", subtotal: 270000 },
       ],
       subtotal: 550000,
       service_fee: 16500,
       delivery_fee: 15000,
       total: 581500,
-      delivery_address: "Jl. Raya Cikajang, Garut",
+      delivery_address: "Jl. Ridwan Rais No. 14, Beji, Kota Depok",
       amount: 1055000,
       method: "Transfer Bank",
       status: "success",
@@ -213,8 +234,8 @@ const COLLECTIONS = {
       delivery_status: "shipping",
       payment_method: "QRIS",
       items: [
-        { product_id: "ayam", product_name: "Ayam Potong", supplier_name: "CV Binar Kalasenja", quantity: 30, unit: "kg", subtotal: 1050000 },
-        { product_id: "beras", product_name: "Beras Premium Setra Ramos", supplier_name: "CV Binar Kalasenja", quantity: 10, unit: "kg", subtotal: 155000 },
+        { product_id: "ayam", product_name: "Ayam Potong", supplier_name: "Gapoktan Sawangan Mandiri", quantity: 30, unit: "kg", subtotal: 1050000 },
+        { product_id: "beras", product_name: "Beras Premium Setra Ramos", supplier_name: "Gapoktan Sawangan Mandiri", quantity: 10, unit: "kg", subtotal: 155000 },
       ],
       subtotal: 1205000,
       service_fee: 36150,
@@ -537,7 +558,7 @@ const COLLECTIONS = {
       id: uid("ntf"),
       type: "new_order",
       title: "Pesanan Baru Masuk",
-      message: "Mitra SPPG Cikajang mengirimkan pesanan bahan pangan baru.",
+      message: "Mitra Pos Cabang Beji mengirimkan pesanan komoditas pangan baru.",
       target_roles: ["supplier"],
       read_by: [],
       created_date: hoursAgo(2),
@@ -546,7 +567,7 @@ const COLLECTIONS = {
       id: uid("ntf"),
       type: "order_update",
       title: "Pengiriman Sedang Berjalan",
-      message: "Ada pengiriman yang sedang menuju SPPG tujuan. Pantau di menu pengiriman.",
+      message: "Ada pengiriman yang sedang menuju Pos Cabang tujuan. Pantau di menu logistik.",
       target_roles: ["logistik"],
       read_by: [],
       created_date: hoursAgo(1),
@@ -555,7 +576,7 @@ const COLLECTIONS = {
       id: uid("ntf"),
       type: "complaint",
       title: "Pengaduan Baru",
-      message: "Warga melaporkan keterlambatan pengiriman di wilayah Tarogong.",
+      message: "Warga melaporkan permintaan restock barang di Pos Sukmajaya.",
       target_roles: ["admin", "mitra"],
       read_by: [],
       created_date: hoursAgo(6),
@@ -568,6 +589,7 @@ export function ensureSeed() {
   try {
     if (localStorage.getItem(SEED_VERSION)) return;
     Object.entries(COLLECTIONS).forEach(([name, items]) => {
+      localStorage.setItem(`kkmp_collection_${name}`, JSON.stringify(items));
       localStorage.setItem(`smb_collection_${name}`, JSON.stringify(items));
     });
     localStorage.setItem(SEED_VERSION, "1");
@@ -579,9 +601,11 @@ export function ensureSeed() {
 export function resetSeed() {
   if (typeof window === "undefined") return;
   Object.keys(COLLECTIONS).forEach((name) => {
+    localStorage.removeItem(`kkmp_collection_${name}`);
     localStorage.removeItem(`smb_collection_${name}`);
   });
   localStorage.removeItem(SEED_VERSION);
+  localStorage.removeItem("kkmp_session_user");
   localStorage.removeItem("smb_session_user");
   localStorage.removeItem("smart_mbg_user");
   ensureSeed();

@@ -10,7 +10,7 @@ import { base44 } from "@/api/base44Client";
 import { useAuth } from "@/lib/AuthContext";
 import { CATEGORIES, categoryLabel, categoryColor } from "@/lib/career";
 
-const OWNER_CATEGORIES = { mitra: ["sppg", "lainnya"], logistik: ["logistik", "lainnya"] };
+const OWNER_CATEGORIES = { mitra: ["pos_cabang", "lainnya"], logistik: ["logistik", "lainnya"] };
 
 export default function Career() {
   const navigate = useNavigate();
@@ -21,8 +21,8 @@ export default function Career() {
   const [category, setCategory] = useState("Semua");
   const [addOpen, setAddOpen] = useState(false);
 
-  const canManage = user && ["mitra", "logistik"].includes(user.role);
-  const allowedCategories = user ? OWNER_CATEGORIES[user.role] || [] : [];
+  const canManage = user && ["mitra", "logistik", "admin"].includes(user.role);
+  const allowedCategories = user ? OWNER_CATEGORIES[user.role] || ["pos_cabang", "logistik", "gudang", "lainnya"] : [];
 
   const load = () => {
     base44.entities.JobOpening.list("-created_date")
@@ -73,16 +73,15 @@ export default function Career() {
       <section className="relative border-b border-gray-200 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/90 to-teal-800/80" />
+          <div className="absolute inset-0 bg-gradient-to-br from-red-900/90 to-rose-800/80" />
         </div>
         <div className="relative max-w-full mx-auto px-4 py-12">
-          <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-100 bg-emerald-500/20 border border-emerald-400/30 px-3 py-1.5 rounded-full w-fit">
-            <Building2 className="w-3.5 h-3.5" /> Career Program MBG Garut
+          <span className="flex items-center gap-1.5 text-xs font-semibold text-red-100 bg-red-500/20 border border-red-400/30 px-3 py-1.5 rounded-full w-fit">
+            <Building2 className="w-3.5 h-3.5" /> Karir & Peluang Kerja KKMP Depok
           </span>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3">Lowongan Kerja Terbuka</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3">Lowongan Kerja Koperasi Merah Putih</h1>
           <p className="text-sm text-white/80 mt-1.5 max-w-2xl">
-            Bergabunglah mendukung program Makan Bergizi Gratis. Tersedia posisi
-            di dapur SPPG, logistik, dan kebutuhan lain seputar MBG.
+            Bergabunglah bersama Koperasi Merah Putih Mekarjaya - Kota Depok. Tersedia posisi di Pos Cabang, Rantai Pasok Gudang Pusat, dan Armada Logistik.
           </p>
 
           <div className="mt-6 flex items-stretch bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden max-w-2xl">
@@ -104,7 +103,7 @@ export default function Career() {
                 onClick={() => setCategory(c.key)}
                 className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${
                   category === c.key
-                    ? "bg-emerald-600 text-white border-emerald-600"
+                    ? "bg-red-600 text-white border-red-600"
                     : "bg-white/10 text-white/85 border-white/30 hover:bg-white/20"
                 }`}
               >
@@ -126,7 +125,7 @@ export default function Career() {
           {canManage && (
             <button
               onClick={() => setAddOpen(true)}
-              className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors"
+              className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors"
             >
               <Plus className="w-4 h-4" /> Tambah Lowongan
             </button>
@@ -135,7 +134,7 @@ export default function Career() {
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-red-200 border-t-red-600 rounded-full animate-spin" />
           </div>
         ) : filtered.length === 0 ? (
           <div className="bg-white rounded-xl border border-gray-200 p-10 text-center">
@@ -149,13 +148,13 @@ export default function Career() {
                 key={j.id}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(`/career/${j.id}`)}
-                className="bg-white rounded-2xl border border-gray-200 p-5 text-left hover:border-emerald-400 hover:shadow-md transition-all flex flex-col"
+                className="bg-white rounded-2xl border border-gray-200 p-5 text-left hover:border-red-400 hover:shadow-md transition-all flex flex-col"
               >
                 <div className="flex items-start justify-between gap-2">
                   <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${categoryColor(j.category)}`}>
                     {categoryLabel(j.category)}
                   </span>
-                  <span className="text-[10px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-medium text-red-700 bg-red-50 px-2 py-0.5 rounded-full">
                     Open
                   </span>
                 </div>
@@ -164,11 +163,11 @@ export default function Career() {
                   <MapPin className="w-3 h-3" /> {j.location}
                 </p>
                 <div className="flex items-center gap-3 mt-2.5 text-xs text-gray-600">
-                  <span className="flex items-center gap-1"><Wallet className="w-3.5 h-3.5 text-emerald-600" /> {j.salary}</span>
-                  <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-emerald-600" /> {j.quota} orang</span>
+                  <span className="flex items-center gap-1"><Wallet className="w-3.5 h-3.5 text-red-600" /> {j.salary}</span>
+                  <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-red-600" /> {j.quota} orang</span>
                 </div>
                 <p className="text-xs text-gray-500 mt-3 leading-relaxed line-clamp-2">{j.description}</p>
-                <span className="mt-auto pt-3 flex items-center gap-0.5 text-xs font-semibold text-emerald-600">
+                <span className="mt-auto pt-3 flex items-center gap-0.5 text-xs font-semibold text-red-600">
                   Lihat & Lamar <ChevronRight className="w-3.5 h-3.5" />
                 </span>
               </motion.button>

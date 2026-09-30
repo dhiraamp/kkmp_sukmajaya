@@ -45,18 +45,18 @@ export default function Berita() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => navigate("/")}
-              className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-emerald-600 hover:border-emerald-300 transition-colors"
+              className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-red-600 hover:border-red-300 transition-colors"
               aria-label="Kembali ke Beranda"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
             <div>
               <div className="flex items-center gap-2">
-                <Newspaper className="w-6 h-6 text-emerald-600" />
-                <h1 className="text-2xl font-bold text-gray-900">Berita & Update</h1>
+                <Newspaper className="w-6 h-6 text-red-600" />
+                <h1 className="text-2xl font-bold text-gray-900">Berita & Informasi Koperasi</h1>
               </div>
               <p className="text-sm text-gray-500 mt-0.5">
-                Berita terkini seputar data, statistik, dan program Satu Data dari Satu Data Garut & data.go.id
+                Kabar terkini seputar kegiatan Koperasi Merah Putih Mekarjaya, ketersediaan pangan, dan program komoditas Kota Depok
               </p>
             </div>
           </div>

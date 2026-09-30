@@ -56,8 +56,8 @@ export default function AdminWarga() {
 
       setWargaList(Array.from(map.values()));
     } catch (err) {
-      console.error("Gagal memuat data warga:", err);
-      toast.error("Gagal memuat data warga penerima");
+      console.error("Gagal memuat data anggota:", err);
+      toast.error("Gagal memuat data anggota koperasi");
     } finally {
       setLoading(false);
     }
@@ -92,7 +92,7 @@ export default function AdminWarga() {
         setSelectedWarga((prev) => ({ ...prev, is_active: newStatus }));
       }
     } catch (err) {
-      toast.error("Gagal memperbarui status warga");
+      toast.error("Gagal memperbarui status anggota");
     }
   };
 
@@ -120,13 +120,13 @@ export default function AdminWarga() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold tracking-tight">Manajemen Warga / Penerima MBG</h2>
-            <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200">
+            <h2 className="text-2xl font-bold tracking-tight">Manajemen Anggota Koperasi</h2>
+            <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
               {wargaList.length} Terdaftar
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm">
-            Daftar data warga & penerima manfaat program MBG yang mendaftar melalui portal publik
+            Daftar data anggota resmi Koperasi Kelurahan Merah Putih (KKMP) Mekarjaya Kota Depok
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={load} className="gap-2 shrink-0">
@@ -136,16 +136,16 @@ export default function AdminWarga() {
 
       {/* Ringkasan Statistik */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="border-l-4 border-l-primary shadow-sm">
+        <Card className="border-l-4 border-l-red-600 shadow-sm">
           <CardHeader className="pb-2 flex flex-row items-center justify-between space-y-0">
             <CardTitle className="text-xs font-medium text-muted-foreground uppercase">
-              Total Warga Terdaftar
+              Total Anggota Terdaftar
             </CardTitle>
-            <Users className="w-4 h-4 text-primary" />
+            <Users className="w-4 h-4 text-red-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{wargaList.length}</div>
-            <p className="text-xs text-muted-foreground mt-1">Akun penerima manfaat MBG</p>
+            <p className="text-xs text-muted-foreground mt-1">Akun anggota resmi KKMP</p>
           </CardContent>
         </Card>
 
@@ -171,7 +171,7 @@ export default function AdminWarga() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-blue-600">{totalActive}</div>
-            <p className="text-xs text-muted-foreground mt-1">Dapat memesan & menerima manfaat</p>
+            <p className="text-xs text-muted-foreground mt-1">Dapat memesan komoditas sembako</p>
           </CardContent>
         </Card>
       </div>
@@ -232,14 +232,14 @@ export default function AdminWarga() {
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
               <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-3" />
-              <p className="text-sm">Memuat data warga penerima...</p>
+              <p className="text-sm">Memuat data anggota koperasi...</p>
             </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-16 text-muted-foreground">
               <Users className="w-12 h-12 mx-auto text-gray-300 mb-3" />
-              <p className="text-base font-semibold text-gray-700">Tidak ada data warga ditemukan</p>
+              <p className="text-base font-semibold text-gray-700">Tidak ada data anggota ditemukan</p>
               <p className="text-xs text-muted-foreground mt-1">
-                {search ? "Coba gunakan kata kunci pencarian yang lain." : "Belum ada warga yang mendaftar."}
+                {search ? "Coba gunakan kata kunci pencarian yang lain." : "Belum ada anggota yang mendaftar."}
               </p>
             </div>
           ) : (

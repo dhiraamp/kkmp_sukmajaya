@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useSupplierProducts } from "@/hooks/useSupplierProducts";
 import AddToCartDialog from "@/components/mitra/AddToCartDialog";
 
-const categories = ["semua", "beras", "telur", "daging", "ikan", "sayuran", "buah", "minyak", "bumbu", "susu", "tepung", "lainnya"];
+const categories = ["semua", "beras", "mentega", "kelontong", "perawatan", "minyak", "sembako", "bumbu", "sayuran", "telur", "daging", "lainnya"];
 
 export default function MitraProducts() {
   const navigate = useNavigate();
@@ -58,11 +58,11 @@ export default function MitraProducts() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Produk Bahan Pangan</h2>
-          <p className="text-muted-foreground">Pilih dan pesan kebutuhan bahan pangan Anda</p>
+          <h2 className="text-2xl font-bold">Katalog Komoditas Pangan</h2>
+          <p className="text-muted-foreground">Pilih dan ajukan kebutuhan komoditas pos cabang dari Gudang Pusat KKMP</p>
         </div>
         {totalItems > 0 && (
-          <Button onClick={() => navigate("/mitra/cart")} className="flex items-center gap-2">
+          <Button onClick={() => navigate("/mitra/cart")} className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white">
             <ShoppingCart className="w-4 h-4" />{totalItems} item di keranjang
           </Button>
         )}
@@ -127,7 +127,7 @@ export default function MitraProducts() {
                   </span>
                   <Button
                     size="sm"
-                    className={`h-7 text-xs px-2 transition-all ${addedIds[p.id] ? 'bg-green-600 hover:bg-green-600' : ''}`}
+                    className={`h-7 text-xs px-2 transition-all ${addedIds[p.id] ? 'bg-green-600 hover:bg-green-600 text-white' : 'bg-orange-600 hover:bg-orange-700 text-white'}`}
                     onClick={() => handleAddClick(p)}
                     disabled={p.stock <= 0}
                   >

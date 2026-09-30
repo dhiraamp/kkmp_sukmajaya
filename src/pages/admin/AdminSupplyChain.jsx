@@ -5,20 +5,22 @@ import StatCard from "@/components/shared/StatCard";
 import { Truck, Package, Clock, CheckCircle2 } from "lucide-react";
 
 const supplyData = [
-  { area: "Garut Kota", supply: 85, demand: 80 },
-  { area: "Tarogong", supply: 70, demand: 75 },
-  { area: "Leles", supply: 60, demand: 65 },
-  { area: "Bayongbong", supply: 55, demand: 50 },
-  { area: "Cibatu", supply: 40, demand: 45 },
-  { area: "Karangpawitan", supply: 50, demand: 55 },
+  { area: "Beji", supply: 85, demand: 80 },
+  { area: "Pancoran Mas", supply: 70, demand: 75 },
+  { area: "Sukmajaya", supply: 90, demand: 85 },
+  { area: "Cimanggis", supply: 65, demand: 60 },
+  { area: "Cilodong", supply: 55, demand: 50 },
+  { area: "Sawangan", supply: 75, demand: 70 },
+  { area: "Bojongsari", supply: 50, demand: 55 },
+  { area: "Cipayung", supply: 60, demand: 58 },
 ];
 
 export default function AdminSupplyChain() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Laporan Rantai Pasok</h2>
-        <p className="text-muted-foreground">Analisis supply & demand bahan pangan per area</p>
+        <h2 className="text-2xl font-bold">Laporan Rantai Pasok KKMP Depok</h2>
+        <p className="text-muted-foreground">Analisis supply & demand komoditas per Pos Cabang Kota Depok</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Efisiensi Pasok" value="92%" icon={CheckCircle2} color="green" trend={3} />
@@ -28,7 +30,7 @@ export default function AdminSupplyChain() {
       </div>
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-base">Supply vs Demand per Area (ton)</CardTitle>
+          <CardTitle className="text-base">Supply vs Demand per Pos Cabang (ton)</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="h-72">

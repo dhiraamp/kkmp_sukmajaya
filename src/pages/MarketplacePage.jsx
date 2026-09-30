@@ -44,7 +44,7 @@ function ProductCard({ product, onView, onAddToCart, onBuyNow }) {
       viewport={{ once: true }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       whileHover={{ y: -4 }}
-      className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-emerald-400 transition-all flex flex-col"
+      className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-red-400 transition-all flex flex-col"
     >
       <div className="relative h-28 bg-gray-100 overflow-hidden">
         <img
@@ -54,8 +54,8 @@ function ProductCard({ product, onView, onAddToCart, onBuyNow }) {
           loading="lazy"
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
         />
-        <span className="absolute top-1.5 left-1.5 text-[10px] font-semibold text-emerald-700 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded flex items-center gap-0.5">
-          <Leaf className="w-3 h-3" /> Segar
+        <span className="absolute top-1.5 left-1.5 text-[10px] font-semibold text-red-700 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded flex items-center gap-0.5">
+          <Leaf className="w-3 h-3 text-red-600" /> Segar
         </span>
         <span className="absolute bottom-1.5 left-1.5 text-[10px] font-medium text-white bg-black/50 backdrop-blur px-1.5 py-0.5 rounded capitalize">
           {product.category}
@@ -72,7 +72,7 @@ function ProductCard({ product, onView, onAddToCart, onBuyNow }) {
           <span className="text-xs text-gray-500 ml-auto">Stok: {product.stock} {product.unit}</span>
         </div>
         <div className="flex items-center justify-between mt-1.5">
-          <p className="font-bold text-sm text-emerald-700">
+          <p className="font-bold text-sm text-red-700">
             {formatRp(product.price)}
             {product.old_price > product.price && (
               <span className="text-xs text-gray-400 line-through ml-1 font-normal">{formatRp(product.old_price)}</span>
@@ -81,8 +81,8 @@ function ProductCard({ product, onView, onAddToCart, onBuyNow }) {
           </p>
           <button
             onClick={() => onView(product)}
-            title="Info Gizi"
-            className="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg p-1.5 transition-colors"
+            title="Info Produk"
+            className="text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg p-1.5 transition-colors"
           >
             <Info className="w-4 h-4" />
           </button>
@@ -101,14 +101,14 @@ function ProductCard({ product, onView, onAddToCart, onBuyNow }) {
           <button
             onClick={() => { onAddToCart(product, qty); setQty(1); }}
             disabled={outOfStock}
-            className="flex items-center justify-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg py-2 transition-colors disabled:opacity-50"
+            className="flex items-center justify-center gap-1 text-xs font-semibold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg py-2 transition-colors disabled:opacity-50"
           >
             <ShoppingCart className="w-3.5 h-3.5" /> Keranjang
           </button>
           <button
             onClick={() => { onBuyNow(product, qty); setQty(1); }}
             disabled={outOfStock}
-            className="flex items-center justify-center gap-1 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg py-2 transition-colors disabled:opacity-50"
+            className="flex items-center justify-center gap-1 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg py-2 transition-colors disabled:opacity-50"
           >
             <Zap className="w-3.5 h-3.5" /> Beli
           </button>
@@ -122,14 +122,14 @@ export default function MarketplacePage() {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
   const email = user?.email || "";
-  const role = user?.role || localStorage.getItem("smartmbg_role") || "penerima";
+  const role = user?.role || localStorage.getItem("kkmp_role") || localStorage.getItem("smartmbg_role") || "warga";
   const cartUser = { email, id: user?.id || email, role };
   const { addToCart } = useCart(cartUser);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("Semua");
   const [selected, setSelected] = useState(null);
 
-  const CART_PATH = { penerima: "/warga/keranjang", mitra: "/mitra/cart" };
+  const CART_PATH = { penerima: "/warga/keranjang", warga: "/warga/keranjang", mitra: "/mitra/cart" };
 
   const normalizeProduct = (p) => ({
     id: p.id,
@@ -198,7 +198,7 @@ export default function MarketplacePage() {
       <section className="relative border-b border-gray-200">
         <div className="absolute inset-0 overflow-hidden">
           <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/85 to-teal-800/80" />
+          <div className="absolute inset-0 bg-gradient-to-br from-red-950/90 via-red-900/85 to-rose-900/80" />
         </div>
         <div className="relative max-w-full mx-auto px-4 py-10">
           <button
@@ -207,9 +207,9 @@ export default function MarketplacePage() {
           >
             <ArrowLeft className="w-4 h-4" /> Kembali ke Beranda
           </button>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Marketplace Bahan Baku MBG</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">Katalog Komoditas Koperasi Merah Putih</h1>
           <p className="text-white/80 text-sm mt-1.5 max-w-2xl">
-            Produk segar & bahan baku dengan harga pasaran terendah di Kabupaten Garut, Jawa Barat. Foto asli menggambarkan bahan, lengkap dengan informasi gizi per 100 gram.
+            Sembako dan kebutuhan harian bermutu tinggi langsung dari Gudang Pusat Mekarjaya ke 8 Pos Cabang KKMP Kota Depok. Kualitas terjamin dengan harga anggota koperasi.
           </p>
 
           <div className="mt-5 flex items-stretch bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden max-w-2xl">
@@ -219,12 +219,12 @@ export default function MarketplacePage() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Cari kentang, telur, cabai, atau kebutuhan lainnya..."
+              placeholder="Cari shampo, beras, mentega, mie, sabun, atau kebutuhan warung kelontong..."
               className="flex-1 px-3 py-3 text-sm outline-none"
             />
             <button
               type="button"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-6 transition-colors"
+              className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-6 transition-colors"
             >
               Cari
             </button>
@@ -237,7 +237,7 @@ export default function MarketplacePage() {
                 onClick={() => setCategory(c)}
                 className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${
                   category === c
-                    ? "bg-emerald-600 text-white border-emerald-600"
+                    ? "bg-red-600 text-white border-red-600"
                     : "bg-white/10 text-white/85 border-white/30 hover:bg-white/20"
                 }`}
               >
@@ -249,9 +249,9 @@ export default function MarketplacePage() {
       </section>
 
       <main className="max-w-full mx-auto px-4 py-6">
-        <div className="flex items-start gap-2.5 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 mb-5">
-          <Truck className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
-          <p className="text-xs sm:text-sm text-emerald-800 leading-relaxed">{SHIPPING_NOTE}</p>
+        <div className="flex items-start gap-2.5 bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-5">
+          <Truck className="w-4 h-4 text-red-600 mt-0.5 shrink-0" />
+          <p className="text-xs sm:text-sm text-red-800 leading-relaxed">{SHIPPING_NOTE}</p>
         </div>
 
         <div className="flex items-center justify-between mb-4">
@@ -267,7 +267,7 @@ export default function MarketplacePage() {
                 setQuery("");
                 setCategory("Semua");
               }}
-              className="text-xs font-medium text-emerald-600 hover:underline"
+              className="text-xs font-medium text-red-600 hover:underline"
             >
               Reset filter
             </button>
@@ -305,13 +305,13 @@ export default function MarketplacePage() {
                 className="w-full h-44 object-cover rounded-lg"
               />
               <div className="flex items-center justify-between text-sm">
-                <p className="text-emerald-600 font-bold">{formatRp(selected.price)} <span className="text-[10px] text-gray-400 font-normal">/{selected.unit}</span></p>
+                <p className="text-red-600 font-bold">{formatRp(selected.price)} <span className="text-[10px] text-gray-400 font-normal">/{selected.unit}</span></p>
                 <p className="text-xs text-gray-500 flex items-center gap-1"><MapPin className="w-3 h-3" /> {selected.origin}</p>
               </div>
 
               <div className="rounded-lg border border-gray-200 overflow-hidden">
-                <div className="bg-emerald-600 text-white text-[11px] font-semibold px-3 py-2 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Informasi Gizi (per 100 g)
+                <div className="bg-red-600 text-white text-[11px] font-semibold px-3 py-2 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Informasi Komoditas Pangan
                 </div>
                 <div className="divide-y divide-gray-100">
                   {nutritionRows.map((r) => (
@@ -324,20 +324,20 @@ export default function MarketplacePage() {
               </div>
 
               <p className="flex items-start gap-2 text-[11px] text-gray-500 leading-relaxed">
-                <Truck className="w-3.5 h-3.5 mt-0.5 shrink-0 text-emerald-600" />
+                <Truck className="w-3.5 h-3.5 mt-0.5 shrink-0 text-red-600" />
                 {SHIPPING_NOTE}
               </p>
 
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleAddToCart(selected)}
-                  className="flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl py-2.5 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl py-2.5 transition-colors"
                 >
                   <ShoppingCart className="w-4 h-4" /> Masukkan Keranjang
                 </button>
                 <button
                   onClick={() => handleBuyNow(selected)}
-                  className="flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl py-2.5 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold text-white bg-red-600 hover:bg-red-700 rounded-xl py-2.5 transition-colors"
                 >
                   <Zap className="w-4 h-4" /> Beli Langsung
                 </button>

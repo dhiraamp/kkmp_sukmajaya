@@ -14,8 +14,8 @@ import { toast } from "@/components/ui/use-toast";
 
 const perishableLabels = { cepat_busuk: "Cepat Busuk", sedang: "Sedang", tahan_lama: "Tahan Lama" };
 const perishableColors = { cepat_busuk: "bg-red-50 text-red-700", sedang: "bg-yellow-50 text-yellow-700", tahan_lama: "bg-green-50 text-green-700" };
-const categories = ["beras", "telur", "daging", "ikan", "sayuran", "buah", "minyak", "bumbu", "susu", "tepung", "lainnya"];
-const units = ["kg", "gram", "liter", "pcs", "ikat", "bungkus"];
+const categories = ["beras", "sembako", "kelontong", "perawatan diri", "minyak", "bumbu", "sayuran", "telur", "daging", "buah", "ikan", "susu", "tepung", "lainnya"];
+const units = ["kg", "sak", "sachet", "botol", "pouch", "pack", "renceng", "kaleng", "tube", "bks", "liter", "pcs", "ikat", "bungkus"];
 const perishables = ["cepat_busuk", "sedang", "tahan_lama"];
 const formatRp = (n) => `Rp ${Number(n || 0).toLocaleString("id-ID")}`;
 
@@ -126,8 +126,8 @@ export default function AdminStock() {
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h2 className="text-2xl font-bold">Manajemen Stok Gudang</h2>
-          <p className="text-muted-foreground">Kelola inventaris bahan pangan secara real-time</p>
+          <h2 className="text-2xl font-bold">Manajemen Stok Gudang Pusat KKMP</h2>
+          <p className="text-muted-foreground">Kelola inventaris komoditas Gudang Pusat Mekarjaya Kota Depok secara real-time</p>
         </div>
 
       </div>

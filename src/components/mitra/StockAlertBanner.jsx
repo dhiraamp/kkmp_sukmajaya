@@ -62,13 +62,13 @@ export default function StockAlertBanner({ userEmail, sppgName }) {
                   Stok <span className="underline">{alert.product_name}</span> tidak mencukupi!
                 </p>
                 <p className="text-xs text-red-600 mt-0.5">
-                  Dibutuhkan <strong>{alert.total_needed} {alert.unit}</strong> oleh {alert.sppg_count} SPPG,
+                  Dibutuhkan <strong>{alert.total_needed} {alert.unit}</strong> oleh {alert.sppg_count || 1} Pos KKMP Cabang,
                   hanya tersedia <strong>{alert.stock_available} {alert.unit}</strong>
                   {alert.shortage > 0 && ` (kurang ${alert.shortage} ${alert.unit})`}.
                 </p>
                 <div className="mt-1.5 p-2 rounded bg-amber-50 border border-amber-200">
                   <p className="text-xs text-amber-800 font-medium">
-                    💡 Harap ganti menu yang menggunakan <strong>{alert.product_name}</strong> dengan bahan alternatif yang tersedia minggu ini.
+                    💡 Koordinasikan dengan Gudang Pusat Mekarjaya untuk jadwal pasokan ulang <strong>{alert.product_name}</strong>.
                   </p>
                 </div>
               </div>

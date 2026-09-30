@@ -12,14 +12,14 @@ import { ShoppingCart, Upload, FileText, CheckCircle, Plus, Trash2, AlertTriangl
 import StockAlertBanner from "@/components/mitra/StockAlertBanner";
 
 const SUPPLIER_LIST = [
-  "UD Tani Makmur Garut",
-  "Peternakan Maju Jaya",
-  "Petani Sayur Cikajang",
-  "RPH Garut",
-  "Budidaya Ikan Garut",
-  "CV Bumbu Nusantara",
-  "PT Sadang Barokah Niaga",
-  "CV Binar Kalasenja",
+  "Gudang Pusat KKMP Mekarjaya (Induk)",
+  "Pemasok Beras Cilodong Depok",
+  "Peternakan Ayam Sawangan",
+  "Distributor Sembako Mekarjaya",
+  "Pemasok Sayur Sukmajaya",
+  "Pemasok Ikan & Segar Beji",
+  "CV Bumbu Nusantara Depok",
+  "PT Pangan Merah Putih Depok",
 ];
 
 const statusPO = {
@@ -132,7 +132,7 @@ export default function MitraKebutuhan() {
     } else {
       const newNeeds = await base44.entities.WeeklyNeeds.create({
         sppg_id: user?.email || "",
-        sppg_name: user?.organization_name || user?.full_name || "SPPG",
+        sppg_name: user?.organization_name || user?.full_name || "Pos KKMP Beji Depok",
         week_label: weekLabel,
         items: validItems,
         notes: poNotes,
@@ -143,7 +143,7 @@ export default function MitraKebutuhan() {
       await base44.functions.invoke("checkStockAlerts", {
         items: validItems.map(i => i.nama),
         sppg_id: user?.email,
-        sppg_name: user?.organization_name || user?.full_name,
+        sppg_name: user?.organization_name || user?.full_name || "Pos KKMP Beji Depok",
       });
     }
 
@@ -156,49 +156,49 @@ export default function MitraKebutuhan() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Kebutuhan Bahan & PO</h2>
-        <p className="text-muted-foreground">Isi kebutuhan bahan untuk minggu ini, kirim ke supplier langganan atau broadcast ke semua supplier</p>
+        <h2 className="text-2xl font-bold">Pengajuan Komoditas & PO Pos Cabang</h2>
+        <p className="text-muted-foreground">Isi pengajuan kebutuhan komoditas Pos Cabang ke Koperasi Induk Mekarjaya (Gudang Pusat Kota Depok)</p>
       </div>
 
-      <StockAlertBanner userEmail={user?.email} sppgName={user?.organization_name || user?.full_name} />
+      <StockAlertBanner userEmail={user?.email} sppgName={user?.organization_name || user?.full_name || "Pos KKMP Beji Depok"} />
 
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center gap-2">
-            <ShoppingCart className="w-4 h-4 text-emerald-600" />
-            Kebutuhan Bahan Mingguan & PO
+            <ShoppingCart className="w-4 h-4 text-orange-600" />
+            Pengajuan Komoditas & PO Pos Cabang
           </CardTitle>
-          <p className="text-xs text-muted-foreground">Pilih kirim ke supplier langganan atau broadcast ke semua supplier.</p>
+          <p className="text-xs text-muted-foreground">Pilih kirim ke Gudang Induk / supplier langganan atau broadcast ke seluruh jaringan pemasok.</p>
         </CardHeader>
         <CardContent className="space-y-4">
           {poSubmitted ? (
             <div className="text-center py-8">
-              <CheckCircle className="w-12 h-12 text-emerald-500 mx-auto mb-3" />
-              <p className="font-bold text-emerald-700 text-lg">
-                {supplierMode === "direct" ? "PO Terkirim ke Supplier!" : "Kebutuhan Dipublikasikan ke Semua Supplier!"}
+              <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
+              <p className="font-bold text-green-700 text-lg">
+                {supplierMode === "direct" ? "PO Terkirim ke Gudang Induk / Pemasok!" : "Kebutuhan Dipublikasikan ke Jaringan Koperasi!"}
               </p>
               <p className="text-sm text-muted-foreground mt-1">
                 {supplierMode === "direct"
-                  ? `Menunggu konfirmasi dari ${selectedSupplier}.`
-                  : "Supplier yang memiliki stok akan mengklik Terima Orderan."}
+                  ? `Menunggu konfirmasi & pemrosesan dari ${selectedSupplier}.`
+                  : "Gudang Induk & pemasok yang memiliki stok akan memproses pengiriman."}
               </p>
-              <Button variant="outline" className="mt-4" onClick={() => setPOSubmitted(false)}>Buat Pesanan Baru</Button>
+              <Button variant="outline" className="mt-4" onClick={() => setPOSubmitted(false)}>Buat Pengajuan Baru</Button>
             </div>
           ) : (
             <>
               {/* Pilih mode: supplier langganan vs broadcast */}
               <div className="p-3 bg-slate-50 rounded-xl border space-y-3">
-                <Label className="text-sm font-semibold">Pilih Cara Pengiriman</Label>
+                <Label className="text-sm font-semibold">Tujuan Pengiriman PO</Label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => setSupplierMode("broadcast")}
-                    className={`p-3 rounded-xl border-2 text-left transition-all ${supplierMode === "broadcast" ? "border-emerald-500 bg-emerald-50" : "border-border bg-white"}`}
+                    className={`p-3 rounded-xl border-2 text-left transition-all ${supplierMode === "broadcast" ? "border-orange-500 bg-orange-50" : "border-border bg-white"}`}
                   >
                     <div className="flex items-center gap-2 mb-1">
-                      <Megaphone className="w-4 h-4 text-emerald-600" />
-                      <span className="text-sm font-semibold">Broadcast</span>
+                      <Megaphone className="w-4 h-4 text-orange-600" />
+                      <span className="text-sm font-semibold">Broadcast Jaringan</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">Tampil ke semua supplier. Supplier yang punya stok klik Terima.</p>
+                    <p className="text-xs text-muted-foreground">Tampil ke Gudang Induk & seluruh pemasok terdaftar di Kota Depok.</p>
                   </button>
                   <button
                     onClick={() => setSupplierMode("direct")}
@@ -206,9 +206,9 @@ export default function MitraKebutuhan() {
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <FileText className="w-4 h-4 text-blue-600" />
-                      <span className="text-sm font-semibold">Supplier Langganan</span>
+                      <span className="text-sm font-semibold">Gudang / Mitra Tertentu</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">Kirim langsung sebagai PO ke supplier pilihan Anda.</p>
+                    <p className="text-xs text-muted-foreground">Kirim langsung sebagai PO resmi ke Gudang Induk / Pemasok pilihan.</p>
                   </button>
                 </div>
 
@@ -256,7 +256,7 @@ export default function MitraKebutuhan() {
               {supplierMode === "broadcast" && (
                 <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                  <p className="text-xs text-amber-700">Jika tidak ada supplier yang menerima dalam 24 jam, admin dan SPPG akan mendapat alert otomatis. Anda akan diminta mencari menu pengganti.</p>
+                  <p className="text-xs text-amber-700">Jika belum ada pemasok / Gudang Induk yang memproses dalam 24 jam, pengurus Koperasi Induk Mekarjaya akan mendapat notifikasi untuk percepatan pasokan.</p>
                 </div>
               )}
 
@@ -267,7 +267,7 @@ export default function MitraKebutuhan() {
                     <XCircle className="w-5 h-5 text-red-600 shrink-0" />
                     <p className="font-bold text-red-700 text-sm">Stok Gudang Tidak Mencukupi!</p>
                   </div>
-                  <p className="text-xs text-red-600">PO tidak dapat dikirim. Bahan berikut stoknya kurang — admin telah diberitahu. Silakan ubah jumlah atau cari <strong>menu pengganti</strong> di halaman Rekomendasi Menu.</p>
+                  <p className="text-xs text-red-600">PO tidak dapat dikirim karena stok komoditas di gudang saat ini belum mencukupi. Pengurus Koperasi Induk telah diberitahu untuk restock dari pemasok daerah.</p>
                   <div className="space-y-2">
                     {stockWarnings.map((w, i) => (
                       <div key={i} className="bg-white border border-red-200 rounded-lg p-3 flex items-center justify-between">
@@ -283,23 +283,23 @@ export default function MitraKebutuhan() {
                     <Button size="sm" variant="outline" className="flex-1 text-xs border-red-300 text-red-700" onClick={() => setShowStockWarning(false)}>
                       <RefreshCw className="w-3 h-3 mr-1" />Ubah Jumlah
                     </Button>
-                    <Button size="sm" className="flex-1 text-xs bg-amber-500 hover:bg-amber-600 text-white" onClick={() => {
+                    <Button size="sm" className="flex-1 text-xs bg-red-600 hover:bg-red-700 text-white" onClick={() => {
                       setShowStockWarning(false);
-                      navigate("/mitra/menu");
+                      navigate("/mitra/inventory");
                     }}>
-                      <UtensilsCrossed className="w-3 h-3 mr-1" />Cari Menu Pengganti
+                      <UtensilsCrossed className="w-3 h-3 mr-1" />Cek Stok Pos Cabang
                     </Button>
                   </div>
                 </div>
               )}
 
               <Button
-                className={`w-full text-white ${supplierMode === "direct" ? "bg-emerald-600 hover:bg-emerald-700" : "bg-emerald-600 hover:bg-emerald-700"}`}
+                className="w-full text-white bg-orange-600 hover:bg-orange-700"
                 onClick={submitOrder}
                 disabled={poSaving || (supplierMode === "direct" && !selectedSupplier)}
               >
                 <Upload className="w-4 h-4 mr-2" />
-                {poSaving ? "Mengirim..." : supplierMode === "direct" ? `Kirim PO ke ${selectedSupplier || "Supplier"}` : "Broadcast ke Semua Supplier"}
+                {poSaving ? "Mengirim..." : supplierMode === "direct" ? `Kirim PO ke ${selectedSupplier || "Pemasok"}` : "Broadcast PO ke Jaringan Pemasok"}
               </Button>
             </>
           )}

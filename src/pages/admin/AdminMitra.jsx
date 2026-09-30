@@ -100,13 +100,13 @@ export default function AdminMitra() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold tracking-tight">Manajemen Mitra / SPPG</h2>
-            <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200">
-              {mitraList.length} Mitra Terdaftar
+            <h2 className="text-2xl font-bold tracking-tight">Manajemen Pos Cabang KKMP Depok</h2>
+            <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
+              {mitraList.length} Pos Cabang Terdaftar
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm">
-            Kelola data satuan pelayanan pangan bergizi (SPPG) dan dapur mitra MBG
+            Kelola data jaringan 8 Pos Cabang KKMP Kota Depok yang melayani anggota
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={load} className="gap-2 shrink-0">
@@ -118,7 +118,7 @@ export default function AdminMitra() {
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="Cari nama dapur, penanggung jawab, no. WA..."
+            placeholder="Cari nama pos cabang, penanggung jawab, no. WA..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-9 h-9 text-sm"
@@ -131,12 +131,12 @@ export default function AdminMitra() {
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
               <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-3" />
-              <p className="text-sm">Memuat data mitra/SPPG...</p>
+              <p className="text-sm">Memuat data Pos Cabang KKMP...</p>
             </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-16 text-muted-foreground">
               <Store className="w-12 h-12 mx-auto text-gray-300 mb-3" />
-              <p className="text-base font-semibold text-gray-700">Belum ada mitra terdaftar</p>
+              <p className="text-base font-semibold text-gray-700">Belum ada pos cabang terdaftar</p>
               <p className="text-xs text-muted-foreground mt-1">
                 {search ? "Coba gunakan kata kunci pencarian yang lain." : "Data pendaftar baru akan otomatis muncul di sini."}
               </p>
@@ -146,7 +146,7 @@ export default function AdminMitra() {
               <Table>
                 <TableHeader>
                   <TableRow className="bg-muted/40">
-                    <TableHead className="font-semibold">Nama Mitra / Dapur</TableHead>
+                    <TableHead className="font-semibold">Nama Pos Cabang KKMP</TableHead>
                     <TableHead className="font-semibold">Penanggung Jawab</TableHead>
                     <TableHead className="font-semibold">Kontak WA</TableHead>
                     <TableHead className="font-semibold">Email</TableHead>
@@ -162,7 +162,7 @@ export default function AdminMitra() {
                     const isWaVerified = Boolean(m.wa_verified || m.verified);
                     const cleanPhone = (m.phone || "").replace(/\D/g, "");
                     const waLink = cleanPhone ? `https://wa.me/${cleanPhone.startsWith("0") ? "62" + cleanPhone.slice(1) : cleanPhone}` : null;
-                    const orgName = m.organization_name || m.dapur_name || m.full_name || "Dapur SPPG";
+                    const orgName = m.organization_name || m.dapur_name || m.full_name || "Pos Cabang KKMP";
                     const parts = formatDateTimeParts(m.created_date);
 
                     return (

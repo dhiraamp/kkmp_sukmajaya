@@ -19,8 +19,8 @@ export default function AdminChatSupplier() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Chat Supplier</h2>
-        <p className="text-muted-foreground">Komunikasi dengan supplier bahan pangan</p>
+        <h2 className="text-2xl font-bold">Chat Supplier & Pemasok Komoditas</h2>
+        <p className="text-muted-foreground">Komunikasi langsung Gudang Pusat Mekarjaya dengan para pemasok dan mitra produsen UMKM</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

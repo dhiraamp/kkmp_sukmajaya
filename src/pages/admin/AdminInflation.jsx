@@ -25,8 +25,8 @@ export default function AdminInflation() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Laporan Inflasi & Harga Pasar</h2>
-        <p className="text-muted-foreground">Pantau fluktuasi harga bahan pangan di pasar</p>
+        <h2 className="text-2xl font-bold">Laporan Inflasi & Harga Pasar Depok</h2>
+        <p className="text-muted-foreground">Pantau fluktuasi harga bahan pokok komoditas di wilayah Kota Depok</p>
       </div>
 
       <Card>

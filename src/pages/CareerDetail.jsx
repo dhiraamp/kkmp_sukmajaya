@@ -28,7 +28,7 @@ export default function CareerDetail() {
       .catch(() => setLoading(false));
   }, [id]);
 
-  const canApply = isAuthenticated && user?.role === "penerima";
+  const canApply = isAuthenticated && (user?.role === "warga" || user?.role === "penerima");
 
   useEffect(() => {
     if (canApply) {
@@ -71,19 +71,19 @@ export default function CareerDetail() {
       <HomeHeader />
 
       <main className="max-w-3xl mx-auto px-4 py-6">
-        <button onClick={() => navigate("/career")} className="flex items-center gap-1 text-sm text-gray-600 hover:text-emerald-600 mb-4">
+        <button onClick={() => navigate("/career")} className="flex items-center gap-1 text-sm text-gray-600 hover:text-red-600 mb-4">
           <ArrowLeft className="w-4 h-4" /> Kembali ke Lowongan
         </button>
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-red-200 border-t-red-600 rounded-full animate-spin" />
           </div>
         ) : !job ? (
           <div className="bg-white rounded-2xl border border-gray-200 p-10 text-center">
             <Briefcase className="w-10 h-10 text-gray-300 mx-auto mb-3" />
             <p className="text-gray-500">Lowongan tidak ditemukan.</p>
-            <Link to="/career" className="inline-block mt-3 text-sm font-semibold text-emerald-600 hover:underline">Lihat semua lowongan</Link>
+            <Link to="/career" className="inline-block mt-3 text-sm font-semibold text-red-600 hover:underline">Lihat semua lowongan</Link>
           </div>
         ) : (
           <div className="space-y-5">
@@ -93,15 +93,15 @@ export default function CareerDetail() {
                 <span className={`text-[11px] font-semibold px-2.5 py-1 rounded ${categoryColor(job.category)}`}>
                   {categoryLabel(job.category)}
                 </span>
-                <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full ${job.status === "open" ? "bg-emerald-50 text-emerald-700" : "bg-gray-100 text-gray-500"}`}>
+                <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full ${job.status === "open" ? "bg-red-50 text-red-700" : "bg-gray-100 text-gray-500"}`}>
                   {job.status === "open" ? "Dibuka" : "Ditutup"}
                 </span>
               </div>
               <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mt-3">{job.title}</h1>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 text-xs text-gray-600">
-                <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-emerald-600" /> {job.location}</span>
-                <span className="flex items-center gap-1.5"><Wallet className="w-3.5 h-3.5 text-emerald-600" /> {job.salary}</span>
-                <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-emerald-600" /> Kebutuhan: {job.quota} orang</span>
+                <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-red-600" /> {job.location}</span>
+                <span className="flex items-center gap-1.5"><Wallet className="w-3.5 h-3.5 text-red-600" /> {job.salary}</span>
+                <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-red-600" /> Kebutuhan: {job.quota} orang</span>
               </div>
             </div>
 
@@ -116,23 +116,23 @@ export default function CareerDetail() {
             {/* Apply */}
             <div className="bg-white rounded-2xl border border-gray-200 p-6">
               <h2 className="font-bold text-gray-900 mb-3 flex items-center gap-1.5">
-                <Send className="w-4 h-4 text-emerald-600" /> Lamar Posisi
+                <Send className="w-4 h-4 text-red-600" /> Lamar Posisi
               </h2>
 
               {applied ? (
-                <div className="flex items-center gap-2 text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
+                <div className="flex items-center gap-2 text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
                   <CheckCircle2 className="w-5 h-5" /> Lamaran Anda telah terkirim. Terima kasih!
                 </div>
               ) : !isAuthenticated ? (
                 <button
                   onClick={() => navigate("/portal")}
-                  className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl py-3 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-xl py-3 transition-colors"
                 >
                   <UserCircle className="w-4 h-4" /> Masuk untuk Melamar
                 </button>
               ) : !canApply ? (
                 <div className="text-sm text-gray-500 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3">
-                  Hanya akun <strong>Warga</strong> yang dapat melamar. Silakan masuk dengan akun warga.
+                  Hanya akun <strong>Anggota Koperasi</strong> yang dapat melamar. Silakan masuk dengan akun anggota koperasi.
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -142,7 +142,7 @@ export default function CareerDetail() {
                       value={form.nama}
                       onChange={(e) => setForm({ ...form, nama: e.target.value })}
                       placeholder="Nama Anda"
-                      className="w-full rounded-xl border border-gray-300 px-3 py-2.5 text-sm outline-none focus:border-emerald-500"
+                      className="w-full rounded-xl border border-gray-300 px-3 py-2.5 text-sm outline-none focus:border-red-500"
                     />
                   </div>
                   <div className="space-y-1.5">
@@ -152,13 +152,13 @@ export default function CareerDetail() {
                       onChange={(e) => setForm({ ...form, pesan: e.target.value })}
                       rows={4}
                       placeholder="Ceritakan singkat pengalaman & alasan Anda melamar..."
-                      className="w-full rounded-xl border border-gray-300 px-3 py-2.5 text-sm outline-none focus:border-emerald-500"
+                      className="w-full rounded-xl border border-gray-300 px-3 py-2.5 text-sm outline-none focus:border-red-500"
                     />
                   </div>
                   <button
                     onClick={handleSubmit}
                     disabled={submitting}
-                    className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl py-3 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl py-3 transition-colors"
                   >
                     <Send className="w-4 h-4" /> {submitting ? "Mengirim..." : "Kirim Lamaran"}
                   </button>

@@ -108,8 +108,8 @@ export default function SupplierDashboard() {
       <PullToRefreshIndicator pullDistance={pullDistance} isRefreshing={isRefreshing} />
       <div className="flex items-start justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Dashboard Supplier</h2>
-          <p className="text-muted-foreground">Ringkasan aktivitas supplier Anda</p>
+          <h2 className="text-2xl font-bold">Dashboard Pemasok Komoditas</h2>
+          <p className="text-muted-foreground">Portal manajemen pasokan komoditas ke Koperasi Induk Mekarjaya (Gudang Pusat Kota Depok)</p>
         </div>
         {poList.filter(p => p.status === "menunggu").length > 0 && (
           <div className="flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-xl px-3 py-2 animate-pulse">
@@ -122,17 +122,17 @@ export default function SupplierDashboard() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total Produk" value="48" icon={Package} color="blue" trend={8} />
+        <StatCard title="Total Komoditas" value="48" icon={Package} color="blue" trend={8} />
         <StatCard title="Pesanan Bulan Ini" value="32" icon={ShoppingCart} color="green" trend={15} />
         <StatCard title="Pendapatan Bulan Ini" value="Rp 24.5jt" icon={TrendingUp} color="yellow" trend={12} />
         <StatCard title="PO Menunggu" value={poList.filter(p => p.status === "menunggu").length.toString()} icon={AlertCircle} color="red" />
       </div>
 
-      {/* Tab: Permintaan SPPG vs Analitik */}
+      {/* Tab: Permintaan Koperasi vs Analitik */}
       <Tabs defaultValue="permintaan">
         <TabsList className="grid grid-cols-2 w-full max-w-sm">
           <TabsTrigger value="permintaan" className="text-xs flex items-center gap-1">
-            <Megaphone className="w-3 h-3" />Kebutuhan SPPG
+            <Megaphone className="w-3 h-3" />Permintaan Koperasi
           </TabsTrigger>
           <TabsTrigger value="analitik" className="text-xs flex items-center gap-1">
             <BarChart2 className="w-3 h-3" />Analitik Tren
@@ -144,40 +144,40 @@ export default function SupplierDashboard() {
         </TabsContent>
 
         <TabsContent value="permintaan" className="mt-4">
-      {/* Kebutuhan Mingguan SPPG — hanya yang belum punya supplier */}
-      <Card className="border-l-4 border-l-emerald-500">
+      {/* Kebutuhan Mingguan Koperasi */}
+      <Card className="border-l-4 border-l-emerald-600">
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center gap-2">
             <Megaphone className="w-4 h-4 text-emerald-600" />
-            Kebutuhan Mingguan SPPG (Belum Ada Supplier)
-            <Badge className="bg-emerald-100 text-emerald-700 ml-auto text-xs">
+            Permintaan Komoditas dari Pos Cabang & Gudang Induk
+            <Badge className="bg-emerald-100 text-emerald-800 ml-auto text-xs">
               {weeklyNeeds.length} Permintaan Terbuka
             </Badge>
           </CardTitle>
           <p className="text-xs text-muted-foreground">
-            SPPG ini belum memiliki supplier tetap. Anda bisa menghubungi mereka langsung untuk menawarkan bahan pangan.
+            Pos Cabang atau Gudang Induk KKMP membutuhkan pasokan komoditas pangan. Konfirmasi untuk menyuplai.
           </p>
         </CardHeader>
         <CardContent>
           {loadingNeeds ? (
-            <div className="flex justify-center py-8"><div className="animate-spin w-6 h-6 border-4 border-emerald-500 border-t-transparent rounded-full" /></div>
+            <div className="flex justify-center py-8"><div className="animate-spin w-6 h-6 border-4 border-emerald-600 border-t-transparent rounded-full" /></div>
           ) : weeklyNeeds.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
               <Megaphone className="w-10 h-10 mx-auto mb-2 opacity-30" />
-              <p className="text-sm">Semua SPPG sudah memiliki supplier pemasok</p>
+              <p className="text-sm">Semua permintaan pasokan saat ini sudah terlayani</p>
             </div>
           ) : (
             <div className="space-y-3">
               {weeklyNeeds.map((need, i) => (
-                <div key={need.id || i} className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/60">
+                <div key={need.id || i} className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50">
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-bold text-sm flex items-center gap-1">
+                        <span className="font-bold text-sm flex items-center gap-1 text-emerald-950">
                           <Users className="w-3.5 h-3.5 text-emerald-600" />
-                          {need.sppg_name}
+                          {need.sppg_name || need.pos_name || "Pos Cabang KKMP"}
                         </span>
-                        <Badge className="text-xs bg-yellow-100 text-yellow-700">Butuh Supplier</Badge>
+                        <Badge className="text-xs bg-amber-100 text-amber-800">Butuh Pasokan</Badge>
                       </div>
                       <p className="text-xs text-muted-foreground mt-0.5">
                         Minggu: {need.week_label} · {need.created_date ? new Date(need.created_date).toLocaleDateString("id-ID") : ""}
@@ -187,7 +187,7 @@ export default function SupplierDashboard() {
                   {Array.isArray(need.items) && need.items.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 mb-2">
                       {need.items.map((item, j) => (
-                        <Badge key={j} variant="outline" className="text-xs bg-white text-black">
+                        <Badge key={j} variant="outline" className="text-xs bg-white text-gray-800 border-emerald-200">
                           {item.nama} {item.qty} {item.unit}
                         </Badge>
                       ))}
@@ -201,7 +201,7 @@ export default function SupplierDashboard() {
                       disabled={updatingPO === need.id}
                       onClick={() => acceptWeeklyNeeds(need)}
                     >
-                      ✓ Terima Orderan
+                      ✓ Terima Pasokan
                     </Button>
                   </div>
                 </div>
@@ -214,17 +214,17 @@ export default function SupplierDashboard() {
         </TabsContent>
       </Tabs>
 
-      {/* PO dari Mitra/SPPG — Real Time */}
+      {/* PO dari Koperasi Induk & Pos Cabang */}
       <Card className="border-l-4 border-l-orange-500">
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center gap-2">
             <FileText className="w-4 h-4 text-orange-500" />
-            Purchase Order dari Mitra / SPPG
+            Purchase Order dari Koperasi Induk Mekarjaya & Pos Cabang
             <Badge className="bg-orange-100 text-orange-700 ml-auto text-xs">
               {poList.filter(p => p.status === "menunggu").length} PO Baru
             </Badge>
           </CardTitle>
-          <p className="text-xs text-muted-foreground">PO masuk dari mitra secara real-time. Konfirmasi atau tolak setiap PO.</p>
+          <p className="text-xs text-muted-foreground">PO masuk dari Koperasi Induk atau Cabang secara real-time. Konfirmasi atau proses pengiriman.</p>
         </CardHeader>
         <CardContent>
           {loadingPO ? (
@@ -289,9 +289,9 @@ export default function SupplierDashboard() {
           </CardHeader>
           <CardContent className="space-y-3">
             {[
-              { id: "ORD-101", mitra: "SPPG Garut Kota", items: "Beras 100kg, Telur 50kg", status: "confirmed", total: "Rp 2.100.000" },
-              { id: "ORD-102", mitra: "SPPG Tarogong", items: "Sayuran Mix 30kg", status: "pending", total: "Rp 450.000" },
-              { id: "ORD-103", mitra: "SPPG Leles", items: "Daging Ayam 25kg", status: "processing", total: "Rp 950.000" },
+              { id: "ORD-101", mitra: "Pos KKMP Beji Depok", items: "Beras Premium 100kg, Telur 50kg", status: "confirmed", total: "Rp 2.100.000" },
+              { id: "ORD-102", mitra: "Gudang Pusat Mekarjaya", items: "Sayuran Segar Sukmajaya 30kg", status: "pending", total: "Rp 450.000" },
+              { id: "ORD-103", mitra: "Pos KKMP Pancoran Mas", items: "Daging Ayam Sawangan 25kg", status: "processing", total: "Rp 950.000" },
             ].map((o) => (
               <div key={o.id} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg border">
                 <div>

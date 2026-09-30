@@ -8,7 +8,7 @@ import JobFormModal from "@/components/career/JobFormModal";
 
 const EMPTY = {
   title: "",
-  category: "sppg",
+  category: "pos_cabang",
   location: "",
   salary: "",
   quota: 1,
@@ -17,7 +17,7 @@ const EMPTY = {
   status: "open",
 };
 
-export default function JobManager({ allowedCategories = ["sppg", "logistik", "lainnya"] }) {
+export default function JobManager({ allowedCategories = ["pos_cabang", "logistik", "lainnya"] }) {
   const { user } = useAuth();
   const email = user?.email || "";
   const ownerRole = user?.role || (email.includes("logistik") ? "logistik" : "mitra");

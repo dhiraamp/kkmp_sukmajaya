@@ -4,7 +4,7 @@ import { CATEGORIES } from "@/lib/career";
 
 const EMPTY = {
   title: "",
-  category: "sppg",
+  category: "pos_cabang",
   location: "",
   salary: "",
   quota: 1,
@@ -17,7 +17,7 @@ export default function JobFormModal({ mode, initial, allowedCategories = [], ap
   const [form, setForm] = useState(
     initial
       ? { ...EMPTY, ...initial, quota: initial.quota }
-      : { ...EMPTY, category: allowedCategories[0] || "sppg", quota: 1 }
+      : { ...EMPTY, category: allowedCategories[0] || "pos_cabang", quota: 1 }
   );
 
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
@@ -33,23 +33,23 @@ export default function JobFormModal({ mode, initial, allowedCategories = [], ap
 
         <div className="px-5 py-4 space-y-3 overflow-y-auto">
           <Field label="Judul Posisi">
-            <input value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="cth. Petugas Dapur SPPG Cikajang" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-emerald-500" />
+            <input value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="cth. Petugas Kasir Pos Cabang Beji Depok" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-red-500" />
           </Field>
           <div className="grid grid-cols-2 gap-3">
             <Field label="Kategori">
-              <select value={form.category} onChange={(e) => set("category", e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-emerald-500">
+              <select value={form.category} onChange={(e) => set("category", e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-red-500">
                 {cats.map((c) => <option key={c.key} value={c.key}>{c.label}</option>)}
               </select>
             </Field>
             <Field label="Status">
-              <select value={form.status} onChange={(e) => set("status", e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-emerald-500">
+              <select value={form.status} onChange={(e) => set("status", e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-red-500">
                 <option value="open">Dibuka</option>
                 <option value="closed">Ditutup</option>
               </select>
             </Field>
           </div>
           <Field label="Lokasi">
-            <input value={form.location} onChange={(e) => set("location", e.target.value)} placeholder="cth: SPPG Cikajang, Garut" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-emerald-500" />
+            <input value={form.location} onChange={(e) => set("location", e.target.value)} placeholder="cth: Pos Cabang Beji, Kota Depok" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-red-500" />
           </Field>
           <div className="grid grid-cols-2 gap-3">
             <Field label="Upah / Gaji">

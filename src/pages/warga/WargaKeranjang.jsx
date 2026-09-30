@@ -12,7 +12,7 @@ const DELIVERY_FEE = 12000;
 export default function WargaKeranjang() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
   const wargaUser = { email, id: user?.id || email, role: "penerima" };
   const { cartItems, loading, updateQty, removeFromCart, clearCart, totalItems, subtotal } = useCart(wargaUser);
   const [clearing, setClearing] = useState(false);
@@ -27,22 +27,22 @@ export default function WargaKeranjang() {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center py-20"><div className="w-8 h-8 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin" /></div>;
+    return <div className="flex items-center justify-center py-20"><div className="w-8 h-8 border-4 border-red-200 border-t-red-600 rounded-full animate-spin" /></div>;
   }
 
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
-        <div className="w-20 h-20 rounded-full bg-emerald-50 flex items-center justify-center">
-          <ShoppingCart className="w-10 h-10 text-emerald-300" />
+        <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center">
+          <ShoppingCart className="w-10 h-10 text-red-300" />
         </div>
         <div>
           <h2 className="text-lg font-bold text-gray-900">Keranjang Kosong</h2>
-          <p className="text-sm text-gray-500 mt-1">Yuk mulai belanja bahan segar untuk kebutuhan Anda.</p>
+          <p className="text-sm text-gray-500 mt-1">Yuk mulai belanja sembako & kebutuhan pokok di Koperasi Merah Putih.</p>
         </div>
         <button
           onClick={() => navigate("/marketplace")}
-          className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
+          className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
         >
           <ShoppingBag className="w-4 h-4" /> Mulai Belanja
         </button>
@@ -122,18 +122,18 @@ export default function WargaKeranjang() {
             </div>
             <div className="border-t border-dashed border-gray-200 pt-2 flex justify-between font-bold text-base">
               <span>Total Bayar</span>
-              <span className="text-emerald-600">{formatRp(grandTotal)}</span>
+              <span className="text-red-600">{formatRp(grandTotal)}</span>
             </div>
           </div>
           <Button
             onClick={() => navigate("/warga/checkout")}
-            className="w-full mt-4 h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold"
+            className="w-full mt-4 h-11 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold"
           >
             Checkout — {formatRp(grandTotal)}
           </Button>
           <button
             onClick={() => navigate("/marketplace")}
-            className="mt-2 w-full flex items-center justify-center gap-1 text-xs font-semibold text-gray-500 hover:text-emerald-600 transition-colors"
+            className="mt-2 w-full flex items-center justify-center gap-1 text-xs font-semibold text-gray-500 hover:text-red-600 transition-colors"
           >
             <ArrowLeft className="w-3 h-3" /> Lanjut Belanja
           </button>

@@ -94,8 +94,8 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
     setLoading(true);
     try {
       const data = resetToDisperindagBaseline();
-      toast.success("Dataset Disperindag Garut Disinkronkan", {
-        description: `Memuat ${data.dapur.length} Dapur SPPG, ${data.sekolah.length} Sekolah Sasaran, dan ${data.supplier.length} Supplier Pangan binaan Disperindag.`,
+      toast.success("Dataset KKMP Depok Disinkronkan", {
+        description: `Memuat ${data.dapur.length} Pos Cabang & Gudang, ${data.sekolah.length} Titik Komunitas, dan ${data.supplier.length} Supplier Pangan KKMP.`,
       });
       setPreviewResult({
         success: true,
@@ -105,7 +105,7 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
           supplier: data.supplier.length,
           jalur: data.jalur.length,
         },
-        message: "Dataset resmi Disperindag Kabupaten Garut berhasil diaktifkan.",
+        message: "Dataset spasial KKMP Kota Depok berhasil diaktifkan.",
       });
       onImportSuccess?.(data);
     } catch (err) {
@@ -122,7 +122,7 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `GIS_Disperindag_Garut_${new Date().toISOString().slice(0, 10)}.geojson`;
+      a.download = `GIS_KKMP_Kota_Depok_${new Date().toISOString().slice(0, 10)}.geojson`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -138,47 +138,39 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
       <DialogContent className="max-w-xl p-6 rounded-3xl max-h-[92vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5 text-emerald-600">
+            <div className="flex items-center gap-1.5 text-red-600">
               <MapPinned className="w-5 h-5" />
-              <span className="text-xs font-bold uppercase tracking-wider">Integrasi Portal MBG Garut</span>
+              <span className="text-xs font-bold uppercase tracking-wider">Integrasi Jaringan Spasial KKMP</span>
             </div>
-            <Badge className="bg-blue-50 text-blue-700 border-blue-200 text-[10px] font-semibold flex items-center gap-1">
-              <Globe className="w-3 h-3" /> Disperindag Kab. Garut
+            <Badge className="bg-red-50 text-red-700 border-red-200 text-[10px] font-semibold flex items-center gap-1">
+              <Globe className="w-3 h-3 text-red-600" /> KKMP Kota Depok
             </Badge>
           </div>
           <DialogTitle className="text-xl font-bold text-gray-900 mt-1">
-            Sinkronisasi Data GIS &amp; Pemetaan
+            Sinkronisasi Data GIS &amp; Pemetaan Cabang
           </DialogTitle>
           <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-            <span>Sumber:</span>
-            <a
-              href="https://mistermbg.disperindag.garutkab.go.id/mbg"
-              target="_blank"
-              rel="noreferrer"
-              className="text-emerald-600 hover:underline font-medium inline-flex items-center gap-0.5"
-            >
-              mistermbg.disperindag.garutkab.go.id/mbg
-              <ExternalLink className="w-3 h-3" />
-            </a>
+            <span>Rantai Pasok:</span>
+            <span className="text-red-700 font-medium">Gudang Induk Mekarjaya &amp; 8 Pos Cabang</span>
           </div>
         </DialogHeader>
 
         {/* Action Utama: Sinkronkan Dataset Resmi */}
-        <div className="mt-3 p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="mt-3 p-4 rounded-2xl bg-gradient-to-br from-red-50 to-rose-50 border border-red-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <p className="text-sm font-bold text-emerald-950 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-emerald-600" />
-              Dataset Resmi Disperindag Garut
+            <p className="text-sm font-bold text-red-950 flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-red-600" />
+              Dataset Resmi KKMP Kota Depok
             </p>
-            <p className="text-xs text-emerald-800/80 mt-0.5">
-              Sinkronkan otomatis data 12 Dapur SPPG, 16 Sekolah, dan 8 Supplier terverifikasi.
+            <p className="text-xs text-red-800/80 mt-0.5">
+              Sinkronkan otomatis data Gudang Mekarjaya, 8 Pos Cabang, 11 Titik Binaan, dan 7 Supplier Pangan.
             </p>
           </div>
           <Button
             size="sm"
             onClick={handleSyncBaseline}
             disabled={loading}
-            className="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-sm gap-1.5 shrink-0"
+            className="rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold shadow-sm gap-1.5 shrink-0"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
             Sinkronkan Sekarang

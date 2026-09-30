@@ -33,7 +33,7 @@ export default function WargaPesananDetail() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
 
   const [order, setOrder] = useState(null);
   const [simulating, setSimulating] = useState(false);
@@ -112,7 +112,7 @@ export default function WargaPesananDetail() {
           <h2 className="text-lg font-bold text-gray-900">Pesanan Tidak Ditemukan</h2>
           <p className="text-sm text-gray-500 mt-1">Pesanan mungkin telah dihapus.</p>
         </div>
-        <button onClick={() => navigate("/warga/pesanan")} className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors">
+        <button onClick={() => navigate("/warga/pesanan")} className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors">
           Kembali ke Pesanan
         </button>
       </div>
@@ -186,7 +186,7 @@ export default function WargaPesananDetail() {
   return (
     <div className="space-y-5">
       <div className="flex items-center gap-2">
-        <button onClick={() => navigate("/warga/pesanan")} className="text-gray-400 hover:text-emerald-600 transition-colors">
+        <button onClick={() => navigate("/warga/pesanan")} className="text-gray-400 hover:text-red-600 transition-colors">
           <ChevronLeft className="w-5 h-5" />
         </button>
         <div className="flex-1 min-w-0">
@@ -201,7 +201,7 @@ export default function WargaPesananDetail() {
       {/* Tracking timeline */}
       <div className="bg-white rounded-2xl border border-gray-200 p-5">
         <h3 className="font-bold text-gray-900 flex items-center gap-1.5 mb-5">
-          <Truck className="w-4 h-4 text-emerald-600" /> Lacak Pesanan
+          <Truck className="w-4 h-4 text-red-600" /> Lacak Pesanan
         </h3>
         <div className="flex items-center">
           {FLOW.map((step, idx) => {
@@ -215,7 +215,7 @@ export default function WargaPesananDetail() {
                   <div
                     className={`w-11 h-11 rounded-full border-2 flex items-center justify-center transition-colors ${
                       isDone
-                        ? "bg-emerald-600 border-emerald-600 text-white"
+                        ? "bg-red-600 border-red-600 text-white"
                         : "bg-white border-gray-200 text-gray-300"
                     }`}
                   >
@@ -231,7 +231,7 @@ export default function WargaPesananDetail() {
                   {time && <p className="text-[9px] text-gray-400 mt-0.5">{time}</p>}
                 </div>
                 {idx < FLOW.length - 1 && (
-                  <div className={`flex-1 h-0.5 -mt-7 rounded ${!cancelled && idx < statusIndex ? "bg-emerald-500" : "bg-gray-200"}`} />
+                  <div className={`flex-1 h-0.5 -mt-7 rounded ${!cancelled && idx < statusIndex ? "bg-red-500" : "bg-gray-200"}`} />
                 )}
               </React.Fragment>
             );
@@ -246,7 +246,7 @@ export default function WargaPesananDetail() {
 
         <div className="flex gap-2.5 mt-5">
           {canReceive && (
-            <button onClick={handleReceive} className="flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl py-2.5 transition-colors">
+            <button onClick={handleReceive} className="flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold text-white bg-red-600 hover:bg-red-700 rounded-xl py-2.5 transition-colors">
               <CheckCircle2 className="w-4 h-4" /> Terima Pesanan
             </button>
           )}
@@ -259,11 +259,11 @@ export default function WargaPesananDetail() {
       </div>
 
       {/* Simulasi status (demo) */}
-      <div className="bg-white rounded-2xl border border-dashed border-emerald-300 p-5">
+      <div className="bg-white rounded-2xl border border-dashed border-red-300 p-5">
         <h3 className="text-sm font-bold text-gray-900 mb-1">Simulasi Update Status</h3>
         <p className="text-[11px] text-gray-500 mb-3">
-          Status asli diperbarui oleh Supplier & Logistik dan tampil otomatis di sini. Tombol di bawah
-          untuk simulasi demo (hanya mengubah tampilan lokal).
+          Status asli diperbarui oleh Pengurus KKMP & Pos Cabang dan tampil otomatis di sini. Tombol di bawah
+          untuk simulasi demo alur distribusi.
         </p>
         <div className="flex flex-wrap gap-2">
           {SIM_STATUSES.map((s) => (
@@ -273,8 +273,8 @@ export default function WargaPesananDetail() {
               disabled={simulating || order.status === s}
               className={`text-[11px] font-semibold px-3 py-1.5 rounded-full border transition-colors disabled:opacity-40 ${
                 order.status === s
-                  ? "bg-emerald-600 text-white border-emerald-600"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-emerald-400"
+                  ? "bg-red-600 text-white border-red-600"
+                  : "bg-white text-gray-600 border-gray-200 hover:border-red-400"
               }`}
             >
               {s}
@@ -289,22 +289,22 @@ export default function WargaPesananDetail() {
           {/* Alamat pengiriman */}
           <div className="bg-white rounded-2xl border border-gray-200 p-5">
             <h3 className="font-bold text-gray-900 flex items-center gap-1.5 mb-3">
-              <MapPin className="w-4 h-4 text-emerald-600" /> Alamat Pengiriman
+              <MapPin className="w-4 h-4 text-red-600" /> Alamat Pengiriman
             </h3>
             {Object.keys(addr).length === 0 ? (
               <p className="text-sm text-gray-500">Tidak ada data alamat.</p>
             ) : (
               <div className="space-y-1.5 text-sm">
                 <p className="font-bold text-gray-900 flex items-center gap-1.5">
-                  <User className="w-3.5 h-3.5 text-emerald-600" /> {addr.recipient_name || "-"}
+                  <User className="w-3.5 h-3.5 text-red-600" /> {addr.recipient_name || "-"}
                 </p>
                 <p className="text-gray-600 flex items-start gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-600 mt-0.5 shrink-0" />
+                  <MapPin className="w-3.5 h-3.5 text-red-600 mt-0.5 shrink-0" />
                   {addr.full_address}
                   {[addr.village, addr.district, addr.regency].filter(Boolean).join(", ")}
                   {addr.postal_code ? ` ${addr.postal_code}` : ""}
                 </p>
-                {addr.phone && <p className="text-gray-600 flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-emerald-600" /> {addr.phone}</p>}
+                {addr.phone && <p className="text-gray-600 flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-red-600" /> {addr.phone}</p>}
                 {addr.notes && <p className="text-gray-500 italic text-xs">Catatan: {addr.notes}</p>}
               </div>
             )}
@@ -313,7 +313,7 @@ export default function WargaPesananDetail() {
           {/* Item pesanan */}
           <div className="bg-white rounded-2xl border border-gray-200 p-5">
             <h3 className="font-bold text-gray-900 flex items-center gap-1.5 mb-3">
-              <Package className="w-4 h-4 text-emerald-600" /> Item Pesanan ({order.items?.length || 0})
+              <Package className="w-4 h-4 text-red-600" /> Item Pesanan ({order.items?.length || 0})
             </h3>
             <div className="space-y-3">
               {(order.items || []).map((i) => (
@@ -321,8 +321,8 @@ export default function WargaPesananDetail() {
                   {i.image_url ? (
                     <img src={i.image_url} alt={i.product_name} referrerPolicy="no-referrer" className="w-12 h-12 rounded-lg object-cover shrink-0" />
                   ) : (
-                    <div className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
-                      <Package className="w-5 h-5 text-emerald-300" />
+                    <div className="w-12 h-12 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+                      <Package className="w-5 h-5 text-red-300" />
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
@@ -339,7 +339,7 @@ export default function WargaPesananDetail() {
         {/* Ringkasan pembayaran */}
         <div className="bg-white rounded-2xl border border-gray-200 p-5 h-fit lg:sticky lg:top-20">
           <h3 className="font-bold text-gray-900 flex items-center gap-1.5 mb-4">
-            <CreditCard className="w-4 h-4 text-emerald-600" /> Pembayaran
+            <CreditCard className="w-4 h-4 text-red-600" /> Pembayaran
           </h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
@@ -356,7 +356,7 @@ export default function WargaPesananDetail() {
             </div>
             <div className="border-t border-dashed border-gray-200 pt-2 flex justify-between font-bold text-base">
               <span>Total Bayar</span>
-              <span className="text-emerald-600">{formatRp(order.grand_total)}</span>
+              <span className="text-red-600">{formatRp(order.grand_total)}</span>
             </div>
           </div>
           <p className="text-[11px] text-gray-400 mt-3 text-center">

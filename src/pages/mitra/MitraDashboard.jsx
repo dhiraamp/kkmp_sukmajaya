@@ -101,11 +101,11 @@ export default function MitraDashboard() {
       <PullToRefreshIndicator pullDistance={pullDistance} isRefreshing={isRefreshing} />
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Dashboard Mitra</h2>
-          <p className="text-muted-foreground">Selamat datang di portal mitra SMART MBG</p>
+          <h2 className="text-2xl font-bold">Dashboard Pos KKMP Cabang</h2>
+          <p className="text-muted-foreground">Selamat datang di portal Koperasi Cabang / Pos KKMP Kota Depok</p>
         </div>
         {totalItems > 0 && (
-          <Button onClick={() => navigate("/mitra/cart")} className="flex items-center gap-2">
+          <Button onClick={() => navigate("/mitra/cart")} className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white">
             <ShoppingCart className="w-4 h-4"/>{totalItems} item di keranjang
           </Button>
         )}
@@ -113,12 +113,12 @@ export default function MitraDashboard() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Total Transaksi" value={String(txCount)} icon={ShoppingCart} color="blue" />
-        <StatCard title="Produk Tersedia" value={String(allProducts.length)} icon={Package} color="green" trend={5} />
+        <StatCard title="Komoditas Tersedia" value={String(allProducts.length)} icon={Package} color="green" trend={5} />
         <StatCard title="Pengeluaran Bulan Ini" value="Rp 8.5jt" icon={TrendingUp} color="yellow" trend={-3} />
         <StatCard title="Pengaduan Aktif" value="2" icon={AlertCircle} color="red" />
       </div>
 
-      <StockAlertBanner userEmail={user?.email} sppgName={user?.organization_name || user?.full_name} />
+      <StockAlertBanner userEmail={user?.email} sppgName={user?.organization_name || user?.full_name || "Pos KKMP Beji Depok"} />
 
       {/* Rekomendasi Pintar */}
       <SmartRecommendations userEmail={user?.email} onAddToCart={handleAddClick} />
@@ -127,8 +127,8 @@ export default function MitraDashboard() {
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center gap-2">
-            <Package className="w-4 h-4 text-primary"/>
-            Produk Supplier Tersedia
+            <Package className="w-4 h-4 text-orange-600"/>
+            Komoditas dari Gudang Pusat / Pemasok
           </CardTitle>
           <div className="flex gap-2 flex-col sm:flex-row mt-2">
             <div className="relative flex-1">
@@ -178,7 +178,7 @@ export default function MitraDashboard() {
                     <span className="font-bold text-sm text-emerald-700">Rp {Number(p.price).toLocaleString("id-ID")}<span className="text-xs font-normal text-muted-foreground">/{p.unit}</span></span>
                     <Button
                       size="sm"
-                      className={`h-7 text-xs px-2 transition-all ${addedIds[p.id] ? 'bg-green-600 hover:bg-green-600' : ''}`}
+                      className={`h-7 text-xs px-2 transition-all ${addedIds[p.id] ? 'bg-green-600 hover:bg-green-600 text-white' : 'bg-orange-600 hover:bg-orange-700 text-white'}`}
                       onClick={() => handleAddClick(p)}
                       disabled={p.stock <= 0}
                     >

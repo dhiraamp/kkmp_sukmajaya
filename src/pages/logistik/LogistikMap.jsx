@@ -15,15 +15,15 @@ L.Icon.Default.mergeOptions({
 });
 
 const AREA_COORDS = {
-  "Garut Kota":     { lat: -7.2275, lng: 107.9028 },
-  "Tarogong Kidul": { lat: -7.2450, lng: 107.8856 },
-  "Tarogong Kaler": { lat: -7.2200, lng: 107.8700 },
-  "Leles":          { lat: -7.1858, lng: 107.8833 },
-  "Bayongbong":     { lat: -7.2856, lng: 107.9167 },
-  "Cibatu":         { lat: -7.1667, lng: 107.9500 },
-  "Karangpawitan":  { lat: -7.2083, lng: 107.9333 },
-  "Samarang":       { lat: -7.1750, lng: 107.8667 },
-  "Pasirwangi":     { lat: -7.3000, lng: 107.8500 },
+  "Gudang Induk Mekarjaya": { lat: -6.3980, lng: 106.8420 },
+  "Pos Cabang Beji":         { lat: -6.3725, lng: 106.8200 },
+  "Pos Cabang Pancoran Mas": { lat: -6.3995, lng: 106.8120 },
+  "Pos Cabang Sukmajaya":    { lat: -6.4020, lng: 106.8370 },
+  "Pos Cabang Cimanggis":    { lat: -6.3680, lng: 106.8650 },
+  "Pos Cabang Cilodong":     { lat: -6.4320, lng: 106.8520 },
+  "Pos Cabang Sawangan":     { lat: -6.4150, lng: 106.7780 },
+  "Pos Cabang Bojongsari":   { lat: -6.4250, lng: 106.7450 },
+  "Pos Cabang Cipayung":     { lat: -6.4280, lng: 106.8080 },
 };
 
 const statusConfig = {
@@ -48,7 +48,7 @@ export default function LogistikMap() {
   // Hitung area stats dari order real
   const areaStats = {};
   orders.forEach(o => {
-    const area = o.delivery_area || "Garut Kota";
+    const area = o.delivery_area || "Gudang Induk Mekarjaya";
     if (!areaStats[area]) areaStats[area] = { count: 0, total: 0, orders: [] };
     areaStats[area].count++;
     areaStats[area].total += o.total_amount || 0;
@@ -57,7 +57,7 @@ export default function LogistikMap() {
 
   // Gabungkan dengan koordinat
   const mapPoints = Object.entries(areaStats).map(([area, stats]) => {
-    const coords = AREA_COORDS[area] || { lat: -7.2275, lng: 107.9028 };
+    const coords = AREA_COORDS[area] || { lat: -6.3980, lng: 106.8420 };
     return { area, ...stats, ...coords };
   });
 
@@ -75,8 +75,8 @@ export default function LogistikMap() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Peta Sebaran Pengiriman</h2>
-        <p className="text-muted-foreground">Distribusi pesanan real-time ke seluruh wilayah Kabupaten Garut</p>
+        <h2 className="text-2xl font-bold">Peta Sebaran Pengiriman KKMP</h2>
+        <p className="text-muted-foreground">Distribusi komoditas real-time dari Gudang Induk Mekarjaya ke 8 Pos Cabang Kota Depok</p>
       </div>
 
       {/* Stat ringkas */}
@@ -108,7 +108,7 @@ export default function LogistikMap() {
                 <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
               </div>
             ) : (
-              <MapContainer center={[-7.2275, 107.9028]} zoom={12} style={{ height: "100%", width: "100%" }} scrollWheelZoom>
+              <MapContainer center={[-6.3980, 106.8350]} zoom={12} style={{ height: "100%", width: "100%" }} scrollWheelZoom>
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -119,13 +119,13 @@ export default function LogistikMap() {
                       <Circle
                         center={[pt.lat, pt.lng]}
                         radius={pt.count * 200}
-                        pathOptions={{ color: "#3b82f6", fillColor: "#93c5fd", fillOpacity: 0.3, weight: 1 }}
+                        pathOptions={{ color: "#ef4444", fillColor: "#fca5a5", fillOpacity: 0.3, weight: 1 }}
                       />
                     )}
                     <Marker position={[pt.lat, pt.lng]}>
                       <Popup minWidth={200}>
                         <div className="space-y-1.5 p-1">
-                          <p className="font-bold text-sm">Kec. {pt.area}</p>
+                          <p className="font-bold text-sm">{pt.area}</p>
                           <p className="text-sm"><Package className="inline w-3 h-3 mr-1" />{pt.count} pesanan</p>
                           {pt.count > 0 && (
                             <>
@@ -157,10 +157,10 @@ export default function LogistikMap() {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         {displayPoints.sort((a, b) => b.count - a.count).map((pt, i) => (
           <Card key={i} className="p-3 text-center hover:shadow-md transition-shadow">
-            <MapPin className="w-4 h-4 text-primary mx-auto mb-1" />
-            <p className="font-semibold text-xs truncate">Kec. {pt.area}</p>
-            <p className="text-2xl font-bold text-primary">{pt.count}</p>
-            <p className="text-[10px] text-muted-foreground">pesanan</p>
+            <MapPin className="w-4 h-4 text-red-600 mx-auto mb-1" />
+            <p className="font-semibold text-xs truncate">{pt.area}</p>
+            <p className="text-2xl font-bold text-red-600">{pt.count}</p>
+            <p className="text-[10px] text-muted-foreground">distribusi</p>
             {pt.count > 0 && <p className="text-[10px] text-muted-foreground">{formatRp(pt.total)}</p>}
           </Card>
         ))}

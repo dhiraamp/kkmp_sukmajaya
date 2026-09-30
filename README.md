@@ -1,19 +1,46 @@
-# 🍽️ Smart MBG
+# 🇮🇩 Koperasi Kelurahan Merah Putih (KKMP) Sukamaja / Mekarjaya — Kota Depok
 
-**Smart MBG** adalah sistem digital terintegrasi untuk mendukung pelaksanaan program **Makan Bergizi Gratis (MBG)**, mencakup manajemen data pengguna/penerima manfaat, rantai pasok bahan pokok (bapokting), logistik distribusi, hingga portal publik & marketplace — dibangun untuk ekosistem program di wilayah Garut dan dapat diadaptasi ke wilayah lain.
+Platform digital terpadu **Koperasi Kelurahan Merah Putih (KKMP)** Kota Depok yang mengintegrasikan ekosistem rantai pasok pangan, marketplace komoditas sembako & warung kelontong, manajemen 8 Pos Cabang Kelurahan, hingga distribusi logistik rakyat.
 
 ---
 
-## 🚀 Fitur Utama
+## 👥 Akun Demo & Kredensial Pengujian (Dummy Accounts)
 
-- **Portal Publik & Marketplace**: Antarmuka publik yang responsif dan mobile-friendly untuk masyarakat mengakses informasi program dan marketplace bahan pokok.
-- **Manajemen Data Pengguna & Lokasi**: Pendaftaran, verifikasi, dan pemetaan lokasi data pengguna/penerima manfaat program (terintegrasi dengan Supabase & audit sistem).
-- **Verifikasi OTP WhatsApp**: Autentikasi pengguna melalui nomor WhatsApp resmi untuk keamanan dan validitas data.
-- **Sinkronisasi Data Real-time (Mister MBG)**: Sinkronisasi otomatis data logistik dan status distribusi secara real-time.
-- **Manajemen Supplier & Bapokting**: Pengelolaan data pemasok bahan pokok penting (bapokting) beserta stok dan harga.
-- **Dashboard Admin & Role Management**: Panel administrasi untuk petugas program dengan manajemen peran (role-based access).
-- **Validasi Data & Type Safety**: Validasi skema data (Zod) untuk menjaga keandalan transaksi dan payload logistik.
-- **Notifikasi Interaktif**: Feedback dan notifikasi toast untuk setiap aksi penting (konfirmasi pesanan, update logistik, dll).
+Semua akun pengujian di bawah ini dapat langsung digunakan untuk masuk melalui **Portal Login** ([http://localhost:5173/portal](http://localhost:5173/portal)).
+
+### 🔑 Sandi Standar untuk Seluruh Akun:
+```text
+demo1234
+```
+
+| No | Role / Peran | Nama Entitas | Email Utama | Email Alternatif | Halaman Utama |
+|---|---|---|---|---|---|
+| **1** | **Warga / Anggota** | Adhira Maharani | `anggota.depok@kkmp-depok.id` | `warga@demo.local` | `/warga/beranda` & `/marketplace` |
+| **2** | **Mitra Pos Cabang** | Mitra Pos Cabang Beji | `cabang.beji@kkmp-depok.id` | `mitra@demo.local` | `/mitra/dashboard` |
+| **3** | **Supplier Pangan** | Gapoktan Sawangan Mandiri | `supplier.pangan@kkmp-depok.id` | `supplier@demo.local` | `/supplier/dashboard` |
+| **4** | **Logistik & Armada** | Tim Logistik KKMP Kota Depok | `logistik@kkmp-depok.id` | `logistik@demo.local` | `/logistik/dashboard` |
+| **5** | **Pengurus Induk (Admin)** | Pengurus KKMP Mekarjaya | `admin.induk@kkmp-depok.id` | `admin@demo.local` | `/admin/dashboard` |
+
+> 💡 *Detail dokumentasi hak akses setiap akun tersedia di [`docs/AKUN_DUMMY_LOGIN.md`](docs/AKUN_DUMMY_LOGIN.md).*
+
+---
+
+## 🚀 Fitur Utama Ekosistem KKMP Depok
+
+1. **Marketplace Sembako & Warung Kelontong**:
+   - Belanja beras premium Ramos, shampo Lifebuoy/Pantene, mentega Blue Band, mie instan Indomie, sabun mandi Dettol, deterjen Rinso, Sunlight, minyak goreng, dan sembako berkualitas dengan **harga khusus anggota**.
+   - Integrasi keranjang belanja, checkout pos cabang terdekat, dan kupon anggota.
+2. **Jaringan Distribusi 8 Pos Cabang Kelurahan**:
+   - Pemetaan sebaran wilayah: Mekarjaya, Sukmajaya, Beji, Pancoran Mas, Cimanggis, Sawangan, Cipayung, dan Tapos.
+   - Pos cabang dapat memesan stok (restock) langsung ke supplier lokal dan Gudang Induk.
+3. **Pusat Logistik & Armada Depok**:
+   - Manajemen armada pickup dan kurir distribusi pos kelurahan dengan pelacakan status rute.
+4. **Dashboard Supplier Komoditas**:
+   - Petani & kelompok tani Depok (Gapoktan) dapat mengelola stok, menerima Purchase Order (PO), dan konfirmasi pengiriman.
+5. **GIS & Pemantauan Agregat Admin Induk**:
+   - GIS sebaran 8 cabang, pemantauan stabilitas harga pangan (Bapokting), serta monitoring stok terpusat.
+6. **Layanan Digital PPOB**:
+   - Pembelian pulsa, token listrik, pembayaran BPJS, dan tagihan utilitas bagi anggota koperasi.
 
 ---
 
@@ -21,114 +48,59 @@
 
 | Layer | Teknologi |
 |---|---|
-| Frontend | React + Vite |
-| Styling/UX | Tailwind CSS, Framer Motion, Sonner (toast) |
-| Backend / Database | Supabase (PostgreSQL, Auth, Realtime) |
-| Validasi Data | Zod |
-| Autentikasi Tambahan | WhatsApp OTP |
-
-> Sesuaikan tabel ini bila ada perbedaan stack aktual di project (misalnya bila sebagian modul memakai Next.js).
+| **Frontend** | React 18, Vite |
+| **Styling & Animasi** | Tailwind CSS, Framer Motion, Lucide Icons |
+| **State & Cache** | TanStack Query v5, Context API, Local Seed Adapter |
+| **Notifikasi** | Sonner |
+| **Peta Wilayah** | Leaflet / React-Leaflet GIS |
 
 ---
 
-## 📋 Prasyarat
-
-Sebelum menjalankan project ini, pastikan sudah terinstall:
-
-- [Node.js](https://nodejs.org/) v18 atau lebih baru
-- [npm](https://www.npmjs.com/) atau [bun](https://bun.sh/)
-- Akun [Supabase](https://supabase.com/) (untuk database & auth)
-- Kredensial Google Cloud Service Account (jika menggunakan integrasi Google Sheets/API terkait)
-
----
-
-## ⚙️ Instalasi & Menjalankan Project
+## ⚙️ Cara Menjalankan Project
 
 ```bash
-# 1. Clone repository
+# 1. Clone repositori
 git clone https://github.com/dhiraamp/smart-mbg.git
 cd smart-mbg
 
-# 2. Install dependencies
+# 2. Instal dependensi
 npm install
-# atau
-bun install
 
-# 3. Salin file environment contoh, lalu isi dengan kredensial Anda
-cp .env.example .env
-
-# 4. Jalankan server development
+# 3. Jalankan server pengembangan lokal
 npm run dev
 
-# 5. Build untuk produksi
-npm run build
-
-# 6. Preview build produksi
-npm run preview
+# 4. Buka di browser
+# http://localhost:5173
 ```
 
 ---
 
-## 🔐 Environment Variables
-
-Buat file `.env` di root project (jangan pernah commit file ini) berdasarkan `.env.example`, isi dengan:
-
-```env
-VITE_SUPABASE_URL=your_supabase_project_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-WHATSAPP_API_KEY=your_whatsapp_api_key
-# tambahkan variabel lain sesuai kebutuhan integrasi
-```
-
-File kredensial JSON (misalnya Google Service Account) disimpan di folder `config/` yang **tidak** ikut ter-commit ke repository (lihat `.gitignore`).
-
----
-
-## 📁 Struktur Project
+## 📁 Struktur Direktori
 
 ```
-smart-mbg/
-├── config/          # Kredensial & konfigurasi sensitif (di-gitignore)
-├── docs/            # Dokumentasi teknis, roadmap, dan panduan
-├── public/          # Aset statis (gambar, ikon, dll)
-├── scripts/         # Script utilitas (sinkronisasi data, parsing, dll)
+kkmp-sukamaja/
+├── docs/                     # Dokumentasi migrasi, alur, dan daftar akun demo
+│   ├── AKUN_DUMMY_LOGIN.md
+│   └── panduan-rebranding-depok.md
+├── public/                   # Aset logo, ikon, gambar ilustrasi
 ├── src/
-│   ├── api/         # Integrasi API & validasi
-│   ├── components/  # Komponen UI React
-│   ├── data/        # Data lokal / hasil sinkronisasi
-│   └── lib/         # Fungsi utilitas & validasi (Zod)
-└── vercel.json      # Konfigurasi deployment Vercel
+│   ├── api/                  # Base44 client adapter & GIS service Depok
+│   ├── components/
+│   │   ├── marketplace/      # HeroKoperasi, CategoryGrid, FeaturedProducts, HomeHeader
+│   │   ├── layout/           # TopNavLayout, Sidebar
+│   │   └── shared/           # DigitalServicesHub (Pulsa/BPJS/Tagihan)
+│   ├── hooks/                # useCart, useSupplierProducts, useUserProfile
+│   ├── lib/                  # marketplace catalog, seed data, role paths, query client
+│   └── pages/
+│       ├── admin/            # Dashboard Admin & GIS Peta Depok
+│       ├── mitra/            # Pos Cabang Dashboard, Restock, Order
+│       ├── supplier/         # Supplier Dashboard & PO Management
+│       ├── logistik/         # Logistik Dashboard & Armada Tracking
+│       └── warga/            # Anggota Warga Dashboard, Checkout, Pesanan
+└── vite.config.js
 ```
 
 ---
 
-## 📚 Dokumentasi Terkait
-
-Dokumentasi lengkap analisis sistem, PRD, roadmap, dan panduan teknis lainnya tersedia di folder [`docs/`](docs/), di antaranya:
-
-- Analisis sistem & PRD (Product Requirement Document)
-- Roadmap & rencana eksekusi (`ROADMAP_EKSEKUSI.md`)
-- Panduan integrasi real-time & sinkronisasi data
-- Laporan harian pengembangan
-
----
-
-## 🚢 Deployment
-
-Project ini dikonfigurasi untuk deploy otomatis ke **Vercel**. Setiap push ke branch `main` akan memicu deployment produksi (sesuaikan dengan pengaturan CI/CD di dashboard Vercel Anda).
-
----
-
-## 🤝 Kontribusi
-
-1. Fork repository ini
-2. Buat branch fitur baru (`git checkout -b fitur/nama-fitur`)
-3. Commit perubahan Anda (`git commit -m "feat: deskripsi fitur"`)
-4. Push ke branch Anda (`git push origin fitur/nama-fitur`)
-5. Buat Pull Request
-
----
-
-## 📄 Lisensi
-
-Hak cipta © 2026. Seluruh hak dilindungi. Proyek ini bersifat internal untuk mendukung program Makan Bergizi Gratis (MBG) di wilayah Garut.
+## 📄 Hak Cipta
+Hak cipta © 2026 **Koperasi Kelurahan Merah Putih (KKMP) Mekarjaya — Kota Depok**. Seluruh hak dilindungi undang-undang.

@@ -7,9 +7,9 @@ import { toast } from "@/components/ui/use-toast";
 import { AlertTriangle } from "lucide-react";
 
 const complaints = [
-  { id: 1, from: "SPPG Garut Kota", title: "Kualitas Bayam Kurang Segar", desc: "Bayam yang dikirim sudah layu dan tidak segar, mohon perbaikan.", date: "07 Apr 2026", status: "open" },
-  { id: 2, from: "SPPG Tarogong", title: "Jumlah Tidak Sesuai Pesanan", desc: "Beras yang diterima kurang 5kg dari yang dipesan.", date: "05 Apr 2026", status: "in_progress" },
-  { id: 3, from: "SPPG Leles", title: "Pengiriman Terlambat", desc: "Pesanan dikirim 1 hari lebih lambat dari jadwal.", date: "03 Apr 2026", status: "resolved" },
+  { id: 1, from: "Pos KKMP Beji Depok", title: "Kualitas Bayam Kurang Segar", desc: "Bayam yang dikirim sudah layu dan tidak segar, mohon perbaikan.", date: "07 Apr 2026", status: "open" },
+  { id: 2, from: "Pos KKMP Sukmajaya", title: "Jumlah Tidak Sesuai Pesanan", desc: "Beras yang diterima kurang 5kg dari yang dipesan.", date: "05 Apr 2026", status: "in_progress" },
+  { id: 3, from: "Pos KKMP Pancoran Mas", title: "Pengiriman Terlambat", desc: "Pesanan dikirim 1 hari lebih lambat dari jadwal.", date: "03 Apr 2026", status: "resolved" },
 ];
 
 const statusColors = { open: "bg-red-50 text-red-700", in_progress: "bg-yellow-50 text-yellow-700", resolved: "bg-green-50 text-green-700" };

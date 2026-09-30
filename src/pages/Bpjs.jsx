@@ -40,17 +40,17 @@ export default function Bpjs() {
         <div className="flex items-center gap-3 mb-6">
           <button
             onClick={() => navigate("/")}
-            className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-emerald-600 hover:border-emerald-300 transition-colors"
+            className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-red-600 hover:border-red-300 transition-colors"
             aria-label="Kembali ke Beranda"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <ShieldPlus className="w-6 h-6 text-emerald-600" />
+              <ShieldPlus className="w-6 h-6 text-red-600" />
               <h1 className="text-2xl font-bold text-gray-900">Bayar Premi BPJS</h1>
             </div>
-            <p className="text-sm text-gray-500 mt-0.5">Bayar iuran BPJS Kesehatan dengan mudah dan cepat.</p>
+            <p className="text-sm text-gray-500 mt-0.5">Bayar iuran BPJS Kesehatan keluarga dengan mudah dan cepat melalui KKMP Digital.</p>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export default function Bpjs() {
           onSubmit={handleSubmit}
           className="bg-white rounded-xl border border-gray-200 p-6 max-w-2xl space-y-5"
         >
-          <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 text-emerald-700 text-sm">
+          <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm">
             <HeartPulse className="w-4 h-4 shrink-0" />
             <span>Layanan resmi pembayaran premi <b>BPJS Kesehatan</b>.</span>
           </div>
@@ -73,8 +73,8 @@ export default function Bpjs() {
                   onClick={() => setKelas(c.id)}
                   className={`flex flex-col items-center gap-0.5 p-3 rounded-lg border text-sm font-medium transition-colors ${
                     kelas === c.id
-                      ? "border-emerald-600 bg-emerald-50 text-emerald-700"
-                      : "border-gray-200 text-gray-600 hover:border-emerald-300"
+                      ? "border-red-600 bg-red-50 text-red-700"
+                      : "border-gray-200 text-gray-600 hover:border-red-300"
                   }`}
                 >
                   <span className="font-semibold">{c.label}</span>
@@ -94,7 +94,7 @@ export default function Bpjs() {
               placeholder="Nomor Kartu BPJS Kesehatan"
               value={cardNumber}
               onChange={(e) => setCardNumber(e.target.value)}
-              className="h-11 rounded-xl border-gray-300 focus:border-emerald-500 focus:ring-emerald-500"
+              className="h-11 rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500"
             />
           </div>
 
@@ -109,11 +109,11 @@ export default function Bpjs() {
               max="10"
               value={familyMembers}
               onChange={(e) => setFamilyMembers(Number(e.target.value) || 1)}
-              className="h-11 rounded-xl border-gray-300 focus:border-emerald-500 focus:ring-emerald-500"
+              className="h-11 rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500"
             />
           </div>
 
-          <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 text-emerald-700 text-sm">
+          <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm">
             <CheckCircle2 className="w-4 h-4 shrink-0" />
             <span>
               Total pembayaran: <b>Rp{total}</b> — {current.label} × {familyMembers} peserta
@@ -122,7 +122,7 @@ export default function Bpjs() {
 
           <Button
             type="submit"
-            className="w-full h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold"
+            className="w-full h-11 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold"
           >
             Bayar Premi Sekarang
           </Button>

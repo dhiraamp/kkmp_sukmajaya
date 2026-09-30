@@ -24,12 +24,14 @@ export default function WargaLayout() {
       <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigate("/warga/beranda")}>
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shadow-sm">
-              <Sprout className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center shadow-sm">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white">
+                <path d="M20 6L6 17H11V32H29V17H34L20 6Z" fill="white" />
+              </svg>
             </div>
             <div className="leading-tight">
-              <p className="text-base font-bold text-gray-900">Smart MBG</p>
-              <p className="text-[10px] text-gray-500">Belanja Warga</p>
+              <p className="text-base font-bold text-gray-900">Koperasi Merah Putih</p>
+              <p className="text-[10px] text-gray-500">Belanja Anggota &bull; Mekarjaya</p>
             </div>
           </div>
 
@@ -41,7 +43,7 @@ export default function WargaLayout() {
                 className={({ isActive }) =>
                   `relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-emerald-50 text-emerald-700 font-semibold"
+                      ? "bg-red-50 text-red-700 font-semibold"
                       : "text-gray-600 hover:bg-gray-100"
                   }`
                 }
@@ -82,14 +84,14 @@ export default function WargaLayout() {
             to={item.path}
             className={({ isActive }) =>
               `flex-1 flex flex-col items-center justify-center gap-0.5 py-2.5 text-[10px] font-medium transition-colors ${
-                isActive ? "text-emerald-600" : "text-gray-400"
+                isActive ? "text-red-600 font-bold" : "text-gray-400"
               }`
             }
           >
             <span className="relative">
               <item.icon className={`w-5 h-5 ${item.badge && totalItems > 0 ? "" : ""}`} />
               {item.badge && totalItems > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-0.5 rounded-full bg-emerald-600 text-white text-[9px] font-bold flex items-center justify-center">
+                <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-0.5 rounded-full bg-red-600 text-white text-[9px] font-bold flex items-center justify-center">
                   {totalItems > 99 ? "99+" : totalItems}
                 </span>
               )}

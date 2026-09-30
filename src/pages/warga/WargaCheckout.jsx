@@ -23,16 +23,16 @@ const PAYMENT_METHODS = [
 ];
 
 const BANK_ACCOUNTS = [
-  { bank: "BRI", account: "0023-01-0456-7890", holder: "Smart MBG Garut" },
-  { bank: "BCA", account: "1234 5678 90", holder: "Smart MBG Garut" },
-  { bank: "Mandiri", account: "9000-0000-1234", holder: "Smart MBG Garut" },
-  { bank: "BNI", account: "0981-2345-67", holder: "Smart MBG Garut" },
+  { bank: "BRI", account: "0023-01-0456-7890", holder: "KKMP Mekarjaya Depok" },
+  { bank: "BCA", account: "1234 5678 90", holder: "KKMP Mekarjaya Depok" },
+  { bank: "Mandiri", account: "9000-0000-1234", holder: "KKMP Mekarjaya Depok" },
+  { bank: "BNI", account: "0981-2345-67", holder: "KKMP Mekarjaya Depok" },
 ];
 
 export default function WargaCheckout() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
   const wargaUser = { email, id: user?.id || email, role: "penerima" };
   const { cartItems, loading, clearCart, totalItems, subtotal } = useCart(wargaUser);
 
@@ -80,7 +80,7 @@ export default function WargaCheckout() {
       const now = new Date();
       const order = {
         id: `ord-${Date.now()}`,
-        order_number: `MBG-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}-${String(Math.floor(Math.random() * 9000) + 1000)}`,
+        order_number: `KKMP-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}-${String(Math.floor(Math.random() * 9000) + 1000)}`,
         email,
         items: cartItems.map((i) => ({
           id: i.id,
@@ -108,7 +108,7 @@ export default function WargaCheckout() {
       // Kirim ke rantai pasok: buat Order di penyimpanan bersama (dilihat Supplier & Logistik).
       let remoteId = null;
       try {
-        const customerName = localStorage.getItem("smartmbg_name") || user?.full_name || email.split("@")[0] || "Warga";
+        const customerName = localStorage.getItem("kkmp_name") || localStorage.getItem("smartmbg_name") || user?.full_name || email.split("@")[0] || "Anggota";
         const addressText = [selectedAddress.full_address, selectedAddress.village, selectedAddress.district, selectedAddress.regency].filter(Boolean).join(", ");
         const remote = await base44.entities.Order.create({
           order_number: order.order_number,
@@ -119,9 +119,9 @@ export default function WargaCheckout() {
           mitra_name: customerName,
           mitra_email: email,
           mitra_address: addressText,
-          delivery_area: selectedAddress.district || selectedAddress.village || "Kabupaten Garut",
-          supplier_name: order.items[0]?.supplier_name || "Supplier Utama",
-          supplier_id: order.items[0]?.supplier_id || "supplier@demo.local",
+          delivery_area: selectedAddress.district || selectedAddress.village || "Kota Depok",
+          supplier_name: order.items[0]?.supplier_name || "Gudang Pusat KKMP Depok",
+          supplier_id: order.items[0]?.supplier_id || "admin@kkmp-depok.id",
           total: grandTotal,
           total_amount: grandTotal,
           subtotal,
@@ -144,15 +144,15 @@ export default function WargaCheckout() {
               label: "Pesanan dibuat",
               at: now.toISOString(),
               time: now.toLocaleString("id-ID", { hour: "2-digit", minute: "2-digit" }),
-              note: selectedAddress.notes || "Pesanan dibuat oleh Warga",
+              note: selectedAddress.notes || "Pesanan belanja oleh Anggota Koperasi",
               done: true,
             },
           ],
         });
         remoteId = remote.id;
-        await notifyRoles(["supplier"], {
+        await notifyRoles(["supplier", "logistik", "mitra"], {
           type: "new_order",
-          title: "Pesanan Baru dari Warga",
+          title: "Pesanan Baru dari Anggota Koperasi",
           message: `${order.order_number} · ${customerName} · ${formatRp(grandTotal)}`,
           ref_id: remote.id,
           link: "/supplier/orders",
@@ -178,13 +178,13 @@ export default function WargaCheckout() {
   if (placed) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center space-y-5 max-w-md mx-auto">
-        <div className="w-20 h-20 rounded-full bg-emerald-50 flex items-center justify-center">
-          <CheckCircle2 className="w-11 h-11 text-emerald-600" />
+        <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center">
+          <CheckCircle2 className="w-11 h-11 text-red-600" />
         </div>
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Pesanan Berhasil Dibuat!</h1>
           <p className="text-sm text-gray-500 mt-2">
-            Terima kasih, pesanan Anda sedang kami proses.
+            Terima kasih, pesanan Anggota Koperasi sedang kami proses.
           </p>
         </div>
         <div className="w-full bg-white rounded-2xl border border-gray-200 p-5 space-y-2 text-sm">
@@ -194,7 +194,7 @@ export default function WargaCheckout() {
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Total Pembayaran</span>
-            <span className="font-bold text-emerald-600">{formatRp(placed.grand_total)}</span>
+            <span className="font-bold text-red-600">{formatRp(placed.grand_total)}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Metode</span>
@@ -206,7 +206,7 @@ export default function WargaCheckout() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 w-full">
-          <Button className="flex-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold" onClick={() => navigate("/warga/pesanan")}>
+          <Button className="flex-1 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold" onClick={() => navigate("/warga/pesanan")}>
             Lihat Pesanan Saya
           </Button>
           <Button variant="outline" className="flex-1 rounded-xl" onClick={() => navigate("/marketplace")}>
@@ -218,20 +218,20 @@ export default function WargaCheckout() {
   }
 
   if (loading) {
-    return <div className="flex items-center justify-center py-20"><div className="w-8 h-8 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin" /></div>;
+    return <div className="flex items-center justify-center py-20"><div className="w-8 h-8 border-4 border-red-200 border-t-red-600 rounded-full animate-spin" /></div>;
   }
 
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
-        <div className="w-20 h-20 rounded-full bg-emerald-50 flex items-center justify-center">
-          <ShoppingBag className="w-10 h-10 text-emerald-300" />
+        <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center">
+          <ShoppingBag className="w-10 h-10 text-red-300" />
         </div>
         <div>
           <h2 className="text-lg font-bold text-gray-900">Keranjang Kosong</h2>
           <p className="text-sm text-gray-500 mt-1">Tidak ada item untuk di-checkout.</p>
         </div>
-        <button onClick={() => navigate("/marketplace")} className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors">
+        <button onClick={() => navigate("/marketplace")} className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors">
           <ShoppingBag className="w-4 h-4" /> Mulai Belanja
         </button>
       </div>
@@ -241,7 +241,7 @@ export default function WargaCheckout() {
   return (
     <div className="space-y-5">
       <div className="flex items-center gap-2">
-        <button onClick={() => navigate("/warga/keranjang")} className="text-gray-400 hover:text-emerald-600 transition-colors">
+        <button onClick={() => navigate("/warga/keranjang")} className="text-gray-400 hover:text-red-600 transition-colors">
           <ChevronLeft className="w-5 h-5" />
         </button>
         <div>
@@ -256,9 +256,9 @@ export default function WargaCheckout() {
           <div className="bg-white rounded-2xl border border-gray-200 p-5">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-gray-900 flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-emerald-600" /> Alamat Pengiriman
+                <MapPin className="w-4 h-4 text-red-600" /> Alamat Pengiriman
               </h3>
-              <button onClick={openAddAddress} className="flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:underline">
+              <button onClick={openAddAddress} className="flex items-center gap-1 text-xs font-semibold text-red-600 hover:underline">
                 <Plus className="w-3 h-3" /> Tambah Alamat
               </button>
             </div>
@@ -267,7 +267,7 @@ export default function WargaCheckout() {
               <div className="text-center py-6">
                 <MapPin className="w-8 h-8 text-gray-300 mx-auto mb-2" />
                 <p className="text-sm text-gray-500">Belum ada alamat.</p>
-                <button onClick={openAddAddress} className="mt-2 text-xs font-semibold text-emerald-600 hover:underline">
+                <button onClick={openAddAddress} className="mt-2 text-xs font-semibold text-red-600 hover:underline">
                   Tambah alamat sekarang
                 </button>
               </div>
@@ -279,20 +279,20 @@ export default function WargaCheckout() {
                     onClick={() => setAddressId(addr.id)}
                     className={`w-full text-left rounded-xl border p-4 transition-all ${
                       addr.id === addressId
-                        ? "border-emerald-500 bg-emerald-50/50 ring-1 ring-emerald-500"
-                        : "border-gray-200 hover:border-emerald-300"
+                        ? "border-red-500 bg-red-50/50 ring-1 ring-red-500"
+                        : "border-gray-200 hover:border-red-300"
                     }`}
                   >
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0 mt-0.5">
-                        <MapPin className="w-4 h-4 text-emerald-600" />
+                      <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 mt-0.5">
+                        <MapPin className="w-4 h-4 text-red-600" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
                           <p className="text-sm font-bold text-gray-900">{addr.label}</p>
                           <span className="text-xs text-gray-500">{addr.recipient_name}</span>
                           {addr.is_primary && (
-                            <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">Utama</span>
+                            <span className="text-[10px] font-semibold text-red-700 bg-red-100 px-2 py-0.5 rounded-full">Utama</span>
                           )}
                         </div>
                         <p className="text-xs text-gray-600 mt-1 leading-relaxed">
@@ -312,7 +312,7 @@ export default function WargaCheckout() {
           {/* Metode Pembayaran */}
           <div className="bg-white rounded-2xl border border-gray-200 p-5">
             <h3 className="font-bold text-gray-900 flex items-center gap-1.5 mb-4">
-              <CreditCard className="w-4 h-4 text-emerald-600" /> Metode Pembayaran
+              <CreditCard className="w-4 h-4 text-red-600" /> Metode Pembayaran
             </h3>
             <div className="space-y-2.5">
               {PAYMENT_METHODS.map((m) => {
@@ -323,18 +323,18 @@ export default function WargaCheckout() {
                     <button
                       onClick={() => setMethod(m.id)}
                       className={`w-full text-left rounded-xl border p-4 flex items-center gap-3 transition-all ${
-                        active ? "border-emerald-500 bg-emerald-50/50 ring-1 ring-emerald-500" : "border-gray-200 hover:border-emerald-300"
+                        active ? "border-red-500 bg-red-50/50 ring-1 ring-red-500" : "border-gray-200 hover:border-red-300"
                       }`}
                     >
-                      <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
-                        <MIcon className="w-4 h-4 text-emerald-600" />
+                      <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+                        <MIcon className="w-4 h-4 text-red-600" />
                       </div>
                       <div className="flex-1">
                         <p className="text-sm font-bold text-gray-900">{m.label}</p>
                         <p className="text-[11px] text-gray-500">{m.desc}</p>
                       </div>
-                      <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${active ? "border-emerald-600" : "border-gray-300"}`}>
-                        {active && <div className="w-2 h-2 rounded-full bg-emerald-600" />}
+                      <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${active ? "border-red-600" : "border-gray-300"}`}>
+                        {active && <div className="w-2 h-2 rounded-full bg-red-600" />}
                       </div>
                     </button>
 
@@ -345,7 +345,7 @@ export default function WargaCheckout() {
                           {BANK_ACCOUNTS.map((b) => (
                             <div key={b.bank} className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-3 py-2">
                               <div className="flex items-center gap-2">
-                                <Landmark className="w-4 h-4 text-emerald-600" />
+                                <Landmark className="w-4 h-4 text-red-600" />
                                 <span className="text-sm font-bold text-gray-900">{b.bank}</span>
                               </div>
                               <div className="text-right">
@@ -366,8 +366,8 @@ export default function WargaCheckout() {
                         <div>
                           <p className="text-sm font-semibold text-gray-900">Scan QRIS saat pembayaran</p>
                           <p className="text-xs text-gray-500 mt-1">
-                            Kode QR disediakan kurir/petugas saat pesanan diproses.
-                            <br />(Simulasi — gateway pembayaran nyata menyusul)
+                            Kode QR disediakan kurir/petugas pos saat pesanan diproses.
+                            <br />(Simulasi — pembayaran anggota koperasi)
                           </p>
                         </div>
                       </div>
@@ -376,7 +376,7 @@ export default function WargaCheckout() {
                     {active && m.id === "cod" && (
                       <div className="mt-2 rounded-xl bg-gray-50 border border-gray-200 p-4 flex items-center gap-3">
                         <div className="w-9 h-9 rounded-lg bg-white border border-gray-200 flex items-center justify-center shrink-0">
-                          <Banknote className="w-5 h-5 text-emerald-600" />
+                          <Banknote className="w-5 h-5 text-red-600" />
                         </div>
                         <p className="text-xs text-gray-600">
                           Siapkan uang tunai sesuai total pembayaran. Pembayaran dilakukan saat pesanan tiba di lokasi Anda.
@@ -393,7 +393,7 @@ export default function WargaCheckout() {
         {/* Ringkasan Pesanan */}
         <div className="bg-white rounded-2xl border border-gray-200 p-5 h-fit lg:sticky lg:top-20">
           <h3 className="font-bold text-gray-900 flex items-center gap-1.5 mb-4">
-            <ClipboardList className="w-4 h-4 text-emerald-600" /> Rincian Pesanan
+            <ClipboardList className="w-4 h-4 text-red-600" /> Rincian Pesanan
           </h3>
           <div className="space-y-3 max-h-56 overflow-y-auto pr-1">
             {cartItems.map((i) => (
@@ -401,8 +401,8 @@ export default function WargaCheckout() {
                 {i.image_url ? (
                   <img src={i.image_url} alt={i.product_name} referrerPolicy="no-referrer" className="w-11 h-11 rounded-lg object-cover shrink-0" />
                 ) : (
-                  <div className="w-11 h-11 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
-                    <ShoppingBag className="w-5 h-5 text-emerald-300" />
+                  <div className="w-11 h-11 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+                    <ShoppingBag className="w-5 h-5 text-red-300" />
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
@@ -425,14 +425,14 @@ export default function WargaCheckout() {
             </div>
             <div className="flex justify-between font-bold text-base">
               <span>Total Bayar</span>
-              <span className="text-emerald-600">{formatRp(grandTotal)}</span>
+              <span className="text-red-600">{formatRp(grandTotal)}</span>
             </div>
           </div>
 
           <Button
             onClick={handlePlaceOrder}
             disabled={paying}
-            className="w-full mt-4 h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold"
+            className="w-full mt-4 h-11 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold"
           >
             {paying ? "Memproses..." : `Buat Pesanan — ${formatRp(grandTotal)}`}
           </Button>

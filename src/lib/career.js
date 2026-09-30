@@ -1,21 +1,26 @@
 export const CATEGORIES = [
-  { key: "sppg", label: "SPPG (Dapur)" },
-  { key: "logistik", label: "Logistik" },
-  { key: "lainnya", label: "Lainnya (MBG)" },
+  { key: "pos_cabang", label: "Pos Cabang Koperasi" },
+  { key: "logistik", label: "Logistik & Armada" },
+  { key: "gudang", label: "Gudang Pusat" },
+  { key: "lainnya", label: "Lainnya (KKMP)" },
 ];
 
 export function categoryLabel(key) {
+  if (key === "sppg") return "Pos Cabang Koperasi";
   return CATEGORIES.find((c) => c.key === key)?.label || key || "Lainnya";
 }
 
 export function categoryColor(key) {
   switch (key) {
+    case "pos_cabang":
     case "sppg":
-      return "bg-emerald-600 text-white";
+      return "bg-red-600 text-white";
     case "logistik":
-      return "bg-sky-600 text-white";
+      return "bg-blue-600 text-white";
+    case "gudang":
+      return "bg-amber-600 text-white";
     default:
-      return "bg-amber-500 text-white";
+      return "bg-slate-700 text-white";
   }
 }
 

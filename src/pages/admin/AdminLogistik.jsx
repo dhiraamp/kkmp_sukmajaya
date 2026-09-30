@@ -25,10 +25,10 @@ import { toast } from "sonner";
 import { formatDateTimeParts, formatFullIndonesianDateTime } from "@/lib/utils";
 
 const defaultFleet = [
-  { id: "fl_1", name: "Pak Asep", sim: "SIM B1 - 12345678", vehicle: "Mobil Box (D 1234 AB)", capacity: "1000 kg", deliveries: 45, status: "active", rating: 4.7, ratingCount: 30, phone: "081234567801", wa_verified: true },
-  { id: "fl_2", name: "Pak Dedi", sim: "SIM B1 - 87654321", vehicle: "Pickup (D 5678 CD)", capacity: "500 kg", deliveries: 38, status: "active", rating: 4.4, ratingCount: 22, phone: "081234567802", wa_verified: true },
-  { id: "fl_3", name: "Pak Ujang", sim: "SIM A - 11223344", vehicle: "Mobil Box (D 9012 EF)", capacity: "800 kg", deliveries: 32, status: "active", rating: 4.1, ratingCount: 18, phone: "081234567803", wa_verified: true },
-  { id: "fl_4", name: "Pak Ade", sim: "SIM C - 55667788", vehicle: "Motor (D 3456 GH)", capacity: "50 kg", deliveries: 28, status: "active", rating: 3.9, ratingCount: 12, phone: "081234567804", wa_verified: true },
+  { id: "fl_1", name: "Pak Asep", sim: "SIM B1 - 12345678", vehicle: "Mobil Box (B 1234 EAA)", capacity: "1000 kg", deliveries: 45, status: "active", rating: 4.7, ratingCount: 30, phone: "081234567801", wa_verified: true },
+  { id: "fl_2", name: "Pak Dedi", sim: "SIM B1 - 87654321", vehicle: "Pickup (B 5678 EBA)", capacity: "500 kg", deliveries: 38, status: "active", rating: 4.4, ratingCount: 22, phone: "081234567802", wa_verified: true },
+  { id: "fl_3", name: "Pak Ujang", sim: "SIM A - 11223344", vehicle: "Mobil Box (B 9012 ECA)", capacity: "800 kg", deliveries: 32, status: "active", rating: 4.1, ratingCount: 18, phone: "081234567803", wa_verified: true },
+  { id: "fl_4", name: "Pak Ade", sim: "SIM C - 55667788", vehicle: "Motor (B 3456 EDA)", capacity: "50 kg", deliveries: 28, status: "active", rating: 3.9, ratingCount: 12, phone: "081234567804", wa_verified: true },
 ];
 
 function StarRating({ rating }) {
@@ -172,7 +172,7 @@ export default function AdminLogistik() {
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm">
-            Kelola supir, kurir, dan armada distribusi yang terdaftar di ekosistem MBG
+            Kelola supir, kurir, dan armada distribusi internal Koperasi Merah Putih Mekarjaya - Kota Depok
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={loadData} className="gap-2 shrink-0">

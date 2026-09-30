@@ -30,14 +30,14 @@ export default function MitraComplaints() {
         </div>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white"><Plus className="w-4 h-4 mr-1" /> Buat Pengaduan</Button>
+            <Button className="bg-orange-600 hover:bg-orange-700 text-white"><Plus className="w-4 h-4 mr-1" /> Buat Pengaduan</Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader><DialogTitle>Buat Pengaduan Baru</DialogTitle></DialogHeader>
             <div className="space-y-4 mt-2">
               <div className="space-y-2"><Label>Judul</Label><Input placeholder="Judul pengaduan" /></div>
               <div className="space-y-2"><Label>Detail Pengaduan</Label><Textarea placeholder="Jelaskan masalah Anda..." rows={4} /></div>
-              <Button onClick={() => { toast({ title: "Terkirim", description: "Pengaduan Anda telah dikirim." }); setOpen(false); }} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white">Kirim Pengaduan</Button>
+              <Button onClick={() => { toast({ title: "Terkirim", description: "Pengaduan Anda telah dikirim." }); setOpen(false); }} className="w-full bg-orange-600 hover:bg-orange-700 text-white">Kirim Pengaduan</Button>
             </div>
           </DialogContent>
         </Dialog>

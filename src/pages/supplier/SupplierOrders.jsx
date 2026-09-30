@@ -103,8 +103,8 @@ export default function SupplierOrders() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Notifikasi Pesanan</h2>
-        <p className="text-muted-foreground">Pesanan masuk dari mitra SPPG & warga secara real-time</p>
+        <h2 className="text-2xl font-bold">Pesanan Masuk Komoditas</h2>
+        <p className="text-muted-foreground">Pesanan komoditas masuk dari Koperasi Induk Mekarjaya, Pos Cabang & Anggota secara real-time</p>
       </div>
 
       {/* Filter tabs */}
@@ -136,7 +136,7 @@ export default function SupplierOrders() {
           <CardContent className="flex flex-col items-center justify-center py-20">
             <Package className="w-12 h-12 text-muted-foreground mb-3 opacity-40" />
             <p className="font-medium">Belum ada pesanan masuk</p>
-            <p className="text-sm text-muted-foreground">Pesanan dari mitra SPPG & warga akan muncul di sini</p>
+            <p className="text-sm text-muted-foreground">Pesanan dari Koperasi Induk, Pos Cabang, & Anggota akan muncul di sini</p>
           </CardContent>
         </Card>
       ) : (
@@ -152,9 +152,9 @@ export default function SupplierOrders() {
                         {statusConfig[o.status]?.label || o.status}
                       </Badge>
                       {o.customer_role === "penerima" ? (
-                        <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 text-xs">Warga</Badge>
+                        <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200 text-xs">Anggota Koperasi</Badge>
                       ) : (
-                        <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 text-xs">Mitra SPPG</Badge>
+                        <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 text-xs">Pos Cabang KKMP</Badge>
                       )}
                       {o.status === "pending" && (
                         <Badge className="bg-red-100 text-red-700 animate-pulse text-xs">⚡ Butuh Respon</Badge>
