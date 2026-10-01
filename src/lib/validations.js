@@ -78,7 +78,7 @@ export const posProfileSchema = z.object({
   address: z.string().min(5, "Alamat operasional pos cabang wajib diisi"),
   kecamatan: z.string().min(2, "Nama kecamatan wajib ditentukan"),
   kapasitas_porsi: z.number().int().min(1, "Kapasitas distribusi harian minimal 1").default(100),
-  total_sekolah: z.number().int().min(0).default(0),
+  total_anggota: z.number().int().min(0).default(0),
 });
 
 // Alias kompatibilitas ke belakang

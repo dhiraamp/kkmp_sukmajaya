@@ -1,4 +1,4 @@
-# 🇮🇩 Koperasi Kelurahan Merah Putih (KKMP) Sukamaja / Sukmajaya — Kota Depok
+# 🇮🇩 Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya — Kota Depok
 
 Platform digital terpadu **Koperasi Kelurahan Merah Putih (KKMP)** Kota Depok yang mengintegrasikan ekosistem rantai pasok pangan, marketplace komoditas sembako & warung kelontong, manajemen 8 Pos Cabang Kelurahan, hingga distribusi logistik rakyat.
 
@@ -31,7 +31,7 @@ demo1234
    - Belanja beras premium Ramos, shampo Lifebuoy/Pantene, mentega Blue Band, mie instan Indomie, sabun mandi Dettol, deterjen Rinso, Sunlight, minyak goreng, dan sembako berkualitas dengan **harga khusus anggota**.
    - Integrasi keranjang belanja, checkout pos cabang terdekat, dan kupon anggota.
 2. **Jaringan Distribusi 8 Pos Cabang Kelurahan**:
-   - Pemetaan sebaran wilayah: Sukmajaya, Sukmajaya, Beji, Pancoran Mas, Cimanggis, Sawangan, Cipayung, dan Tapos.
+   - Pemetaan sebaran wilayah: Sukmajaya, Beji, Pancoran Mas, Cimanggis, Sawangan, Cipayung, dan Tapos.
    - Pos cabang dapat memesan stok (restock) langsung ke supplier lokal dan Gudang Induk.
 3. **Pusat Logistik & Armada Depok**:
    - Manajemen armada pickup dan kurir distribusi pos kelurahan dengan pelacakan status rute.
@@ -60,8 +60,8 @@ demo1234
 
 ```bash
 # 1. Clone repositori
-git clone https://github.com/dhiraamp/smart-mbg.git
-cd smart-mbg
+git clone https://github.com/dhiraamp/kkmp_sukmajaya.git
+cd kkmp_sukmajaya
 
 # 2. Instal dependensi
 npm install
@@ -78,7 +78,7 @@ npm run dev
 ## 📁 Struktur Direktori
 
 ```
-kkmp-sukamaja/
+kkmp-sukmajaya/
 ├── docs/                     # Dokumentasi migrasi, alur, dan daftar akun demo
 │   ├── AKUN_DUMMY_LOGIN.md
 │   └── panduan-rebranding-depok.md

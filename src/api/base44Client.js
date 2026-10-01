@@ -60,10 +60,12 @@ function applySort(query, sort) {
 function getLocalCollection(name) {
   if (typeof window === "undefined") return [];
   try {
-    const raw =
-      localStorage.getItem(`kkmp_collection_${name}`) ||
-      localStorage.getItem(`smb_collection_${name}`);
+    const raw = localStorage.getItem(`kkmp_collection_${name}`);
     if (raw) return JSON.parse(raw);
+    // Hapus sisa key lama jika ada
+    if (localStorage.getItem(`smb_collection_${name}`)) {
+      localStorage.removeItem(`smb_collection_${name}`);
+    }
   } catch (e) {
     console.warn("Gagal membaca lokal collection:", e);
   }
@@ -99,17 +101,17 @@ function saveLocalItem(name, item) {
     } else {
       existing.unshift(item);
     }
-    localStorage.setItem(`smb_collection_${name}`, JSON.stringify(existing));
+    localStorage.setItem(`kkmp_collection_${name}`, JSON.stringify(existing));
 
-    // Kirim sinyal perubahan realtime lokal (antar komponen & tab browser)
+    // Kirim sinyal perubahan realtime lokal KKMP
     try {
       if (typeof window.dispatchEvent === "function") {
         window.dispatchEvent(
-          new CustomEvent(`smb_realtime_${name}`, { detail: { type: index >= 0 ? "update" : "create", item } })
+          new CustomEvent(`kkmp_realtime_${name}`, { detail: { type: index >= 0 ? "update" : "create", item } })
         );
       }
       if (typeof BroadcastChannel !== "undefined") {
-        const bc = new BroadcastChannel(`smb_channel_${name}`);
+        const bc = new BroadcastChannel(`kkmp_channel_${name}`);
         bc.postMessage({ type: index >= 0 ? "update" : "create", item });
         bc.close();
       }
@@ -341,6 +343,40 @@ function prepareSupabaseUpdatePayload(table, payload) {
   return payload;
 }
 
+function cleanKkmpItems(name, list) {
+  if (!Array.isArray(list)) return [];
+  return list
+    .filter((item) => {
+      if (!item) return false;
+      if (name === "Order") {
+        const num = String(item.order_number || "");
+        const mitra = String(item.mitra_name || "");
+        const area = String(item.delivery_area || "");
+        if (num.startsWith("MBG-") || num.startsWith("PO-POD-")) return false;
+        if (mitra.toLowerCase().includes("sppg") || mitra.toLowerCase().includes("cikajang")) return false;
+        if (area.toLowerCase().includes("garut")) return false;
+      }
+      if (name === "PurchaseOrder") {
+        const num = String(item.po_number || "");
+        const mitra = String(item.mitra_name || "");
+        if (num.startsWith("MBG-") || mitra.toLowerCase().includes("sppg") || mitra.toLowerCase().includes("cikajang")) return false;
+      }
+      return true;
+    })
+    .map((item) => {
+      if (name === "UserProfile") {
+        const copy = { ...item };
+        if (copy.full_name?.includes("Pemkab Garut")) copy.full_name = "Tim Logistik KKMP Kota Depok";
+        if (copy.full_name?.includes("SPPG")) copy.full_name = "Pos Cabang KKMP Sukmajaya";
+        if (copy.organization_name?.includes("Garut") || copy.organization_name?.includes("SPPG")) {
+          copy.organization_name = "KKMP Sukmajaya Kota Depok";
+        }
+        return copy;
+      }
+      return item;
+    });
+}
+
 function makeEntity(name) {
   const table = TABLE_MAP[name];
   if (!table) throw new Error(`Entity "${name}" belum dipetakan ke tabel Supabase.`);
@@ -379,7 +415,12 @@ function makeEntity(name) {
           }
         }
       });
-      return Array.from(idMap.values());
+      const finalItems = Array.from(idMap.values());
+      const cleaned = cleanKkmpItems(name, finalItems);
+      if (name === "Order" && cleaned.length === 0) {
+        return cleanKkmpItems(name, getLocalCollection(name));
+      }
+      return cleaned;
     },
 
     async filter(filters, sort, limit) {
@@ -418,7 +459,7 @@ function makeEntity(name) {
       });
 
       if (!data || data.length === 0) {
-        return filteredLocal || [];
+        return cleanKkmpItems(name, filteredLocal || []);
       }
 
       const idMap = new Map();
@@ -436,7 +477,12 @@ function makeEntity(name) {
           }
         }
       });
-      return Array.from(idMap.values());
+      const finalItems = Array.from(idMap.values());
+      const cleaned = cleanKkmpItems(name, finalItems);
+      if (name === "Order" && cleaned.length === 0) {
+        return cleanKkmpItems(name, filteredLocal);
+      }
+      return cleaned;
     },
 
     async get(id) {

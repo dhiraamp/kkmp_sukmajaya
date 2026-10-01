@@ -95,13 +95,12 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
     try {
       const data = resetToKkmpBaseline();
       toast.success("Dataset KKMP Depok Disinkronkan", {
-        description: `Memuat ${data.dapur.length} Pos Cabang & Gudang, ${data.sekolah.length} Titik Komunitas, dan ${data.supplier.length} Supplier Pangan KKMP.`,
+        description: `Memuat ${data.dapur.length} Pos Cabang & Gudang, dan ${data.supplier.length} Supplier Pangan KKMP.`,
       });
       setPreviewResult({
         success: true,
         importedCounts: {
           dapur: data.dapur.length,
-          sekolah: data.sekolah.length,
           supplier: data.supplier.length,
           jalur: data.jalur.length,
         },
@@ -163,7 +162,7 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
               Dataset Resmi KKMP Kota Depok
             </p>
             <p className="text-xs text-red-800/80 mt-0.5">
-              Sinkronkan otomatis data Gudang Sukmajaya, 8 Pos Cabang, 11 Titik Binaan, dan 7 Supplier Pangan.
+              Sinkronkan otomatis data Gudang Sukmajaya, 8 Pos Cabang, dan 7 Supplier Pangan.
             </p>
           </div>
           <Button
@@ -270,8 +269,8 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
                 <p className="text-[11px] font-semibold text-emerald-700">Pos Cabang KKMP</p>
               </div>
               <div className="bg-blue-50/70 border border-blue-200 p-3 rounded-2xl text-center">
-                <p className="text-xl font-bold text-blue-800">{currentGis.sekolah?.length || 0}</p>
-                <p className="text-[11px] font-semibold text-blue-700">Titik Penyaluran Komunitas</p>
+                <p className="text-xl font-bold text-blue-800">1 Hub</p>
+                <p className="text-[11px] font-semibold text-blue-700">Gudang Induk Sukmajaya</p>
               </div>
               <div className="bg-orange-50/70 border border-orange-200 p-3 rounded-2xl text-center">
                 <p className="text-xl font-bold text-orange-800">{currentGis.supplier?.length || 0}</p>

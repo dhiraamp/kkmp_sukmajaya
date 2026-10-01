@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import StatCard from "@/components/shared/StatCard";
 import { ShoppingCart, Package, TrendingUp, AlertCircle, Search, Star, Filter, CheckCircle } from "lucide-react";
-import SmartRecommendations from "@/components/mitra/SmartRecommendations";
+import RekomendasiPangan from "@/components/mitra/RekomendasiPangan";
 import StockAlertBanner from "@/components/mitra/StockAlertBanner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -120,8 +120,8 @@ export default function MitraDashboard() {
 
       <StockAlertBanner userEmail={user?.email} posName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} sppgName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} />
 
-      {/* Rekomendasi Pintar */}
-      <SmartRecommendations userEmail={user?.email} onAddToCart={handleAddClick} />
+      {/* Rekomendasi Pintar Komoditas Pangan */}
+      <RekomendasiPangan userEmail={user?.email} onAddToCart={handleAddClick} />
 
       {/* Produk Supplier */}
       <Card>

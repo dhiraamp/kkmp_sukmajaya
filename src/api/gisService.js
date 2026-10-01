@@ -5,10 +5,9 @@
  * 
  * Mendukung:
  * 1. Dataset Gudang Pusat Sukmajaya & 8 Pos Cabang KKMP se-Kota Depok
- * 2. Titik Penerima Manfaat Komunitas / Sekolah Binaan
- * 3. Jaringan Supplier Komoditas Pangan Pokok
- * 4. Rute Logistik Distribusi Antar Cabang
- * 5. Penyimpanan terpadu & pembaruan reaktif via event
+ * 2. Jaringan Supplier Komoditas Pangan Pokok
+ * 3. Rute Logistik Distribusi Antar Cabang
+ * 4. Penyimpanan terpadu & pembaruan reaktif via event
  */
 
 const STORAGE_KEY = "kkmp_depok_gis_v1";
@@ -41,7 +40,7 @@ export const KKMP_DEPOK_BASELINE = {
   lastUpdated: new Date().toISOString(),
   status: "verified_koperasi_network",
   totalPosCabangTerdaftar: 9,
-  totalSasaranPenerima: 3200,
+  totalSupplierTerdaftar: 7,
 
   // Titik Pos Cabang & Gudang Induk
   dapur: [
@@ -164,21 +163,6 @@ export const KKMP_DEPOK_BASELINE = {
     },
   ],
 
-  // Titik Komunitas / Anggota / Sekolah Binaan KKMP
-  sekolah: [
-    { id: "sek_01", name: "SDN Sukmajaya 1 Sukmajaya", lat: -6.3970, lng: 106.8340, siswa: 450, jenjang: "SD", kecamatan: "Sukmajaya", posId: "pos_sukmajaya" },
-    { id: "sek_02", name: "SDN Beji 3 Kota Depok", lat: -6.3710, lng: 106.8180, siswa: 380, jenjang: "SD", kecamatan: "Beji", posId: "pos_beji" },
-    { id: "sek_03", name: "SMPN 2 Kota Depok (Pancoran Mas)", lat: -6.3980, lng: 106.8150, siswa: 620, jenjang: "SMP", kecamatan: "Pancoran Mas", posId: "pos_panmas" },
-    { id: "sek_04", name: "SDN Harjamukti 1 Cimanggis", lat: -6.3650, lng: 106.8620, siswa: 510, jenjang: "SD", kecamatan: "Cimanggis", posId: "pos_cimanggis" },
-    { id: "sek_05", name: "SDN Kalibaru 1 Cilodong", lat: -6.4310, lng: 106.8500, siswa: 420, jenjang: "SD", kecamatan: "Cilodong", posId: "pos_cilodong" },
-    { id: "sek_06", name: "SMPN 10 Sawangan Depok", lat: -6.4170, lng: 106.7760, siswa: 580, jenjang: "SMP", kecamatan: "Sawangan", posId: "pos_sawangan" },
-    { id: "sek_07", name: "Posyandu Balita Mawar Sehat Bojongsari", lat: -6.4230, lng: 106.7480, siswa: 180, jenjang: "PAUD", kecamatan: "Bojongsari", posId: "pos_bojongsari" },
-    { id: "sek_08", name: "Balai Komunitas Warga Cipayung", lat: -6.4260, lng: 106.8100, siswa: 250, jenjang: "PAUD", kecamatan: "Cipayung", posId: "pos_cipayung" },
-    { id: "sek_09", name: "SMAN 2 Kota Depok (Sukmajaya)", lat: -6.4010, lng: 106.8390, siswa: 750, jenjang: "SMA", kecamatan: "Sukmajaya", posId: "pos_sukmajaya" },
-    { id: "sek_10", name: "SMPN 3 Kota Depok", lat: -6.4050, lng: 106.8320, siswa: 680, jenjang: "SMP", kecamatan: "Sukmajaya", posId: "pos_sukmajaya" },
-    { id: "sek_11", name: "TK & PAUD Merah Putih Sukmajaya", lat: -6.3965, lng: 106.8360, siswa: 95, jenjang: "PAUD", kecamatan: "Sukmajaya", posId: "hub_sukmajaya" },
-  ],
-
   // Supplier Komoditas Pangan KKMP
   supplier: [
     { id: "sup_01", name: "Gapoktan Sawangan Mandiri (Sayuran & Buah Segar)", lat: -6.4120, lng: 106.7720, jenis: "Sayuran & Buah Segar", kecamatan: "Sawangan", kontak: "0813-8877-6655" },
@@ -229,7 +213,6 @@ export function getGisData() {
           return {
             ...KKMP_DEPOK_BASELINE,
             ...parsed,
-            sekolah: (parsed.sekolah && parsed.sekolah.length > 0) ? parsed.sekolah : KKMP_DEPOK_BASELINE.sekolah,
             dapur: parsed.dapur,
             supplier: (parsed.supplier && parsed.supplier.length > 0) ? parsed.supplier : KKMP_DEPOK_BASELINE.supplier,
             jalur: (parsed.jalur && parsed.jalur.length > 0) ? parsed.jalur : KKMP_DEPOK_BASELINE.jalur,
@@ -284,7 +267,6 @@ export function importKkmpGisData(content, hint = "json") {
 
     const currentData = getGisData();
     let newDapur = [...currentData.dapur];
-    let newSekolah = [...currentData.sekolah];
     let newSupplier = [...currentData.supplier];
 
     if (parsedData && parsedData.type === "FeatureCollection" && Array.isArray(parsedData.features)) {
@@ -309,16 +291,6 @@ export function importKkmpGisData(content, hint = "json") {
             status: props.status || "Aktif",
             alamat: props.alamat || "Kota Depok",
           });
-        } else if (tipe.includes("sekolah") || tipe.includes("sd") || tipe.includes("smp") || tipe.includes("anggota")) {
-          newSekolah.push({
-            id: `imp_sek_${Date.now()}_${idx}`,
-            name,
-            lat: Number(lat),
-            lng: Number(lng),
-            siswa: Number(props.siswa || props.jumlah_siswa || 300),
-            jenjang: props.jenjang || "SD",
-            kecamatan: props.kecamatan || "Depok",
-          });
         } else {
           newSupplier.push({
             id: `imp_sup_${Date.now()}_${idx}`,
@@ -330,9 +302,8 @@ export function importKkmpGisData(content, hint = "json") {
           });
         }
       });
-    } else if (parsedData && (Array.isArray(parsedData.dapur) || Array.isArray(parsedData.sekolah))) {
+    } else if (parsedData && Array.isArray(parsedData.dapur)) {
       if (Array.isArray(parsedData.dapur)) newDapur = parsedData.dapur;
-      if (Array.isArray(parsedData.sekolah)) newSekolah = parsedData.sekolah;
       if (Array.isArray(parsedData.supplier)) newSupplier = parsedData.supplier;
     } else if (typeof content === "string") {
       const lines = content.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
@@ -368,16 +339,6 @@ export function importKkmpGisData(content, hint = "json") {
               kecamatan: kec,
               status: "Aktif",
             });
-          } else if (tipe.includes("sekolah") || tipe.includes("sd") || tipe.includes("smp")) {
-            newSekolah.push({
-              id: `csv_sek_${Date.now()}_${i}`,
-              name,
-              lat,
-              lng,
-              siswa: val,
-              jenjang: name.includes("SMP") ? "SMP" : name.includes("SMA") ? "SMA" : "SD",
-              kecamatan: kec,
-            });
           } else {
             newSupplier.push({
               id: `csv_sup_${Date.now()}_${i}`,
@@ -393,7 +354,6 @@ export function importKkmpGisData(content, hint = "json") {
     }
 
     const uniqueDapur = Array.from(new Map(newDapur.map((d) => [`${d.name}_${d.lat}`, d])).values());
-    const uniqueSekolah = Array.from(new Map(newSekolah.map((s) => [`${s.name}_${s.lat}`, s])).values());
     const uniqueSupplier = Array.from(new Map(newSupplier.map((sp) => [`${sp.name}_${sp.lat}`, sp])).values());
 
     const newJalur = uniqueDapur.slice(0, 10).map((d) => {
@@ -410,7 +370,6 @@ export function importKkmpGisData(content, hint = "json") {
 
     const updatedData = saveGisData({
       dapur: uniqueDapur,
-      sekolah: uniqueSekolah,
       supplier: uniqueSupplier,
       jalur: newJalur,
       source: "Sinkronisasi Spasial KKMP Kota Depok",
@@ -420,11 +379,10 @@ export function importKkmpGisData(content, hint = "json") {
       success: true,
       importedCounts: {
         dapur: uniqueDapur.length,
-        sekolah: uniqueSekolah.length,
         supplier: uniqueSupplier.length,
         jalur: newJalur.length,
       },
-      message: `Berhasil mengintegrasikan ${uniqueDapur.length} Titik Pos Cabang, ${uniqueSekolah.length} Titik Komunitas/Sekolah, dan ${uniqueSupplier.length} Supplier Pangan KKMP Depok.`,
+      message: `Berhasil mengintegrasikan ${uniqueDapur.length} Titik Pos Cabang dan ${uniqueSupplier.length} Supplier Pangan KKMP Depok.`,
       data: updatedData,
     };
   } catch (err) {
@@ -459,14 +417,6 @@ export function exportToGeoJson() {
       type: "Feature",
       geometry: { type: "Point", coordinates: [d.lng, d.lat] },
       properties: { name: d.name, tipe: "pos_cabang", kapasitas: d.kapasitas, status: d.status, kecamatan: d.kecamatan },
-    });
-  });
-
-  (data.sekolah || []).forEach((s) => {
-    features.push({
-      type: "Feature",
-      geometry: { type: "Point", coordinates: [s.lng, s.lat] },
-      properties: { name: s.name, tipe: "sekolah_komunitas", siswa: s.siswa, jenjang: s.jenjang, kecamatan: s.kecamatan },
     });
   });
 

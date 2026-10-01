@@ -2,8 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Polyline, Circle, useMap } from "react-leaflet";
 import {
   MapPinned,
-  Utensils,
-  School,
+  Store,
   Factory,
   Route,
   Flame,
@@ -33,8 +32,6 @@ import {
   Clock,
   Calendar,
   Award,
-  Heart,
-  Baby,
   BookOpen,
   Layers,
 } from "lucide-react";
@@ -62,8 +59,6 @@ L.Icon.Default.mergeOptions({
 
 const COLOR = {
   dapur: "#059669",
-  sekolah: "#2563eb",
-  penerima: "#db2777",
   supplier: "#ea580c",
   jalur: "#8b5cf6",
   heatmap: "#ef4444",
@@ -79,38 +74,6 @@ function makeIcon(color, size = 22) {
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });
-}
-
-// Helper pembersih nama titik manfaat
-export function cleanSchoolName(name) {
-  if (!name) return "Sasaran Penerima Manfaat KKMP";
-  return name.trim();
-}
-
-// Helper pengkategori penerima manfaat
-export function getPenerimaCategory(item) {
-  const n = (item.name || "").toUpperCase();
-  const j = (item.jenjang || "").toUpperCase();
-
-  if (n.includes("BALITA") || n.includes("BASUTA") || n.includes("BAYI")) {
-    return { label: "Balita & Baduta", color: "bg-pink-100 text-pink-800 border-pink-200", icon: Baby };
-  }
-  if (n.includes("BUMIL") || n.includes("BUSUI") || n.includes("IBU HAMIL") || n.includes("IBU MENYUSUI")) {
-    return { label: "Ibu Hamil & Menyusui", color: "bg-rose-100 text-rose-800 border-rose-200", icon: Heart };
-  }
-  if (n.includes("POSYANDU") || n.includes("POS YANDU") || n.includes("KADER")) {
-    return { label: "Posyandu & Balita", color: "bg-purple-100 text-purple-800 border-purple-200", icon: Users };
-  }
-  if (j.includes("PAUD") || n.includes("PAUD") || n.includes("TK ") || n.includes("KOBER") || n.includes("RA ")) {
-    return { label: "PAUD & TK", color: "bg-amber-100 text-amber-800 border-amber-200", icon: Baby };
-  }
-  if (j.includes("SMA") || j.includes("SMK") || n.includes("SMA") || n.includes("SMK") || n.includes("MA ")) {
-    return { label: "Siswa SMA / SMK / MA", color: "bg-indigo-100 text-indigo-800 border-indigo-200", icon: BookOpen };
-  }
-  if (j.includes("SMP") || n.includes("SMP") || n.includes("MTS")) {
-    return { label: "Siswa SMP / MTs", color: "bg-cyan-100 text-cyan-800 border-cyan-200", icon: BookOpen };
-  }
-  return { label: "Siswa SD / MI", color: "bg-blue-100 text-blue-800 border-blue-200", icon: School };
 }
 
 // Helper untuk menghubungkan instance peta ke ref parent
@@ -238,7 +201,6 @@ export default function GisMap() {
   const [importModalOpen, setImportModalOpen] = useState(false);
   const [active, setActive] = useState({
     dapur: true,
-    sekolah: true,
     supplier: true,
     jalur: true,
     heatmap: false,
@@ -246,15 +208,13 @@ export default function GisMap() {
 
   // Modal State
   const [selectedPosModal, setSelectedPosModal] = useState(null);
-  const [selectedSekolahModal, setSelectedSekolahModal] = useState(null);
   const [selectedSupplierModal, setSelectedSupplierModal] = useState(null);
   const [selectedJalurModal, setSelectedJalurModal] = useState(null);
-  const [selectedPenerimaModal, setSelectedPenerimaModal] = useState(null);
 
   const [mapInstance, setMapInstance] = useState(null);
 
   // DROPDOWN ENTITAS UTAMA (Samping Search Bar)
-  // Opsi: "dapur" | "sekolah" | "penerima" | "supplier" | "jalur"
+  // Opsi: "dapur" | "supplier" | "jalur"
   const [selectedEntityType, setSelectedEntityType] = useState("dapur");
 
   // State Filtering
@@ -280,35 +240,18 @@ export default function GisMap() {
   const toggle = (key) => setActive((prev) => ({ ...prev, [key]: !prev[key] }));
 
   const rawDapur = gisData.dapur || [];
-  const rawSekolah = gisData.sekolah || [];
   const rawSupplier = gisData.supplier || [];
   const rawJalur = gisData.jalur || [];
   const rawHeatmap = gisData.heatmap || [];
-
-  // Peta lookup ID Pos Cabang -> Objek Pos Cabang untuk relasi titik manfaat
-  const dapurLookup = useMemo(() => {
-    const map = new Map();
-    rawDapur.forEach((d) => {
-      map.set(d.id, d);
-      if (d.code) map.set(d.code, d);
-      const cleanNum = String(d.id).replace(/[^0-9]/g, "");
-      if (cleanNum) {
-        map.set(`pos_${parseInt(cleanNum, 10)}`, d);
-        map.set(parseInt(cleanNum, 10), d);
-      }
-    });
-    return map;
-  }, [rawDapur]);
 
   // Daftar unik kecamatan gabungan se-Kota Depok
   const kecamatanList = useMemo(() => {
     const setKec = new Set([
       ...rawDapur.map((d) => d.kecamatan).filter(Boolean),
-      ...rawSekolah.map((s) => s.kecamatan).filter(Boolean),
       ...rawSupplier.map((s) => s.kecamatan).filter(Boolean),
     ]);
     return Array.from(setKec).sort();
-  }, [rawDapur, rawSekolah, rawSupplier]);
+  }, [rawDapur, rawSupplier]);
 
   // Hitung jumlah item per kecamatan berdasarkan entitas aktif
   const entityCountPerKec = useMemo(() => {
@@ -316,8 +259,6 @@ export default function GisMap() {
     const dataset =
       selectedEntityType === "dapur"
         ? rawDapur
-        : selectedEntityType === "sekolah" || selectedEntityType === "penerima"
-        ? rawSekolah
         : selectedEntityType === "supplier"
         ? rawSupplier
         : [];
@@ -327,7 +268,7 @@ export default function GisMap() {
       map[k] = (map[k] || 0) + 1;
     });
     return map;
-  }, [selectedEntityType, rawDapur, rawSekolah, rawSupplier]);
+  }, [selectedEntityType, rawDapur, rawSupplier]);
 
   // FILTER 1: Pos Cabang KKMP
   const filteredDapur = useMemo(() => {
@@ -350,8 +291,7 @@ export default function GisMap() {
         const matchDesa = (d.desa_unit || "").toLowerCase().includes(q);
         const matchYayasan = (d.yayasan || "").toLowerCase().includes(q);
         const matchKec = (d.kecamatan || "").toLowerCase().includes(q);
-        const matchSasaran = (d.sasaran || []).some((s) => (s.name || "").toLowerCase().includes(q));
-        if (!matchName && !matchTitle && !matchDesa && !matchYayasan && !matchKec && !matchSasaran) {
+        if (!matchName && !matchTitle && !matchDesa && !matchYayasan && !matchKec) {
           return false;
         }
       }
@@ -359,57 +299,7 @@ export default function GisMap() {
     });
   }, [rawDapur, selectedKecamatan, entitySubFilter, searchQuery, selectedEntityType]);
 
-  // FILTER 2: Sekolah Sasaran
-  const filteredSekolah = useMemo(() => {
-    return rawSekolah.filter((s) => {
-      if (selectedKecamatan !== "all" && s.kecamatan !== selectedKecamatan) return false;
-
-      // Sub-filter Jenjang
-      if (selectedEntityType === "sekolah" && entitySubFilter !== "all") {
-        if (entitySubFilter === "SD" && s.jenjang !== "SD") return false;
-        if (entitySubFilter === "SMP" && s.jenjang !== "SMP") return false;
-        if (entitySubFilter === "SMA" && s.jenjang !== "SMA/SMK") return false;
-        if (entitySubFilter === "PAUD" && s.jenjang !== "PAUD/Posyandu") return false;
-      }
-
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const cleaned = cleanSchoolName(s.name).toLowerCase();
-        const matchName = (s.name || "").toLowerCase().includes(q) || cleaned.includes(q);
-        const matchKec = (s.kecamatan || "").toLowerCase().includes(q);
-        const matchJenjang = (s.jenjang || "").toLowerCase().includes(q);
-        if (!matchName && !matchKec && !matchJenjang) return false;
-      }
-      return true;
-    });
-  }, [rawSekolah, selectedKecamatan, entitySubFilter, searchQuery, selectedEntityType]);
-
-  // FILTER 3: Penerima Manfaat
-  const filteredPenerima = useMemo(() => {
-    return rawSekolah.filter((s) => {
-      if (selectedKecamatan !== "all" && s.kecamatan !== selectedKecamatan) return false;
-
-      const cat = getPenerimaCategory(s).label.toLowerCase();
-      if (selectedEntityType === "penerima" && entitySubFilter !== "all") {
-        if (entitySubFilter === "sekolah" && !cat.includes("siswa")) return false;
-        if (entitySubFilter === "balita" && !cat.includes("balita") && !cat.includes("paud")) return false;
-        if (entitySubFilter === "bumil" && !cat.includes("ibu hamil") && !cat.includes("menyusui")) return false;
-        if (entitySubFilter === "posyandu" && !cat.includes("posyandu")) return false;
-      }
-
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const cleaned = cleanSchoolName(s.name).toLowerCase();
-        const matchName = (s.name || "").toLowerCase().includes(q) || cleaned.includes(q);
-        const matchKec = (s.kecamatan || "").toLowerCase().includes(q);
-        const matchCat = cat.includes(q);
-        if (!matchName && !matchKec && !matchCat) return false;
-      }
-      return true;
-    });
-  }, [rawSekolah, selectedKecamatan, entitySubFilter, searchQuery, selectedEntityType]);
-
-  // FILTER 4: Supplier Pangan
+  // FILTER 2: Supplier Pangan
   const filteredSupplier = useMemo(() => {
     return rawSupplier.filter((s) => {
       if (selectedKecamatan !== "all" && s.kecamatan && !s.kecamatan.includes(selectedKecamatan)) {
@@ -443,7 +333,7 @@ export default function GisMap() {
     });
   }, [rawSupplier, selectedKecamatan, entitySubFilter, searchQuery, selectedEntityType]);
 
-  // FILTER 5: Jalur Logistik
+  // FILTER 3: Jalur Logistik
   const filteredJalur = useMemo(() => {
     return rawJalur.filter((j) => {
       const distanceNum = parseInt(j.jarak, 10) || 0;
@@ -465,7 +355,6 @@ export default function GisMap() {
   }, [rawJalur, entitySubFilter, searchQuery, selectedEntityType]);
 
   // Hitung Agregat
-  const totalSiswaFiltered = filteredSekolah.reduce((sum, s) => sum + (Number(s.siswa) || 0), 0);
   const totalKapasitasFiltered = filteredDapur.reduce((sum, d) => sum + (Number(d.kapasitas) || 0), 0);
 
   // Reset pagination saat filter atau entitas berubah
@@ -481,8 +370,6 @@ export default function GisMap() {
 
     // Otomatis aktifkan layer peta terkait
     if (newType === "dapur") setActive((p) => ({ ...p, dapur: true }));
-    if (newType === "sekolah") setActive((p) => ({ ...p, sekolah: true }));
-    if (newType === "penerima") setActive((p) => ({ ...p, sekolah: true }));
     if (newType === "supplier") setActive((p) => ({ ...p, supplier: true }));
     if (newType === "jalur") setActive((p) => ({ ...p, jalur: true }));
   };
@@ -516,10 +403,6 @@ export default function GisMap() {
     switch (selectedEntityType) {
       case "dapur":
         return "Cari Kode Pos Cabang, Nama Pos Cabang, Kelurahan...";
-      case "sekolah":
-        return "Cari Titik Penyaluran, Komunitas, Sekolah...";
-      case "penerima":
-        return "Cari Sasaran Warga, Balita, Lansia, Komunitas...";
       case "supplier":
         return "Cari Supplier, Komoditas (Beras, Minyak, Telur)...";
       case "jalur":
@@ -530,8 +413,7 @@ export default function GisMap() {
   };
 
   const LAYERS = [
-    { key: "dapur", label: "Pos Cabang KKMP", icon: Utensils, color: COLOR.dapur, count: filteredDapur.length },
-    { key: "sekolah", label: "Titik Penyaluran", icon: School, color: COLOR.sekolah, count: filteredSekolah.length },
+    { key: "dapur", label: "Pos Cabang KKMP", icon: Store, color: COLOR.dapur, count: filteredDapur.length },
     { key: "supplier", label: "Supplier Pangan", icon: Factory, color: COLOR.supplier, count: filteredSupplier.length },
     { key: "jalur", label: "Jalur Distribusi", icon: Route, color: COLOR.jalur, count: filteredJalur.length },
     { key: "heatmap", label: "Heatmap Layanan", icon: Flame, color: COLOR.heatmap, count: rawHeatmap.length },
@@ -549,8 +431,8 @@ export default function GisMap() {
               <Globe className="w-3 h-3 text-emerald-600" />
               KKMP Kota Depok
             </Badge>
-            <Badge className="bg-blue-50 text-blue-700 border-blue-200 text-[11px] font-semibold py-0.5">
-              {rawDapur.length} Pos Cabang · {rawSekolah.length} Titik Manfaat
+            <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px] font-semibold py-0.5">
+              {rawDapur.length} Pos Cabang · {rawSupplier.length} Supplier Pangan
             </Badge>
           </div>
           <p className="text-xs text-gray-500">
@@ -558,7 +440,7 @@ export default function GisMap() {
             <span className="text-emerald-600 font-medium inline-flex items-center gap-0.5">
               kkmp-sukmajaya.depok.go.id
             </span>{" "}
-            · Pemetaan Gudang Induk, Pos Cabang, Titik Penerima Manfaat, Supplier Komoditas &amp; Rute Distribusi Depok
+            · Pemetaan Gudang Induk, Pos Cabang, Supplier Komoditas &amp; Rute Logistik Depok
           </p>
         </div>
 
@@ -598,7 +480,7 @@ export default function GisMap() {
 
         {/* BARIS UTAMA: DROPDOWN ENTITAS DI SAMPING SEARCH BAR + KECAMATAN */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5">
-          {/* 1. DROPDOWN PILIHAN ENTITAS (Dapur, Sekolah, Penerima, Supplier, Jalur) */}
+          {/* 1. DROPDOWN PILIHAN ENTITAS (Pos Cabang KKMP, Supplier Pangan, Jalur Logistik) */}
           <div className="md:col-span-4 lg:col-span-3">
             <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-1">
               Pilih Entitas GIS:
@@ -610,8 +492,6 @@ export default function GisMap() {
                 className="w-full pl-3 pr-8 py-2 text-xs font-bold bg-emerald-50/90 border-2 border-emerald-500/50 text-emerald-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer shadow-xs transition-all appearance-none"
               >
                 <option value="dapur">🏪 Pos Cabang KKMP ({filteredDapur.length})</option>
-                <option value="sekolah">🏫 Titik Penyaluran ({filteredSekolah.length})</option>
-                <option value="penerima">👥 Penerima Manfaat ({totalSiswaFiltered.toLocaleString("id-ID")})</option>
                 <option value="supplier">🌾 Supplier Pangan ({filteredSupplier.length})</option>
                 <option value="jalur">🚚 Jalur Logistik ({filteredJalur.length})</option>
               </select>
@@ -721,117 +601,6 @@ export default function GisMap() {
                   }`}
                 >
                   &lt; 1.500
-                </button>
-              </>
-            )}
-
-            {/* Sub-filter untuk Sekolah Sasaran */}
-            {selectedEntityType === "sekolah" && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setEntitySubFilter("all")}
-                  className={`px-2.5 py-1 text-[11px] rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    entitySubFilter === "all"
-                      ? "bg-blue-700 text-white shadow-xs"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }`}
-                >
-                  Semua Jenjang ({rawSekolah.length})
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEntitySubFilter("SD")}
-                  className={`px-2.5 py-1 text-[11px] rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    entitySubFilter === "SD"
-                      ? "bg-blue-600 text-white shadow-xs"
-                      : "bg-blue-50 text-blue-700 hover:bg-blue-100"
-                  }`}
-                >
-                  SD / MI
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEntitySubFilter("SMP")}
-                  className={`px-2.5 py-1 text-[11px] rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    entitySubFilter === "SMP"
-                      ? "bg-cyan-600 text-white shadow-xs"
-                      : "bg-cyan-50 text-cyan-700 hover:bg-cyan-100"
-                  }`}
-                >
-                  SMP / MTs
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEntitySubFilter("SMA")}
-                  className={`px-2.5 py-1 text-[11px] rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    entitySubFilter === "SMA"
-                      ? "bg-indigo-600 text-white shadow-xs"
-                      : "bg-indigo-50 text-indigo-700 hover:bg-indigo-100"
-                  }`}
-                >
-                  SMA / SMK
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEntitySubFilter("PAUD")}
-                  className={`px-2.5 py-1 text-[11px] rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    entitySubFilter === "PAUD"
-                      ? "bg-amber-600 text-white shadow-xs"
-                      : "bg-amber-50 text-amber-700 hover:bg-amber-100"
-                  }`}
-                >
-                  PAUD / Posyandu
-                </button>
-              </>
-            )}
-
-            {/* Sub-filter untuk Penerima Manfaat */}
-            {selectedEntityType === "penerima" && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setEntitySubFilter("all")}
-                  className={`px-2.5 py-1 text-[11px] rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    entitySubFilter === "all"
-                      ? "bg-pink-700 text-white shadow-xs"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }`}
-                >
-                  Semua Penerima
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEntitySubFilter("sekolah")}
-                  className={`px-2.5 py-1 text-[11px] rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    entitySubFilter === "sekolah"
-                      ? "bg-blue-600 text-white shadow-xs"
-                      : "bg-blue-50 text-blue-700 hover:bg-blue-100"
-                  }`}
-                >
-                  Siswa Sekolah
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEntitySubFilter("balita")}
-                  className={`px-2.5 py-1 text-[11px] rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    entitySubFilter === "balita"
-                      ? "bg-pink-600 text-white shadow-xs"
-                      : "bg-pink-50 text-pink-700 hover:bg-pink-100"
-                  }`}
-                >
-                  Balita &amp; PAUD
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEntitySubFilter("bumil")}
-                  className={`px-2.5 py-1 text-[11px] rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                    entitySubFilter === "bumil"
-                      ? "bg-rose-600 text-white shadow-xs"
-                      : "bg-rose-50 text-rose-700 hover:bg-rose-100"
-                  }`}
-                >
-                  Ibu Hamil &amp; Menyusui
                 </button>
               </>
             )}
@@ -953,13 +722,9 @@ export default function GisMap() {
             <strong className="text-gray-900">
               {selectedEntityType === "dapur"
                 ? `${filteredDapur.length} Pos Cabang KKMP`
-                : selectedEntityType === "sekolah"
-                ? `${filteredSekolah.length} Titik Penyaluran`
-                : selectedEntityType === "penerima"
-                ? `${totalSiswaFiltered.toLocaleString("id-ID")} Siswa & Balita`
                 : selectedEntityType === "supplier"
                 ? `${filteredSupplier.length} Supplier Pangan`
-                : `${filteredJalur.length} Jalur Distribusi`}
+                : `${filteredJalur.length} Jalur Logistik`}
             </strong>
           </span>
         </div>
@@ -1007,8 +772,6 @@ export default function GisMap() {
               filteredEntities={
                 selectedEntityType === "dapur"
                   ? filteredDapur
-                  : selectedEntityType === "sekolah" || selectedEntityType === "penerima"
-                  ? filteredSekolah
                   : selectedEntityType === "supplier"
                   ? filteredSupplier
                   : filteredDapur
@@ -1108,52 +871,6 @@ export default function GisMap() {
                 </Marker>
               ))}
 
-            {/* Marker Sekolah / Sasaran Penerima */}
-            {active.sekolah &&
-              filteredSekolah.map((s, i) => {
-                const cleanedName = cleanSchoolName(s.name);
-                const category = getPenerimaCategory(s);
-
-                return (
-                  <Marker key={`sek-${i}`} position={[s.lat, s.lng]} icon={makeIcon(COLOR.sekolah, 20)}>
-                    <Popup>
-                      <div className="p-1 space-y-2 max-w-[260px]">
-                        <div className="flex items-center justify-between gap-1">
-                          <span
-                            className={`text-[9px] font-bold uppercase px-2 py-0.5 rounded-md border ${category.color}`}
-                          >
-                            {category.label}
-                          </span>
-                          <span className="text-[10px] font-semibold text-gray-500">
-                            Kec. {s.kecamatan}
-                          </span>
-                        </div>
-                        <p className="text-xs font-bold text-gray-900 leading-snug">{cleanedName}</p>
-                        <div className="bg-blue-50/70 border border-blue-100 p-2 rounded-xl text-xs space-y-0.5">
-                          <p className="text-blue-900 font-bold">
-                            Alokasi: {(s.siswa || 0).toLocaleString("id-ID")} Porsi/Hari
-                          </p>
-                          <p className="text-[11px] text-gray-600">Jenjang: {s.jenjang || "SD"}</p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (selectedEntityType === "penerima") {
-                              setSelectedPenerimaModal(s);
-                            } else {
-                              setSelectedSekolahModal(s);
-                            }
-                          }}
-                          className="w-full py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold rounded-xl cursor-pointer"
-                        >
-                          Lihat Detail Lengkap
-                        </button>
-                      </div>
-                    </Popup>
-                  </Marker>
-                );
-              })}
-
             {/* Marker Pos Cabang KKMP Terfilter */}
             {active.dapur &&
               filteredDapur.map((d, i) => {
@@ -1205,7 +922,7 @@ export default function GisMap() {
                           onClick={() => setSelectedPosModal(d)}
                           className="w-full py-1.5 bg-gray-900 hover:bg-black text-white text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1 transition-all shadow-xs cursor-pointer"
                         >
-                          Lihat Rincian Sasaran &amp; Penyaluran
+                          Lihat Rincian Pos Cabang
                           <ArrowRight className="w-3 h-3" />
                         </button>
                       </div>
@@ -1223,10 +940,6 @@ export default function GisMap() {
           <span className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full" style={{ background: COLOR.dapur }} /> Pos Cabang KKMP (
             {filteredDapur.length})
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full" style={{ background: COLOR.sekolah }} /> Sekolah (
-            {filteredSekolah.length})
           </span>
           <span className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full" style={{ background: COLOR.supplier }} /> Supplier (
@@ -1257,18 +970,6 @@ export default function GisMap() {
                   Direktori Pos Cabang KKMP Terverifikasi
                 </>
               )}
-              {selectedEntityType === "sekolah" && (
-                <>
-                  <School className="w-5 h-5 text-blue-600" />
-                  Direktori Titik Distribusi & Penerima Manfaat
-                </>
-              )}
-              {selectedEntityType === "penerima" && (
-                <>
-                  <Users className="w-5 h-5 text-pink-600" />
-                  Direktori Sasaran Penerima Manfaat Komunitas
-                </>
-              )}
               {selectedEntityType === "supplier" && (
                 <>
                   <Factory className="w-5 h-5 text-orange-600" />
@@ -1285,10 +986,6 @@ export default function GisMap() {
             <p className="text-xs text-muted-foreground mt-0.5">
               {selectedEntityType === "dapur" &&
                 "Daftar Pos Cabang & Gudang Terpadu KKMP resmi di Kota Depok dengan rincian nama, wilayah, dan kapasitas"}
-              {selectedEntityType === "sekolah" &&
-                "Daftar titik distribusi dan penerima manfaat binaan harian terdata resmi di wilayah Kota Depok"}
-              {selectedEntityType === "penerima" &&
-                "Rincian penerima manfaat harian: Komunitas, Siswa Sekolah Binaan, serta Anggota Koperasi KKMP"}
               {selectedEntityType === "supplier" &&
                 "Kelompok tani, peternak, distributor & UMKM pangan lokal terverifikasi pemasok bahan baku KKMP"}
               {selectedEntityType === "jalur" &&
@@ -1300,10 +997,6 @@ export default function GisMap() {
             <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
               {selectedEntityType === "dapur" &&
                 `Menampilkan ${Math.min(visibleListCount, filteredDapur.length)} dari ${filteredDapur.length} Pos Cabang`}
-              {selectedEntityType === "sekolah" &&
-                `Menampilkan ${Math.min(visibleListCount, filteredSekolah.length)} dari ${filteredSekolah.length} Sekolah`}
-              {selectedEntityType === "penerima" &&
-                `Menampilkan ${Math.min(visibleListCount, filteredPenerima.length)} dari ${filteredPenerima.length} Sasaran`}
               {selectedEntityType === "supplier" &&
                 `Menampilkan ${Math.min(visibleListCount, filteredSupplier.length)} dari ${filteredSupplier.length} Supplier`}
               {selectedEntityType === "jalur" &&
@@ -1317,7 +1010,7 @@ export default function GisMap() {
           <>
             {filteredDapur.length === 0 ? (
               <div className="text-center py-12 bg-white rounded-2xl border border-gray-200 p-6">
-                <Utensils className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                <Store className="w-10 h-10 text-gray-300 mx-auto mb-2" />
                 <h4 className="text-sm font-bold text-gray-800">Tidak ada Pos Cabang yang sesuai</h4>
                 <p className="text-xs text-gray-500 mt-1">Coba ganti kata kunci pencarian atau reset filter.</p>
                 <Button size="sm" variant="outline" onClick={handleResetFilters} className="mt-3 text-xs">
@@ -1372,12 +1065,6 @@ export default function GisMap() {
                                 <span className="font-semibold text-gray-700">🏢 Pengelola:</span> {d.yayasan}
                               </div>
                             )}
-                            {sasaranCount > 0 && (
-                              <div className="text-[11px] text-blue-700 font-semibold flex items-center gap-1 pt-0.5">
-                                <School className="w-3.5 h-3.5" />
-                                {sasaranCount} Titik Sasaran (Komunitas/Penerima)
-                              </div>
-                            )}
                           </div>
                         </div>
 
@@ -1396,7 +1083,7 @@ export default function GisMap() {
                             onClick={() => setSelectedPosModal(d)}
                             className="py-1.5 px-2 bg-gray-900 hover:bg-black text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1 transition-all cursor-pointer"
                           >
-                            Detail Sasaran
+                            Detail Pos Cabang
                             <ArrowRight className="w-3 h-3" />
                           </button>
                         </div>
@@ -1422,206 +1109,7 @@ export default function GisMap() {
           </>
         )}
 
-        {/* 2. KONTEN DIREKTORI SEKOLAH SASARAN */}
-        {selectedEntityType === "sekolah" && (
-          <>
-            {filteredSekolah.length === 0 ? (
-              <div className="text-center py-12 bg-white rounded-2xl border border-gray-200 p-6">
-                <School className="w-10 h-10 text-gray-300 mx-auto mb-2" />
-                <h4 className="text-sm font-bold text-gray-800">Tidak ada Sekolah yang sesuai</h4>
-                <p className="text-xs text-gray-500 mt-1">Coba ganti kata kunci atau pilih jenjang lainnya.</p>
-                <Button size="sm" variant="outline" onClick={handleResetFilters} className="mt-3 text-xs">
-                  Reset Filter
-                </Button>
-              </div>
-            ) : (
-              <>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                  {filteredSekolah.slice(0, visibleListCount).map((s, idx) => {
-                    const cleanedName = cleanSchoolName(s.name);
-                    const linkedDapur = dapurLookup.get(s.posId || s.pos_id);
-
-                    return (
-                      <div
-                        key={s.id || idx}
-                        className="bg-white border border-gray-200 hover:border-blue-400 rounded-2xl p-4 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
-                      >
-                        <div className="space-y-2.5">
-                          <div className="flex items-center justify-between gap-2">
-                            <Badge className="bg-blue-600 text-white text-[11px] font-bold">
-                              {s.jenjang || "SD"}
-                            </Badge>
-                            <Badge variant="outline" className="text-[10px] bg-blue-50 text-blue-800 border-blue-200">
-                              Kec. {s.kecamatan}
-                            </Badge>
-                          </div>
-
-                          <div>
-                            <h4 className="text-base font-bold text-gray-900 leading-tight group-hover:text-blue-700 transition-colors">
-                              {cleanedName}
-                            </h4>
-                            <p className="text-xs text-gray-500 font-medium flex items-center gap-1 mt-1">
-                              <MapPin className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                              Kecamatan {s.kecamatan}, Depok
-                            </p>
-                          </div>
-
-                          <div className="bg-gray-50 border border-gray-100 rounded-xl p-2.5 space-y-1.5 text-xs">
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-500 font-medium">Penerima Manfaat:</span>
-                              <span className="font-extrabold text-blue-700 text-sm">
-                                {(s.siswa || 0).toLocaleString("id-ID")} Orang
-                              </span>
-                            </div>
-                            <div className="text-[11px] text-gray-600 pt-1 border-t border-gray-200/60 truncate">
-                              <span className="font-semibold text-gray-700">🏢 Pos Penyuplai:</span>{" "}
-                              {linkedDapur ? linkedDapur.clean_title || linkedDapur.name : "Pos Cabang KKMP Terdekat"}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-2 mt-3 pt-2.5 border-t border-gray-100">
-                          <button
-                            type="button"
-                            onClick={() => handleFocusItemOnMap(s.lat, s.lng, 15)}
-                            className="py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-800 text-xs font-bold rounded-xl flex items-center justify-center gap-1 transition-all cursor-pointer"
-                          >
-                            <Crosshair className="w-3.5 h-3.5 text-blue-600" />
-                            Fokus di Peta
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setSelectedSekolahModal(s)}
-                            className="py-1.5 px-2 bg-gray-900 hover:bg-black text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1 transition-all cursor-pointer"
-                          >
-                            Detail Sekolah
-                            <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {visibleListCount < filteredSekolah.length && (
-                  <div className="text-center pt-2">
-                    <Button
-                      variant="outline"
-                      onClick={() => setVisibleListCount((prev) => prev + 12)}
-                      className="rounded-xl px-6 border-gray-300 text-gray-800 hover:bg-gray-50 text-xs font-semibold gap-1.5 shadow-xs"
-                    >
-                      <ChevronDown className="w-4 h-4" />
-                      Tampilkan 12 Sekolah Berikutnya ({filteredSekolah.length - visibleListCount} Tersisa)
-                    </Button>
-                  </div>
-                )}
-              </>
-            )}
-          </>
-        )}
-
-        {/* 3. KONTEN DIREKTORI PENERIMA MANFAAT */}
-        {selectedEntityType === "penerima" && (
-          <>
-            {filteredPenerima.length === 0 ? (
-              <div className="text-center py-12 bg-white rounded-2xl border border-gray-200 p-6">
-                <Users className="w-10 h-10 text-gray-300 mx-auto mb-2" />
-                <h4 className="text-sm font-bold text-gray-800">Tidak ada data penerima yang sesuai</h4>
-                <p className="text-xs text-gray-500 mt-1">Coba ganti kata kunci atau reset filter.</p>
-                <Button size="sm" variant="outline" onClick={handleResetFilters} className="mt-3 text-xs">
-                  Reset Filter
-                </Button>
-              </div>
-            ) : (
-              <>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                  {filteredPenerima.slice(0, visibleListCount).map((p, idx) => {
-                    const cleanedName = cleanSchoolName(p.name);
-                    const category = getPenerimaCategory(p);
-                    const linkedDapur = dapurLookup.get(p.posId || p.pos_id);
-
-                    return (
-                      <div
-                        key={p.id || idx}
-                        className="bg-white border border-gray-200 hover:border-pink-400 rounded-2xl p-4 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
-                      >
-                        <div className="space-y-2.5">
-                          <div className="flex items-center justify-between gap-2">
-                            <span
-                              className={`text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-lg border ${category.color}`}
-                            >
-                              {category.label}
-                            </span>
-                            <Badge variant="outline" className="text-[10px] bg-pink-50 text-pink-800 border-pink-200">
-                              Kec. {p.kecamatan}
-                            </Badge>
-                          </div>
-
-                          <div>
-                            <h4 className="text-base font-bold text-gray-900 leading-tight group-hover:text-pink-700 transition-colors">
-                              {cleanedName}
-                            </h4>
-                            <p className="text-xs text-gray-500 font-medium flex items-center gap-1 mt-1">
-                              <MapPin className="w-3.5 h-3.5 text-pink-600 shrink-0" />
-                              Titik Sasaran Kecamatan {p.kecamatan}
-                            </p>
-                          </div>
-
-                          <div className="bg-pink-50/50 border border-pink-100 rounded-xl p-2.5 space-y-1 text-xs">
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Alokasi Paket Harian:</span>
-                              <span className="font-extrabold text-pink-700 text-sm">
-                                {(p.siswa || 0).toLocaleString("id-ID")} Paket
-                              </span>
-                            </div>
-                            <div className="text-[11px] text-gray-600 pt-1 border-t border-pink-100">
-                              <span className="font-semibold text-gray-700">🏢 Pos Cabang Penyalur:</span>{" "}
-                              {linkedDapur ? linkedDapur.clean_title || linkedDapur.name : "Pos Cabang KKMP Sukmajaya"}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-2 mt-3 pt-2.5 border-t border-gray-100">
-                          <button
-                            type="button"
-                            onClick={() => handleFocusItemOnMap(p.lat, p.lng, 15)}
-                            className="py-1.5 px-2 bg-pink-50 hover:bg-pink-100 text-pink-800 text-xs font-bold rounded-xl flex items-center justify-center gap-1 transition-all cursor-pointer"
-                          >
-                            <Crosshair className="w-3.5 h-3.5 text-pink-600" />
-                            Fokus di Peta
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setSelectedPenerimaModal(p)}
-                            className="py-1.5 px-2 bg-gray-900 hover:bg-black text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1 transition-all cursor-pointer"
-                          >
-                            Detail Penerima
-                            <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {visibleListCount < filteredPenerima.length && (
-                  <div className="text-center pt-2">
-                    <Button
-                      variant="outline"
-                      onClick={() => setVisibleListCount((prev) => prev + 12)}
-                      className="rounded-xl px-6 border-gray-300 text-gray-800 hover:bg-gray-50 text-xs font-semibold gap-1.5 shadow-xs"
-                    >
-                      <ChevronDown className="w-4 h-4" />
-                      Tampilkan 12 Sasaran Berikutnya ({filteredPenerima.length - visibleListCount} Tersisa)
-                    </Button>
-                  </div>
-                )}
-              </>
-            )}
-          </>
-        )}
-
-        {/* 4. KONTEN DIREKTORI SUPPLIER PANGAN */}
+        {/* 2. KONTEN DIREKTORI SUPPLIER PANGAN */}
         {selectedEntityType === "supplier" && (
           <>
             {filteredSupplier.length === 0 ? (
@@ -1830,32 +1318,26 @@ export default function GisMap() {
                 </div>
               </div>
 
-              {/* Daftar Titik Sasaran & Penyaluran */}
+              {/* Informasi Operasional Pos Cabang */}
               <div className="space-y-2 mt-2">
                 <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wide flex items-center gap-1.5">
-                  <School className="w-4 h-4 text-emerald-600" />
-                  Daftar Titik Sasaran &amp; Penyaluran Komunitas:
+                  <Building2 className="w-4 h-4 text-emerald-600" />
+                  Informasi Operasional &amp; Penyaluran:
                 </h4>
-
-                {selectedPosModal.sasaran && selectedPosModal.sasaran.length > 0 ? (
-                  <div className="border border-gray-200 rounded-2xl overflow-hidden divide-y divide-gray-100 max-h-64 overflow-y-auto">
-                    {selectedPosModal.sasaran.map((s, si) => (
-                      <div
-                        key={si}
-                        className="p-2.5 text-xs flex items-center justify-between hover:bg-gray-50/80 transition-colors"
-                      >
-                        <span className="font-semibold text-gray-800">{cleanSchoolName(s.name)}</span>
-                        <span className="text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                          {s.penerima} Paket
-                        </span>
-                      </div>
-                    ))}
+                <div className="border border-gray-200 rounded-2xl p-3 bg-gray-50/60 text-xs space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-500">Layanan Distribusi:</span>
+                    <span className="font-semibold text-gray-900">Bahan Pokok &amp; Sembako Warga</span>
                   </div>
-                ) : (
-                  <div className="p-4 rounded-xl bg-gray-50 border border-gray-200 text-xs text-gray-500 text-center">
-                    Data rincian titik sasaran untuk pos cabang ini terdaftar dalam agregasi wilayah kelurahan.
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-500">Kapasitas Bulanan:</span>
+                    <span className="font-bold text-emerald-800">{(selectedPosModal.kapasitas || 0).toLocaleString("id-ID")} Paket</span>
                   </div>
-                )}
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-500">Jadwal Operasional:</span>
+                    <span className="font-semibold text-gray-800">Senin – Sabtu (07.00 – 17.00 WIB)</span>
+                  </div>
+                </div>
               </div>
 
               <div className="flex justify-end gap-2 mt-4 pt-3 border-t border-gray-100">
@@ -1884,194 +1366,7 @@ export default function GisMap() {
         </DialogContent>
       </Dialog>
 
-      {/* 2. MODAL DETAIL SATU SEKOLAH SASARAN */}
-      <Dialog
-        open={Boolean(selectedSekolahModal)}
-        onOpenChange={(open) => {
-          if (!open) setSelectedSekolahModal(null);
-        }}
-      >
-        <DialogContent className="sm:max-w-xl rounded-3xl p-6">
-          {selectedSekolahModal && (
-            <>
-              <DialogHeader>
-                <div className="flex items-center gap-2 mb-1">
-                  <Badge className="bg-blue-600 text-white text-xs font-bold">
-                    {selectedSekolahModal.jenjang || "SD"}
-                  </Badge>
-                  <Badge variant="outline" className="bg-blue-50 text-blue-800 border-blue-200 text-[11px] font-semibold">
-                    Kecamatan {selectedSekolahModal.kecamatan}
-                  </Badge>
-                </div>
-                <DialogTitle className="text-xl font-extrabold text-gray-900 leading-tight">
-                  {cleanSchoolName(selectedSekolahModal.name)}
-                </DialogTitle>
-                <DialogDescription className="text-xs text-gray-600 mt-0.5">
-                  Titik Distribusi Penerima Manfaat Terdata Resmi KKMP Kota Depok
-                </DialogDescription>
-              </DialogHeader>
-
-              <div className="grid grid-cols-2 gap-2.5 my-3 text-xs">
-                <div className="bg-blue-50/70 p-3 rounded-xl border border-blue-100">
-                  <span className="text-blue-800 font-medium block">Alokasi Penerima Harian</span>
-                  <span className="text-xl font-black text-blue-950">
-                    {(selectedSekolahModal.siswa || 0).toLocaleString("id-ID")}{" "}
-                    <span className="text-xs font-normal text-blue-700">Sasaran / Hari</span>
-                  </span>
-                </div>
-                <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
-                  <span className="text-gray-500 font-medium block">Jadwal Pengantaran</span>
-                  <span className="text-sm font-bold text-gray-800">Pukul 06.30 – 07.45 WIB</span>
-                </div>
-              </div>
-
-              <div className="space-y-2 text-xs bg-gray-50 p-3 rounded-2xl border border-gray-200">
-                <div className="flex items-center justify-between pb-1.5 border-b border-gray-200">
-                  <span className="text-gray-500">Pos Cabang Penyalur:</span>
-                  <span className="font-bold text-gray-900">
-                    {(() => {
-                      const d = dapurLookup.get(selectedSekolahModal.posId || selectedSekolahModal.pos_id);
-                      return d ? `${d.clean_title || d.name} (Kec. ${d.kecamatan})` : "Pos Cabang KKMP Sukmajaya";
-                    })()}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between pb-1.5 border-b border-gray-200">
-                  <span className="text-gray-500">Koordinat Lokasi:</span>
-                  <span className="font-mono text-[11px] text-gray-700">
-                    {selectedSekolahModal.lat}, {selectedSekolahModal.lng}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-500">Standar Penyaluran:</span>
-                  <span className="font-semibold text-emerald-700">Bahan Pokok, Komoditas Bergizi, &amp; Sembako Terstandar</span>
-                </div>
-              </div>
-
-              <div className="flex justify-end gap-2 mt-4 pt-3 border-t border-gray-100">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => {
-                    handleFocusItemOnMap(selectedSekolahModal.lat, selectedSekolahModal.lng, 15);
-                    setSelectedSekolahModal(null);
-                  }}
-                  className="rounded-xl text-xs gap-1 border-blue-300 text-blue-700 hover:bg-blue-50"
-                >
-                  <Crosshair className="w-3.5 h-3.5" />
-                  Buka Titik di Peta
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={() => setSelectedSekolahModal(null)}
-                  className="rounded-xl text-xs bg-gray-900 hover:bg-black text-white"
-                >
-                  Tutup
-                </Button>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
-
-      {/* 3. MODAL DETAIL PENERIMA MANFAAT */}
-      <Dialog
-        open={Boolean(selectedPenerimaModal)}
-        onOpenChange={(open) => {
-          if (!open) setSelectedPenerimaModal(null);
-        }}
-      >
-        <DialogContent className="sm:max-w-xl rounded-3xl p-6">
-          {selectedPenerimaModal && (
-            <>
-              {(() => {
-                const category = getPenerimaCategory(selectedPenerimaModal);
-                const cleanedName = cleanSchoolName(selectedPenerimaModal.name);
-                const linkedDapur = dapurLookup.get(selectedPenerimaModal.posId || selectedPenerimaModal.pos_id);
-
-                return (
-                  <>
-                    <DialogHeader>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span
-                          className={`text-xs font-bold uppercase px-2.5 py-0.5 rounded-lg border ${category.color}`}
-                        >
-                          {category.label}
-                        </span>
-                        <Badge variant="outline" className="text-xs bg-pink-50 text-pink-800 border-pink-200">
-                          Kecamatan {selectedPenerimaModal.kecamatan}
-                        </Badge>
-                      </div>
-                      <DialogTitle className="text-xl font-extrabold text-gray-900 leading-tight">
-                        {cleanedName}
-                      </DialogTitle>
-                      <DialogDescription className="text-xs text-gray-600 mt-0.5">
-                        Kelompok Sasaran Penerima Manfaat Program KKMP Sukmajaya Kota Depok
-                      </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="grid grid-cols-2 gap-2.5 my-3 text-xs">
-                      <div className="bg-pink-50/70 p-3 rounded-xl border border-pink-100">
-                        <span className="text-pink-800 font-medium block">Total Alokasi Penyaluran</span>
-                        <span className="text-2xl font-black text-pink-950">
-                          {(selectedPenerimaModal.siswa || 0).toLocaleString("id-ID")}{" "}
-                          <span className="text-xs font-normal text-pink-700">Paket</span>
-                        </span>
-                      </div>
-                      <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
-                        <span className="text-gray-500 font-medium block">Frekuensi Penyaluran</span>
-                        <span className="text-sm font-bold text-gray-800">Senin – Sabtu (Rutin)</span>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2 text-xs bg-gray-50 p-3 rounded-2xl border border-gray-200">
-                      <div className="flex items-center justify-between pb-1.5 border-b border-gray-200">
-                        <span className="text-gray-500">Unit Pos Cabang Penyalur:</span>
-                        <span className="font-bold text-gray-900">
-                          {linkedDapur ? linkedDapur.clean_title || linkedDapur.name : "Pos Cabang KKMP Sukmajaya"}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between pb-1.5 border-b border-gray-200">
-                        <span className="text-gray-500">Wilayah Sasaran:</span>
-                        <span className="font-semibold text-gray-800">
-                          Kecamatan {selectedPenerimaModal.kecamatan}, Kota Depok
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-gray-500">Kebutuhan Pangan:</span>
-                        <span className="font-semibold text-pink-700">Standar Pemenuhan Gizi &amp; Pangan Pokok</span>
-                      </div>
-                    </div>
-
-                    <div className="flex justify-end gap-2 mt-4 pt-3 border-t border-gray-100">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          handleFocusItemOnMap(selectedPenerimaModal.lat, selectedPenerimaModal.lng, 15);
-                          setSelectedPenerimaModal(null);
-                        }}
-                        className="rounded-xl text-xs gap-1 border-pink-300 text-pink-700 hover:bg-pink-50"
-                      >
-                        <Crosshair className="w-3.5 h-3.5" />
-                        Buka Titik di Peta
-                      </Button>
-                      <Button
-                        size="sm"
-                        onClick={() => setSelectedPenerimaModal(null)}
-                        className="rounded-xl text-xs bg-gray-900 hover:bg-black text-white"
-                      >
-                        Tutup
-                      </Button>
-                    </div>
-                  </>
-                );
-              })()}
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
-
-      {/* 4. MODAL DETAIL SUPPLIER PANGAN */}
+      {/* 2. MODAL DETAIL SUPPLIER PANGAN */}
       <Dialog
         open={Boolean(selectedSupplierModal)}
         onOpenChange={(open) => {

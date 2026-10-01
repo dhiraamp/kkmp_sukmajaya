@@ -4,74 +4,13 @@
 
 import { PRODUCTS } from "@/lib/marketplace";
 
-const SEED_VERSION = "kkmp_depok_seed_v4";
+const SEED_VERSION = "kkmp_sukmajaya_seed_v5_clean";
 
 const now = () => new Date().toISOString();
 const daysAgo = (n) => new Date(Date.now() - n * 86400000).toISOString();
 const hoursAgo = (n) => new Date(Date.now() - n * 3600000).toISOString();
 
 const uid = (p) => `${p}_${Math.random().toString(36).slice(2, 8)}`;
-
-const WEEKLY_MENU = {
-  week_label: "Menu Minggu Ini",
-  menu_data: {
-    Senin: {
-      ingredients: [
-        { nama: "Nasi Putih", jumlah: "100 g", gram_per_porsi: 100, kalori: 130, protein: 2.4, karbo: 28.2, lemak: 0.3 },
-        { nama: "Ayam Goreng Tepung", jumlah: "80 g", gram_per_porsi: 80, kalori: 200, protein: 18, karbo: 8, lemak: 12 },
-        { nama: "Tahu Goreng", jumlah: "50 g", gram_per_porsi: 50, kalori: 80, protein: 6, karbo: 2, lemak: 6 },
-        { nama: "Sayur Bening Bayam", jumlah: "100 g", gram_per_porsi: 100, kalori: 30, protein: 3, karbo: 5, lemak: 0.5 },
-        { nama: "Pisang", jumlah: "1 buah", gram_per_porsi: 100, kalori: 90, protein: 1, karbo: 23, lemak: 0.3 },
-      ],
-    },
-    Selasa: {
-      ingredients: [
-        { nama: "Nasi Putih", jumlah: "100 g", gram_per_porsi: 100, kalori: 130, protein: 2.4, karbo: 28.2, lemak: 0.3 },
-        { nama: "Semur Daging Sapi", jumlah: "80 g", gram_per_porsi: 80, kalori: 180, protein: 18, karbo: 5, lemak: 10 },
-        { nama: "Tempe Bacem", jumlah: "50 g", gram_per_porsi: 50, kalori: 100, protein: 9, karbo: 8, lemak: 4 },
-        { nama: "Tumis Buncis Wortel", jumlah: "100 g", gram_per_porsi: 100, kalori: 45, protein: 2, karbo: 8, lemak: 1 },
-        { nama: "Jeruk", jumlah: "1 buah", gram_per_porsi: 100, kalori: 60, protein: 1.2, karbo: 15, lemak: 0.2 },
-      ],
-    },
-    Rabu: {
-      ingredients: [
-        { nama: "Nasi Putih", jumlah: "100 g", gram_per_porsi: 100, kalori: 130, protein: 2.4, karbo: 28.2, lemak: 0.3 },
-        { nama: "Ikan Fillet Asam Manis", jumlah: "100 g", gram_per_porsi: 100, kalori: 150, protein: 18, karbo: 10, lemak: 5 },
-        { nama: "Perkedel Tahu", jumlah: "50 g", gram_per_porsi: 50, kalori: 70, protein: 5, karbo: 4, lemak: 4 },
-        { nama: "Sayur Sop Bening", jumlah: "150 g", gram_per_porsi: 150, kalori: 40, protein: 2, karbo: 6, lemak: 1 },
-        { nama: "Melon", jumlah: "150 g", gram_per_porsi: 150, kalori: 50, protein: 1, karbo: 12, lemak: 0.2 },
-      ],
-    },
-    Kamis: {
-      ingredients: [
-        { nama: "Nasi Putih", jumlah: "100 g", gram_per_porsi: 100, kalori: 130, protein: 2.4, karbo: 28.2, lemak: 0.3 },
-        { nama: "Ayam Teriyaki", jumlah: "80 g", gram_per_porsi: 80, kalori: 180, protein: 20, karbo: 8, lemak: 9 },
-        { nama: "Tempe Goreng Crispy", jumlah: "50 g", gram_per_porsi: 50, kalori: 120, protein: 8, karbo: 9, lemak: 6 },
-        { nama: "Tumis Sawi Hijau", jumlah: "100 g", gram_per_porsi: 100, kalori: 35, protein: 2.5, karbo: 5, lemak: 0.5 },
-        { nama: "Apel", jumlah: "1 buah", gram_per_porsi: 100, kalori: 80, protein: 0.4, karbo: 21, lemak: 0.2 },
-      ],
-    },
-    Jumat: {
-      ingredients: [
-        { nama: "Nasi Putih", jumlah: "100 g", gram_per_porsi: 100, kalori: 130, protein: 2.4, karbo: 28.2, lemak: 0.3 },
-        { nama: "Telur Dadar / Balado", jumlah: "2 butir", gram_per_porsi: 100, kalori: 150, protein: 12, karbo: 2, lemak: 10 },
-        { nama: "Tahu Isi Sayur", jumlah: "50 g", gram_per_porsi: 50, kalori: 60, protein: 4, karbo: 5, lemak: 3 },
-        { nama: "Tumis Kacang Panjang", jumlah: "100 g", gram_per_porsi: 100, kalori: 40, protein: 2.5, karbo: 7, lemak: 0.5 },
-        { nama: "Jeruk", jumlah: "1 buah", gram_per_porsi: 100, kalori: 60, protein: 1.2, karbo: 15, lemak: 0.2 },
-      ],
-    },
-    Sabtu: {
-      ingredients: [
-        { nama: "Nasi Goreng / Nasi Putih", jumlah: "150 g", gram_per_porsi: 150, kalori: 220, protein: 5, karbo: 40, lemak: 5 },
-        { nama: "Ayam Bakar", jumlah: "100 g", gram_per_porsi: 100, kalori: 200, protein: 22, karbo: 2, lemak: 12 },
-        { nama: "Tempe Orek Kering", jumlah: "30 g", gram_per_porsi: 30, kalori: 80, protein: 6, karbo: 5, lemak: 4 },
-        { nama: "Cah Kangkung / Capcay", jumlah: "100 g", gram_per_porsi: 100, kalori: 35, protein: 2, karbo: 5, lemak: 1 },
-        { nama: "Semangka", jumlah: "200 g", gram_per_porsi: 200, kalori: 60, protein: 1, karbo: 15, lemak: 0.3 },
-      ],
-    },
-    Minggu: { ingredients: [] },
-  },
-};
 
 const COLLECTIONS = {
   users: [
@@ -132,11 +71,12 @@ const COLLECTIONS = {
   Order: [
     {
       id: uid("order"),
-      order_number: "ORD-2026-0001",
+      order_number: "ORD-KKMP-2026-0001",
       mitra_id: "mitra@demo.local",
-      mitra_name: "Pos Cabang Beji",
+      mitra_name: "Pos Cabang KKMP Sukmajaya",
       supplier_name: "Gapoktan Sawangan Mandiri",
       supplier_id: "supplier@demo.local",
+      delivery_area: "Kecamatan Sukmajaya, Kota Depok",
       items: [
         { product_id: "kentang", product_name: "Kentang Granola", quantity: 20, unit: "kg", price: 14000 },
         { product_id: "beras", product_name: "Beras Premium Setra Ramos", quantity: 50, unit: "kg", price: 15500 },
@@ -151,16 +91,17 @@ const COLLECTIONS = {
         { status: "Dikirim", at: daysAgo(1), note: "Barang dalam perjalanan" },
         { status: "Selesai", at: daysAgo(0), note: "Pesanan diterima" },
       ],
-      driver: "Pak Rudi",
+      driver: "Pak Rudi (Armada KKMP)",
       created_date: daysAgo(3),
     },
     {
       id: uid("order"),
-      order_number: "ORD-2026-0002",
+      order_number: "ORD-KKMP-2026-0002",
       mitra_id: "mitra@demo.local",
-      mitra_name: "Pos Cabang Beji",
+      mitra_name: "Pos Cabang KKMP Sukmajaya",
       supplier_name: "PT Berkah Jaya Supplier",
       supplier_id: "supplier@demo.local",
+      delivery_area: "Kecamatan Sukmajaya, Kota Depok",
       items: [
         { product_id: "ayam", product_name: "Ayam Potong", quantity: 30, unit: "kg", price: 35000 },
         { product_id: "tomat", product_name: "Tomat Merah", quantity: 15, unit: "kg", price: 10000 },
@@ -174,16 +115,17 @@ const COLLECTIONS = {
         { status: "Diproses", at: daysAgo(1), note: "Supplier menyiapkan barang" },
         { status: "Dikirim", at: daysAgo(0), note: "Barang dalam perjalanan" },
       ],
-      driver: "Pak Joko",
+      driver: "Pak Joko (Armada KKMP)",
       created_date: daysAgo(2),
     },
     {
       id: uid("order"),
-      order_number: "ORD-2026-0003",
+      order_number: "ORD-KKMP-2026-0003",
       mitra_id: "mitra@demo.local",
-      mitra_name: "Pos Cabang Beji",
+      mitra_name: "Pos Cabang KKMP Sukmajaya",
       supplier_name: "UD Shafira Jaya Abadi",
       supplier_id: "supplier@demo.local",
+      delivery_area: "Kecamatan Sukmajaya, Kota Depok",
       items: [
         { product_id: "daging-sapi", product_name: "Daging Sapi Segar", quantity: 10, unit: "kg", price: 135000 },
       ],
@@ -199,8 +141,8 @@ const COLLECTIONS = {
     },
   ],
   PurchaseOrder: [
-    { id: uid("po"), po_number: "PO-2026-0001", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang Beji", supplier_email: "supplier@demo.local", supplier_name: "Gapoktan Sawangan Mandiri", items: [{ product_id: "kentang", product_name: "Kentang Granola", quantity: 20, unit: "kg" }], total: 280000, status: "diproses", has_supplier: true, created_date: daysAgo(1) },
-    { id: uid("po"), po_number: "PO-2026-0002", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang Beji", supplier_email: "supplier@demo.local", supplier_name: "PT Berkah Jaya Supplier", items: [{ product_id: "ayam", product_name: "Ayam Potong", quantity: 30, unit: "kg" }], total: 1050000, status: "menunggu", has_supplier: true, created_date: daysAgo(1) },
+    { id: uid("po"), po_number: "PO-KKMP-2026-0001", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang KKMP Sukmajaya", supplier_email: "supplier@demo.local", supplier_name: "Gapoktan Sawangan Mandiri", items: [{ product_id: "kentang", product_name: "Kentang Granola", quantity: 20, unit: "kg" }], total: 280000, status: "diproses", has_supplier: true, created_date: daysAgo(1) },
+    { id: uid("po"), po_number: "PO-KKMP-2026-0002", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang KKMP Sukmajaya", supplier_email: "supplier@demo.local", supplier_name: "PT Berkah Jaya Supplier", items: [{ product_id: "ayam", product_name: "Ayam Potong", quantity: 30, unit: "kg" }], total: 1050000, status: "menunggu", has_supplier: true, created_date: daysAgo(1) },
   ],
   Transaction: [
     {
@@ -269,9 +211,6 @@ const COLLECTIONS = {
       status: "success",
       created_date: daysAgo(1),
     },
-  ],
-  WeeklyMenu: [
-    { id: uid("wm"), week_label: WEEKLY_MENU.week_label, status: "published", menu_data: WEEKLY_MENU.menu_data, created_date: now() },
   ],
   WeeklyNeeds: [
     { id: uid("wn"), pos_id: "mitra@demo.local", pos_name: "Pos Cabang KKMP Sukmajaya", sppg_id: "mitra@demo.local", sppg_name: "Pos Cabang KKMP Sukmajaya", product_id: "kentang", product_name: "Kentang Granola", quantity: 100, unit: "kg", week_label: "Minggu Ini", status: "open", has_supplier: false, created_date: daysAgo(1) },
@@ -587,10 +526,29 @@ const COLLECTIONS = {
 export function ensureSeed() {
   if (typeof window === "undefined") return;
   try {
+    // Purge seluruh kunci legacy yang mengandung MBG / SPPG
+    const legacyKeys = [
+      "kkmp_depok_seed_v1", "kkmp_depok_seed_v2", "kkmp_depok_seed_v3", "kkmp_depok_seed_v4",
+      "logistik_notifs"
+    ];
+    legacyKeys.forEach((k) => localStorage.removeItem(k));
+
+    // Hapus semua key legacy smb_ dan cache order lama
+    try {
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k && (k.startsWith("smb_") || k.includes("sppg") || k.includes("mbg"))) {
+          localStorage.removeItem(k);
+        }
+      }
+    } catch (err) {
+      console.warn("Purge legacy localStorage:", err);
+    }
+
     if (localStorage.getItem(SEED_VERSION)) return;
+
     Object.entries(COLLECTIONS).forEach(([name, items]) => {
       localStorage.setItem(`kkmp_collection_${name}`, JSON.stringify(items));
-      localStorage.setItem(`smb_collection_${name}`, JSON.stringify(items));
     });
     localStorage.setItem(SEED_VERSION, "1");
   } catch (e) {
@@ -600,10 +558,16 @@ export function ensureSeed() {
 
 export function resetSeed() {
   if (typeof window === "undefined") return;
-  Object.keys(COLLECTIONS).forEach((name) => {
-    localStorage.removeItem(`kkmp_collection_${name}`);
-    localStorage.removeItem(`smb_collection_${name}`);
-  });
+  try {
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const k = localStorage.key(i);
+      if (k && (k.startsWith("kkmp_") || k.startsWith("smb_"))) {
+        localStorage.removeItem(k);
+      }
+    }
+  } catch (err) {
+    console.warn("Reset seed error:", err);
+  }
   localStorage.removeItem(SEED_VERSION);
   localStorage.removeItem("kkmp_session_user");
   localStorage.removeItem("kkmp_user");

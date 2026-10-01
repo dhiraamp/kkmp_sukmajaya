@@ -11,8 +11,8 @@ import {
   ExternalLink,
   ShieldCheck,
   Download,
-  Utensils,
-  School,
+  Store,
+  Building2,
   Factory,
   Route,
 } from "lucide-react";
@@ -36,7 +36,6 @@ export default function AdminGis() {
   };
 
   const dapurCount = (gisData.dapur || []).length;
-  const sekolahCount = (gisData.sekolah || []).length;
   const supplierCount = (gisData.supplier || []).length;
   const jalurCount = (gisData.jalur || []).length;
 
@@ -82,11 +81,11 @@ export default function AdminGis() {
         <Card className="border-red-200/80 bg-red-50/40">
           <CardContent className="p-4 flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold">
-              <Utensils className="w-5 h-5" />
+              <Store className="w-5 h-5" />
             </div>
             <div>
               <p className="text-xs text-muted-foreground font-medium">Pos Cabang KKMP</p>
-              <p className="text-xl font-bold text-gray-900">{dapurCount || 9} Titik</p>
+              <p className="text-xl font-bold text-gray-900">{dapurCount || 9} Cabang</p>
             </div>
           </CardContent>
         </Card>
@@ -94,11 +93,11 @@ export default function AdminGis() {
         <Card className="border-blue-200/80 bg-blue-50/40">
           <CardContent className="p-4 flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold">
-              <School className="w-5 h-5" />
+              <Building2 className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground font-medium">Titik Distribusi Anggota</p>
-              <p className="text-xl font-bold text-gray-900">{sekolahCount} Lokasi</p>
+              <p className="text-xs text-muted-foreground font-medium">Gudang Induk KKMP</p>
+              <p className="text-xl font-bold text-gray-900">Hub Sukmajaya</p>
             </div>
           </CardContent>
         </Card>
