@@ -14,7 +14,7 @@ const NAV = [
 export default function WargaLayout() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || "";
   const wargaUser = { email, id: user?.id || email, role: "penerima" };
   const { totalItems } = useCart(wargaUser);
 

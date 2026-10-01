@@ -24,7 +24,7 @@ export default function HomeHeader({ onSearchClick }) {
   const dropdownRef = useRef(null);
   const locRef = useRef(null);
 
-  const role = localStorage.getItem("kkmp_role") || localStorage.getItem("smartmbg_role") || "penerima";
+  const role = localStorage.getItem("kkmp_role") || "penerima";
   const profilePath = getProfilePath(role);
   const email = user?.email || "";
   const CART_PATH = { penerima: "/warga/keranjang", warga: "/warga/keranjang", mitra: "/mitra/cart" };

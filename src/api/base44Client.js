@@ -595,7 +595,7 @@ const auth = {
 
     // Fallback ke local session jika belum ada di Supabase Auth
     if (!user && typeof window !== "undefined") {
-      const localSession = localStorage.getItem("smb_session_user");
+      const localSession = localStorage.getItem("kkmp_session_user");
       if (localSession) {
         try {
           const parsed = JSON.parse(localSession);
@@ -678,7 +678,7 @@ const auth = {
       const rawExpected = targetAccount.password || matchedUser?.password || matchedProfile?.password || "demo1234";
       const normExpected = rawExpected.replace(/\s+/g, "").toLowerCase();
 
-      const isDemoPass = normInput === "demo1234" || normInput === "smartmbg2026!";
+      const isDemoPass = normInput === "demo1234";
       if (normInput !== normExpected && !isDemoPass) {
         throw apiError("Password yang Anda masukkan salah. Silakan gunakan password demo: demo 1 2 3 4", 401);
       }
@@ -692,7 +692,7 @@ const auth = {
 
         if (accountRole !== requiredRole && !isWargaAlias) {
           const roleLabels = {
-            mitra: "Mitra / SPPG",
+            mitra: "Mitra / Gerai",
             supplier: "Supplier",
             logistik: "Logistik",
             penerima: "Warga",
@@ -721,10 +721,9 @@ const auth = {
     const merged = { ...user, ...profile, email: user.email, role: resolvedRole };
 
     if (typeof window !== "undefined") {
-      localStorage.setItem("smb_session_user", JSON.stringify(merged));
-      localStorage.setItem("smart_mbg_user", JSON.stringify(merged));
-      localStorage.setItem("smartmbg_role", resolvedRole);
-      localStorage.setItem("smartmbg_login_email", merged.email);
+      localStorage.setItem("kkmp_session_user", JSON.stringify(merged));
+      localStorage.setItem("kkmp_role", resolvedRole);
+      localStorage.setItem("kkmp_login_email", merged.email);
     }
     return merged;
   },
@@ -791,10 +790,9 @@ const auth = {
 
     // Set sesi pengguna langsung agar tidak perlu login ulang
     if (typeof window !== "undefined") {
-      localStorage.setItem("smb_session_user", JSON.stringify(newProfile));
-      localStorage.setItem("smart_mbg_user", JSON.stringify(newProfile));
-      localStorage.setItem("smartmbg_role", defaultRole);
-      localStorage.setItem("smartmbg_login_email", email);
+      localStorage.setItem("kkmp_session_user", JSON.stringify(newProfile));
+      localStorage.setItem("kkmp_role", defaultRole);
+      localStorage.setItem("kkmp_login_email", email);
     }
 
     // Simpan ke Supabase Cloud (Realtime Trigger via postgres_changes)
@@ -826,12 +824,11 @@ const auth = {
 
   async logout(redirectPath) {
     if (typeof window !== "undefined") {
-      localStorage.removeItem("smb_session_user");
-      localStorage.removeItem("smart_mbg_user");
-      localStorage.removeItem("smartmbg_role");
-      localStorage.removeItem("smartmbg_login_email");
-      localStorage.removeItem("smartmbg_intended");
-      localStorage.removeItem("smartmbg_name");
+      localStorage.removeItem("kkmp_session_user");
+      localStorage.removeItem("kkmp_role");
+      localStorage.removeItem("kkmp_login_email");
+      localStorage.removeItem("kkmp_intended");
+      localStorage.removeItem("kkmp_name");
       if (redirectPath) {
         window.location.href = redirectPath;
       }

@@ -23,7 +23,7 @@ const bankPartners = [
 ];
 
 const loanSteps = [
-  { step: 1, title: "Pengajuan Online", desc: "Isi formulir permohonan pinjaman melalui platform SMART MBG" },
+  { step: 1, title: "Pengajuan Online", desc: "Isi formulir permohonan pinjaman melalui platform KKMP Kota Depok" },
   { step: 2, title: "Verifikasi Dokumen", desc: "Tim bank mitra akan memverifikasi dokumen persyaratan dalam 3-5 hari kerja" },
   { step: 3, title: "Penilaian Kredit", desc: "Bank melakukan analisis kelayakan kredit dan penilaian agunan" },
   { step: 4, title: "Persetujuan Bank", desc: "Bank memberikan keputusan kredit (approval/penolakan) beserta syarat dan ketentuan" },
@@ -88,7 +88,7 @@ export default function DigitalServices() {
                       <FileText className="w-4 h-4" /> Regulasi & Persyaratan Umum
                     </h4>
                     <ul className="text-sm text-blue-700 space-y-1 list-disc list-inside">
-                      <li>Pemohon merupakan anggota aktif SMART MBG (Supplier/Mitra/Logistik)</li>
+                      <li>Pemohon merupakan anggota aktif KKMP Depok (Supplier/Mitra/Logistik/Warga)</li>
                       <li>Memiliki usaha yang telah berjalan minimal 1 tahun</li>
                       <li>Tidak memiliki kredit macet di bank manapun (BI Checking)</li>
                       <li>Bersedia menyerahkan dokumen agunan apabila diperlukan</li>

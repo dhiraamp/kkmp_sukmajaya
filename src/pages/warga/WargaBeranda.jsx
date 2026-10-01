@@ -12,7 +12,7 @@ import QuantityStepper from "@/components/marketplace/QuantityStepper";
 export default function WargaBeranda() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || "";
   const wargaUser = { email, id: user?.id || email, role: "penerima" };
   const { totalItems, addToCart } = useCart(wargaUser);
   const [qtyMap, setQtyMap] = useState({});
@@ -20,7 +20,7 @@ export default function WargaBeranda() {
   const orders = getOrders(email);
   const activeOrders = orders.filter(o => !["Selesai", "Dibatalkan"].includes(o.status));
 
-  const name = localStorage.getItem("kkmp_name") || localStorage.getItem("smartmbg_name") || email.split("@")[0] || "Anggota";
+  const name = localStorage.getItem("kkmp_name") || email.split("@")[0] || "Anggota";
   const today = new Date().toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
   const handleAdd = (p, qty = 1) => {

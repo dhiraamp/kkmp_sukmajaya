@@ -12,8 +12,7 @@
  */
 
 const STORAGE_KEY = "kkmp_depok_gis_v1";
-const EVENT_NAME = "smartmbg_gis_updated";
-const EVENT_NAME_KKMP = "kkmp_gis_updated";
+const EVENT_NAME = "kkmp_gis_updated";
 
 // Titik Pusat Hub: Gudang Induk KKMP Mekarjaya, Sukmajaya, Kota Depok
 export const DEPOK_HUB = { lat: -6.3980, lng: 106.8420 };
@@ -262,7 +261,6 @@ export function saveGisData(newData) {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
       window.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: merged }));
-      window.dispatchEvent(new CustomEvent(EVENT_NAME_KKMP, { detail: merged }));
     } catch (e) {
       console.warn("Gagal menyimpan GIS data:", e);
     }

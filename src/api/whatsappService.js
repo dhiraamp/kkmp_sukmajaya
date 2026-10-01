@@ -24,7 +24,7 @@ export async function sendWhatsAppOtp({ phone, name = "Pengguna", otpCode }) {
     (typeof import.meta !== "undefined" && import.meta.env?.VITE_FONNTE_TOKEN) ||
     "pWm4FsSP3o4o2TuHEaxJ";
 
-  const message = `*SMART MBG — Kode Verifikasi Pendaftaran*\n\nHalo ${name},\n\nKode OTP verifikasi akun Smart MBG Anda adalah:\n\n👉 *${otpCode}* 👈\n\nKode ini berlaku selama 5 menit. Jangan berikan kode ini kepada siapa pun untuk menjaga keamanan akun Anda.\n\n_Sistem Manajemen Rantai Pasok MBG_`;
+  const message = `*KKMP DEPOK — Kode Verifikasi Pendaftaran*\n\nHalo ${name},\n\nKode OTP verifikasi akun Koperasi Merah Putih Anda adalah:\n\n👉 *${otpCode}* 👈\n\nKode ini berlaku selama 5 menit. Jangan berikan kode ini kepada siapa pun untuk menjaga keamanan akun Anda.\n\n_Koperasi Kelurahan Merah Putih Mekarjaya Kota Depok_`;
 
   // Jika token Fonnte / WhatsApp Gateway tersedia
   if (token && token.trim() !== "") {

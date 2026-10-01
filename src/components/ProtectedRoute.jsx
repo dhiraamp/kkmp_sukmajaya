@@ -44,7 +44,7 @@ export default function ProtectedRoute({
 
   // 2. Proteksi Peran (Role Guard): Cek apakah peran pengguna diizinkan
   if (allowedRoles && allowedRoles.length > 0) {
-    const userRole = (user.role || localStorage.getItem("smartmbg_role") || "").toLowerCase();
+    const userRole = (user.role || localStorage.getItem("kkmp_role") || "").toLowerCase();
 
     const isMatch =
       allowedRoles.includes(userRole) ||

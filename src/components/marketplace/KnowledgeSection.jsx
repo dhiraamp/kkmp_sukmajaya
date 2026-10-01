@@ -4,42 +4,42 @@ import { ArrowRight, Calendar, Tag } from "lucide-react";
 
 const KNOWLEDGE = {
   Yayasan: {
-    title: "Yayasan & SPPG",
-    subtitle: "Satuan Pendidikan Penyelenggara Gizi — pilar utama pelaksana program MBG di lingkungan sekolah.",
+    title: "Pos Cabang & Gerai",
+    subtitle: "Jaringan unit operasional pos cabang & gerai — pilar utama pelayanan pangan warga di lingkungan kelurahan.",
     cards: [
       {
-        title: "Pendaftaran Yayasan MBG",
-        desc: "Proses registrasi SPPG untuk mengikuti program MBG, termasuk verifikasi dokumen & kapasitas dapur.",
+        title: "Pendaftaran Mitra KKMP",
+        desc: "Proses registrasi pos cabang untuk mengikuti jaringan KKMP, termasuk verifikasi dokumen & kapasitas operasional.",
         img: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400",
         tag: "Registrasi",
-        time: "Tahun Ajaran 2026",
+        time: "Tahun 2026",
       },
       {
-        title: "Manajemen Menu Mingguan",
-        desc: "Yayasan menyusun menu gizi seimbang tujuh hari, disesuaikan kebutuhan & ketersediaan bahan lokal.",
+        title: "Manajemen Paket Sembako",
+        desc: "Unit cabang menyusun alokasi paket sembako mingguan, disesuaikan kebutuhan & ketersediaan bahan lokal.",
         img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400",
-        tag: "Menu",
+        tag: "Paket",
         time: "Mingguan",
       },
       {
         title: "Pelaporan Kebutuhan Bahan",
-        desc: "SPPG mengunggah kebutuhan bahan pangan per minggu untuk dipasangkan dengan supplier terdekat.",
+        desc: "Pos cabang mengunggah kebutuhan komoditas pangan per minggu untuk dipasok dari gudang induk.",
         img: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
         tag: "Kebutuhan",
         time: "Real-time",
       },
       {
         title: "Daftar Penerima Manfaat",
-        desc: "Kelola data siswa penerima MBG, termasuk riwayat konsumsi & evaluasi gizi.",
+        desc: "Kelola data anggota & warga penerima manfaat KKMP, termasuk riwayat pemenuhan sembako.",
         img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400",
         tag: "Penerima",
-        time: "Per Siswa",
+        time: "Per Anggota",
       },
     ],
   },
   Pengadaan: {
     title: "Pengadaan",
-    subtitle: "Proses akuisisi bahan pangan dari supplier terverifikasi menuju gudang MBG.",
+    subtitle: "Proses akuisisi bahan pangan dari supplier terverifikasi menuju gudang pusat KKMP.",
     cards: [
       {
         title: "Sumber Supplier Terverifikasi",
@@ -72,12 +72,12 @@ const KNOWLEDGE = {
     ],
   },
   Produksi: {
-    title: "Produksi",
-    subtitle: "Pengolahan bahan pangan menjadi menu gizi seimbang di dapur MBG.",
+    title: "Pusat Distribusi",
+    subtitle: "Penyortiran, pengemasan, dan persiapan bahan pangan di sentra logistik KKMP.",
     cards: [
       {
-        title: "Dapur MBG Terpadu",
-        desc: "Sentra produksi masakan gizi untuk distribusi massal ke satuan pendidikan.",
+        title: "Pusat Distribusi Terpadu",
+        desc: "Sentra pemenuhan pasokan pangan untuk distribusi massal ke pos-pos cabang KKMP.",
         img: "https://images.unsplash.com/photo-1556910103-1c020456d545?w=400",
         tag: "Dapur",
         time: "1.200+ aktif",
@@ -175,11 +175,11 @@ const KNOWLEDGE = {
   },
   "Kualitas & Keamanan": {
     title: "Kualitas & Keamanan",
-    subtitle: "Standar mutu & keamanan pangan sepanjang rantai pasok MBG.",
+    subtitle: "Standar mutu & keamanan komoditas pangan sepanjang rantai pasok KKMP Kota Depok.",
     cards: [
       {
         title: "Sertifikasi Laik Higiene",
-        desc: "Verifikasi dokumen higiene supplier & dapur sebelum masuk ekosistem MBG.",
+        desc: "Verifikasi dokumen higiene supplier & gerai sebelum masuk ekosistem KKMP.",
         img: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400",
         tag: "Sertifikasi",
         time: "Wajib",
@@ -209,25 +209,25 @@ const KNOWLEDGE = {
   },
   "Kebijakan & Regulasi": {
     title: "Kebijakan & Regulasi",
-    subtitle: "Kerangka regulasi nasional & pedoman pelaksanaan program MBG.",
+    subtitle: "Kerangka regulasi koperasi & pedoman pelaksanaan operasional KKMP Kota Depok.",
     cards: [
       {
-        title: "Regulasi Program MBG",
-        desc: "Dasar hukum & pedoman teknis pelaksanaan Makan Bergizi Gratis dari pemerintah.",
+        title: "Regulasi Koperasi Merah Putih",
+        desc: "Dasar hukum perkoperasian & pedoman teknis pengelolaan rantai pasok KKMP.",
         img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400",
         tag: "Regulasi",
         time: "Peraturan Nasional",
       },
       {
-        title: "Anggaran & Pendanaan",
-        desc: "Alokasi APBN/APBD untuk program MBG serta mekanisme pencairan ke mitra.",
+        title: "Anggaran & Permodalan",
+        desc: "Alokasi permodalan dan simpan pinjam KKMP serta mekanisme pendanaan usaha.",
         img: "https://images.unsplash.com/photo-1454165804606-c7d8c4d8d963?w=400",
         tag: "Anggaran",
         time: "2026",
       },
       {
         title: "Kemitraan Multi-Pihak",
-        desc: "Skema kolaborasi pemerintah, supplier, logistik, & yayasan dalam ekosistem MBG.",
+        desc: "Skema kolaborasi pemerintah kota, supplier, logistik, & anggota dalam ekosistem KKMP.",
         img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400",
         tag: "Kemitraan",
         time: "Multi-Stakeholder",

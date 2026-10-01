@@ -413,7 +413,7 @@ export default function AdminWarga() {
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2 text-lg">
                 <IdCard className="w-5 h-5 text-emerald-600" />
-                Detail Data Warga / Penerima
+                Detail Data Anggota Koperasi (Warga)
               </DialogTitle>
             </DialogHeader>
 
@@ -426,7 +426,7 @@ export default function AdminWarga() {
                   <h4 className="font-bold text-base text-gray-900">{selectedWarga.full_name || "Warga"}</h4>
                   <div className="flex items-center gap-2 mt-1">
                     <Badge variant="outline" className="bg-white text-xs">
-                      Role: Penerima MBG
+                      Role: Anggota Koperasi (Warga)
                     </Badge>
                     <Badge
                       className={

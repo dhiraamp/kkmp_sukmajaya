@@ -122,7 +122,7 @@ export default function MarketplacePage() {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
   const email = user?.email || "";
-  const role = user?.role || localStorage.getItem("kkmp_role") || localStorage.getItem("smartmbg_role") || "warga";
+  const role = user?.role || localStorage.getItem("kkmp_role") || "warga";
   const cartUser = { email, id: user?.id || email, role };
   const { addToCart } = useCart(cartUser);
   const [query, setQuery] = useState("");

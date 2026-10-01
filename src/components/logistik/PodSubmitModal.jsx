@@ -10,12 +10,12 @@ import { toast } from "sonner";
 // Contoh foto serah terima bawaan (SVG data URL) untuk kemudahan pengujian di desktop browser
 const SAMPLE_POD_IMAGES = [
   {
-    label: "Foto Serah Terima Dapur SPPG",
-    dataUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%2310b981'/><rect x='20' y='20' width='560' height='360' fill='%23ffffff' rx='16'/><circle cx='300' cy='150' r='60' fill='%23ecfdf5'/><path d='M275 150 L292 167 L325 134' stroke='%23059669' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='300' y='240' font-family='Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='%23065f46'>BUKTI SERAH TERIMA FISIK (POD)</text><text x='300' y='270' font-family='Arial, sans-serif' font-size='14' text-anchor='middle' fill='%234b5563'>Penerimaan Bahan Baku Dapur SPPG Garut</text><rect x='80' y='305' width='440' height='40' fill='%23f3f4f6' rx='8'/><text x='300' y='330' font-family='monospace' font-size='13' text-anchor='middle' fill='%231f2937'>KONDISI: LENGKAP &amp; SESUAI MANIFEST</text></svg>",
+    label: "Foto Serah Terima Pos Cabang KKMP",
+    dataUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%2310b981'/><rect x='20' y='20' width='560' height='360' fill='%23ffffff' rx='16'/><circle cx='300' cy='150' r='60' fill='%23ecfdf5'/><path d='M275 150 L292 167 L325 134' stroke='%23059669' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='300' y='240' font-family='Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='%23065f46'>BUKTI SERAH TERIMA FISIK (POD)</text><text x='300' y='270' font-family='Arial, sans-serif' font-size='14' text-anchor='middle' fill='%234b5563'>Penerimaan Pasokan Pos Cabang KKMP Depok</text><rect x='80' y='305' width='440' height='40' fill='%23f3f4f6' rx='8'/><text x='300' y='330' font-family='monospace' font-size='13' text-anchor='middle' fill='%231f2937'>KONDISI: LENGKAP &amp; SESUAI MANIFEST</text></svg>",
   },
   {
-    label: "Foto Penyerahan di Gudang Pangan",
-    dataUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%230284c7'/><rect x='20' y='20' width='560' height='360' fill='%23ffffff' rx='16'/><circle cx='300' cy='150' r='60' fill='%23f0f9ff'/><path d='M275 150 L292 167 L325 134' stroke='%230284c7' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='300' y='240' font-family='Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='%23075985'>DOKUMENTASI PENYERAHAN LOGISTIK</text><text x='300' y='270' font-family='Arial, sans-serif' font-size='14' text-anchor='middle' fill='%234b5563'>Gudang Penerima Satuan Pelayanan MBG</text><rect x='80' y='305' width='440' height='40' fill='%23f3f4f6' rx='8'/><text x='300' y='330' font-family='monospace' font-size='13' text-anchor='middle' fill='%231f2937'>STATUS: DIVERIFIKASI PETUGAS</text></svg>",
+    label: "Foto Penyerahan di Gudang KKMP",
+    dataUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%230284c7'/><rect x='20' y='20' width='560' height='360' fill='%23ffffff' rx='16'/><circle cx='300' cy='150' r='60' fill='%23f0f9ff'/><path d='M275 150 L292 167 L325 134' stroke='%230284c7' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='300' y='240' font-family='Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='%23075985'>DOKUMENTASI PENYERAHAN LOGISTIK</text><text x='300' y='270' font-family='Arial, sans-serif' font-size='14' text-anchor='middle' fill='%234b5563'>Gudang Penerima Unit Cabang KKMP Depok</text><rect x='80' y='305' width='440' height='40' fill='%23f3f4f6' rx='8'/><text x='300' y='330' font-family='monospace' font-size='13' text-anchor='middle' fill='%231f2937'>STATUS: DIVERIFIKASI PETUGAS</text></svg>",
   },
 ];
 
@@ -26,7 +26,7 @@ export default function PodSubmitModal({
   onSubmit,
 }) {
   const [recipientName, setRecipientName] = useState("");
-  const [recipientRole, setRecipientRole] = useState("Pengelola Dapur SPPG");
+  const [recipientRole, setRecipientRole] = useState("Pengelola Pos Cabang KKMP");
   const [notes, setNotes] = useState("Bahan baku diterima dalam kondisi lengkap, segar, dan sesuai jumlah manifes.");
   const [imageUrl, setImageUrl] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -211,11 +211,11 @@ export default function PodSubmitModal({
                 onChange={(e) => setRecipientRole(e.target.value)}
                 className="w-full h-10 px-3 rounded-xl border border-gray-300 bg-white text-sm focus:outline-none focus:border-emerald-500 text-gray-800 font-medium"
               >
-                <option value="Pengelola Dapur SPPG">Pengelola Dapur SPPG</option>
-                <option value="Kepala Dapur">Kepala Dapur</option>
-                <option value="Staf Gudang &amp; Logistik">Staf Gudang &amp; Logistik</option>
-                <option value="Guru Piket Sekolah">Guru Piket Sekolah</option>
-                <option value="Pengurus Posyandu">Pengurus Posyandu</option>
+                <option value="Pengelola Pos Cabang KKMP">Pengelola Pos Cabang KKMP</option>
+                <option value="Kepala Gudang / Pos Cabang">Kepala Gudang / Pos Cabang</option>
+                <option value="Staf Logistik Cabang">Staf Logistik Cabang</option>
+                <option value="Petugas Penerima Komunitas">Petugas Penerima Komunitas</option>
+                <option value="Pengurus KKMP">Pengurus KKMP</option>
                 <option value="Lainnya">Lainnya</option>
               </select>
             </div>

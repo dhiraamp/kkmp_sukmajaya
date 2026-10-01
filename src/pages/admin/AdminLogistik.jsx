@@ -385,7 +385,7 @@ export default function AdminLogistik() {
                   <h4 className="font-bold text-base text-gray-900">{selectedDriver.name}</h4>
                   <div className="flex items-center gap-2 mt-1">
                     <Badge variant="outline" className="bg-white text-xs">
-                      Role: Logistik MBG
+                      Role: Tim Logistik KKMP
                     </Badge>
                     <Badge className={selectedDriver.is_active !== false ? "bg-green-600 text-white text-xs" : "bg-yellow-600 text-white text-xs"}>
                       {selectedDriver.is_active !== false ? "Siap Bertugas" : "Pending"}

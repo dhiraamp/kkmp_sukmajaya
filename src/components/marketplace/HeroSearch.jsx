@@ -48,7 +48,7 @@ export default function HeroSearch({ query, setQuery, activeFilter, setActiveFil
           transition={{ duration: 0.5, delay: 0.15 }}
           className="text-2xl sm:text-3xl font-bold text-white"
         >
-          Cari Informasi Rantai Pasok MBG
+          Cari Informasi Rantai Pasok KKMP Depok
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 15 }}
@@ -56,7 +56,7 @@ export default function HeroSearch({ query, setQuery, activeFilter, setActiveFil
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-white/80 text-sm mt-2 max-w-2xl mx-auto"
         >
-          Temukan data, wawasan, dan solusi terbaik untuk mendukung program MBG untuk siswa Indonesia.
+          Temukan data, komoditas pangan, dan solusi logistik terbaik Koperasi Kelurahan Merah Putih Kota Depok.
         </motion.p>
 
         <motion.div
@@ -71,7 +71,7 @@ export default function HeroSearch({ query, setQuery, activeFilter, setActiveFil
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Cari komoditas, supplier, distribusi, harga, atau topik lain terkait MBG..."
+            placeholder="Cari komoditas, supplier, distribusi, harga, atau kebutuhan koperasi..."
             className="flex-1 px-3 py-3 text-sm outline-none"
           />
           <button

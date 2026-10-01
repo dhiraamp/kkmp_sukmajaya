@@ -24,10 +24,11 @@ export default function SearchHeader({ query, setQuery, activeCategory, setActiv
   const { isAuthenticated } = useAuth();
 
   const handleLogout = () => {
-    localStorage.removeItem("smartmbg_role");
-    localStorage.removeItem("smartmbg_login_email");
-    localStorage.removeItem("smart_mbg_role");
-    localStorage.removeItem("smart_mbg_user");
+    localStorage.removeItem("kkmp_role");
+    localStorage.removeItem("kkmp_login_email");
+    localStorage.removeItem("kkmp_session_user");
+    localStorage.removeItem("kkmp_intended");
+    localStorage.removeItem("kkmp_name");
     base44.auth.logout("/portal");
   };
 
@@ -39,7 +40,7 @@ export default function SearchHeader({ query, setQuery, activeCategory, setActiv
           onClick={() => navigate("/")}
           className="text-white font-bold text-lg tracking-tight whitespace-nowrap hidden sm:block"
         >
-          SMART<span className="text-blue-100">MBG</span>
+          KKMP<span className="text-blue-100"> DEPOK</span>
         </button>
 
         <button

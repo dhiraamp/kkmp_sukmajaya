@@ -23,7 +23,7 @@ const ADDR_ICONS = { Rumah: "🏠", Kantor: "🏢", Lainnya: "📍" };
 export default function WargaProfil() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || "";
 
   const [profile, setProfile] = useState(null);
   const [editing, setEditing] = useState(false);
@@ -45,30 +45,27 @@ export default function WargaProfil() {
         const p = rows[0] || null;
         setProfile(p);
         setForm({
-          full_name: p?.full_name || localStorage.getItem("kkmp_name") || localStorage.getItem("smartmbg_name") || "",
-          nik: p?.nik || localStorage.getItem("kkmp_nik") || localStorage.getItem("smartmbg_nik") || "",
+          full_name: p?.full_name || localStorage.getItem("kkmp_name") || "",
+          nik: p?.nik || localStorage.getItem("kkmp_nik") || "",
           email,
-          phone: p?.phone || localStorage.getItem("kkmp_phone") || localStorage.getItem("smartmbg_phone") || "",
+          phone: p?.phone || localStorage.getItem("kkmp_phone") || "",
         });
         if (p?.full_name) {
           localStorage.setItem("kkmp_name", p.full_name);
-          localStorage.setItem("smartmbg_name", p.full_name);
         }
         if (p?.phone) {
           localStorage.setItem("kkmp_phone", p.phone);
-          localStorage.setItem("smartmbg_phone", p.phone);
         }
         if (p?.nik) {
           localStorage.setItem("kkmp_nik", p.nik);
-          localStorage.setItem("smartmbg_nik", p.nik);
         }
       })
       .catch(() => setForm((f) => ({ ...f, email })));
   }, [email]);
 
-  const displayName = profile?.full_name || localStorage.getItem("kkmp_name") || localStorage.getItem("smartmbg_name") || email.split("@")[0] || "Anggota";
-  const displayPhone = profile?.phone || localStorage.getItem("kkmp_phone") || localStorage.getItem("smartmbg_phone") || "-";
-  const displayNik = profile?.nik || localStorage.getItem("kkmp_nik") || localStorage.getItem("smartmbg_nik") || "-";
+  const displayName = profile?.full_name || localStorage.getItem("kkmp_name") || email.split("@")[0] || "Anggota";
+  const displayPhone = profile?.phone || localStorage.getItem("kkmp_phone") || "-";
+  const displayNik = profile?.nik || localStorage.getItem("kkmp_nik") || "-";
   const initial = (displayName[0] || "A").toUpperCase();
 
   const handleSaveProfile = async () => {
@@ -92,14 +89,11 @@ export default function WargaProfil() {
         await base44.entities.UserProfile.create(payload);
       }
       localStorage.setItem("kkmp_name", form.full_name);
-      localStorage.setItem("smartmbg_name", form.full_name);
       if (form.phone) {
         localStorage.setItem("kkmp_phone", form.phone);
-        localStorage.setItem("smartmbg_phone", form.phone);
       }
       if (form.nik) {
         localStorage.setItem("kkmp_nik", form.nik);
-        localStorage.setItem("smartmbg_nik", form.nik);
       }
       setProfile((p) => ({ ...(p || {}), ...payload }));
       setEditing(false);

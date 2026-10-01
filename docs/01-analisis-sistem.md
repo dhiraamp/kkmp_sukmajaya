@@ -1,8 +1,6 @@
-# Analisis Sistem Smart MBG — Aplikasi Sumber
+# Analisis Sistem Rantai Pasok KKMP Sukamaja — Kota Depok
 
-Dokumen ini adalah hasil analisis read-only terhadap aplikasi sumber di
-`C:\Users\DELL\Documents\smart-mbg` sebelum dibuatkan klon lokal tanpa Base44.
-Menjadi dasar penyusunan `02-prd.md`.
+Dokumen ini adalah hasil analisis arsitektur aplikasi rantai pasok dan marketplace Koperasi Kelurahan Merah Putih Sukamaja (Mekarjaya, Depok).
 
 Dibuat: Sabtu, 01 Agustus 2026
 
@@ -115,7 +113,7 @@ Semua dibungkus `<ProtectedRoute unauthenticatedElement={<Navigate to="/portal" 
 |---|---|---|
 | `/admin/dashboard` | Dashboard | `AdminDashboard` |
 | `/admin/stock` | Manajemen Stok | `AdminStock` |
-| `/admin/bapokting` | SIHARBATING & MISTER MBG | `AdminBapokting` |
+| `/admin/bapokting` | Monitoring Harga Pasar & Pos KKMP | `AdminBapokting` |
 | `/admin/suppliers` | Manajemen Supplier | `AdminSuppliers` |
 | `/admin/mitra` | Manajemen Mitra/SPPG | `AdminMitra` |
 | `/admin/sppg-menus` | Menu Harian SPPG | `AdminSppgMenus` |
@@ -219,7 +217,7 @@ Semua dibungkus `<ProtectedRoute unauthenticatedElement={<Navigate to="/portal" 
 ### 3.7 Admin
 
 - Dashboard (KPI, `StockAlertPanel`, `NotificationBell`).
-- Manajemen stok; SIHARBATING & MISTER MBG (`AdminBapokting`).
+- Manajemen stok; Monitoring Harga Pasar & Pos KKMP (`AdminBapokting`).
 - Manajemen Supplier / Mitra / Logistik; Menu harian SPPG.
 - Laporan: keuangan, inflasi/harga, rantai pasok, bahan pangan.
 - Komunikasi: chat mitra / supplier / logistik (`ChatPanel`); notifikasi stok.
@@ -282,10 +280,9 @@ Hook/API konsumen utama: `src/hooks/useCart.js`, `usePublicRegister.js`,
 
 - Role internal: `"mitra"`, `"supplier"`, `"logistik"`, `"penerima"`,
   `"admin"`. Role penerima tampil sebagai **"Warga"** (label UI).
-- Login menyimpan `smartmbg_role`, token, dan profil di localStorage/context;
-  redirect via `smartmbg_intended`; admin login via email+password
-  (akun `admin@demo.local`)
-  (nilai dummy di `.env`).
+- Login menyimpan `kkmp_role`, token, dan profil di localStorage/context;
+  redirect via `kkmp_intended`; admin login via email+password
+  (akun `admin.induk@kkmp-depok.id` / `admin@demo.local`).
 - Path per role di `DASHBOARD_PATHS` / `PROFILE_PATHS` (`rolePaths.js`).
 - Theme: hijau emerald (toast sukses `#f0fdf4`/`#16a34a`, error `#fef2f2`/`#991b1b`).
 - Dialog Radix di-override `z-[1000]`/`1001` (kompatibilitas with header).

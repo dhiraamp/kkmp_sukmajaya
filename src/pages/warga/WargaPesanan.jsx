@@ -18,7 +18,7 @@ const STATUS_STYLE = {
 export default function WargaPesanan() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || "";
   const [orders, setOrders] = useState(() => getOrders(email));
 
   // Gabungkan Order dari rantai pasok (sumber status nyata) dengan pesanan lokal.

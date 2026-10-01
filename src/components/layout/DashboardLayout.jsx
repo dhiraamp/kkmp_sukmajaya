@@ -13,20 +13,19 @@ export default function DashboardLayout({ menuItems, title, roleColor }) {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("smart_mbg_user") || '{"name":"User","role":"mitra"}');
+  const user = JSON.parse(localStorage.getItem("kkmp_session_user") || localStorage.getItem("kkmp_user") || '{"name":"Pengguna KKMP","role":"mitra"}');
 
   const handleLogout = () => {
-    localStorage.removeItem("smart_mbg_role");
-    localStorage.removeItem("smartmbg_role");
-    localStorage.removeItem("smartmbg_login_email");
-    localStorage.removeItem("smart_mbg_user");
+    localStorage.removeItem("kkmp_role");
+    localStorage.removeItem("kkmp_login_email");
+    localStorage.removeItem("kkmp_session_user");
+    localStorage.removeItem("kkmp_user");
     base44.auth.logout("/portal");
   };
 
   const handleDeleteAccount = () => {
-    // In a real app, call the delete account API here
-    localStorage.removeItem("smart_mbg_role");
-    localStorage.removeItem("smart_mbg_user");
+    localStorage.removeItem("kkmp_role");
+    localStorage.removeItem("kkmp_session_user");
     navigate("/");
   };
 
@@ -65,7 +64,7 @@ export default function DashboardLayout({ menuItems, title, roleColor }) {
               <ShieldCheck className="w-5 h-5 text-sidebar-primary-foreground" />
             </div>
             <div>
-              <h2 className="font-bold text-sm">SMART MBG</h2>
+              <h2 className="font-bold text-sm">KKMP DEPOK</h2>
               <p className="text-xs text-sidebar-foreground/60">{title}</p>
             </div>
           </div>

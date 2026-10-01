@@ -2,7 +2,7 @@ import confetti from "canvas-confetti";
 import { toast } from "sonner";
 
 /**
- * Smart Feedback & Micro-Interactions System — Smart MBG Garut
+ * Smart Feedback & Micro-Interactions System — KKMP Kota Depok
  * 
  * Modul ini menyediakan:
  * 1. Haptic Feedback (Vibration API untuk smartphone pengguna)
@@ -45,12 +45,12 @@ export function triggerHaptic(type = "light") {
 }
 
 /**
- * 2. Celebratory Confetti Burst (Garut Smart MBG Theme)
+ * 2. Celebratory Confetti Burst (KKMP Kota Depok Theme)
  */
 export function triggerCelebrationConfetti(options = {}) {
   try {
-    // Warna tema Smart MBG: Emerald Green, Teal, Emas Garut, dan Putih
-    const colors = ["#059669", "#10b981", "#f59e0b", "#06b6d4", "#ffffff"];
+    // Warna tema KKMP Depok: Merah, Emerald, Emas, dan Putih
+    const colors = ["#dc2626", "#10b981", "#f59e0b", "#06b6d4", "#ffffff"];
 
     confetti({
       particleCount: options.particleCount || 75,

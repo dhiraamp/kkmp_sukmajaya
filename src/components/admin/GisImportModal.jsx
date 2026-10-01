@@ -232,7 +232,7 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
                 <Upload className="w-6 h-6" />
               </div>
               <p className="text-sm font-semibold text-gray-800">
-                Pilih Berkas Ekspor dari Mister MBG
+                Pilih Berkas Ekspor Data Geospasial KKMP
               </p>
               <p className="text-xs text-muted-foreground mt-0.5">
                 Mendukung format GeoJSON (.geojson), JSON (.json), atau Tabel CSV (.csv)
@@ -243,12 +243,12 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
           {activeTab === "paste" && (
             <div className="space-y-2">
               <Label className="text-xs font-semibold text-gray-700">
-                Tempelkan Data JSON / CSV dari Mister MBG:
+                Tempelkan Data JSON / CSV Titik Jaringan KKMP:
               </Label>
               <Textarea
                 value={pastedText}
                 onChange={(e) => setPastedText(e.target.value)}
-                placeholder='Contoh: [{"nama": "SPPG Tarogong", "tipe": "dapur", "lat": -7.245, "lng": 107.885, "kapasitas": 2500}] atau CSV...'
+                placeholder='Contoh: [{"nama": "Pos Cabang Beji", "tipe": "dapur", "lat": -6.3725, "lng": 106.82, "kapasitas": 2500}] atau CSV...'
                 rows={5}
                 className="font-mono text-xs rounded-xl border-gray-300 focus:border-emerald-500"
               />

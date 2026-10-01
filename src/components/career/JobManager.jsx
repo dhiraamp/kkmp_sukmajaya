@@ -85,7 +85,7 @@ export default function JobManager({ allowedCategories = ["pos_cabang", "logisti
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div>
           <h1 className="text-xl font-bold text-gray-900">Kelola Lowongan</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Kelola lowongan kebutuhan MBG Anda.</p>
+          <p className="text-sm text-gray-500 mt-0.5">Kelola lowongan kebutuhan operasional KKMP Anda.</p>
         </div>
         <button
           onClick={() => setModal({ mode: "add", item: null })}

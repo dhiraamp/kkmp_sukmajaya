@@ -33,7 +33,7 @@ export default function WargaPesananDetail() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || "";
 
   const [order, setOrder] = useState(null);
   const [simulating, setSimulating] = useState(false);

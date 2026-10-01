@@ -13,7 +13,7 @@ export const FEATURES = [
   { icon: LineChart, title: "Monitoring Rantai Pasok", desc: "Pantau alur distribusi real-time", path: "/admin/supply-chain", requiresAuth: true },
   { icon: Users, title: "Manajemen Supplier", desc: "Kelola supplier terverifikasi", path: "/admin/suppliers", requiresAuth: true },
   { icon: BarChart3, title: "Analisis & Laporan", desc: "Insight harga & stok", path: "/admin/financial", requiresAuth: true },
-  { icon: BookOpen, title: "Knowledge Center", desc: "Panduan & regulasi MBG", path: "/knowledge-center", requiresAuth: false },
+  { icon: BookOpen, title: "Knowledge Center", desc: "Panduan & regulasi Koperasi", path: "/knowledge-center", requiresAuth: false },
   { icon: Bell, title: "Notifikasi & Informasi", desc: "Update stok & pesanan", path: "/admin/notifications", requiresAuth: true },
 ];
 
@@ -23,7 +23,7 @@ export default function HomeSidebar() {
 
   const handleDigital = (path) => {
     if (!isAuthenticated) {
-      localStorage.setItem("smartmbg_intended", path);
+      localStorage.setItem("kkmp_intended", path);
     }
     navigate(path);
   };
@@ -31,21 +31,21 @@ export default function HomeSidebar() {
   return (
     <aside className="space-y-4">
       <div className="bg-white rounded-xl border border-gray-200 p-4">
-          <h3 className="text-sm font-bold text-gray-900">Login ke Smart MBG</h3>
+          <h3 className="text-sm font-bold text-gray-900">Login ke KKMP Depok</h3>
           <p className="text-xs text-gray-500 mt-1">
-            Akses fitur lengkap untuk mengelola rantai pasok MBG Anda.
+            Akses fitur lengkap untuk mengelola rantai pasok pangan Koperasi.
           </p>
           <button
             onClick={() => navigate("/portal")}
-            className="mt-3 w-full bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold py-2 rounded-lg transition-colors"
+            className="mt-3 w-full bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2 rounded-lg transition-colors"
           >
-            Login
+            Login Portal
           </button>
           <p className="text-xs text-center text-gray-500 mt-2">
             Belum punya akun?{" "}
             <span
-              onClick={() => navigate("/register/mitra")}
-              className="text-emerald-600 font-medium cursor-pointer"
+              onClick={() => navigate("/register/penerima")}
+              className="text-red-600 font-medium cursor-pointer"
             >
               Daftar di sini
             </span>

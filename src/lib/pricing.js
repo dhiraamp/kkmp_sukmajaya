@@ -1,10 +1,10 @@
 // ════════════════════════════════════════════════════════════════════════════
-// SISTEM MONETISASI SMART MBG — MARK-UP PLATFORM
+// SISTEM MONETISASI KKMP DEPOK — MARK-UP PLATFORM KOPERASI
 //
 // Supplier memasukkan harga asli (base_price) ke dalam sistem, kemudian
 // aplikasi secara otomatis menambahkan mark-up 2,5% sebagai biaya layanan
 // platform. Harga yang ditampilkan ke pembeli = base_price × (1 + 2,5%).
-// Selisih 2,5% menjadi pendapatan Smart MBG; supplier menerima harga asli.
+// Selisih 2,5% menjadi pendapatan operasional KKMP; supplier menerima harga asli.
 // ════════════════════════════════════════════════════════════════════════════
 
 // Tarif mark-up platform (2,5%)

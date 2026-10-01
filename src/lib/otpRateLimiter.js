@@ -14,7 +14,7 @@ export const OTP_COOLDOWN_SECONDS = 60;
 export const OTP_MAX_ATTEMPTS = 3;
 export const OTP_WINDOW_SECONDS = 300; // 5 menit
 
-const STORAGE_KEY = "smartmbg_otp_rate_limit";
+const STORAGE_KEY = "kkmp_otp_rate_limit";
 const memoryStore = new Map();
 
 function getStore() {

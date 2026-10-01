@@ -21,11 +21,7 @@ export const PROFILE_PATHS = {
 };
 
 export function getRole() {
-  return (
-    localStorage.getItem("kkmp_role") ||
-    localStorage.getItem("smartmbg_role") ||
-    "penerima"
-  );
+  return localStorage.getItem("kkmp_role") || "penerima";
 }
 
 export function getDashboardPath(role = getRole()) {
@@ -39,14 +35,11 @@ export function getProfilePath(role = getRole()) {
 export function logoutUser(redirectPath = "/portal") {
   localStorage.removeItem("kkmp_role");
   localStorage.removeItem("kkmp_user");
+  localStorage.removeItem("kkmp_session_user");
   localStorage.removeItem("kkmp_login_email");
   localStorage.removeItem("kkmp_intended");
   localStorage.removeItem("kkmp_name");
-  // Bersihkan legacy storage jika ada
-  localStorage.removeItem("smartmbg_role");
-  localStorage.removeItem("smart_mbg_user");
-  localStorage.removeItem("smartmbg_login_email");
-  localStorage.removeItem("smartmbg_intended");
-  localStorage.removeItem("smartmbg_name");
+  localStorage.removeItem("kkmp_phone");
+  localStorage.removeItem("kkmp_nik");
   base44.auth.logout(redirectPath);
 }

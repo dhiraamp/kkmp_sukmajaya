@@ -23,7 +23,7 @@ const produkPembiayaan = [
   },
   {
     nama: "Pembiayaan Modal Kerja iB",
-    deskripsi: "Pembiayaan modal kerja untuk pengadaan bahan pangan SPPG MBG menggunakan akad Mudharabah",
+    deskripsi: "Pembiayaan modal kerja untuk pengadaan komoditas pangan KKMP Depok menggunakan akad Mudharabah",
     plafon: "Rp 50 juta – Rp 500 juta",
     tenor: "12 – 60 bulan",
     margin: "1,2% / bulan (flat)",
@@ -33,7 +33,7 @@ const produkPembiayaan = [
   },
   {
     nama: "Pembiayaan Investasi iB",
-    deskripsi: "Pembiayaan untuk pengembangan kapasitas produksi dan infrastruktur supplier MBG",
+    deskripsi: "Pembiayaan untuk pengembangan kapasitas produksi dan infrastruktur supplier pangan KKMP",
     plafon: "Rp 500 juta – Rp 5 miliar",
     tenor: "24 – 120 bulan",
     margin: "1,0% / bulan (flat)",
@@ -142,7 +142,7 @@ export default function SupplierLoanServices() {
               <Building2 className="w-8 h-8 text-blue-700 shrink-0" />
               <div>
                 <p className="font-semibold text-sm text-blue-900">Tentang BJB Syariah</p>
-                <p className="text-xs text-blue-700">Bank BJB Syariah adalah mitra resmi SMART MBG dalam penyediaan pembiayaan syariah untuk supplier, mitra SPPG, dan pelaku logistik. Semua produk sesuai prinsip syariah Islam dan telah mendapat persetujuan OJK.</p>
+                <p className="text-xs text-blue-700">Bank BJB Syariah adalah mitra resmi KKMP Kota Depok dalam penyediaan pembiayaan syariah untuk supplier pangan, mitra pos cabang, dan pelaku logistik. Semua produk sesuai prinsip syariah Islam dan telah mendapat persetujuan OJK.</p>
               </div>
             </CardContent>
           </Card>
@@ -298,7 +298,7 @@ export default function SupplierLoanServices() {
                 </div>
               )}
               <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-700">
-                <strong>Info:</strong> Untuk informasi lebih lanjut hubungi BJBS Garut: (0262) 241-8000 atau email cs.garut@bjbsyariah.co.id
+                <strong>Info:</strong> Untuk informasi lebih lanjut hubungi Layanan BJB Syariah KC Depok: (021) 7720-8000 atau email cs.depok@bjbsyariah.co.id
               </div>
             </CardContent>
           </Card>

@@ -12,7 +12,7 @@ const DELIVERY_FEE = 12000;
 export default function WargaKeranjang() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || "";
   const wargaUser = { email, id: user?.id || email, role: "penerima" };
   const { cartItems, loading, updateQty, removeFromCart, clearCart, totalItems, subtotal } = useCart(wargaUser);
   const [clearing, setClearing] = useState(false);

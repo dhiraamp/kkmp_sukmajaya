@@ -32,7 +32,7 @@ const BANK_ACCOUNTS = [
 export default function WargaCheckout() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const email = user?.email || localStorage.getItem("kkmp_login_email") || localStorage.getItem("smartmbg_login_email") || "";
+  const email = user?.email || localStorage.getItem("kkmp_login_email") || "";
   const wargaUser = { email, id: user?.id || email, role: "penerima" };
   const { cartItems, loading, clearCart, totalItems, subtotal } = useCart(wargaUser);
 
@@ -108,7 +108,7 @@ export default function WargaCheckout() {
       // Kirim ke rantai pasok: buat Order di penyimpanan bersama (dilihat Supplier & Logistik).
       let remoteId = null;
       try {
-        const customerName = localStorage.getItem("kkmp_name") || localStorage.getItem("smartmbg_name") || user?.full_name || email.split("@")[0] || "Anggota";
+        const customerName = localStorage.getItem("kkmp_name") || user?.full_name || email.split("@")[0] || "Anggota";
         const addressText = [selectedAddress.full_address, selectedAddress.village, selectedAddress.district, selectedAddress.regency].filter(Boolean).join(", ");
         const remote = await base44.entities.Order.create({
           order_number: order.order_number,

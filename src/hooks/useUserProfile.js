@@ -21,7 +21,7 @@ export function useUserProfile() {
           if (profiles.length > 0) {
             setProfile(profiles[0]);
           } else {
-            const storedRole = localStorage.getItem("smartmbg_role") || "mitra";
+            const storedRole = localStorage.getItem("kkmp_role") || "mitra";
             const newProfile = await base44.entities.UserProfile.create({
               user_id: me.id || me.email,
               user_email: me.email,
@@ -50,7 +50,7 @@ export function useUserProfile() {
 
   const mergedUser = user ? {
     ...user,
-    role: profile?.role || localStorage.getItem("smartmbg_role") || user?.role || "mitra",
+    role: profile?.role || localStorage.getItem("kkmp_role") || user?.role || "mitra",
     organization_name: profile?.organization_name || "",
     phone: profile?.phone || "",
     address: profile?.address || "",

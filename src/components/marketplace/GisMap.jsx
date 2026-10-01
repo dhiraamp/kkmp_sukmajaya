@@ -82,7 +82,7 @@ function makeIcon(color, size = 22) {
 
 // Helper pembersih nama sekolah dari teks header PDF
 export function cleanSchoolName(name) {
-  if (!name) return "Sasaran Penerima MBG";
+  if (!name) return "Sasaran Penerima Manfaat KKMP";
   let str = name.trim();
   if (str.toUpperCase().includes("SPPG")) {
     const match = str.match(
@@ -281,8 +281,8 @@ export default function GisMap() {
       }
     };
 
-    window.addEventListener("smartmbg_gis_updated", handleUpdate);
-    return () => window.removeEventListener("smartmbg_gis_updated", handleUpdate);
+    window.addEventListener("kkmp_gis_updated", handleUpdate);
+    return () => window.removeEventListener("kkmp_gis_updated", handleUpdate);
   }, []);
 
   const toggle = (key) => setActive((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -549,27 +549,21 @@ export default function GisMap() {
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-1">
             <MapPinned className="w-5 h-5 text-emerald-600" />
-            <h2 className="text-xl font-bold text-gray-900 tracking-tight">Peta Sebaran GIS MBG Garut</h2>
+            <h2 className="text-xl font-bold text-gray-900 tracking-tight">Peta Sebaran Rantai Pasok KKMP Kota Depok</h2>
             <Badge className="bg-emerald-50 text-emerald-700 border-emerald-300 gap-1 text-[11px] font-semibold py-0.5">
               <Globe className="w-3 h-3 text-emerald-600" />
-              Terintegrasi Disperindag Garut
+              KKMP Kota Depok
             </Badge>
             <Badge className="bg-blue-50 text-blue-700 border-blue-200 text-[11px] font-semibold py-0.5">
-              {rawDapur.length} Dapur SPPG · {rawSekolah.length} Sekolah
+              {rawDapur.length} Pos Cabang · {rawSekolah.length} Titik Manfaat
             </Badge>
           </div>
           <p className="text-xs text-gray-500">
             Sumber Data:{" "}
-            <a
-              href="https://mistermbg.disperindag.garutkab.go.id/mbg"
-              target="_blank"
-              rel="noreferrer"
-              className="text-emerald-600 font-medium hover:underline inline-flex items-center gap-0.5"
-            >
-              mistermbg.disperindag.garutkab.go.id/mbg
-              <ExternalLink className="w-2.5 h-2.5" />
-            </a>{" "}
-            · Pemetaan 446 Dapur SPPG, 1.611 Sekolah Sasaran, Penerima Manfaat, Supplier &amp; Logistik Garut
+            <span className="text-emerald-600 font-medium inline-flex items-center gap-0.5">
+              kkmp-mekarjaya.depok.go.id
+            </span>{" "}
+            · Pemetaan Gudang Induk, Pos Cabang, Titik Penerima Manfaat, Supplier Komoditas &amp; Rute Distribusi Depok
           </p>
         </div>
 
@@ -1047,8 +1041,8 @@ export default function GisMap() {
                   }}
                 >
                   <Popup>
-                    <p className="text-xs font-bold text-red-600">Zona Heatmap Layanan MBG</p>
-                    <p className="text-xs text-gray-700 font-medium">Wilayah: {h.area || "Garut"}</p>
+                    <p className="text-xs font-bold text-red-600">Zona Heatmap Distribusi KKMP</p>
+                    <p className="text-xs text-gray-700 font-medium">Wilayah: {h.area || "Depok"}</p>
                     <p className="text-[11px] text-gray-500">Tingkat Konsumsi: {h.intensitas || 5}/10</p>
                   </Popup>
                 </Circle>
@@ -1271,39 +1265,39 @@ export default function GisMap() {
               {selectedEntityType === "sekolah" && (
                 <>
                   <School className="w-5 h-5 text-blue-600" />
-                  Direktori Sekolah Sasaran Distribusi MBG
+                  Direktori Titik Distribusi & Penerima Manfaat
                 </>
               )}
               {selectedEntityType === "penerima" && (
                 <>
                   <Users className="w-5 h-5 text-pink-600" />
-                  Direktori Sasaran Penerima Manfaat Gizi
+                  Direktori Sasaran Penerima Manfaat Komunitas
                 </>
               )}
               {selectedEntityType === "supplier" && (
                 <>
                   <Factory className="w-5 h-5 text-orange-600" />
-                  Direktori Supplier Pangan Binaan Garut
+                  Direktori Supplier Pangan Binaan KKMP
                 </>
               )}
               {selectedEntityType === "jalur" && (
                 <>
                   <Route className="w-5 h-5 text-purple-600" />
-                  Direktori Jalur Distribusi Logistik
+                  Direktori Jalur Distribusi Logistik KKMP
                 </>
               )}
             </h3>
             <p className="text-xs text-muted-foreground mt-0.5">
               {selectedEntityType === "dapur" &&
-                "Daftar Satuan Pelayanan Pangan Bergizi resmi di Kabupaten Garut dengan rincian nama, wilayah, dan kapasitas"}
+                "Daftar Pos Cabang & Gudang Terpadu KKMP resmi di Kota Depok dengan rincian nama, wilayah, dan kapasitas"}
               {selectedEntityType === "sekolah" &&
-                "Daftar 1.611 satuan pendidikan penerima paket MBG harian terdata resmi di 36 kecamatan Kabupaten Garut"}
+                "Daftar titik distribusi dan penerima manfaat binaan harian terdata resmi di wilayah Kota Depok"}
               {selectedEntityType === "penerima" &&
-                "Rincian penerima manfaat harian: Siswa SD/SMP/SMA, PAUD, Balita, serta Ibu Hamil & Menyusui"}
+                "Rincian penerima manfaat harian: Komunitas, Siswa Sekolah Binaan, serta Anggota Koperasi KKMP"}
               {selectedEntityType === "supplier" &&
-                "Kelompok tani, peternak, nelayan & UMKM pangan lokal terverifikasi pemasok bahan baku dapur SPPG"}
+                "Kelompok tani, peternak, distributor & UMKM pangan lokal terverifikasi pemasok bahan baku KKMP"}
               {selectedEntityType === "jalur" &&
-                "Jalur distribusi logistik terjadwal dari Central Hub Garut Kota menuju unit dapur SPPG kecamatan"}
+                "Jalur distribusi logistik terjadwal dari Gudang Pusat Mekarjaya menuju pos-pos cabang KKMP kecamatan"}
             </p>
           </div>
 
@@ -1473,20 +1467,20 @@ export default function GisMap() {
                             </h4>
                             <p className="text-xs text-gray-500 font-medium flex items-center gap-1 mt-1">
                               <MapPin className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                              Kecamatan {s.kecamatan}, Garut
+                              Kecamatan {s.kecamatan}, Depok
                             </p>
                           </div>
 
                           <div className="bg-gray-50 border border-gray-100 rounded-xl p-2.5 space-y-1.5 text-xs">
                             <div className="flex items-center justify-between">
-                              <span className="text-gray-500 font-medium">Siswa Penerima MBG:</span>
+                              <span className="text-gray-500 font-medium">Penerima Manfaat:</span>
                               <span className="font-extrabold text-blue-700 text-sm">
-                                {(s.siswa || 0).toLocaleString("id-ID")} Siswa
+                                {(s.siswa || 0).toLocaleString("id-ID")} Orang
                               </span>
                             </div>
                             <div className="text-[11px] text-gray-600 pt-1 border-t border-gray-200/60 truncate">
-                              <span className="font-semibold text-gray-700">🏢 Dapur Penyuplai:</span>{" "}
-                              {linkedDapur ? linkedDapur.clean_title || linkedDapur.name : "SPPG Garut Terdekat"}
+                              <span className="font-semibold text-gray-700">🏢 Pos Penyuplai:</span>{" "}
+                              {linkedDapur ? linkedDapur.clean_title || linkedDapur.name : "Pos Cabang KKMP Terdekat"}
                             </div>
                           </div>
                         </div>
@@ -1817,7 +1811,7 @@ export default function GisMap() {
                 </DialogTitle>
                 <DialogDescription className="text-xs text-gray-600 mt-0.5">
                   Lembaga Penyelenggara:{" "}
-                  <strong>{selectedSppgModal.yayasan || "Yayasan Mitra MBG Garut"}</strong>
+                  <strong>{selectedSppgModal.yayasan || "Koperasi Kelurahan Merah Putih Bersama"}</strong>
                 </DialogDescription>
               </DialogHeader>
 
@@ -1918,7 +1912,7 @@ export default function GisMap() {
                   {cleanSchoolName(selectedSekolahModal.name)}
                 </DialogTitle>
                 <DialogDescription className="text-xs text-gray-600 mt-0.5">
-                  Satuan Pendidikan Penerima Manfaat MBG Terdata Resmi Disperindag Kabupaten Garut
+                  Titik Distribusi Penerima Manfaat Terdata Resmi KKMP Kota Depok
                 </DialogDescription>
               </DialogHeader>
 
@@ -2103,7 +2097,7 @@ export default function GisMap() {
                   {selectedSupplierModal.name}
                 </DialogTitle>
                 <DialogDescription className="text-xs text-gray-600 mt-0.5">
-                  Mitra Penyedia Bahan Baku Resmi Program MBG Disperindag Kabupaten Garut
+                  Mitra Penyedia Bahan Baku Resmi KKMP Kota Depok
                 </DialogDescription>
               </DialogHeader>
 
@@ -2115,7 +2109,7 @@ export default function GisMap() {
                 <div className="bg-emerald-50/70 p-3 rounded-xl border border-emerald-100">
                   <span className="text-emerald-800 font-medium block">Kontak / Narahubung</span>
                   <span className="text-sm font-bold text-emerald-950">
-                    {selectedSupplierModal.kontak || "Tersedia di Disperindag"}
+                    {selectedSupplierModal.kontak || "Tersedia di Kantor KKMP Depok"}
                   </span>
                 </div>
               </div>

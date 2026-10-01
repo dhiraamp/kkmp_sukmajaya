@@ -97,10 +97,9 @@ export default function Portal() {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      const intended = localStorage.getItem("kkmp_intended") || localStorage.getItem("smartmbg_intended");
+      const intended = localStorage.getItem("kkmp_intended");
       if (intended && intended !== "/portal" && intended !== "/") {
         localStorage.removeItem("kkmp_intended");
-        localStorage.removeItem("smartmbg_intended");
         navigate(intended, { replace: true });
       }
     }
@@ -134,15 +133,11 @@ export default function Portal() {
       const userRole = loggedUser.role || selectedRole;
       localStorage.setItem("kkmp_role", userRole);
       localStorage.setItem("kkmp_login_email", email.trim());
-      // Backwards compatibility
-      localStorage.setItem("smartmbg_role", userRole);
-      localStorage.setItem("smartmbg_login_email", email.trim());
       await checkUserAuth();
 
-      const intended = localStorage.getItem("kkmp_intended") || localStorage.getItem("smartmbg_intended");
+      const intended = localStorage.getItem("kkmp_intended");
       if (intended && intended !== "/portal" && intended !== "/") {
         localStorage.removeItem("kkmp_intended");
-        localStorage.removeItem("smartmbg_intended");
         navigate(intended, { replace: true });
       } else {
         toast.success("Berhasil Masuk!", {
