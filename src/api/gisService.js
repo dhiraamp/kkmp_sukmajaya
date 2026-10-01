@@ -16,8 +16,7 @@ const EVENT_NAME = "kkmp_gis_updated";
 
 // Titik Pusat Hub: Gudang Induk KKMP Sukmajaya, Sukmajaya, Kota Depok
 export const DEPOK_HUB = { lat: -6.3980, lng: 106.8420 };
-// Alias kompatibilitas
-export const GARUT_HUB = DEPOK_HUB;
+export const SUKMAJAYA_HUB = DEPOK_HUB;
 
 export const KECAMATAN_COORDS = {
   // Kota Depok
@@ -41,7 +40,7 @@ export const KKMP_DEPOK_BASELINE = {
   portal_name: "Portal Geospasial Rantai Pasok KKMP Sukmajaya Kota Depok",
   lastUpdated: new Date().toISOString(),
   status: "verified_koperasi_network",
-  totalSppgTerdaftar: 9,
+  totalPosCabangTerdaftar: 9,
   totalSasaranPenerima: 3200,
 
   // Titik Pos Cabang & Gudang Induk
@@ -216,9 +215,6 @@ export const KKMP_DEPOK_BASELINE = {
   ],
 };
 
-// Alias kompatibilitas penuh untuk modul yang mengimpor DISPERINDAG_GARUT_BASELINE
-export const DISPERINDAG_GARUT_BASELINE = KKMP_DEPOK_BASELINE;
-
 /**
  * Mengambil data GIS lengkap yang aktif.
  * Mengutamakan data lokal KKMP Kota Depok yang tersimpan, fallback ke baseline resmi.
@@ -272,7 +268,7 @@ export function saveGisData(newData) {
 /**
  * Parser Fleksibel untuk mengimpor berkas spasial (GeoJSON, JSON, CSV).
  */
-export function importDisperindagData(content, hint = "json") {
+export function importKkmpGisData(content, hint = "json") {
   try {
     let parsedData = null;
 
@@ -443,7 +439,7 @@ export function importDisperindagData(content, hint = "json") {
 /**
  * Mengembalikan data GIS ke dataset bawaan resmi KKMP Kota Depok.
  */
-export function resetToDisperindagBaseline() {
+export function resetToKkmpBaseline() {
   return saveGisData(KKMP_DEPOK_BASELINE);
 }
 

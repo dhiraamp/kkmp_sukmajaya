@@ -46,14 +46,14 @@ export default function AdminGis() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold tracking-tight">Peta Geospasial Jaringan 8 Cabang KKMP Depok</h2>
+            <h2 className="text-2xl font-bold tracking-tight">Peta Geospasial Jaringan Pos Cabang KKMP Kota Depok</h2>
             <Badge className="bg-red-50 text-red-700 border-red-300 gap-1 text-xs">
               <Globe className="w-3.5 h-3.5 text-red-600" />
               KKMP Kota Depok
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm mt-1">
-            Manajemen data spasial Gudang Pusat Sukmajaya, 8 Pos Cabang, dan Rute Logistik se-Kota Depok
+            Manajemen data spasial Gudang Induk Sukmajaya, Pos Cabang, dan Rute Logistik se-Kota Depok
           </p>
         </div>
 
@@ -86,7 +86,7 @@ export default function AdminGis() {
             </div>
             <div>
               <p className="text-xs text-muted-foreground font-medium">Pos Cabang KKMP</p>
-              <p className="text-xl font-bold text-gray-900">{dapurCount || 8} Titik</p>
+              <p className="text-xl font-bold text-gray-900">{dapurCount || 9} Titik</p>
             </div>
           </CardContent>
         </Card>

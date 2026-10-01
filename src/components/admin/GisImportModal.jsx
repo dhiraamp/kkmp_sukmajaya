@@ -24,8 +24,8 @@ import {
 } from "lucide-react";
 import {
   getGisData,
-  importDisperindagData,
-  resetToDisperindagBaseline,
+  importKkmpGisData,
+  resetToKkmpBaseline,
   exportToGeoJson,
 } from "@/api/gisService";
 import { toast } from "sonner";
@@ -50,7 +50,7 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
     reader.onload = (ev) => {
       try {
         const content = ev.target.result;
-        const res = importDisperindagData(content);
+        const res = importKkmpGisData(content);
         if (res.success) {
           setPreviewResult(res);
           toast.success("Data Berhasil Dimuat", { description: res.message });
@@ -75,7 +75,7 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
 
     setLoading(true);
     try {
-      const res = importDisperindagData(pastedText);
+      const res = importKkmpGisData(pastedText);
       if (res.success) {
         setPreviewResult(res);
         toast.success("Data Berhasil Disinkronkan", { description: res.message });
@@ -93,7 +93,7 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
   const handleSyncBaseline = () => {
     setLoading(true);
     try {
-      const data = resetToDisperindagBaseline();
+      const data = resetToKkmpBaseline();
       toast.success("Dataset KKMP Depok Disinkronkan", {
         description: `Memuat ${data.dapur.length} Pos Cabang & Gudang, ${data.sekolah.length} Titik Komunitas, dan ${data.supplier.length} Supplier Pangan KKMP.`,
       });
@@ -267,11 +267,11 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               <div className="bg-emerald-50/70 border border-emerald-200 p-3 rounded-2xl text-center">
                 <p className="text-xl font-bold text-emerald-800">{currentGis.dapur?.length || 0}</p>
-                <p className="text-[11px] font-semibold text-emerald-700">Dapur SPPG</p>
+                <p className="text-[11px] font-semibold text-emerald-700">Pos Cabang KKMP</p>
               </div>
               <div className="bg-blue-50/70 border border-blue-200 p-3 rounded-2xl text-center">
                 <p className="text-xl font-bold text-blue-800">{currentGis.sekolah?.length || 0}</p>
-                <p className="text-[11px] font-semibold text-blue-700">Sekolah Sasaran</p>
+                <p className="text-[11px] font-semibold text-blue-700">Titik Penyaluran Komunitas</p>
               </div>
               <div className="bg-orange-50/70 border border-orange-200 p-3 rounded-2xl text-center">
                 <p className="text-xl font-bold text-orange-800">{currentGis.supplier?.length || 0}</p>

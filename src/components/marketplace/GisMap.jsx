@@ -47,7 +47,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { getGisData, KECAMATAN_COORDS, GARUT_HUB } from "@/api/gisService";
+import { getGisData, KECAMATAN_COORDS, DEPOK_HUB } from "@/api/gisService";
 import GisImportModal from "@/components/admin/GisImportModal";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -69,7 +69,8 @@ const COLOR = {
   heatmap: "#ef4444",
 };
 
-const GARUT_CENTER = [-6.3980, 106.8420]; // Depok Hub Sukmajaya
+const DEPOK_SUKMAJAYA_CENTER = [-6.3980, 106.8420]; // Depok Hub Sukmajaya
+const DEPOK_CENTER = DEPOK_SUKMAJAYA_CENTER;
 
 function makeIcon(color, size = 22) {
   return L.divIcon({
@@ -80,19 +81,10 @@ function makeIcon(color, size = 22) {
   });
 }
 
-// Helper pembersih nama sekolah dari teks header PDF
+// Helper pembersih nama titik manfaat
 export function cleanSchoolName(name) {
   if (!name) return "Sasaran Penerima Manfaat KKMP";
-  let str = name.trim();
-  if (str.toUpperCase().includes("SPPG")) {
-    const match = str.match(
-      /\b(SDN|SD|SMPN|SMP|SMAN|SMA|SMKN|SMK|TK|PAUD|KOBER|RA|MI|MTS|MTs|MA|SPS|SLB|SLBS|POSYANDU|POS YANDU|BALITA|BUMIL|BUSUI)\b.*$/i
-    );
-    if (match) {
-      return match[0].trim();
-    }
-  }
-  return str.replace(/^\d+\s+SPPG\s+[^a-z0-9]+/i, "").trim();
+  return name.trim();
 }
 
 // Helper pengkategori penerima manfaat
@@ -146,7 +138,7 @@ function MapResizer() {
   return null;
 }
 
-// Komponen kontrol navigasi peta (Zoom In, Zoom Out, Pusat Garut, Fit Bounds)
+// Komponen kontrol navigasi peta (Zoom In, Zoom Out, Pusat Sukmajaya Depok, Fit Bounds)
 function MapNavigationControls({ center, selectedKecamatan, filteredEntities }) {
   const map = useMap();
   const [currentZoom, setCurrentZoom] = useState(11);
@@ -253,7 +245,7 @@ export default function GisMap() {
   });
 
   // Modal State
-  const [selectedSppgModal, setSelectedSppgModal] = useState(null);
+  const [selectedPosModal, setSelectedPosModal] = useState(null);
   const [selectedSekolahModal, setSelectedSekolahModal] = useState(null);
   const [selectedSupplierModal, setSelectedSupplierModal] = useState(null);
   const [selectedJalurModal, setSelectedJalurModal] = useState(null);
@@ -293,19 +285,22 @@ export default function GisMap() {
   const rawJalur = gisData.jalur || [];
   const rawHeatmap = gisData.heatmap || [];
 
-  // Peta lookup ID SPPG -> Dapur Object untuk relasi sekolah
+  // Peta lookup ID Pos Cabang -> Objek Pos Cabang untuk relasi titik manfaat
   const dapurLookup = useMemo(() => {
     const map = new Map();
     rawDapur.forEach((d) => {
       map.set(d.id, d);
       if (d.code) map.set(d.code, d);
-      const cleanNum = d.id.replace("sppg_", "");
-      map.set(`sppg_${parseInt(cleanNum, 10)}`, d);
+      const cleanNum = String(d.id).replace(/[^0-9]/g, "");
+      if (cleanNum) {
+        map.set(`pos_${parseInt(cleanNum, 10)}`, d);
+        map.set(parseInt(cleanNum, 10), d);
+      }
     });
     return map;
   }, [rawDapur]);
 
-  // Daftar unik kecamatan gabungan se-Garut
+  // Daftar unik kecamatan gabungan se-Kota Depok
   const kecamatanList = useMemo(() => {
     const setKec = new Set([
       ...rawDapur.map((d) => d.kecamatan).filter(Boolean),
@@ -328,13 +323,13 @@ export default function GisMap() {
         : [];
 
     dataset.forEach((item) => {
-      const k = item.kecamatan || "Garut Kota";
+      const k = item.kecamatan || "Sukmajaya";
       map[k] = (map[k] || 0) + 1;
     });
     return map;
   }, [selectedEntityType, rawDapur, rawSekolah, rawSupplier]);
 
-  // FILTER 1: Dapur SPPG
+  // FILTER 1: Pos Cabang KKMP
   const filteredDapur = useMemo(() => {
     return rawDapur.filter((d) => {
       if (selectedKecamatan !== "all" && d.kecamatan !== selectedKecamatan) return false;
@@ -520,23 +515,23 @@ export default function GisMap() {
   const getSearchPlaceholder = () => {
     switch (selectedEntityType) {
       case "dapur":
-        return "Cari Kode SPPG, Nama Desa, Yayasan...";
+        return "Cari Kode Pos Cabang, Nama Pos Cabang, Kelurahan...";
       case "sekolah":
-        return "Cari Nama Sekolah, Jenjang (SD, SMP, SMA)...";
+        return "Cari Titik Penyaluran, Komunitas, Sekolah...";
       case "penerima":
-        return "Cari Sasaran Balita, Siswa, Posyandu, Bumil...";
+        return "Cari Sasaran Warga, Balita, Lansia, Komunitas...";
       case "supplier":
-        return "Cari Supplier, Komoditas (Beras, Telur, Sayur)...";
+        return "Cari Supplier, Komoditas (Beras, Minyak, Telur)...";
       case "jalur":
-        return "Cari Dapur Tujuan, Rute Distribusi...";
+        return "Cari Pos Cabang Tujuan, Rute Distribusi...";
       default:
         return "Cari data...";
     }
   };
 
   const LAYERS = [
-    { key: "dapur", label: "Lokasi Dapur (SPPG)", icon: Utensils, color: COLOR.dapur, count: filteredDapur.length },
-    { key: "sekolah", label: "Sekolah Sasaran", icon: School, color: COLOR.sekolah, count: filteredSekolah.length },
+    { key: "dapur", label: "Pos Cabang KKMP", icon: Utensils, color: COLOR.dapur, count: filteredDapur.length },
+    { key: "sekolah", label: "Titik Penyaluran", icon: School, color: COLOR.sekolah, count: filteredSekolah.length },
     { key: "supplier", label: "Supplier Pangan", icon: Factory, color: COLOR.supplier, count: filteredSupplier.length },
     { key: "jalur", label: "Jalur Distribusi", icon: Route, color: COLOR.jalur, count: filteredJalur.length },
     { key: "heatmap", label: "Heatmap Layanan", icon: Flame, color: COLOR.heatmap, count: rawHeatmap.length },
@@ -544,7 +539,7 @@ export default function GisMap() {
 
   return (
     <section className="w-full mx-auto py-2">
-      {/* Header GIS dengan Badge Integrasi Disperindag */}
+      {/* Header GIS dengan Badge Integrasi Jaringan KKMP Sukmajaya */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-1">
@@ -575,7 +570,7 @@ export default function GisMap() {
             className="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs h-9 shadow-sm gap-1.5 cursor-pointer"
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
-            Sinkronkan Data Disperindag
+            Sinkronkan Jaringan Spasial KKMP
           </Button>
         </div>
       </div>
@@ -614,8 +609,8 @@ export default function GisMap() {
                 onChange={(e) => handleEntityChange(e.target.value)}
                 className="w-full pl-3 pr-8 py-2 text-xs font-bold bg-emerald-50/90 border-2 border-emerald-500/50 text-emerald-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer shadow-xs transition-all appearance-none"
               >
-                <option value="dapur">🏢 Dapur SPPG ({filteredDapur.length})</option>
-                <option value="sekolah">🏫 Sekolah Sasaran ({filteredSekolah.length})</option>
+                <option value="dapur">🏪 Pos Cabang KKMP ({filteredDapur.length})</option>
+                <option value="sekolah">🏫 Titik Penyaluran ({filteredSekolah.length})</option>
                 <option value="penerima">👥 Penerima Manfaat ({totalSiswaFiltered.toLocaleString("id-ID")})</option>
                 <option value="supplier">🌾 Supplier Pangan ({filteredSupplier.length})</option>
                 <option value="jalur">🚚 Jalur Logistik ({filteredJalur.length})</option>
@@ -650,7 +645,7 @@ export default function GisMap() {
             </div>
           </div>
 
-          {/* 3. DROPDOWN KECAMATAN GARUT */}
+          {/* 3. DROPDOWN KECAMATAN / WILAYAH */}
           <div className="md:col-span-3 lg:col-span-4">
             <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-1">
               Wilayah Kecamatan ({kecamatanList.length}):
@@ -680,7 +675,7 @@ export default function GisMap() {
               Kategori Spesifik:
             </span>
 
-            {/* Sub-filter untuk Dapur SPPG */}
+            {/* Sub-filter untuk Pos Cabang KKMP */}
             {selectedEntityType === "dapur" && (
               <>
                 <button
@@ -703,7 +698,7 @@ export default function GisMap() {
                       : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
                   }`}
                 >
-                  &gt; 2.500 Porsi
+                  &gt; 2.500 Paket/Bln
                 </button>
                 <button
                   type="button"
@@ -957,9 +952,9 @@ export default function GisMap() {
             Entitas Terfilter:{" "}
             <strong className="text-gray-900">
               {selectedEntityType === "dapur"
-                ? `${filteredDapur.length} Dapur SPPG`
+                ? `${filteredDapur.length} Pos Cabang KKMP`
                 : selectedEntityType === "sekolah"
-                ? `${filteredSekolah.length} Sekolah Sasaran`
+                ? `${filteredSekolah.length} Titik Penyaluran`
                 : selectedEntityType === "penerima"
                 ? `${totalSiswaFiltered.toLocaleString("id-ID")} Siswa & Balita`
                 : selectedEntityType === "supplier"
@@ -998,7 +993,7 @@ export default function GisMap() {
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm relative z-0">
         <div style={{ height: "560px", width: "100%", position: "relative" }}>
           <MapContainer
-            center={GARUT_CENTER}
+            center={DEPOK_CENTER}
             zoom={11}
             style={{ height: "100%", width: "100%", minHeight: "560px" }}
             scrollWheelZoom={true}
@@ -1007,7 +1002,7 @@ export default function GisMap() {
             <MapInstanceBridge setMapInstance={setMapInstance} />
             <MapResizer />
             <MapNavigationControls
-              center={GARUT_CENTER}
+              center={DEPOK_CENTER}
               selectedKecamatan={selectedKecamatan}
               filteredEntities={
                 selectedEntityType === "dapur"
@@ -1159,20 +1154,20 @@ export default function GisMap() {
                 );
               })}
 
-            {/* Marker Dapur (SPPG) Terfilter */}
+            {/* Marker Pos Cabang KKMP Terfilter */}
             {active.dapur &&
               filteredDapur.map((d, i) => {
-                const sppgCode = d.code || `SPPG-${String(i + 1).padStart(3, "0")}`;
+                const posCode = d.code || `POS-${String(i + 1).padStart(3, "0")}`;
                 const displayName = d.desa_unit || d.clean_title || d.name;
 
                 return (
                   <Marker key={`dapur-${d.id || i}`} position={[d.lat, d.lng]} icon={makeIcon(COLOR.dapur)}>
-                    <Popup className="custom-sppg-popup">
+                    <Popup className="custom-pos-popup">
                       <div className="p-1 space-y-2 max-w-[280px]">
                         {/* Header Popup */}
                         <div className="flex items-center justify-between gap-2 border-b border-gray-100 pb-1.5">
                           <span className="text-[11px] font-extrabold bg-emerald-600 text-white px-2 py-0.5 rounded-md shadow-xs tracking-wider">
-                            {sppgCode}
+                            {posCode}
                           </span>
                           <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-full flex items-center gap-1">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
@@ -1185,21 +1180,21 @@ export default function GisMap() {
                           <h4 className="text-sm font-bold text-gray-900 leading-snug">{displayName}</h4>
                           <p className="text-[11px] text-gray-500 font-medium flex items-center gap-1 mt-0.5">
                             <MapPin className="w-3 h-3 text-emerald-600 shrink-0" />
-                            Kecamatan {d.kecamatan || "Garut Kota"}
+                            Kecamatan {d.kecamatan || "Sukmajaya"}
                           </p>
                         </div>
 
                         {/* Kapasitas & Yayasan */}
                         <div className="bg-emerald-50/70 border border-emerald-100 rounded-xl p-2 space-y-1">
                           <div className="flex items-center justify-between text-[11px]">
-                            <span className="text-gray-600 font-medium">Kapasitas Harian:</span>
+                            <span className="text-gray-600 font-medium">Kapasitas Penyaluran:</span>
                             <span className="font-bold text-emerald-800">
-                              {(d.kapasitas || 0).toLocaleString("id-ID")} Porsi
+                              {(d.kapasitas || 0).toLocaleString("id-ID")} Paket/Bulan
                             </span>
                           </div>
                           {d.yayasan && (
                             <div className="text-[10px] text-gray-600 pt-1 border-t border-emerald-100/80 truncate">
-                              <span className="font-semibold text-gray-700">🏢 Yayasan:</span> {d.yayasan}
+                              <span className="font-semibold text-gray-700">🏢 Pengelola:</span> {d.yayasan}
                             </div>
                           )}
                         </div>
@@ -1207,10 +1202,10 @@ export default function GisMap() {
                         {/* Tombol Detail Sasaran */}
                         <button
                           type="button"
-                          onClick={() => setSelectedSppgModal(d)}
+                          onClick={() => setSelectedPosModal(d)}
                           className="w-full py-1.5 bg-gray-900 hover:bg-black text-white text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1 transition-all shadow-xs cursor-pointer"
                         >
-                          Lihat Rincian Sasaran &amp; Sekolah
+                          Lihat Rincian Sasaran &amp; Penyaluran
                           <ArrowRight className="w-3 h-3" />
                         </button>
                       </div>
@@ -1226,7 +1221,7 @@ export default function GisMap() {
       <div className="flex flex-wrap items-center justify-between gap-3 mt-3 text-xs text-gray-500 bg-white p-3 rounded-xl border border-gray-200">
         <div className="flex flex-wrap items-center gap-4">
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full" style={{ background: COLOR.dapur }} /> Dapur SPPG (
+            <span className="w-2.5 h-2.5 rounded-full" style={{ background: COLOR.dapur }} /> Pos Cabang KKMP (
             {filteredDapur.length})
           </span>
           <span className="flex items-center gap-1.5">
@@ -1246,7 +1241,7 @@ export default function GisMap() {
           </span>
         </div>
         <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Data Aktif Disperindag Garut
+          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Data Resmi Jaringan KKMP Sukmajaya Kota Depok
         </span>
       </div>
 
@@ -1259,7 +1254,7 @@ export default function GisMap() {
               {selectedEntityType === "dapur" && (
                 <>
                   <Building2 className="w-5 h-5 text-emerald-600" />
-                  Direktori Dapur SPPG Terverifikasi
+                  Direktori Pos Cabang KKMP Terverifikasi
                 </>
               )}
               {selectedEntityType === "sekolah" && (
@@ -1317,13 +1312,13 @@ export default function GisMap() {
           </div>
         </div>
 
-        {/* 1. KONTEN DIREKTORI DAPUR SPPG */}
+        {/* 1. KONTEN DIREKTORI POS CABANG KKMP */}
         {selectedEntityType === "dapur" && (
           <>
             {filteredDapur.length === 0 ? (
               <div className="text-center py-12 bg-white rounded-2xl border border-gray-200 p-6">
                 <Utensils className="w-10 h-10 text-gray-300 mx-auto mb-2" />
-                <h4 className="text-sm font-bold text-gray-800">Tidak ada Dapur SPPG yang sesuai</h4>
+                <h4 className="text-sm font-bold text-gray-800">Tidak ada Pos Cabang yang sesuai</h4>
                 <p className="text-xs text-gray-500 mt-1">Coba ganti kata kunci pencarian atau reset filter.</p>
                 <Button size="sm" variant="outline" onClick={handleResetFilters} className="mt-3 text-xs">
                   Reset Filter
@@ -1333,7 +1328,7 @@ export default function GisMap() {
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
                   {filteredDapur.slice(0, visibleListCount).map((d, idx) => {
-                    const sppgCode = d.code || `SPPG-${String(idx + 1).padStart(3, "0")}`;
+                    const posCode = d.code || `POS-${String(idx + 1).padStart(3, "0")}`;
                     const displayName = d.desa_unit || d.clean_title || d.name;
                     const sasaranCount = d.jumlah_sasaran || (d.sasaran || []).length || 0;
 
@@ -1346,41 +1341,41 @@ export default function GisMap() {
                           {/* Badge Header Bar */}
                           <div className="flex items-center justify-between gap-2">
                             <span className="text-[11px] font-black bg-emerald-600 text-white px-2.5 py-0.5 rounded-lg shadow-xs tracking-wide">
-                              {sppgCode}
+                              {posCode}
                             </span>
                             <Badge variant="outline" className="text-[10px] bg-emerald-50 text-emerald-800 border-emerald-200">
                               Kec. {d.kecamatan}
                             </Badge>
                           </div>
 
-                          {/* Nama SPPG */}
+                          {/* Nama Pos Cabang */}
                           <div>
                             <h4 className="text-base font-bold text-gray-900 leading-tight group-hover:text-emerald-700 transition-colors">
                               {displayName}
                             </h4>
                             <p className="text-xs text-gray-500 font-medium flex items-center gap-1 mt-1">
                               <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                              Wilayah {d.kecamatan}, Garut
+                              Wilayah {d.kecamatan}, Kota Depok
                             </p>
                           </div>
 
-                          {/* Detail Kapasitas & Yayasan */}
+                          {/* Detail Kapasitas & Pengelola */}
                           <div className="bg-gray-50 border border-gray-100 rounded-xl p-2.5 space-y-1.5 text-xs">
                             <div className="flex items-center justify-between">
-                              <span className="text-gray-500 font-medium">Kapasitas Produksi:</span>
+                              <span className="text-gray-500 font-medium">Kapasitas Penyaluran:</span>
                               <span className="font-extrabold text-emerald-700">
-                                {(d.kapasitas || 0).toLocaleString("id-ID")} Porsi/Hari
+                                {(d.kapasitas || 0).toLocaleString("id-ID")} Paket/Bulan
                               </span>
                             </div>
                             {d.yayasan && (
                               <div className="text-[11px] text-gray-600 pt-1 border-t border-gray-200/60 truncate" title={d.yayasan}>
-                                <span className="font-semibold text-gray-700">🏢 Yayasan:</span> {d.yayasan}
+                                <span className="font-semibold text-gray-700">🏢 Pengelola:</span> {d.yayasan}
                               </div>
                             )}
                             {sasaranCount > 0 && (
                               <div className="text-[11px] text-blue-700 font-semibold flex items-center gap-1 pt-0.5">
                                 <School className="w-3.5 h-3.5" />
-                                {sasaranCount} Titik Sasaran (Sekolah/Posyandu)
+                                {sasaranCount} Titik Sasaran (Komunitas/Penerima)
                               </div>
                             )}
                           </div>
@@ -1398,7 +1393,7 @@ export default function GisMap() {
                           </button>
                           <button
                             type="button"
-                            onClick={() => setSelectedSppgModal(d)}
+                            onClick={() => setSelectedPosModal(d)}
                             className="py-1.5 px-2 bg-gray-900 hover:bg-black text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1 transition-all cursor-pointer"
                           >
                             Detail Sasaran
@@ -1418,7 +1413,7 @@ export default function GisMap() {
                       className="rounded-xl px-6 border-gray-300 text-gray-800 hover:bg-gray-50 text-xs font-semibold gap-1.5 shadow-xs"
                     >
                       <ChevronDown className="w-4 h-4" />
-                      Tampilkan 12 Dapur Berikutnya ({filteredDapur.length - visibleListCount} Tersisa)
+                      Tampilkan 12 Pos Cabang Berikutnya ({filteredDapur.length - visibleListCount} Tersisa)
                     </Button>
                   </div>
                 )}
@@ -1444,7 +1439,7 @@ export default function GisMap() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
                   {filteredSekolah.slice(0, visibleListCount).map((s, idx) => {
                     const cleanedName = cleanSchoolName(s.name);
-                    const linkedDapur = dapurLookup.get(s.sppg_id);
+                    const linkedDapur = dapurLookup.get(s.posId || s.pos_id);
 
                     return (
                       <div
@@ -1543,7 +1538,7 @@ export default function GisMap() {
                   {filteredPenerima.slice(0, visibleListCount).map((p, idx) => {
                     const cleanedName = cleanSchoolName(p.name);
                     const category = getPenerimaCategory(p);
-                    const linkedDapur = dapurLookup.get(p.sppg_id);
+                    const linkedDapur = dapurLookup.get(p.posId || p.pos_id);
 
                     return (
                       <div
@@ -1576,12 +1571,12 @@ export default function GisMap() {
                             <div className="flex items-center justify-between">
                               <span className="text-gray-600 font-medium">Alokasi Paket Harian:</span>
                               <span className="font-extrabold text-pink-700 text-sm">
-                                {(p.siswa || 0).toLocaleString("id-ID")} Porsi
+                                {(p.siswa || 0).toLocaleString("id-ID")} Paket
                               </span>
                             </div>
                             <div className="text-[11px] text-gray-600 pt-1 border-t border-pink-100">
-                              <span className="font-semibold text-gray-700">🏢 Dapur Distribusi:</span>{" "}
-                              {linkedDapur ? linkedDapur.clean_title || linkedDapur.name : "SPPG Garut Terdekat"}
+                              <span className="font-semibold text-gray-700">🏢 Pos Cabang Penyalur:</span>{" "}
+                              {linkedDapur ? linkedDapur.clean_title || linkedDapur.name : "Pos Cabang KKMP Sukmajaya"}
                             </div>
                           </div>
                         </div>
@@ -1648,7 +1643,7 @@ export default function GisMap() {
                     <div className="space-y-2.5">
                       <div className="flex items-center justify-between gap-2">
                         <Badge className="bg-orange-600 text-white text-[11px] font-bold">
-                          Mitra Binaan Disperindag
+                          Mitra Binaan KKMP Kota Depok
                         </Badge>
                         <Badge variant="outline" className="text-[10px] bg-orange-50 text-orange-800 border-orange-200">
                           Kec. {s.kecamatan}
@@ -1661,7 +1656,7 @@ export default function GisMap() {
                         </h4>
                         <p className="text-xs text-gray-500 font-medium flex items-center gap-1 mt-1">
                           <MapPin className="w-3.5 h-3.5 text-orange-600 shrink-0" />
-                          Wilayah {s.kecamatan}, Garut
+                          Wilayah {s.kecamatan}, Kota Depok
                         </p>
                       </div>
 
@@ -1739,7 +1734,7 @@ export default function GisMap() {
                         </h4>
                         <p className="text-xs text-gray-500 font-medium flex items-center gap-1 mt-1">
                           <Truck className="w-3.5 h-3.5 text-purple-600 shrink-0" />
-                          Hub Garut Kota ➔ {j.target}
+                          Gudang Induk Sukmajaya ➔ {j.target}
                         </p>
                       </div>
 
@@ -1784,34 +1779,34 @@ export default function GisMap() {
       {/* MODAL DIALOG DETAIL LENGKAP TIAP ENTITAS */}
       {/* ======================================================== */}
 
-      {/* 1. MODAL DETAIL SATU SPPG */}
+      {/* 1. MODAL DETAIL SATU POS CABANG KKMP */}
       <Dialog
-        open={Boolean(selectedSppgModal)}
+        open={Boolean(selectedPosModal)}
         onOpenChange={(open) => {
-          if (!open) setSelectedSppgModal(null);
+          if (!open) setSelectedPosModal(null);
         }}
       >
         <DialogContent className="sm:max-w-2xl rounded-3xl p-6 max-h-[90vh] overflow-y-auto">
-          {selectedSppgModal && (
+          {selectedPosModal && (
             <>
               <DialogHeader>
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xs font-black bg-emerald-600 text-white px-2.5 py-0.5 rounded-lg shadow-xs">
-                    {selectedSppgModal.code || selectedSppgModal.id}
+                    {selectedPosModal.code || selectedPosModal.id}
                   </span>
                   <Badge className="bg-emerald-50 text-emerald-800 border-emerald-300 text-[11px] font-semibold">
-                    Kecamatan {selectedSppgModal.kecamatan}
+                    Kecamatan {selectedPosModal.kecamatan}
                   </Badge>
                   <span className="text-xs font-bold text-gray-500 ml-auto">
-                    Kapasitas: {(selectedSppgModal.kapasitas || 0).toLocaleString("id-ID")} Porsi/Hari
+                    Kapasitas: {(selectedPosModal.kapasitas || 0).toLocaleString("id-ID")} Paket/Bulan
                   </span>
                 </div>
                 <DialogTitle className="text-xl font-extrabold text-gray-900 leading-tight">
-                  {selectedSppgModal.desa_unit || selectedSppgModal.clean_title || selectedSppgModal.name}
+                  {selectedPosModal.desa_unit || selectedPosModal.clean_title || selectedPosModal.name}
                 </DialogTitle>
                 <DialogDescription className="text-xs text-gray-600 mt-0.5">
-                  Lembaga Penyelenggara:{" "}
-                  <strong>{selectedSppgModal.yayasan || "Koperasi Kelurahan Merah Putih Bersama"}</strong>
+                  Lembaga Pengelola:{" "}
+                  <strong>{selectedPosModal.yayasan || "Koperasi Kelurahan Merah Putih Sukmajaya"}</strong>
                 </DialogDescription>
               </DialogHeader>
 
@@ -1819,46 +1814,46 @@ export default function GisMap() {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 my-3 text-xs">
                 <div className="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
                   <span className="text-gray-500 font-medium block">Kecamatan</span>
-                  <span className="font-bold text-gray-900">{selectedSppgModal.kecamatan}</span>
+                  <span className="font-bold text-gray-900">{selectedPosModal.kecamatan}</span>
                 </div>
                 <div className="bg-gray-50 p-2.5 rounded-xl border border-gray-200">
                   <span className="text-gray-500 font-medium block">Koordinat Lat / Lng</span>
                   <span className="font-bold text-gray-900">
-                    {selectedSppgModal.lat}, {selectedSppgModal.lng}
+                    {selectedPosModal.lat}, {selectedPosModal.lng}
                   </span>
                 </div>
                 <div className="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 col-span-2 sm:col-span-1">
                   <span className="text-emerald-700 font-medium block">Total Sasaran</span>
                   <span className="font-bold text-emerald-900">
-                    {selectedSppgModal.sasaran?.length || selectedSppgModal.jumlah_sasaran || 0} Titik Penerima
+                    {selectedPosModal.sasaran?.length || selectedPosModal.jumlah_sasaran || 0} Titik Penerima
                   </span>
                 </div>
               </div>
 
-              {/* Daftar Sekolah & Sasaran */}
+              {/* Daftar Titik Sasaran & Penyaluran */}
               <div className="space-y-2 mt-2">
                 <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wide flex items-center gap-1.5">
                   <School className="w-4 h-4 text-emerald-600" />
-                  Daftar Sekolah &amp; Posyandu Sasaran Distribusi:
+                  Daftar Titik Sasaran &amp; Penyaluran Komunitas:
                 </h4>
 
-                {selectedSppgModal.sasaran && selectedSppgModal.sasaran.length > 0 ? (
+                {selectedPosModal.sasaran && selectedPosModal.sasaran.length > 0 ? (
                   <div className="border border-gray-200 rounded-2xl overflow-hidden divide-y divide-gray-100 max-h-64 overflow-y-auto">
-                    {selectedSppgModal.sasaran.map((s, si) => (
+                    {selectedPosModal.sasaran.map((s, si) => (
                       <div
                         key={si}
                         className="p-2.5 text-xs flex items-center justify-between hover:bg-gray-50/80 transition-colors"
                       >
                         <span className="font-semibold text-gray-800">{cleanSchoolName(s.name)}</span>
                         <span className="text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                          {s.penerima} Porsi
+                          {s.penerima} Paket
                         </span>
                       </div>
                     ))}
                   </div>
                 ) : (
                   <div className="p-4 rounded-xl bg-gray-50 border border-gray-200 text-xs text-gray-500 text-center">
-                    Data rincian nama sekolah untuk dapur ini terdaftar dalam agregasi wilayah kecamatan.
+                    Data rincian titik sasaran untuk pos cabang ini terdaftar dalam agregasi wilayah kelurahan.
                   </div>
                 )}
               </div>
@@ -1868,8 +1863,8 @@ export default function GisMap() {
                   size="sm"
                   variant="outline"
                   onClick={() => {
-                    handleFocusItemOnMap(selectedSppgModal.lat, selectedSppgModal.lng, 15);
-                    setSelectedSppgModal(null);
+                    handleFocusItemOnMap(selectedPosModal.lat, selectedPosModal.lng, 15);
+                    setSelectedPosModal(null);
                   }}
                   className="rounded-xl text-xs gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50"
                 >
@@ -1878,7 +1873,7 @@ export default function GisMap() {
                 </Button>
                 <Button
                   size="sm"
-                  onClick={() => setSelectedSppgModal(null)}
+                  onClick={() => setSelectedPosModal(null)}
                   className="rounded-xl text-xs bg-gray-900 hover:bg-black text-white"
                 >
                   Tutup
@@ -1921,7 +1916,7 @@ export default function GisMap() {
                   <span className="text-blue-800 font-medium block">Alokasi Penerima Harian</span>
                   <span className="text-xl font-black text-blue-950">
                     {(selectedSekolahModal.siswa || 0).toLocaleString("id-ID")}{" "}
-                    <span className="text-xs font-normal text-blue-700">Siswa / Hari</span>
+                    <span className="text-xs font-normal text-blue-700">Sasaran / Hari</span>
                   </span>
                 </div>
                 <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
@@ -1932,11 +1927,11 @@ export default function GisMap() {
 
               <div className="space-y-2 text-xs bg-gray-50 p-3 rounded-2xl border border-gray-200">
                 <div className="flex items-center justify-between pb-1.5 border-b border-gray-200">
-                  <span className="text-gray-500">Dapur Penyuplai (SPPG):</span>
+                  <span className="text-gray-500">Pos Cabang Penyalur:</span>
                   <span className="font-bold text-gray-900">
                     {(() => {
-                      const d = dapurLookup.get(selectedSekolahModal.sppg_id);
-                      return d ? `${d.clean_title || d.name} (Kec. ${d.kecamatan})` : "SPPG Garut Terdekat";
+                      const d = dapurLookup.get(selectedSekolahModal.posId || selectedSekolahModal.pos_id);
+                      return d ? `${d.clean_title || d.name} (Kec. ${d.kecamatan})` : "Pos Cabang KKMP Sukmajaya";
                     })()}
                   </span>
                 </div>
@@ -1947,8 +1942,8 @@ export default function GisMap() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-500">Standar Menu:</span>
-                  <span className="font-semibold text-emerald-700">Nasi, Lauk Hewani, Nabati, Sayur, &amp; Buah</span>
+                  <span className="text-gray-500">Standar Penyaluran:</span>
+                  <span className="font-semibold text-emerald-700">Bahan Pokok, Komoditas Bergizi, &amp; Sembako Terstandar</span>
                 </div>
               </div>
 
@@ -1991,7 +1986,7 @@ export default function GisMap() {
               {(() => {
                 const category = getPenerimaCategory(selectedPenerimaModal);
                 const cleanedName = cleanSchoolName(selectedPenerimaModal.name);
-                const linkedDapur = dapurLookup.get(selectedPenerimaModal.sppg_id);
+                const linkedDapur = dapurLookup.get(selectedPenerimaModal.posId || selectedPenerimaModal.pos_id);
 
                 return (
                   <>
@@ -2010,40 +2005,40 @@ export default function GisMap() {
                         {cleanedName}
                       </DialogTitle>
                       <DialogDescription className="text-xs text-gray-600 mt-0.5">
-                        Kelompok Sasaran Intervensi Gizi Terpadu Program Makanan Bergizi Gratis Garut
+                        Kelompok Sasaran Penerima Manfaat Program KKMP Sukmajaya Kota Depok
                       </DialogDescription>
                     </DialogHeader>
 
                     <div className="grid grid-cols-2 gap-2.5 my-3 text-xs">
                       <div className="bg-pink-50/70 p-3 rounded-xl border border-pink-100">
-                        <span className="text-pink-800 font-medium block">Total Porsi Nutrisi</span>
+                        <span className="text-pink-800 font-medium block">Total Alokasi Penyaluran</span>
                         <span className="text-2xl font-black text-pink-950">
                           {(selectedPenerimaModal.siswa || 0).toLocaleString("id-ID")}{" "}
                           <span className="text-xs font-normal text-pink-700">Paket</span>
                         </span>
                       </div>
                       <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
-                        <span className="text-gray-500 font-medium block">Frekuensi Distribusi</span>
-                        <span className="text-sm font-bold text-gray-800">Senin – Sabtu (Harian)</span>
+                        <span className="text-gray-500 font-medium block">Frekuensi Penyaluran</span>
+                        <span className="text-sm font-bold text-gray-800">Senin – Sabtu (Rutin)</span>
                       </div>
                     </div>
 
                     <div className="space-y-2 text-xs bg-gray-50 p-3 rounded-2xl border border-gray-200">
                       <div className="flex items-center justify-between pb-1.5 border-b border-gray-200">
-                        <span className="text-gray-500">Unit Dapur Penyedia:</span>
+                        <span className="text-gray-500">Unit Pos Cabang Penyalur:</span>
                         <span className="font-bold text-gray-900">
-                          {linkedDapur ? linkedDapur.clean_title || linkedDapur.name : "SPPG Garut Terdekat"}
+                          {linkedDapur ? linkedDapur.clean_title || linkedDapur.name : "Pos Cabang KKMP Sukmajaya"}
                         </span>
                       </div>
                       <div className="flex items-center justify-between pb-1.5 border-b border-gray-200">
                         <span className="text-gray-500">Wilayah Sasaran:</span>
                         <span className="font-semibold text-gray-800">
-                          Kecamatan {selectedPenerimaModal.kecamatan}, Garut
+                          Kecamatan {selectedPenerimaModal.kecamatan}, Kota Depok
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-gray-500">Kebutuhan Gizi:</span>
-                        <span className="font-semibold text-pink-700">Memenuhi AKG Nasional BGN RI</span>
+                        <span className="text-gray-500">Kebutuhan Pangan:</span>
+                        <span className="font-semibold text-pink-700">Standar Pemenuhan Gizi &amp; Pangan Pokok</span>
                       </div>
                     </div>
 
@@ -2124,12 +2119,12 @@ export default function GisMap() {
                 <div className="flex items-center justify-between pb-1.5 border-b border-gray-200">
                   <span className="text-gray-500">Wilayah Sentra:</span>
                   <span className="font-semibold text-gray-800">
-                    Kecamatan {selectedSupplierModal.kecamatan}, Garut
+                    Kecamatan {selectedSupplierModal.kecamatan}, Kota Depok
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-500">Penyaluran:</span>
-                  <span className="font-semibold text-gray-800">Pasokan Bahan Pokok Harian Dapur SPPG</span>
+                  <span className="font-semibold text-gray-800">Pasokan Bahan Pokok Pos Cabang KKMP</span>
                 </div>
               </div>
 
@@ -2177,10 +2172,10 @@ export default function GisMap() {
                   </Badge>
                 </div>
                 <DialogTitle className="text-xl font-extrabold text-gray-900 leading-tight">
-                  Hub Garut Kota ➔ {selectedJalurModal.target}
+                  Gudang Induk Sukmajaya ➔ {selectedJalurModal.target}
                 </DialogTitle>
                 <DialogDescription className="text-xs text-gray-600 mt-0.5">
-                  Rute Distribusi Makanan Bergizi dari Central Hub menuju SPPG Kecamatan
+                  Rute Distribusi Logistik dari Gudang Induk Sukmajaya menuju Pos Cabang Kelurahan
                 </DialogDescription>
               </DialogHeader>
 
@@ -2206,7 +2201,7 @@ export default function GisMap() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-500">Status Jalan:</span>
-                  <span className="font-semibold text-gray-800">Jalur Protokol &amp; Arteri Garut</span>
+                  <span className="font-semibold text-gray-800">Jalur Protokol &amp; Arteri Kota Depok</span>
                 </div>
               </div>
 
@@ -2236,7 +2231,7 @@ export default function GisMap() {
         </DialogContent>
       </Dialog>
 
-      {/* Modal Sinkronisasi Disperindag Garut */}
+      {/* Modal Sinkronisasi Jaringan KKMP Sukmajaya */}
       <GisImportModal
         open={importModalOpen}
         onClose={() => setImportModalOpen(false)}
