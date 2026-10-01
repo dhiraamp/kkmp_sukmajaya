@@ -11,11 +11,6 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/satudata": {
-        target: "https://satudata-api.garutkab.go.id",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/satudata/, ""),
-      },
       "/dataid": {
         target: "https://data.go.id",
         changeOrigin: true,
@@ -30,11 +25,6 @@ export default defineConfig({
   },
   preview: {
     proxy: {
-      "/satudata": {
-        target: "https://satudata-api.garutkab.go.id",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/satudata/, ""),
-      },
       "/dataid": {
         target: "https://data.go.id",
         changeOrigin: true,
