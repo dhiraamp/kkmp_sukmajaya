@@ -107,7 +107,7 @@ export default function WargaRegForm({ onSuccess }) {
         <p className="text-xs text-muted-foreground">Kode OTP 6 digit akan dikirim ke nomor WhatsApp ini</p>
       </div>
       <p className="text-xs text-muted-foreground bg-gray-50 border border-gray-100 rounded-lg px-3 py-2">
-        Pendaftaran Anda akan diverifikasi oleh SPPG/Admin sebelum akun aktif.
+        Pendaftaran Anda akan diverifikasi oleh Petugas KKMP/Admin sebelum akun aktif.
       </p>
       <Button type="submit" disabled={loading} className="w-full h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-md">
         {loading ? "Mengirim OTP WhatsApp..." : "Daftar Sebagai Warga"}

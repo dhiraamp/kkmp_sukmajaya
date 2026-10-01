@@ -1,18 +1,19 @@
 export const CATEGORIES = [
-  { key: "pos_cabang", label: "Pos Cabang Koperasi" },
+  { key: "pos_cabang", label: "Pos Cabang KKMP" },
   { key: "logistik", label: "Logistik & Armada" },
-  { key: "gudang", label: "Gudang Pusat" },
+  { key: "gudang", label: "Gudang Induk KKMP" },
   { key: "lainnya", label: "Lainnya (KKMP)" },
 ];
 
 export function categoryLabel(key) {
-  if (key === "sppg") return "Pos Cabang Koperasi";
+  if (key === "sppg" || key === "pos_cabang" || key === "mitra") return "Pos Cabang KKMP";
   return CATEGORIES.find((c) => c.key === key)?.label || key || "Lainnya";
 }
 
 export function categoryColor(key) {
   switch (key) {
     case "pos_cabang":
+    case "mitra":
     case "sppg":
       return "bg-red-600 text-white";
     case "logistik":

@@ -16,7 +16,7 @@ const emptyForm = {
   full_address: "",
   village: "",
   district: "",
-  regency: "Kabupaten Garut",
+  regency: "Kota Depok",
   postal_code: "",
   notes: "",
   lat: null,

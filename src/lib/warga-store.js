@@ -27,7 +27,7 @@ export function addAddress(email, addr) {
     full_address: addr.full_address || "",
     village: addr.village || "",
     district: addr.district || "",
-    regency: addr.regency || "Kabupaten Garut",
+    regency: addr.regency || "Kota Depok",
     postal_code: addr.postal_code || "",
     notes: addr.notes || "",
     lat: addr.lat ?? null,
@@ -124,7 +124,7 @@ export function remoteToWargaOrder(r) {
   if (r.mitra_address) {
     addressObj = {
       full_address: r.mitra_address,
-      regency: r.delivery_area || "Kabupaten Garut",
+      regency: r.delivery_area || "Kota Depok",
       recipient_name: r.mitra_name || "",
     };
   } else if (r.address && typeof r.address === "object") {

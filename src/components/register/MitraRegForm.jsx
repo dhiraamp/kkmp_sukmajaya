@@ -67,8 +67,8 @@ export default function MitraRegForm({ onSuccess }) {
     <>
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label className="text-black">Nama Mitra / SPPG <span className="text-destructive">*</span></Label>
-        <Input value={form.mitra_name} onChange={(e) => update("mitra_name", e.target.value)} placeholder="Nama mitra atau SPPG" required />
+        <Label className="text-black">Nama Mitra / Pos Cabang KKMP <span className="text-destructive">*</span></Label>
+        <Input value={form.mitra_name} onChange={(e) => update("mitra_name", e.target.value)} placeholder="Nama Pos Cabang KKMP atau mitra" required />
       </div>
       <div className="space-y-2">
         <Label className="text-black">Nama Penanggung Jawab <span className="text-destructive">*</span></Label>
@@ -99,11 +99,11 @@ export default function MitraRegForm({ onSuccess }) {
         <p className="text-xs text-muted-foreground">Kode OTP 6 digit akan dikirim ke nomor WhatsApp ini</p>
       </div>
       <div className="space-y-2">
-        <Label className="text-black">Alamat Mitra / SPPG</Label>
-        <Textarea value={form.address} onChange={(e) => update("address", e.target.value)} placeholder="Alamat lengkap mitra" rows={3} />
+        <Label className="text-black">Alamat Mitra / Pos Cabang KKMP</Label>
+        <Textarea value={form.address} onChange={(e) => update("address", e.target.value)} placeholder="Alamat lengkap Pos Cabang KKMP di Kota Depok" rows={3} />
       </div>
       <Button type="submit" disabled={loading} className="w-full h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-md">
-        {loading ? "Mengirim OTP WhatsApp..." : "Daftar Sebagai Mitra"}
+        {loading ? "Mengirim OTP WhatsApp..." : "Daftar Sebagai Pos Cabang KKMP"}
       </Button>
     </form>
 

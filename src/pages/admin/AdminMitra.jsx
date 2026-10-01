@@ -346,7 +346,7 @@ export default function AdminMitra() {
                 </div>
                 {selectedMitra.address && (
                   <div className="flex justify-between border-b pb-1.5">
-                    <span className="text-muted-foreground shrink-0">Alamat Dapur:</span>
+                    <span className="text-muted-foreground shrink-0">Alamat Pos Cabang:</span>
                     <span className="text-right font-medium text-gray-900 max-w-[220px]">{selectedMitra.address}</span>
                   </div>
                 )}

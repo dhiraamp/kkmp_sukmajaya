@@ -4,7 +4,7 @@
 
 import { PRODUCTS } from "@/lib/marketplace";
 
-const SEED_VERSION = "kkmp_depok_seed_v3";
+const SEED_VERSION = "kkmp_depok_seed_v4";
 
 const now = () => new Date().toISOString();
 const daysAgo = (n) => new Date(Date.now() - n * 86400000).toISOString();
@@ -241,7 +241,7 @@ const COLLECTIONS = {
       service_fee: 36150,
       delivery_fee: 15000,
       total: 1256150,
-      delivery_address: "Jl. Raya Cikajang, Garut",
+      delivery_address: "Jl. Kejayaan No. 12, Sukmajaya, Kota Depok",
       amount: 1200000,
       method: "QRIS",
       status: "success",
@@ -256,14 +256,14 @@ const COLLECTIONS = {
       delivery_status: "delivered",
       payment_method: "COD",
       items: [
-        { product_id: "bayam", product_name: "Bayam Hijau", supplier_name: "Toko Tani Garut", quantity: 2, unit: "ikat", subtotal: 10000 },
-        { product_id: "telur", product_name: "Telur Ayam Negeri", supplier_name: "Toko Tani Garut", quantity: 1, unit: "kg", subtotal: 27000 },
+        { product_id: "bayam", product_name: "Bayam Hijau", supplier_name: "Toko Tani Sukmajaya Depok", quantity: 2, unit: "ikat", subtotal: 10000 },
+        { product_id: "telur", product_name: "Telur Ayam Negeri", supplier_name: "Toko Tani Sukmajaya Depok", quantity: 1, unit: "kg", subtotal: 27000 },
       ],
       subtotal: 37000,
       service_fee: 1110,
       delivery_fee: 12000,
       total: 50110,
-      delivery_address: "Jl. Merdeka No. 12, Garut Kota, Kabupaten Garut",
+      delivery_address: "Jl. Merdeka No. 12, Abadijaya, Sukmajaya, Kota Depok",
       amount: 41000,
       method: "COD",
       status: "success",
@@ -274,25 +274,25 @@ const COLLECTIONS = {
     { id: uid("wm"), week_label: WEEKLY_MENU.week_label, status: "published", menu_data: WEEKLY_MENU.menu_data, created_date: now() },
   ],
   WeeklyNeeds: [
-    { id: uid("wn"), sppg_id: "mitra@demo.local", sppg_name: "Mitra SPPG Cikajang", product_id: "kentang", product_name: "Kentang Granola", quantity: 100, unit: "kg", week_label: "Minggu Ini", status: "open", has_supplier: false, created_date: daysAgo(1) },
-    { id: uid("wn"), sppg_id: "mitra@demo.local", sppg_name: "Mitra SPPG Cikajang", product_id: "telur", product_name: "Telur Ayam Negeri", quantity: 60, unit: "kg", week_label: "Minggu Ini", status: "open", has_supplier: false, created_date: daysAgo(1) },
+    { id: uid("wn"), pos_id: "mitra@demo.local", pos_name: "Pos Cabang KKMP Sukmajaya", sppg_id: "mitra@demo.local", sppg_name: "Pos Cabang KKMP Sukmajaya", product_id: "kentang", product_name: "Kentang Granola", quantity: 100, unit: "kg", week_label: "Minggu Ini", status: "open", has_supplier: false, created_date: daysAgo(1) },
+    { id: uid("wn"), pos_id: "mitra@demo.local", pos_name: "Pos Cabang KKMP Sukmajaya", sppg_id: "mitra@demo.local", sppg_name: "Pos Cabang KKMP Sukmajaya", product_id: "telur", product_name: "Telur Ayam Negeri", quantity: 60, unit: "kg", week_label: "Minggu Ini", status: "open", has_supplier: false, created_date: daysAgo(1) },
   ],
   StockAlert: [
     { id: uid("sa"), product_id: "cabai-merah", product_name: "Cabai Merah Keriting", message: "Stok Cabai Merah Keriting menipis (12 kg)", level: "warning", status: "active", week_label: "Minggu Ini", created_date: daysAgo(0) },
     { id: uid("sa"), product_id: "telur", product_name: "Telur Ayam Negeri", message: "Stok Telur Ayam Negeri mulai rendah", level: "info", status: "active", week_label: "Minggu Ini", created_date: daysAgo(0) },
   ],
   Notification: [
-    { id: uid("notif"), title: "Pesanan Baru Masuk", message: "Ada pesanan baru dari Mitra SPPG Cikajang", type: "order", read: false, created_date: daysAgo(0) },
+    { id: uid("notif"), title: "Pesanan Baru Masuk", message: "Ada pesanan baru dari Pos Cabang KKMP Sukmajaya", type: "order", read: false, created_date: daysAgo(0) },
     { id: uid("notif"), title: "Stok Menipis", message: "Stok Cabai Merah Keriting menipis", type: "stock", read: false, created_date: daysAgo(0) },
   ],
   ChatMessage: [
-    { id: uid("chat"), channel: "admin-mitra", from: "mitra@demo.local", from_name: "Mitra SPPG Cikajang", text: "Selamat pagi, ada update ketersediaan beras?", created_date: daysAgo(1) },
+    { id: uid("chat"), channel: "admin-mitra", from: "mitra@demo.local", from_name: "Pos Cabang KKMP Sukmajaya", text: "Selamat pagi, ada update ketersediaan beras?", created_date: daysAgo(1) },
     { id: uid("chat"), channel: "admin-supplier", from: "supplier@demo.local", from_name: "CV Binar Kalasenja", text: "Pengiriman beras sudah kami proses.", created_date: daysAgo(1) },
-    { id: uid("chat"), channel: "admin-logistik", from: "logistik@demo.local", from_name: "Tim Logistik", text: "Armada siap berangkat ke Cikajang.", created_date: daysAgo(1) },
+    { id: uid("chat"), channel: "admin-logistik", from: "logistik@demo.local", from_name: "Tim Logistik", text: "Armada siap berangkat ke Sukmajaya.", created_date: daysAgo(1) },
   ],
   SupplierRating: [
-    { id: uid("sr"), sppg_id: "mitra@demo.local", supplier_name: "CV Binar Kalasenja", stars: 5, comment: "Pengiriman cepat dan barang berkualitas.", created_date: daysAgo(1) },
-    { id: uid("sr"), sppg_id: "mitra@demo.local", supplier_name: "PT Berkah Jaya Supplier", stars: 4, comment: "Baik, tapi ada sedikit keterlambatan.", created_date: daysAgo(2) },
+    { id: uid("sr"), pos_id: "mitra@demo.local", pos_name: "Pos Cabang KKMP Sukmajaya", sppg_id: "mitra@demo.local", sppg_name: "Pos Cabang KKMP Sukmajaya", supplier_name: "CV Binar Kalasenja", stars: 5, comment: "Pengiriman cepat dan barang berkualitas.", created_date: daysAgo(1) },
+    { id: uid("sr"), pos_id: "mitra@demo.local", pos_name: "Pos Cabang KKMP Sukmajaya", sppg_id: "mitra@demo.local", sppg_name: "Pos Cabang KKMP Sukmajaya", supplier_name: "PT Berkah Jaya Supplier", stars: 4, comment: "Baik, tapi ada sedikit keterlambatan.", created_date: daysAgo(2) },
   ],
   DriverRating: [
     { id: uid("dr"), mitra_id: "mitra@demo.local", driver_name: "Pak Rudi", stars: 5, comment: "Tepat waktu dan ramah.", created_date: daysAgo(1) },

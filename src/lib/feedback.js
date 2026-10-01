@@ -80,7 +80,7 @@ export const feedbackToast = {
   cartAdded: (productName, quantity = 1, unit = "kg") => {
     triggerHaptic("medium");
     return toast.success(`"${productName}" masuk ke keranjang`, {
-      description: `Jumlah: ${quantity} ${unit}. Siap diproses untuk kebutuhan Dapur SPPG.`,
+      description: `Jumlah: ${quantity} ${unit}. Siap diproses untuk kebutuhan Pos Cabang KKMP.`,
       duration: 3500,
     });
   },
@@ -89,7 +89,7 @@ export const feedbackToast = {
     triggerHaptic("success");
     triggerCelebrationConfetti({ particleCount: 90, spread: 75 });
     return toast.success(`Pesanan ${orderNumber} Berhasil Dikonfirmasi! 🎉`, {
-      description: `Total pembayaran: ${totalAmountFormatted}. Dapur SPPG dan logistik telah menerima notifikasi.`,
+      description: `Total pembayaran: ${totalAmountFormatted}. Pos Cabang KKMP dan tim logistik telah menerima notifikasi.`,
       duration: 6000,
       action: options.onViewOrder
         ? {
@@ -104,15 +104,15 @@ export const feedbackToast = {
     triggerHaptic("success");
     triggerCelebrationConfetti({ particleCount: 60, spread: 50 });
     return toast.success(`🚚 ${fleetName} Telah Tiba!`, {
-      description: `Sebanyak ${portions} porsi makan bergizi siap diserahterimakan di ${schoolName}.`,
+      description: `Sebanyak ${portions} paket komoditas sembako siap diserahterimakan di ${schoolName}.`,
       duration: 5000,
     });
   },
 
   haccpAlert: (currentTemp, threshold = 60) => {
     triggerHaptic("warning");
-    return toast.warning("⚠️ Peringatan Suhu Makanan HACCP", {
-      description: `Suhu saat ini ${currentTemp}°C mendekati ambang batas minimal (${threshold}°C). Segera percepat serah terima!`,
+    return toast.warning("⚠️ Peringatan Suhu Penyimpanan Pangan", {
+      description: `Suhu saat ini ${currentTemp}°C mendekati ambang batas minimal (${threshold}°C). Segera periksa tempat penyimpanan!`,
       duration: 6000,
     });
   },

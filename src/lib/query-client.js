@@ -36,8 +36,10 @@ export const queryClientInstance = new QueryClient({
 export const QUERY_KEYS = {
   products: (filter = 'all') => ['products', filter],
   productDetail: (id) => ['product', id],
-  sppgList: (kecamatan = 'all') => ['sppg_list', kecamatan],
-  sppgDetail: (id) => ['sppg_detail', id],
+  posList: (kecamatan = 'all') => ['pos_list', kecamatan],
+  posDetail: (id) => ['pos_detail', id],
+  sppgList: (kecamatan = 'all') => ['pos_list', kecamatan],
+  sppgDetail: (id) => ['pos_detail', id],
   orders: (role, userEmail) => ['orders', role, userEmail || 'all'],
   orderDetail: (id) => ['order_detail', id],
   bapoktingPrices: () => ['bapokting_prices'],
@@ -74,9 +76,9 @@ export function useProductsQuery(filter = 'all', options = {}) {
 /**
  * Hook Terpadu: Mengambil Pos Cabang & Mitra Terpadu KKMP Depok
  */
-export function useSppgQuery(kecamatan = 'all', options = {}) {
+export function usePosQuery(kecamatan = 'all', options = {}) {
   return useQuery({
-    queryKey: QUERY_KEYS.sppgList(kecamatan),
+    queryKey: QUERY_KEYS.posList(kecamatan),
     queryFn: async () => {
       try {
         const local = localStorage.getItem("kkmp_depok_gis_v1");
@@ -94,6 +96,9 @@ export function useSppgQuery(kecamatan = 'all', options = {}) {
     ...options,
   });
 }
+
+// Alias kompatibilitas ke belakang
+export const useSppgQuery = usePosQuery;
 
 /**
  * Hook Terpadu: Memeriksa Status Live Sistem KKMP Depok

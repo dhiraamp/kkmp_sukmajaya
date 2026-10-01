@@ -1299,7 +1299,7 @@ export default function GisMap() {
           <div className="flex items-center gap-2 self-start sm:self-auto">
             <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
               {selectedEntityType === "dapur" &&
-                `Menampilkan ${Math.min(visibleListCount, filteredDapur.length)} dari ${filteredDapur.length} Dapur`}
+                `Menampilkan ${Math.min(visibleListCount, filteredDapur.length)} dari ${filteredDapur.length} Pos Cabang`}
               {selectedEntityType === "sekolah" &&
                 `Menampilkan ${Math.min(visibleListCount, filteredSekolah.length)} dari ${filteredSekolah.length} Sekolah`}
               {selectedEntityType === "penerima" &&

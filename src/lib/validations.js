@@ -41,8 +41,8 @@ export const deliveryManifestSchema = z.object({
   destination_school_name: z.string().min(2, "Nama titik tujuan distribusi wajib diisi"),
   driver_name: z.string().min(2, "Nama supir/kurir pengantar wajib diisi"),
   vehicle_plate: z.string().regex(/^[A-Z]{1,2}\s?[0-9]{1,4}\s?[A-Z]{1,3}$/i, "Format plat nomor kendaraan tidak valid (contoh: B 1234 DEP)"),
-  portions: z.number().int().min(1, "Jumlah porsi makanan minimal 1"),
-  box_count: z.number().int().min(1, "Jumlah thermal box minimal 1"),
+  portions: z.number().int().min(1, "Jumlah paket komoditas minimal 1").default(1),
+  box_count: z.number().int().min(1, "Jumlah boks/peti distribusi minimal 1"),
   food_menu: z.string().min(5, "Rincian paket komoditas pangan wajib diisi"),
   temperature_celsius: z
     .number()
@@ -53,33 +53,36 @@ export const deliveryManifestSchema = z.object({
   haccp_verified: z.boolean().default(true),
 });
 
-// 4. Skema Formulasi Nutrisi & Komoditas Pangan KKMP
+// 4. Skema Formulasi Komoditas Pangan KKMP
 export const nutritionItemSchema = z.object({
   commodity_id: z.string().min(1, "ID komoditas bahan wajib dipilih"),
-  name: z.string().min(2, "Nama bahan pangan wajib ada"),
-  grams: z.number().min(5, "Takaran minimal 5 gram per porsi").max(500, "Takaran maksimal 500 gram per porsi"),
+  name: z.string().min(2, "Nama komoditas wajib ada"),
+  grams: z.number().min(1, "Takaran kuantitas minimal 1").max(5000, "Takaran maksimal 5000"),
 });
 
 export const nutritionPlanSchema = z.object({
-  menu_name: z.string().min(3, "Nama menu makanan bergizi minimal 3 karakter"),
-  target_group: z.enum(["paud", "sd_rendah", "sd_tinggi", "smp_sma", "ibu_hamil"]),
-  ingredients: z.array(nutritionItemSchema).min(2, "Menu minimal harus mengandung 2 komponen bahan pangan"),
-  total_calories: z.number().min(200, "Kalori porsi terlalu rendah untuk makan siang"),
-  total_protein: z.number().min(10, "Kandungan protein minimal 10 gram"),
+  menu_name: z.string().min(3, "Nama paket komoditas/sembako minimal 3 karakter"),
+  target_group: z.enum(["paud", "sd_rendah", "sd_tinggi", "smp_sma", "ibu_hamil", "warga", "umum"]).default("umum"),
+  ingredients: z.array(nutritionItemSchema).min(1, "Paket minimal harus memuat 1 jenis komoditas"),
+  total_calories: z.number().optional().default(0),
+  total_protein: z.number().optional().default(0),
   cost_per_portion: z.number().min(0, "Estimasi biaya tidak valid"),
 });
 
-// 5. Skema Profil Pos Cabang / Mitra KKMP Kota Depok
-export const sppgProfileSchema = z.object({
+// 5. Skema Profil Pos Cabang / Mitra KKMP Sukmajaya Kota Depok
+export const posProfileSchema = z.object({
   code: z.string().min(3, "Kode Pos Cabang tidak valid"),
   name: z.string().min(3, "Nama Pos Cabang / Unit Usaha KKMP wajib diisi"),
   penanggung_jawab: z.string().min(2, "Nama penanggung jawab wajib diisi"),
   phone: z.string().min(9, "Nomor kontak minimal 9 digit"),
   address: z.string().min(5, "Alamat operasional pos cabang wajib diisi"),
   kecamatan: z.string().min(2, "Nama kecamatan wajib ditentukan"),
-  kapasitas_porsi: z.number().int().min(100, "Kapasitas harian minimal 100 porsi"),
+  kapasitas_porsi: z.number().int().min(1, "Kapasitas distribusi harian minimal 1").default(100),
   total_sekolah: z.number().int().min(0).default(0),
 });
+
+// Alias kompatibilitas ke belakang
+export const sppgProfileSchema = posProfileSchema;
 
 /**
  * Helper Validasi Data Aman (Safe Parse)
