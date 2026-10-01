@@ -48,7 +48,7 @@ export default function Register() {
             KOPERASI MERAH PUTIH
           </h1>
           <p className="text-white/90 mt-1 text-xs sm:text-sm font-semibold tracking-wide">
-            MEKARJAYA &bull; KOTA DEPOK
+            SUKMAJAYA &bull; KOTA DEPOK
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export default function Register() {
           </CardContent>
         </Card>
         <p className="text-center text-white/80 text-xs mt-4">
-          &copy; 2026 Koperasi Kelurahan Merah Putih (KKMP) Mekarjaya &bull; Kota Depok
+          &copy; 2026 Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya &bull; Kota Depok
         </p>
       </motion.div>
     </div>

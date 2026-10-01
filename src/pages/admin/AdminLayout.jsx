@@ -44,5 +44,5 @@ const menuItems = [
 ];
 
 export default function AdminLayout() {
-  return <TopNavLayout menuItems={menuItems} title="Koperasi Induk Mekarjaya (Gudang Pusat)" />;
+  return <TopNavLayout menuItems={menuItems} title="Koperasi Induk Sukmajaya (Gudang Pusat)" />;
 }

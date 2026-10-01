@@ -134,7 +134,7 @@ export default function AdminSuppliers() {
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm">
-            Kelola pemasok komoditas pangan segar, beras, dan sembako untuk jaringan Koperasi Merah Putih Mekarjaya - Kota Depok
+            Kelola pemasok komoditas pangan segar, beras, dan sembako untuk jaringan Koperasi Merah Putih Sukmajaya - Kota Depok
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={load} className="gap-2 shrink-0">

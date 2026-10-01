@@ -1,5 +1,5 @@
 # 📋 Panduan Akun Demo & Kredensial Pengujian (Dummy Accounts)
-## Koperasi Kelurahan Merah Putih (KKMP) Sukamaja / Mekarjaya — Kota Depok
+## Koperasi Kelurahan Merah Putih (KKMP) Sukamaja / Sukmajaya — Kota Depok
 
 Dokumen ini memuat seluruh akun pengujian (dummy accounts) untuk memverifikasi seluruh modul dan alur kerja di ekosistem **KKMP Kota Depok**.
 
@@ -22,7 +22,7 @@ Kata Sandi: demo1234
 | **2** | **Mitra Pos Cabang** | Mitra Pos Cabang Beji | `cabang.beji@kkmp-depok.id` | `mitra@demo.local` | `/mitra/dashboard` |
 | **3** | **Supplier Bahan Pangan** | Gapoktan Sawangan Mandiri | `supplier.pangan@kkmp-depok.id` | `supplier@demo.local` | `/supplier/dashboard` |
 | **4** | **Logistik & Armada** | Tim Logistik KKMP Kota Depok | `logistik@kkmp-depok.id` | `logistik@demo.local` | `/logistik/dashboard` |
-| **5** | **Pengurus Induk (Admin)** | Pengurus KKMP Mekarjaya | `admin.induk@kkmp-depok.id` | `admin@demo.local` | `/admin/dashboard` |
+| **5** | **Pengurus Induk (Admin)** | Pengurus KKMP Sukmajaya | `admin.induk@kkmp-depok.id` | `admin@demo.local` | `/admin/dashboard` |
 
 ---
 
@@ -40,7 +40,7 @@ Kata Sandi: demo1234
 - **Email:** `cabang.beji@kkmp-depok.id` atau `mitra@demo.local`
 - **Fitur Utama:**
   - Monitoring stok lokal Pos Cabang.
-  - Melakukan restock pemesanan komoditas ke Supplier dan Gudang Induk Mekarjaya.
+  - Melakukan restock pemesanan komoditas ke Supplier dan Gudang Induk Sukmajaya.
   - Rekapitulasi pesanan anggota warga di wilayah kelurahannya.
   - Penerimaan dan verifikasi barang masuk dari tim logistik.
 
@@ -56,15 +56,15 @@ Kata Sandi: demo1234
 - **Email:** `logistik@kkmp-depok.id` atau `logistik@demo.local`
 - **Fitur Utama:**
   - Manajemen armada kendaraan (Mobil pickup, motor box kelurahan).
-  - Alur rute pengiriman dari Gudang Induk Mekarjaya menuju 8 Pos Cabang.
+  - Alur rute pengiriman dari Gudang Induk Sukmajaya menuju 8 Pos Cabang.
   - Pelacakan pesanan aktif (Pickup -> On the way -> Delivered).
   - Update status dan tanda terima serah terima logistik.
 
-#### 5. 🏛️ Pengurus Koperasi Induk (Admin Pusat Mekarjaya)
+#### 5. 🏛️ Pengurus Koperasi Induk (Admin Pusat Sukmajaya)
 - **Email:** `admin.induk@kkmp-depok.id` atau `admin@demo.local`
 - **Fitur Utama:**
-  - Monitoring agregat stok Gudang Pusat Mekarjaya dan seluruh 8 cabang kelurahan.
-  - GIS Peta Sebaran 8 Pos Cabang KKMP Kota Depok (Mekarjaya, Sukmajaya, Beji, Pancoran Mas, Cimanggis, Sawangan, Cipayung, Tapos).
+  - Monitoring agregat stok Gudang Pusat Sukmajaya dan seluruh 8 cabang kelurahan.
+  - GIS Peta Sebaran 8 Pos Cabang KKMP Kota Depok (Sukmajaya, Sukmajaya, Beji, Pancoran Mas, Cimanggis, Sawangan, Cipayung, Tapos).
   - Manajemen anggota koperasi, verifikasi pendaftar baru, dan laporan keuangan ekosistem.
   - Pemantauan stabilitas inflasi harga bahan pokok pangan (Bapokting).
 

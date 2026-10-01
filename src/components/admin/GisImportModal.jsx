@@ -151,7 +151,7 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
           </DialogTitle>
           <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
             <span>Rantai Pasok:</span>
-            <span className="text-red-700 font-medium">Gudang Induk Mekarjaya &amp; 8 Pos Cabang</span>
+            <span className="text-red-700 font-medium">Gudang Induk Sukmajaya &amp; 8 Pos Cabang</span>
           </div>
         </DialogHeader>
 
@@ -163,7 +163,7 @@ export default function GisImportModal({ open, onClose, onImportSuccess }) {
               Dataset Resmi KKMP Kota Depok
             </p>
             <p className="text-xs text-red-800/80 mt-0.5">
-              Sinkronkan otomatis data Gudang Mekarjaya, 8 Pos Cabang, 11 Titik Binaan, dan 7 Supplier Pangan.
+              Sinkronkan otomatis data Gudang Sukmajaya, 8 Pos Cabang, 11 Titik Binaan, dan 7 Supplier Pangan.
             </p>
           </div>
           <Button

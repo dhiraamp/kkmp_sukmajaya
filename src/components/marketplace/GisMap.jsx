@@ -69,7 +69,7 @@ const COLOR = {
   heatmap: "#ef4444",
 };
 
-const GARUT_CENTER = [-6.3980, 106.8420]; // Depok Hub Mekarjaya
+const GARUT_CENTER = [-6.3980, 106.8420]; // Depok Hub Sukmajaya
 
 function makeIcon(color, size = 22) {
   return L.divIcon({
@@ -221,7 +221,7 @@ function MapNavigationControls({ center, selectedKecamatan, filteredEntities }) 
           type="button"
           onClick={handleReset}
           className="w-9 h-9 flex items-center justify-center rounded-xl bg-white hover:bg-emerald-50 text-gray-800 hover:text-emerald-700 shadow-sm border border-gray-100 transition-all active:scale-95 cursor-pointer"
-          title="Pusatkan ke Gudang Mekarjaya Depok"
+          title="Pusatkan ke Gudang Sukmajaya Depok"
         >
           <Crosshair className="w-4 h-4 text-emerald-600" />
         </button>
@@ -561,7 +561,7 @@ export default function GisMap() {
           <p className="text-xs text-gray-500">
             Sumber Data:{" "}
             <span className="text-emerald-600 font-medium inline-flex items-center gap-0.5">
-              kkmp-mekarjaya.depok.go.id
+              kkmp-sukmajaya.depok.go.id
             </span>{" "}
             · Pemetaan Gudang Induk, Pos Cabang, Titik Penerima Manfaat, Supplier Komoditas &amp; Rute Distribusi Depok
           </p>
@@ -1297,7 +1297,7 @@ export default function GisMap() {
               {selectedEntityType === "supplier" &&
                 "Kelompok tani, peternak, distributor & UMKM pangan lokal terverifikasi pemasok bahan baku KKMP"}
               {selectedEntityType === "jalur" &&
-                "Jalur distribusi logistik terjadwal dari Gudang Pusat Mekarjaya menuju pos-pos cabang KKMP kecamatan"}
+                "Jalur distribusi logistik terjadwal dari Gudang Pusat Sukmajaya menuju pos-pos cabang KKMP kecamatan"}
             </p>
           </div>
 

@@ -8,7 +8,7 @@ export default function AdminFinancial() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Laporan Keuangan Koperasi</h2>
-        <p className="text-muted-foreground">Ringkasan keuangan dan perputaran komoditas Koperasi Merah Putih Mekarjaya</p>
+        <p className="text-muted-foreground">Ringkasan keuangan dan perputaran komoditas Koperasi Merah Putih Sukmajaya</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Total Revenue" value="Rp 384jt" icon={TrendingUp} color="green" trend={12} />

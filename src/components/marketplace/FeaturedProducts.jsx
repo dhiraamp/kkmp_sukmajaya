@@ -23,7 +23,7 @@ export const SAMPLE_PRODUCTS = [
     id: "prod-2",
     name: "Mentega Margarin Blue Band Serbaguna 200g",
     category: "Minyak & Mentega",
-    supplier_name: "Gudang Pusat Mekarjaya",
+    supplier_name: "Gudang Pusat Sukmajaya",
     price: 11500,
     member_price: 10000,
     unit: "sachet",
@@ -35,7 +35,7 @@ export const SAMPLE_PRODUCTS = [
     id: "prod-3",
     name: "Shampo Rambut Lifebuoy Anti Dandruff 170ml",
     category: "Perawatan Diri",
-    supplier_name: "Sentra Kelontong Mekarjaya",
+    supplier_name: "Sentra Kelontong Sukmajaya",
     price: 19500,
     member_price: 17500,
     unit: "botol",
@@ -47,7 +47,7 @@ export const SAMPLE_PRODUCTS = [
     id: "prod-4",
     name: "Mie Instan Indomie Goreng Spesial (Isi 5 Pcs)",
     category: "Kelontong",
-    supplier_name: "Gudang Induk Mekarjaya, Depok",
+    supplier_name: "Gudang Induk Sukmajaya, Depok",
     price: 16000,
     member_price: 14500,
     unit: "paket",
@@ -59,7 +59,7 @@ export const SAMPLE_PRODUCTS = [
     id: "prod-5",
     name: "Minyak Goreng Sawit 2 Liter",
     category: "Sembako",
-    supplier_name: "Gudang Pusat Mekarjaya",
+    supplier_name: "Gudang Pusat Sukmajaya",
     price: 36000,
     member_price: 32500,
     unit: "pouch",
@@ -71,7 +71,7 @@ export const SAMPLE_PRODUCTS = [
     id: "prod-6",
     name: "Sabun Cuci Piring Sunlight Jeruk Nipis 750ml",
     category: "Kelontong",
-    supplier_name: "Gudang Pusat Mekarjaya",
+    supplier_name: "Gudang Pusat Sukmajaya",
     price: 15000,
     member_price: 13500,
     unit: "pouch",
@@ -95,7 +95,7 @@ export const SAMPLE_PRODUCTS = [
     id: "prod-8",
     name: "Sabun Mandi Batang Dettol Original (Isi 3)",
     category: "Perawatan Diri",
-    supplier_name: "Sentra Kelontong Mekarjaya",
+    supplier_name: "Sentra Kelontong Sukmajaya",
     price: 17500,
     member_price: 15500,
     unit: "pack",
@@ -107,7 +107,7 @@ export const SAMPLE_PRODUCTS = [
     id: "prod-9",
     name: "Shampo Pantene Total Damage Care 160ml",
     category: "Perawatan Diri",
-    supplier_name: "Distributor Mekarjaya Depok",
+    supplier_name: "Distributor Sukmajaya Depok",
     price: 24000,
     member_price: 21500,
     unit: "botol",
@@ -143,7 +143,7 @@ export const SAMPLE_PRODUCTS = [
     id: "prod-12",
     name: "Kecap Manis Bango Botol 520ml",
     category: "Bumbu",
-    supplier_name: "Distributor Sembako Mekarjaya",
+    supplier_name: "Distributor Sembako Sukmajaya",
     price: 24500,
     member_price: 22000,
     unit: "botol",
@@ -206,7 +206,7 @@ export default function FeaturedProducts({ products = SAMPLE_PRODUCTS }) {
               Produk Unggulan
             </h2>
             <p className="text-xs text-gray-500 mt-0.5">
-              Komoditas pokok & produk UMKM pilihan langsung dari supplier dan Gudang Pusat Mekarjaya
+              Komoditas pokok & produk UMKM pilihan langsung dari supplier dan Gudang Pusat Sukmajaya
             </p>
           </div>
 

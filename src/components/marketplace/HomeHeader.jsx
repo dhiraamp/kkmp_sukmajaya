@@ -56,7 +56,7 @@ export default function HomeHeader({ onSearchClick }) {
 
   const DEPOK_DISTRICTS = [
     "Kota Depok (Semua)",
-    "Kec. Sukmajaya / Mekarjaya",
+    "Kec. Sukmajaya / Sukmajaya",
     "Kec. Beji / Margonda",
     "Kec. Pancoran Mas",
     "Kec. Cimanggis",
@@ -99,7 +99,7 @@ export default function HomeHeader({ onSearchClick }) {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-4">
-        {/* Logo Koperasi Merah Putih Mekarjaya - Exactly as in skema_web_kkmp_sukamaja.jpeg */}
+        {/* Logo Koperasi Merah Putih Sukmajaya - Exactly as in skema_web_kkmp_sukamaja.jpeg */}
         <div
           className="flex items-center gap-3 cursor-pointer shrink-0"
           onClick={() => navigate("/")}
@@ -137,7 +137,7 @@ export default function HomeHeader({ onSearchClick }) {
               MERAH PUTIH
             </div>
             <div className="text-[10px] font-extrabold tracking-widest text-slate-800 uppercase">
-              MEKARJAYA
+              SUKMAJAYA
             </div>
           </div>
         </div>

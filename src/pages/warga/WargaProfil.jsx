@@ -147,7 +147,7 @@ export default function WargaProfil() {
           <div className="min-w-0">
             <h2 className="text-lg font-bold truncate">{displayName}</h2>
             <p className="text-xs text-rose-100 flex items-center gap-1 mt-0.5">
-              <BadgeCheck className="w-3.5 h-3.5" /> Anggota Resmi Koperasi Merah Putih Mekarjaya - Depok
+              <BadgeCheck className="w-3.5 h-3.5" /> Anggota Resmi Koperasi Merah Putih Sukmajaya - Depok
             </p>
             <p className="text-xs text-rose-100 mt-0.5 truncate flex items-center gap-1">
               <Mail className="w-3 h-3" /> {email}

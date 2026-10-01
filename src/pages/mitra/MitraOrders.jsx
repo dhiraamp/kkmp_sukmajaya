@@ -108,7 +108,7 @@ export default function MitraOrders() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Tracking Pengiriman Logistik</h2>
-        <p className="text-muted-foreground">Pantau status distribusi komoditas dari Gudang Pusat Mekarjaya ke Pos Cabang</p>
+        <p className="text-muted-foreground">Pantau status distribusi komoditas dari Gudang Pusat Sukmajaya ke Pos Cabang</p>
       </div>
 
       {/* Tab status ala Shopee */}

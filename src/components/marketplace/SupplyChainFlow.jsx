@@ -16,7 +16,7 @@ export default function SupplyChainFlow() {
     {
       roleId: "admin",
       step: 2,
-      title: "Koperasi Induk Mekarjaya",
+      title: "Koperasi Induk Sukmajaya",
       desc: "Manajemen produk, stok dan order",
       color: "border-red-200 bg-red-50/60 text-red-900",
       badgeColor: "bg-red-600 text-white",

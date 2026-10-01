@@ -1,6 +1,6 @@
 # Analisis Sistem Rantai Pasok KKMP Sukamaja — Kota Depok
 
-Dokumen ini adalah hasil analisis arsitektur aplikasi rantai pasok dan marketplace Koperasi Kelurahan Merah Putih Sukamaja (Mekarjaya, Depok).
+Dokumen ini adalah hasil analisis arsitektur aplikasi rantai pasok dan marketplace Koperasi Kelurahan Merah Putih Sukamaja (Sukmajaya, Depok).
 
 Dibuat: Sabtu, 01 Agustus 2026
 

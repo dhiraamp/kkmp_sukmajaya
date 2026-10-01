@@ -12,10 +12,10 @@ import { ShoppingCart, Upload, FileText, CheckCircle, Plus, Trash2, AlertTriangl
 import StockAlertBanner from "@/components/mitra/StockAlertBanner";
 
 const SUPPLIER_LIST = [
-  "Gudang Pusat KKMP Mekarjaya (Induk)",
+  "Gudang Pusat KKMP Sukmajaya (Induk)",
   "Pemasok Beras Cilodong Depok",
   "Peternakan Ayam Sawangan",
-  "Distributor Sembako Mekarjaya",
+  "Distributor Sembako Sukmajaya",
   "Pemasok Sayur Sukmajaya",
   "Pemasok Ikan & Segar Beji",
   "CV Bumbu Nusantara Depok",
@@ -157,7 +157,7 @@ export default function MitraKebutuhan() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Pengajuan Komoditas & PO Pos Cabang</h2>
-        <p className="text-muted-foreground">Isi pengajuan kebutuhan komoditas Pos Cabang ke Koperasi Induk Mekarjaya (Gudang Pusat Kota Depok)</p>
+        <p className="text-muted-foreground">Isi pengajuan kebutuhan komoditas Pos Cabang ke Koperasi Induk Sukmajaya (Gudang Pusat Kota Depok)</p>
       </div>
 
       <StockAlertBanner userEmail={user?.email} sppgName={user?.organization_name || user?.full_name || "Pos KKMP Beji Depok"} />
@@ -256,7 +256,7 @@ export default function MitraKebutuhan() {
               {supplierMode === "broadcast" && (
                 <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                  <p className="text-xs text-amber-700">Jika belum ada pemasok / Gudang Induk yang memproses dalam 24 jam, pengurus Koperasi Induk Mekarjaya akan mendapat notifikasi untuk percepatan pasokan.</p>
+                  <p className="text-xs text-amber-700">Jika belum ada pemasok / Gudang Induk yang memproses dalam 24 jam, pengurus Koperasi Induk Sukmajaya akan mendapat notifikasi untuk percepatan pasokan.</p>
                 </div>
               )}
 

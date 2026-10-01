@@ -6,9 +6,9 @@ export default function LogistikChat() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Chat Koperasi Induk</h2>
-        <p className="text-muted-foreground">Koordinasi langsung dengan Pengurus Gudang Pusat KKMP Mekarjaya</p>
+        <p className="text-muted-foreground">Koordinasi langsung dengan Pengurus Gudang Pusat KKMP Sukmajaya</p>
       </div>
-      <ChatPanel title="Chat Pengurus KKMP Mekarjaya" receiverRole="admin" senderRole="logistik" channelId="admin-logistik" />
+      <ChatPanel title="Chat Pengurus KKMP Sukmajaya" receiverRole="admin" senderRole="logistik" channelId="admin-logistik" />
     </div>
   );
 }

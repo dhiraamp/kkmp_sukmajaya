@@ -18,7 +18,7 @@ export default function GisPetaPage() {
             <div className="flex flex-wrap items-center gap-2 mb-3">
               <Badge className="bg-red-500/30 text-red-100 border border-red-400/40 px-3 py-1 text-xs font-semibold backdrop-blur-md gap-1.5">
                 <Building2 className="w-3.5 h-3.5 text-red-300" />
-                Gudang Pusat Mekarjaya
+                Gudang Pusat Sukmajaya
               </Badge>
               <Badge className="bg-rose-500/30 text-rose-100 border border-rose-400/40 px-3 py-1 text-xs font-semibold backdrop-blur-md gap-1.5">
                 <Store className="w-3.5 h-3.5 text-rose-200" />
@@ -30,7 +30,7 @@ export default function GisPetaPage() {
               Peta Persebaran Jaringan Pos & Cabang Koperasi
             </h1>
             <p className="text-rose-100 text-sm sm:text-base leading-relaxed mb-4">
-              Pemetaan geospasial rantai pasok Koperasi Kelurahan Merah Putih (KKMP) Kota Depok. Menghubungkan Gudang Pusat Mekarjaya dengan 8 pos cabang kelurahan (Beji, Margonda, Pancoran Mas, Sukmajaya, Cilodong, Cimanggis, Sawangan, Tapos) dan rute logistik pengantaran komoditas.
+              Pemetaan geospasial rantai pasok Koperasi Kelurahan Merah Putih (KKMP) Kota Depok. Menghubungkan Gudang Pusat Sukmajaya dengan 8 pos cabang kelurahan (Beji, Margonda, Pancoran Mas, Sukmajaya, Cilodong, Cimanggis, Sawangan, Tapos) dan rute logistik pengantaran komoditas.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-rose-200 pt-2 border-t border-red-600/60">

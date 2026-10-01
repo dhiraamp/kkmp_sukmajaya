@@ -19,7 +19,7 @@ const ADS = [
     imageUrl: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400",
   },
   {
-    title: "Jaringan Distribusi Pangan Rakyat Sukamaja & Mekarjaya",
+    title: "Jaringan Distribusi Pangan Rakyat Sukamaja & Sukmajaya",
     desc: "Bergabung memperkuat kedaulatan pangan dan koperasi mandiri di Kota Depok.",
     buttonText: "Lihat Jaringan Cabang",
     gradient: "from-red-700 to-rose-600",

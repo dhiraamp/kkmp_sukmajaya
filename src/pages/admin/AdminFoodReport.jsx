@@ -53,7 +53,7 @@ export default function AdminFoodReport() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h2 className="text-2xl font-bold">Laporan Komoditas Pangan KKMP</h2>
-          <p className="text-muted-foreground">Analisis ketersediaan dan kebutuhan komoditas pangan Koperasi Merah Putih Mekarjaya - Depok</p>
+          <p className="text-muted-foreground">Analisis ketersediaan dan kebutuhan komoditas pangan Koperasi Merah Putih Sukmajaya - Depok</p>
         </div>
         <Button onClick={handleExportCsv} variant="outline">
           <Download className="w-4 h-4" />

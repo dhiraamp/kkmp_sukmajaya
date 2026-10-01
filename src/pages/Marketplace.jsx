@@ -23,7 +23,7 @@ export default function Marketplace() {
         id: p.id || `db-${idx}`,
         name: p.name,
         category: p.category || "Sembako",
-        supplier_name: p.supplier_name || "Supplier Gudang Pusat Mekarjaya",
+        supplier_name: p.supplier_name || "Supplier Gudang Pusat Sukmajaya",
         price: p.price || 15000,
         member_price: p.member_price || Math.round((p.price || 15000) * 0.9),
         unit: p.unit || "kg",
@@ -69,7 +69,7 @@ export default function Marketplace() {
 
   return (
     <div className="min-h-screen bg-slate-50/50 flex flex-col justify-between">
-      {/* 1. Header Koperasi Merah Putih Mekarjaya */}
+      {/* 1. Header Koperasi Merah Putih Sukmajaya */}
       <HomeHeader
         onSearchClick={() => {
           const searchEl = document.getElementById("search-input-hero");
@@ -117,7 +117,7 @@ export default function Marketplace() {
         </div>
       </main>
 
-      {/* 8. Footer Koperasi Merah Putih Mekarjaya */}
+      {/* 8. Footer Koperasi Merah Putih Sukmajaya */}
       <footer className="bg-slate-900 text-white border-t border-slate-800 pt-12 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
@@ -131,7 +131,7 @@ export default function Marketplace() {
                 </div>
                 <div className="leading-tight">
                   <p className="text-sm font-black text-red-500 uppercase tracking-wider">KOPERASI MERAH PUTIH</p>
-                  <p className="text-xs font-bold text-white uppercase tracking-widest">MEKARJAYA &bull; DEPOK</p>
+                  <p className="text-xs font-bold text-white uppercase tracking-widest">SUKMAJAYA &bull; DEPOK</p>
                 </div>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -170,10 +170,10 @@ export default function Marketplace() {
             {/* Col 4: Contact & Office */}
             <div>
               <h4 className="text-xs font-extrabold uppercase text-slate-300 tracking-wider mb-3">
-                Kantor Pusat Mekarjaya
+                Kantor Pusat Sukmajaya
               </h4>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Jl. Raya Mekarjaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16411
+                Jl. Raya Sukmajaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16411
               </p>
               <p className="text-xs text-slate-400 mt-2">
                 Email: <span className="text-slate-300">sekretariat@kkmp-depok.id</span>
@@ -185,7 +185,7 @@ export default function Marketplace() {
           </div>
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-            <p>&copy; 2026 <strong>Koperasi Kelurahan Merah Putih (KKMP) Mekarjaya</strong> &bull; Kota Depok. Seluruh hak cipta dilindungi.</p>
+            <p>&copy; 2026 <strong>Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya</strong> &bull; Kota Depok. Seluruh hak cipta dilindungi.</p>
             <button
               onClick={scrollToTop}
               className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"

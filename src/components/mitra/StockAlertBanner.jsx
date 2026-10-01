@@ -68,7 +68,7 @@ export default function StockAlertBanner({ userEmail, sppgName }) {
                 </p>
                 <div className="mt-1.5 p-2 rounded bg-amber-50 border border-amber-200">
                   <p className="text-xs text-amber-800 font-medium">
-                    💡 Koordinasikan dengan Gudang Pusat Mekarjaya untuk jadwal pasokan ulang <strong>{alert.product_name}</strong>.
+                    💡 Koordinasikan dengan Gudang Pusat Sukmajaya untuk jadwal pasokan ulang <strong>{alert.product_name}</strong>.
                   </p>
                 </div>
               </div>

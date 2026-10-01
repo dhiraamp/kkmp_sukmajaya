@@ -53,7 +53,7 @@ export default function AdminGis() {
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm mt-1">
-            Manajemen data spasial Gudang Pusat Mekarjaya, 8 Pos Cabang, dan Rute Logistik se-Kota Depok
+            Manajemen data spasial Gudang Pusat Sukmajaya, 8 Pos Cabang, dan Rute Logistik se-Kota Depok
           </p>
         </div>
 

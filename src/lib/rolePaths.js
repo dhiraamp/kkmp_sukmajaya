@@ -1,7 +1,7 @@
 import { base44 } from "@/api/base44Client";
 
 export const DASHBOARD_PATHS = {
-  admin: "/admin/dashboard",      // Koperasi Induk Mekarjaya
+  admin: "/admin/dashboard",      // Koperasi Induk Sukmajaya
   mitra: "/mitra/dashboard",      // Koperasi Cabang / Pos KKMP
   supplier: "/supplier/dashboard", // Pemasok Komoditas
   logistik: "/logistik/dashboard", // Armada Pengiriman Internal

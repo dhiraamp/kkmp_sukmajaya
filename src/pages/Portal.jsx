@@ -28,7 +28,7 @@ import { toast } from "sonner";
 export const ROLES = [
   {
     id: "admin",
-    label: "Koperasi Induk Mekarjaya",
+    label: "Koperasi Induk Sukmajaya",
     shortLabel: "Koperasi Induk",
     icon: Award,
     color: "from-red-700 to-rose-900",
@@ -141,7 +141,7 @@ export default function Portal() {
         navigate(intended, { replace: true });
       } else {
         toast.success("Berhasil Masuk!", {
-          description: `Selamat datang di Koperasi Merah Putih Mekarjaya, masuk sebagai ${currentRole.label}.`,
+          description: `Selamat datang di Koperasi Merah Putih Sukmajaya, masuk sebagai ${currentRole.label}.`,
         });
         navigate(getDashboardPath(userRole), { replace: true });
       }
@@ -177,7 +177,7 @@ export default function Portal() {
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-base tracking-tight text-white">KOPERASI MERAH PUTIH</span>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-500/20 text-red-300 border border-red-500/30">
-                Mekarjaya &bull; Kota Depok
+                Sukmajaya &bull; Kota Depok
               </span>
             </div>
             <p className="text-[11px] text-white/60 hidden sm:block">
@@ -214,7 +214,7 @@ export default function Portal() {
             >
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-300 text-xs font-semibold">
                 <Sparkles className="w-3.5 h-3.5 text-red-400" />
-                Portal Resmi Koperasi Merah Putih Mekarjaya
+                Portal Resmi Koperasi Merah Putih Sukmajaya
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
@@ -222,7 +222,7 @@ export default function Portal() {
               </h1>
 
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                Pusat integrasi rantai pasok antara <strong>Supplier</strong>, <strong>Gudang Pusat Mekarjaya</strong>, 
+                Pusat integrasi rantai pasok antara <strong>Supplier</strong>, <strong>Gudang Pusat Sukmajaya</strong>, 
                 <strong>Armada Logistik</strong>, <strong>8 Cabang Depok</strong>, dan <strong>Seluruh Anggota Koperasi</strong>.
               </p>
             </motion.div>
@@ -237,7 +237,7 @@ export default function Portal() {
               <div className="bg-slate-900/70 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
                 <p className="text-[11px] text-slate-400 font-medium">Koperasi Induk</p>
                 <p className="text-2xl font-black text-red-400 mt-0.5">1</p>
-                <p className="text-[10px] text-red-300/80">Pusat Mekarjaya</p>
+                <p className="text-[10px] text-red-300/80">Pusat Sukmajaya</p>
               </div>
 
               <div className="bg-slate-900/70 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
@@ -389,7 +389,7 @@ export default function Portal() {
       {/* Footer Hak Cipta */}
       <footer className="relative z-10 w-full py-4 px-4 text-center border-t border-white/10 bg-slate-950/50 text-xs text-slate-400">
         <p>
-          &copy; 2026 <strong>Koperasi Kelurahan Merah Putih (KKMP) Mekarjaya</strong> &bull; Kota Depok
+          &copy; 2026 <strong>Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya</strong> &bull; Kota Depok
         </p>
       </footer>
     </div>

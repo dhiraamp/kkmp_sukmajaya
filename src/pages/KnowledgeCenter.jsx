@@ -20,10 +20,10 @@ const DATA = [
     id: "dev-1",
     category: "pengembangan",
     title: "Perjalanan & Perkembangan Koperasi Merah Putih di Kota Depok",
-    excerpt: "Perjalanan dan capaian KKMP sejak diluncurkan di Kota Depok, mulai dari pembentukan Gudang Pusat Mekarjaya hingga 8 pos cabang kelurahan.",
+    excerpt: "Perjalanan dan capaian KKMP sejak diluncurkan di Kota Depok, mulai dari pembentukan Gudang Pusat Sukmajaya hingga 8 pos cabang kelurahan.",
     image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800",
     date: "2026-09-20",
-    author: "Koperasi Induk Mekarjaya",
+    author: "Koperasi Induk Sukmajaya",
     body: "Koperasi Kelurahan Merah Putih (KKMP) terus berkembang di Kota Depok. Kini pos cabang aktif melayani kebutuhan ribuan anggota dengan sembako dan komoditas bermutu tinggi langsung dari gudang pusat.",
   },
   {
@@ -70,7 +70,7 @@ const DATA = [
     id: "panduan-3",
     category: "panduan",
     title: "Panduan Manajemen Simpanan & Manfaat Anggota",
-    excerpt: "Manfaat menjadi anggota resmi Koperasi Merah Putih Mekarjaya - Kota Depok.",
+    excerpt: "Manfaat menjadi anggota resmi Koperasi Merah Putih Sukmajaya - Kota Depok.",
     image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800",
     date: "2026-06-28",
     author: "Pengurus Koperasi KKMP",
@@ -94,7 +94,7 @@ const DATA = [
     image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800",
     date: "2026-06-12",
     author: "Quality Control KKMP",
-    body: "Setiap komoditas yang masuk dari supplier diperiksa kualitas dan masa kedaluwarsanya di Gudang Pusat Mekarjaya sebelum didistribusikan armada logistik ke 8 pos cabang kelurahan.",
+    body: "Setiap komoditas yang masuk dari supplier diperiksa kualitas dan masa kedaluwarsanya di Gudang Pusat Sukmajaya sebelum didistribusikan armada logistik ke 8 pos cabang kelurahan.",
   },
   {
     id: "regulasi-3",
@@ -104,7 +104,7 @@ const DATA = [
     image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
     date: "2026-06-01",
     author: "Divisi Pengadaan KKMP",
-    body: "Kemitraan supplier diatur dengan transparansi harga acuan pasar, mekanisme Purchase Order (PO), dan pembayaran terpadu melalui Koperasi Induk Mekarjaya.",
+    body: "Kemitraan supplier diatur dengan transparansi harga acuan pasar, mekanisme Purchase Order (PO), dan pembayaran terpadu melalui Koperasi Induk Sukmajaya.",
   },
   {
     id: "sumber-1",
@@ -124,7 +124,7 @@ const DATA = [
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
     date: "2026-05-18",
     author: "Customer Care KKMP",
-    body: "Layanan informasi dan bantuan operasional KKMP siap melayani anggota dan mitra setiap hari kerja melalui WhatsApp dan pusat bantuan kantor Mekarjaya.",
+    body: "Layanan informasi dan bantuan operasional KKMP siap melayani anggota dan mitra setiap hari kerja melalui WhatsApp dan pusat bantuan kantor Sukmajaya.",
   },
   {
     id: "sumber-3",

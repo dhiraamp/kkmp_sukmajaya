@@ -50,7 +50,7 @@ export default function WargaBeranda() {
           <p className="text-sm text-gray-500 mt-0.5">{today}</p>
         </div>
         <span className="flex items-center gap-1 text-xs font-medium text-red-700 bg-red-50 border border-red-200 px-3 py-1.5 rounded-full">
-          <MapPin className="w-3 h-3" /> Pos Mekarjaya — Kota Depok
+          <MapPin className="w-3 h-3" /> Pos Sukmajaya — Kota Depok
         </span>
       </div>
 
@@ -83,7 +83,7 @@ export default function WargaBeranda() {
         <div className="absolute inset-0 bg-gradient-to-r from-red-950/85 via-red-900/70 to-transparent" />
         <div className="relative p-5">
           <span className="flex items-center gap-1 text-[11px] font-semibold text-red-100">
-            <Leaf className="w-3 h-3" /> Koperasi Merah Putih Mekarjaya
+            <Leaf className="w-3 h-3" /> Koperasi Merah Putih Sukmajaya
           </span>
           <h3 className="text-lg font-bold text-white mt-1 max-w-xs leading-snug">
             Belanja Hemat & Berkualitas untuk Anggota Koperasi

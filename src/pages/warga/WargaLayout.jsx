@@ -31,7 +31,7 @@ export default function WargaLayout() {
             </div>
             <div className="leading-tight">
               <p className="text-base font-bold text-gray-900">Koperasi Merah Putih</p>
-              <p className="text-[10px] text-gray-500">Belanja Anggota &bull; Mekarjaya</p>
+              <p className="text-[10px] text-gray-500">Belanja Anggota &bull; Sukmajaya</p>
             </div>
           </div>
 

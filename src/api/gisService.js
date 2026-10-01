@@ -1,10 +1,10 @@
 /**
  * Service Data Geospasial (GIS) Terpadu — KKMP Kota Depok
  * Terintegrasi dengan Sistem Koperasi Kelurahan Merah Putih Bersama
- * Kelurahan Mekarjaya, Kecamatan Sukmajaya, Kota Depok
+ * Kelurahan Sukmajaya, Kecamatan Sukmajaya, Kota Depok
  * 
  * Mendukung:
- * 1. Dataset Gudang Pusat Mekarjaya & 8 Pos Cabang KKMP se-Kota Depok
+ * 1. Dataset Gudang Pusat Sukmajaya & 8 Pos Cabang KKMP se-Kota Depok
  * 2. Titik Penerima Manfaat Komunitas / Sekolah Binaan
  * 3. Jaringan Supplier Komoditas Pangan Pokok
  * 4. Rute Logistik Distribusi Antar Cabang
@@ -14,14 +14,14 @@
 const STORAGE_KEY = "kkmp_depok_gis_v1";
 const EVENT_NAME = "kkmp_gis_updated";
 
-// Titik Pusat Hub: Gudang Induk KKMP Mekarjaya, Sukmajaya, Kota Depok
+// Titik Pusat Hub: Gudang Induk KKMP Sukmajaya, Sukmajaya, Kota Depok
 export const DEPOK_HUB = { lat: -6.3980, lng: 106.8420 };
 // Alias kompatibilitas
 export const GARUT_HUB = DEPOK_HUB;
 
 export const KECAMATAN_COORDS = {
   // Kota Depok
-  "Mekarjaya": { lat: -6.3980, lng: 106.8420 },
+  "Sukmajaya": { lat: -6.3980, lng: 106.8420 },
   "Sukmajaya": { lat: -6.4020, lng: 106.8370 },
   "Beji": { lat: -6.3725, lng: 106.8200 },
   "Pancoran Mas": { lat: -6.3995, lng: 106.8120 },
@@ -37,8 +37,8 @@ export const KECAMATAN_COORDS = {
 
 // Dataset Baseline KKMP Kota Depok (Gudang Pusat + 8 Pos Cabang)
 export const KKMP_DEPOK_BASELINE = {
-  source: "kkmp-mekarjaya.depok.go.id",
-  portal_name: "Portal Geospasial Rantai Pasok KKMP Mekarjaya Kota Depok",
+  source: "kkmp-sukmajaya.depok.go.id",
+  portal_name: "Portal Geospasial Rantai Pasok KKMP Sukmajaya Kota Depok",
   lastUpdated: new Date().toISOString(),
   status: "verified_koperasi_network",
   totalSppgTerdaftar: 9,
@@ -47,17 +47,17 @@ export const KKMP_DEPOK_BASELINE = {
   // Titik Pos Cabang & Gudang Induk
   dapur: [
     {
-      id: "hub_mekarjaya",
-      name: "Gudang Pusat Induk Mekarjaya",
+      id: "hub_sukmajaya",
+      name: "Gudang Pusat Induk Sukmajaya",
       code: "HUB-00",
       lat: -6.3980,
       lng: 106.8420,
       kapasitas: 25000,
-      kecamatan: "Mekarjaya",
+      kecamatan: "Sukmajaya",
       status: "Pusat Distribusi (Hub)",
       penanggungJawab: "Bpk. Wibisono (Logistik KKMP)",
       kontak: "0811-1234-5678",
-      alamat: "Jl. Bahagia Raya No. 10, Kel. Mekarjaya, Kec. Sukmajaya, Kota Depok",
+      alamat: "Jl. Bahagia Raya No. 10, Kel. Sukmajaya, Kec. Sukmajaya, Kota Depok",
     },
     {
       id: "pos_beji",
@@ -167,7 +167,7 @@ export const KKMP_DEPOK_BASELINE = {
 
   // Titik Komunitas / Anggota / Sekolah Binaan KKMP
   sekolah: [
-    { id: "sek_01", name: "SDN Mekarjaya 1 Sukmajaya", lat: -6.3970, lng: 106.8340, siswa: 450, jenjang: "SD", kecamatan: "Sukmajaya", posId: "pos_sukmajaya" },
+    { id: "sek_01", name: "SDN Sukmajaya 1 Sukmajaya", lat: -6.3970, lng: 106.8340, siswa: 450, jenjang: "SD", kecamatan: "Sukmajaya", posId: "pos_sukmajaya" },
     { id: "sek_02", name: "SDN Beji 3 Kota Depok", lat: -6.3710, lng: 106.8180, siswa: 380, jenjang: "SD", kecamatan: "Beji", posId: "pos_beji" },
     { id: "sek_03", name: "SMPN 2 Kota Depok (Pancoran Mas)", lat: -6.3980, lng: 106.8150, siswa: 620, jenjang: "SMP", kecamatan: "Pancoran Mas", posId: "pos_panmas" },
     { id: "sek_04", name: "SDN Harjamukti 1 Cimanggis", lat: -6.3650, lng: 106.8620, siswa: 510, jenjang: "SD", kecamatan: "Cimanggis", posId: "pos_cimanggis" },
@@ -177,7 +177,7 @@ export const KKMP_DEPOK_BASELINE = {
     { id: "sek_08", name: "Balai Komunitas Warga Cipayung", lat: -6.4260, lng: 106.8100, siswa: 250, jenjang: "PAUD", kecamatan: "Cipayung", posId: "pos_cipayung" },
     { id: "sek_09", name: "SMAN 2 Kota Depok (Sukmajaya)", lat: -6.4010, lng: 106.8390, siswa: 750, jenjang: "SMA", kecamatan: "Sukmajaya", posId: "pos_sukmajaya" },
     { id: "sek_10", name: "SMPN 3 Kota Depok", lat: -6.4050, lng: 106.8320, siswa: 680, jenjang: "SMP", kecamatan: "Sukmajaya", posId: "pos_sukmajaya" },
-    { id: "sek_11", name: "TK & PAUD Merah Putih Mekarjaya", lat: -6.3965, lng: 106.8360, siswa: 95, jenjang: "PAUD", kecamatan: "Mekarjaya", posId: "hub_mekarjaya" },
+    { id: "sek_11", name: "TK & PAUD Merah Putih Sukmajaya", lat: -6.3965, lng: 106.8360, siswa: 95, jenjang: "PAUD", kecamatan: "Sukmajaya", posId: "hub_sukmajaya" },
   ],
 
   // Supplier Komoditas Pangan KKMP
@@ -191,7 +191,7 @@ export const KKMP_DEPOK_BASELINE = {
     { id: "sup_07", name: "Distributor Minyak Goreng & Gula Pasir Beji", lat: -6.3740, lng: 106.8220, jenis: "Minyak Goreng & Sembako", kecamatan: "Beji", kontak: "0819-2233-4455" },
   ],
 
-  // Rute Rantai Pasok dari Gudang Pusat Mekarjaya ke Pos Cabang
+  // Rute Rantai Pasok dari Gudang Pusat Sukmajaya ke Pos Cabang
   jalur: [
     { target: "Pos Cabang Beji", path: [DEPOK_HUB, { lat: -6.3725, lng: 106.8200 }], jarak: "4.2 km", waktu: "12 mnt" },
     { target: "Pos Cabang Pancoran Mas", path: [DEPOK_HUB, { lat: -6.3995, lng: 106.8120 }], jarak: "3.5 km", waktu: "10 mnt" },
@@ -204,7 +204,7 @@ export const KKMP_DEPOK_BASELINE = {
   ],
 
   heatmap: [
-    { lat: -6.3980, lng: 106.8420, intensitas: 9, area: "Mekarjaya" },
+    { lat: -6.3980, lng: 106.8420, intensitas: 9, area: "Sukmajaya" },
     { lat: -6.4020, lng: 106.8370, intensitas: 8, area: "Sukmajaya" },
     { lat: -6.3725, lng: 106.8200, intensitas: 7, area: "Beji" },
     { lat: -6.3995, lng: 106.8120, intensitas: 8, area: "Pancoran Mas" },
@@ -486,7 +486,7 @@ export function exportToGeoJson() {
     type: "FeatureCollection",
     metadata: {
       generatedAt: new Date().toISOString(),
-      source: "KKMP Mekarjaya Kota Depok — Geospasial Rantai Pasok",
+      source: "KKMP Sukmajaya Kota Depok — Geospasial Rantai Pasok",
       totalFeatures: features.length,
     },
     features,

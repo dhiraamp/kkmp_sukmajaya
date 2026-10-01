@@ -127,7 +127,7 @@ export default function AdminStock() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h2 className="text-2xl font-bold">Manajemen Stok Gudang Pusat KKMP</h2>
-          <p className="text-muted-foreground">Kelola inventaris komoditas Gudang Pusat Mekarjaya Kota Depok secara real-time</p>
+          <p className="text-muted-foreground">Kelola inventaris komoditas Gudang Pusat Sukmajaya Kota Depok secara real-time</p>
         </div>
 
       </div>

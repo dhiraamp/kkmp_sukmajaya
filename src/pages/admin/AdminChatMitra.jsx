@@ -20,7 +20,7 @@ export default function AdminChatMitra() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Chat Pos Cabang KKMP</h2>
-        <p className="text-muted-foreground">Komunikasi langsung Gudang Pusat Mekarjaya dengan pengurus 8 pos cabang Depok</p>
+        <p className="text-muted-foreground">Komunikasi langsung Gudang Pusat Sukmajaya dengan pengurus 8 pos cabang Depok</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

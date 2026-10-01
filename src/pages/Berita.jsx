@@ -56,7 +56,7 @@ export default function Berita() {
                 <h1 className="text-2xl font-bold text-gray-900">Berita & Informasi Koperasi</h1>
               </div>
               <p className="text-sm text-gray-500 mt-0.5">
-                Kabar terkini seputar kegiatan Koperasi Merah Putih Mekarjaya, ketersediaan pangan, dan program komoditas Kota Depok
+                Kabar terkini seputar kegiatan Koperasi Merah Putih Sukmajaya, ketersediaan pangan, dan program komoditas Kota Depok
               </p>
             </div>
           </div>

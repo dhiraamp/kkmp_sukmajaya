@@ -209,7 +209,7 @@ export default function MarketplacePage() {
           </button>
           <h1 className="text-2xl sm:text-3xl font-bold text-white">Katalog Komoditas Koperasi Merah Putih</h1>
           <p className="text-white/80 text-sm mt-1.5 max-w-2xl">
-            Sembako dan kebutuhan harian bermutu tinggi langsung dari Gudang Pusat Mekarjaya ke 8 Pos Cabang KKMP Kota Depok. Kualitas terjamin dengan harga anggota koperasi.
+            Sembako dan kebutuhan harian bermutu tinggi langsung dari Gudang Pusat Sukmajaya ke 8 Pos Cabang KKMP Kota Depok. Kualitas terjamin dengan harga anggota koperasi.
           </p>
 
           <div className="mt-5 flex items-stretch bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden max-w-2xl">

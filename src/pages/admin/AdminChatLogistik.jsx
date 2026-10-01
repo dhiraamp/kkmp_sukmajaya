@@ -20,7 +20,7 @@ export default function AdminChatLogistik() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Chat Armada Logistik KKMP</h2>
-        <p className="text-muted-foreground">Koordinasi langsung Gudang Pusat Mekarjaya dengan pengemudi & armada distribusi se-Kota Depok</p>
+        <p className="text-muted-foreground">Koordinasi langsung Gudang Pusat Sukmajaya dengan pengemudi & armada distribusi se-Kota Depok</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

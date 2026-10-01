@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAppState = async () => {
     try {
-      setAppPublicSettings({ app_name: "Koperasi Merah Putih Mekarjaya", app_logo_url: null });
+      setAppPublicSettings({ app_name: "Koperasi Merah Putih Sukmajaya", app_logo_url: null });
       setIsLoadingPublicSettings(false);
       await checkUserAuth();
     } catch (error) {

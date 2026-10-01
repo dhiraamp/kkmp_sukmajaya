@@ -15,7 +15,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const AREA_COORDS = {
-  "Gudang Induk Mekarjaya": { lat: -6.3980, lng: 106.8420 },
+  "Gudang Induk Sukmajaya": { lat: -6.3980, lng: 106.8420 },
   "Pos Cabang Beji":         { lat: -6.3725, lng: 106.8200 },
   "Pos Cabang Pancoran Mas": { lat: -6.3995, lng: 106.8120 },
   "Pos Cabang Sukmajaya":    { lat: -6.4020, lng: 106.8370 },
@@ -48,7 +48,7 @@ export default function LogistikMap() {
   // Hitung area stats dari order real
   const areaStats = {};
   orders.forEach(o => {
-    const area = o.delivery_area || "Gudang Induk Mekarjaya";
+    const area = o.delivery_area || "Gudang Induk Sukmajaya";
     if (!areaStats[area]) areaStats[area] = { count: 0, total: 0, orders: [] };
     areaStats[area].count++;
     areaStats[area].total += o.total_amount || 0;
@@ -76,7 +76,7 @@ export default function LogistikMap() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Peta Sebaran Pengiriman KKMP</h2>
-        <p className="text-muted-foreground">Distribusi komoditas real-time dari Gudang Induk Mekarjaya ke 8 Pos Cabang Kota Depok</p>
+        <p className="text-muted-foreground">Distribusi komoditas real-time dari Gudang Induk Sukmajaya ke 8 Pos Cabang Kota Depok</p>
       </div>
 
       {/* Stat ringkas */}

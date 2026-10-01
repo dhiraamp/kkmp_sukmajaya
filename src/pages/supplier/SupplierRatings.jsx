@@ -58,7 +58,7 @@ export default function SupplierRatings() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Rating & Ulasan</h2>
-        <p className="text-muted-foreground">Penilaian dari Pos Cabang & Koperasi Induk Mekarjaya terhadap pasokan komoditas Anda</p>
+        <p className="text-muted-foreground">Penilaian dari Pos Cabang & Koperasi Induk Sukmajaya terhadap pasokan komoditas Anda</p>
       </div>
 
       {ratings.length === 0 ? (

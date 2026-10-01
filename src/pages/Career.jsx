@@ -81,7 +81,7 @@ export default function Career() {
           </span>
           <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3">Lowongan Kerja Koperasi Merah Putih</h1>
           <p className="text-sm text-white/80 mt-1.5 max-w-2xl">
-            Bergabunglah bersama Koperasi Merah Putih Mekarjaya - Kota Depok. Tersedia posisi di Pos Cabang, Rantai Pasok Gudang Pusat, dan Armada Logistik.
+            Bergabunglah bersama Koperasi Merah Putih Sukmajaya - Kota Depok. Tersedia posisi di Pos Cabang, Rantai Pasok Gudang Pusat, dan Armada Logistik.
           </p>
 
           <div className="mt-6 flex items-stretch bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden max-w-2xl">

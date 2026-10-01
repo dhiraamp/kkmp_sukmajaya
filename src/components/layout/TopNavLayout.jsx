@@ -35,7 +35,7 @@ export default function TopNavLayout({ menuItems = [], title = "" }) {
       case "admin":
         return {
           brand: "KKMP INDUK",
-          subBrand: "Koperasi Induk Mekarjaya",
+          subBrand: "Koperasi Induk Sukmajaya",
           roleBadge: "Gudang Pusat",
           badgeColor: "bg-red-50 text-red-700 border-red-300",
           logoBg: "bg-gradient-to-br from-red-600 to-rose-700",
@@ -91,7 +91,7 @@ export default function TopNavLayout({ menuItems = [], title = "" }) {
       default:
         return {
           brand: "KOPERASI MERAH PUTIH",
-          subBrand: "Mekarjaya Kota Depok",
+          subBrand: "Sukmajaya Kota Depok",
           roleBadge: "KKMP",
           badgeColor: "bg-red-50 text-red-700 border-red-300",
           logoBg: "bg-gradient-to-br from-red-600 to-rose-700",

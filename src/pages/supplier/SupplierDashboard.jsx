@@ -109,7 +109,7 @@ export default function SupplierDashboard() {
       <div className="flex items-start justify-between">
         <div>
           <h2 className="text-2xl font-bold">Dashboard Pemasok Komoditas</h2>
-          <p className="text-muted-foreground">Portal manajemen pasokan komoditas ke Koperasi Induk Mekarjaya (Gudang Pusat Kota Depok)</p>
+          <p className="text-muted-foreground">Portal manajemen pasokan komoditas ke Koperasi Induk Sukmajaya (Gudang Pusat Kota Depok)</p>
         </div>
         {poList.filter(p => p.status === "menunggu").length > 0 && (
           <div className="flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-xl px-3 py-2 animate-pulse">
@@ -219,7 +219,7 @@ export default function SupplierDashboard() {
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center gap-2">
             <FileText className="w-4 h-4 text-orange-500" />
-            Purchase Order dari Koperasi Induk Mekarjaya & Pos Cabang
+            Purchase Order dari Koperasi Induk Sukmajaya & Pos Cabang
             <Badge className="bg-orange-100 text-orange-700 ml-auto text-xs">
               {poList.filter(p => p.status === "menunggu").length} PO Baru
             </Badge>
@@ -290,7 +290,7 @@ export default function SupplierDashboard() {
           <CardContent className="space-y-3">
             {[
               { id: "ORD-101", mitra: "Pos KKMP Beji Depok", items: "Beras Premium 100kg, Telur 50kg", status: "confirmed", total: "Rp 2.100.000" },
-              { id: "ORD-102", mitra: "Gudang Pusat Mekarjaya", items: "Sayuran Segar Sukmajaya 30kg", status: "pending", total: "Rp 450.000" },
+              { id: "ORD-102", mitra: "Gudang Pusat Sukmajaya", items: "Sayuran Segar Sukmajaya 30kg", status: "pending", total: "Rp 450.000" },
               { id: "ORD-103", mitra: "Pos KKMP Pancoran Mas", items: "Daging Ayam Sawangan 25kg", status: "processing", total: "Rp 950.000" },
             ].map((o) => (
               <div key={o.id} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg border">

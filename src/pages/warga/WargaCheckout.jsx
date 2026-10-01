@@ -23,10 +23,10 @@ const PAYMENT_METHODS = [
 ];
 
 const BANK_ACCOUNTS = [
-  { bank: "BRI", account: "0023-01-0456-7890", holder: "KKMP Mekarjaya Depok" },
-  { bank: "BCA", account: "1234 5678 90", holder: "KKMP Mekarjaya Depok" },
-  { bank: "Mandiri", account: "9000-0000-1234", holder: "KKMP Mekarjaya Depok" },
-  { bank: "BNI", account: "0981-2345-67", holder: "KKMP Mekarjaya Depok" },
+  { bank: "BRI", account: "0023-01-0456-7890", holder: "KKMP Sukmajaya Depok" },
+  { bank: "BCA", account: "1234 5678 90", holder: "KKMP Sukmajaya Depok" },
+  { bank: "Mandiri", account: "9000-0000-1234", holder: "KKMP Sukmajaya Depok" },
+  { bank: "BNI", account: "0981-2345-67", holder: "KKMP Sukmajaya Depok" },
 ];
 
 export default function WargaCheckout() {

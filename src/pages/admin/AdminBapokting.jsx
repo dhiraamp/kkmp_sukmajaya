@@ -99,7 +99,7 @@ export default function AdminBapokting() {
                 <Badge className="bg-red-100 text-red-800 text-[10px] font-semibold border-red-300">Live 8 Cabang</Badge>
               </div>
               <p className="text-xs text-red-800">
-                Data komoditas terhubung secara langsung dari Gudang Induk Mekarjaya menuju 8 Pos Cabang Kelurahan di Kota Depok.
+                Data komoditas terhubung secara langsung dari Gudang Induk Sukmajaya menuju 8 Pos Cabang Kelurahan di Kota Depok.
               </p>
             </div>
             <Button

@@ -1,4 +1,4 @@
-# 🇮🇩 Koperasi Kelurahan Merah Putih (KKMP) Sukamaja / Mekarjaya — Kota Depok
+# 🇮🇩 Koperasi Kelurahan Merah Putih (KKMP) Sukamaja / Sukmajaya — Kota Depok
 
 Platform digital terpadu **Koperasi Kelurahan Merah Putih (KKMP)** Kota Depok yang mengintegrasikan ekosistem rantai pasok pangan, marketplace komoditas sembako & warung kelontong, manajemen 8 Pos Cabang Kelurahan, hingga distribusi logistik rakyat.
 
@@ -19,7 +19,7 @@ demo1234
 | **2** | **Mitra Pos Cabang** | Mitra Pos Cabang Beji | `cabang.beji@kkmp-depok.id` | `mitra@demo.local` | `/mitra/dashboard` |
 | **3** | **Supplier Pangan** | Gapoktan Sawangan Mandiri | `supplier.pangan@kkmp-depok.id` | `supplier@demo.local` | `/supplier/dashboard` |
 | **4** | **Logistik & Armada** | Tim Logistik KKMP Kota Depok | `logistik@kkmp-depok.id` | `logistik@demo.local` | `/logistik/dashboard` |
-| **5** | **Pengurus Induk (Admin)** | Pengurus KKMP Mekarjaya | `admin.induk@kkmp-depok.id` | `admin@demo.local` | `/admin/dashboard` |
+| **5** | **Pengurus Induk (Admin)** | Pengurus KKMP Sukmajaya | `admin.induk@kkmp-depok.id` | `admin@demo.local` | `/admin/dashboard` |
 
 > 💡 *Detail dokumentasi hak akses setiap akun tersedia di [`docs/AKUN_DUMMY_LOGIN.md`](docs/AKUN_DUMMY_LOGIN.md).*
 
@@ -31,7 +31,7 @@ demo1234
    - Belanja beras premium Ramos, shampo Lifebuoy/Pantene, mentega Blue Band, mie instan Indomie, sabun mandi Dettol, deterjen Rinso, Sunlight, minyak goreng, dan sembako berkualitas dengan **harga khusus anggota**.
    - Integrasi keranjang belanja, checkout pos cabang terdekat, dan kupon anggota.
 2. **Jaringan Distribusi 8 Pos Cabang Kelurahan**:
-   - Pemetaan sebaran wilayah: Mekarjaya, Sukmajaya, Beji, Pancoran Mas, Cimanggis, Sawangan, Cipayung, dan Tapos.
+   - Pemetaan sebaran wilayah: Sukmajaya, Sukmajaya, Beji, Pancoran Mas, Cimanggis, Sawangan, Cipayung, dan Tapos.
    - Pos cabang dapat memesan stok (restock) langsung ke supplier lokal dan Gudang Induk.
 3. **Pusat Logistik & Armada Depok**:
    - Manajemen armada pickup dan kurir distribusi pos kelurahan dengan pelacakan status rute.
@@ -103,4 +103,4 @@ kkmp-sukamaja/
 ---
 
 ## 📄 Hak Cipta
-Hak cipta © 2026 **Koperasi Kelurahan Merah Putih (KKMP) Mekarjaya — Kota Depok**. Seluruh hak dilindungi undang-undang.
+Hak cipta © 2026 **Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya — Kota Depok**. Seluruh hak dilindungi undang-undang.

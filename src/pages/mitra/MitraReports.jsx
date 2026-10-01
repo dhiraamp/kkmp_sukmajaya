@@ -32,7 +32,7 @@ export default function MitraReports() {
       doc.text("Laporan Bulanan Pos Cabang KKMP", startX, 20);
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10);
-      doc.text("KKMP KOTA DEPOK - Koperasi Kelurahan Merah Putih Mekarjaya", startX, 27);
+      doc.text("KKMP KOTA DEPOK - Koperasi Kelurahan Merah Putih Sukmajaya", startX, 27);
 
       let y = 40;
       const cols = ["Bulan", "Pendapatan", "Pengeluaran", "Selisih"];

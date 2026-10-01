@@ -647,8 +647,8 @@ const auth = {
       // 2. Validasi Keberadaan Email (dengan fallback otomatis untuk akun demo)
       if (!targetAccount) {
         const demoRoleMap = {
-          "admin.induk@kkmp-depok.id": { role: "admin", name: "Pengurus KKMP Mekarjaya" },
-          "admin@demo.local": { role: "admin", name: "Pengurus KKMP Mekarjaya" },
+          "admin.induk@kkmp-depok.id": { role: "admin", name: "Pengurus KKMP Sukmajaya" },
+          "admin@demo.local": { role: "admin", name: "Pengurus KKMP Sukmajaya" },
           "cabang.beji@kkmp-depok.id": { role: "mitra", name: "Mitra Pos Cabang Beji" },
           "mitra@demo.local": { role: "mitra", name: "Mitra Pos Cabang Beji" },
           "anggota.depok@kkmp-depok.id": { role: "penerima", name: "Adhira Maharani (Anggota Koperasi)" },

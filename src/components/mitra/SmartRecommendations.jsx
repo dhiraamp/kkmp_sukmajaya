@@ -6,13 +6,13 @@ import { Sparkles, TrendingUp, Star, ShoppingCart } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
 const supplierProducts = [
-  { id: 1, name: "Beras Premium Setra Ramos", supplier: "Gudang Pusat Induk Mekarjaya", category: "beras", price: 14500, unit: "kg", stock: 2500, rating: 4.9, image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop" },
+  { id: 1, name: "Beras Premium Setra Ramos", supplier: "Gudang Pusat Induk Sukmajaya", category: "beras", price: 14500, unit: "kg", stock: 2500, rating: 4.9, image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop" },
   { id: 2, name: "Sayuran Organik Segar", supplier: "Gapoktan Sawangan Mandiri", category: "sayuran", price: 8000, unit: "kg", stock: 350, rating: 4.8, image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80" },
   { id: 3, name: "Telur Ayam Negeri Segar", supplier: "Peternakan Unggas Cipayung", category: "telur", price: 28000, unit: "kg", stock: 800, rating: 4.9, image: "https://images.unsplash.com/photo-1587486913049-53fc88980cfc?w=400&h=300&fit=crop" },
   { id: 4, name: "Daging Ayam Broiler Segar", supplier: "Peternakan Unggas Cipayung", category: "daging", price: 35000, unit: "kg", stock: 400, rating: 4.9, image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=400&h=300&fit=crop" },
   { id: 5, name: "Ikan Nila Segar Kolam", supplier: "Perikanan Situ Pengasinan", category: "ikan", price: 32000, unit: "kg", stock: 220, rating: 4.7, image: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=400&q=80" },
   { id: 6, name: "Tahu & Tempe Segar", supplier: "Sentra Kedelai Cilodong", category: "olahan", price: 6000, unit: "pack", stock: 600, rating: 4.8, image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
-  { id: 7, name: "Minyak Goreng Sawit 2L", supplier: "Gudang Pusat Induk Mekarjaya", category: "minyak", price: 33500, unit: "pouch", stock: 1200, rating: 4.9, image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=300&fit=crop" },
+  { id: 7, name: "Minyak Goreng Sawit 2L", supplier: "Gudang Pusat Induk Sukmajaya", category: "minyak", price: 33500, unit: "pouch", stock: 1200, rating: 4.9, image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=300&fit=crop" },
   { id: 8, name: "Bumbu Dapur Lengkap", supplier: "Sentra Bumbu Sukmajaya", category: "bumbu", price: 15000, unit: "pack", stock: 300, rating: 4.8, image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=300&fit=crop" },
 ];
 
@@ -104,7 +104,7 @@ export default function SmartRecommendations({ userEmail, onAddToCart }) {
             Rekomendasi Restok Pos Cabang
           </CardTitle>
           <Badge className="bg-orange-50 text-orange-700 border-orange-200 text-xs">
-            Gudang Induk Mekarjaya
+            Gudang Induk Sukmajaya
           </Badge>
         </div>
       </CardHeader>

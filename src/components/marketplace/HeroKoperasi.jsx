@@ -68,7 +68,7 @@ export default function HeroKoperasi({ onSearch }) {
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight">
                 Koperasi Merah Putih <br className="hidden sm:inline" />
-                <span className="text-red-600">Mekarjaya</span>
+                <span className="text-red-600">Sukmajaya</span>
               </h1>
 
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-xl">
@@ -135,7 +135,7 @@ export default function HeroKoperasi({ onSearch }) {
             </motion.div>
           </div>
 
-          {/* Sisi Kanan: Visual Hero Banner (Gedung Koperasi Mekarjaya, Truk, Kurir & Sembako) */}
+          {/* Sisi Kanan: Visual Hero Banner (Gedung Koperasi Sukmajaya, Truk, Kurir & Sembako) */}
           <div className="lg:col-span-6">
             <motion.div
               initial={{ opacity: 0, scale: 0.97 }}
@@ -145,7 +145,7 @@ export default function HeroKoperasi({ onSearch }) {
             >
               <img
                 src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1000&auto=format&fit=crop&q=80"
-                alt="Koperasi Merah Putih Mekarjaya Depok"
+                alt="Koperasi Merah Putih Sukmajaya Depok"
                 className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-35"
               />
 
@@ -153,7 +153,7 @@ export default function HeroKoperasi({ onSearch }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-6 sm:p-7 text-white">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-red-600 text-white tracking-wider border border-white/30">
-                    Koperasi Induk Mekarjaya
+                    Koperasi Induk Sukmajaya
                   </span>
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/20 text-white backdrop-blur-xs">
                     Gudang Pusat Kota Depok

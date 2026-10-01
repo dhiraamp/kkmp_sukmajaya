@@ -22,7 +22,7 @@ const DEFAULT_DELIVERIES = [
     area: "Kec. Beji",
     distance: "5 km",
     status: "in_transit",
-    items: "Beras Premium Mekarjaya 50kg, Telur Ayam 20kg",
+    items: "Beras Premium Sukmajaya 50kg, Telur Ayam 20kg",
     date: "16 Sep 2026",
     driver: "Pak Asep Suhendar",
   },

@@ -126,7 +126,7 @@ export default function AdminWarga() {
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm">
-            Daftar data anggota resmi Koperasi Kelurahan Merah Putih (KKMP) Mekarjaya Kota Depok
+            Daftar data anggota resmi Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya Kota Depok
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={load} className="gap-2 shrink-0">

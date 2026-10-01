@@ -10,7 +10,7 @@ export default function StatsBanner() {
       icon: Building2,
       count: "1",
       label: "Koperasi Induk",
-      sub: "Mekarjaya Depok",
+      sub: "Sukmajaya Depok",
     },
     {
       icon: Store,

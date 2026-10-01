@@ -288,7 +288,7 @@ export default function MitraCheckout({ cartItems, subtotal, baseTotal, serviceF
                         <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-medium">Rekening Utama</span>
                       </div>
                       <p className="font-bold text-emerald-800 text-lg tracking-widest">0934 0100 0040 566</p>
-                      <p className="text-emerald-700 font-medium">a.n. KKMP MEKARJAYA DEPOK</p>
+                      <p className="text-emerald-700 font-medium">a.n. KKMP SUKMAJAYA DEPOK</p>
                     </div>
                     <p className="text-xs text-emerald-500">*Simpan bukti transfer untuk konfirmasi pesanan. Pembayaran dikonfirmasi dalam 1×24 jam.</p>
                   </div>
