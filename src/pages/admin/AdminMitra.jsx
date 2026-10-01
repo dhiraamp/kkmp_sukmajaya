@@ -300,7 +300,7 @@ export default function AdminMitra() {
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2 text-lg">
                 <Store className="w-5 h-5 text-emerald-600" />
-                Detail Mitra / SPPG
+                Detail Mitra / Pos Cabang KKMP
               </DialogTitle>
             </DialogHeader>
 
@@ -315,7 +315,7 @@ export default function AdminMitra() {
                   </h4>
                   <div className="flex items-center gap-2 mt-1">
                     <Badge variant="outline" className="bg-white text-xs">
-                      Role: Mitra / SPPG
+                      Role: Mitra / Pos Cabang KKMP
                     </Badge>
                     <Badge className={selectedMitra.is_active !== false ? "bg-green-600 text-white text-xs" : "bg-red-600 text-white text-xs"}>
                       {selectedMitra.is_active !== false ? "Aktif" : "Nonaktif"}

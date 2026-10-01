@@ -110,7 +110,7 @@ export default function PodSubmitModal({
           </DialogTitle>
           <p className="text-xs text-muted-foreground">
             No. Pengiriman: <span className="font-semibold text-gray-800">{delivery.id}</span> · Tujuan:{" "}
-            <span className="font-semibold text-gray-800">{delivery.mitra || delivery.mitra_name || "Dapur SPPG"}</span>
+            <span className="font-semibold text-gray-800">{delivery.mitra || delivery.mitra_name || "Pos Cabang KKMP"}</span>
           </p>
         </DialogHeader>
 

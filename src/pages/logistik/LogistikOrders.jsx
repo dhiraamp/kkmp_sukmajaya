@@ -245,7 +245,7 @@ export default function LogistikOrders() {
       }
     }
 
-    // Beri notifikasi realtime ke Mitra Dapur SPPG, Supplier, dan Admin
+    // Beri notifikasi realtime ke Mitra Pos Cabang KKMP, Supplier, dan Admin
     try {
       await notifyRoles(["mitra", "supplier", "admin"], {
         type: "pod_submitted",
@@ -367,7 +367,7 @@ export default function LogistikOrders() {
               <TableHeader className="bg-gray-50/80">
                 <TableRow>
                   <TableHead className="font-bold text-gray-700">No. Kirim</TableHead>
-                  <TableHead className="font-bold text-gray-700">Mitra SPPG</TableHead>
+                  <TableHead className="font-bold text-gray-700">Pos Cabang KKMP</TableHead>
                   <TableHead className="font-bold text-gray-700">Area</TableHead>
                   <TableHead className="font-bold text-gray-700">Jarak</TableHead>
                   <TableHead className="font-bold text-gray-700">Biaya Kirim</TableHead>
@@ -502,7 +502,7 @@ export default function LogistikOrders() {
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-3 text-xs bg-gray-50 p-3.5 rounded-2xl border border-gray-100">
                   <div>
-                    <p className="text-muted-foreground">Tujuan Mitra SPPG</p>
+                    <p className="text-muted-foreground">Tujuan Pos Cabang KKMP</p>
                     <p className="font-bold text-gray-900 mt-0.5">{selected.mitra}</p>
                   </div>
                   <div>
@@ -530,7 +530,7 @@ export default function LogistikOrders() {
                       <ShieldCheck className="w-5 h-5 text-emerald-600" />
                       <div>
                         <p className="text-xs font-bold text-emerald-900">Bukti Serah Terima Tersedia</p>
-                        <p className="text-[11px] text-emerald-700">Diterima oleh: {selected.pod_recipient_name || "Petugas SPPG"}</p>
+                        <p className="text-[11px] text-emerald-700">Diterima oleh: {selected.pod_recipient_name || "Petugas Pos Cabang KKMP"}</p>
                       </div>
                     </div>
                     <Button

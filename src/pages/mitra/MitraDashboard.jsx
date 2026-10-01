@@ -118,7 +118,7 @@ export default function MitraDashboard() {
         <StatCard title="Pengaduan Aktif" value="2" icon={AlertCircle} color="red" />
       </div>
 
-      <StockAlertBanner userEmail={user?.email} sppgName={user?.organization_name || user?.full_name || "Pos KKMP Beji Depok"} />
+      <StockAlertBanner userEmail={user?.email} posName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} sppgName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} />
 
       {/* Rekomendasi Pintar */}
       <SmartRecommendations userEmail={user?.email} onAddToCart={handleAddClick} />

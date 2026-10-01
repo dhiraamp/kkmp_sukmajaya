@@ -30,13 +30,13 @@ export default function DemandAnalytics() {
       .catch(() => setLoading(false));
   }, []);
 
-  // --- Aggregated demand per product across all SPPG & weeks ---
+  // --- Aggregated demand per product across all Pos Cabang KKMP & weeks ---
   const { topProducts, weeklyTrend, categoryBreakdown, currentWeekAgg, prevWeekAgg } = useMemo(() => {
     const currentWeek = getWeekLabel(0);
     const prevWeek = getWeekLabel(1);
 
     // Aggregate by product name across all data
-    const productMap = {}; // key: product_name -> { total, weeks: {weekLabel: qty}, sppgCount, category, unit }
+    const productMap = {}; // key: product_name -> { total, weeks: {weekLabel: qty}, posCabangCount, category, unit }
     const weekSet = new Set();
     const categoryMap = {}; // key: category -> total qty
 
@@ -48,11 +48,11 @@ export default function DemandAnalytics() {
         const key = item.nama.toLowerCase().trim();
         const qty = parseFloat(item.qty) || 0;
         if (!productMap[key]) {
-          productMap[key] = { name: item.nama, total: 0, weeks: {}, sppgSet: new Set(), category: item.category || "lainnya", unit: item.unit || "kg" };
+          productMap[key] = { name: item.nama, total: 0, weeks: {}, posCabangSet: new Set(), category: item.category || "lainnya", unit: item.unit || "kg" };
         }
         productMap[key].total += qty;
         productMap[key].weeks[need.week_label] = (productMap[key].weeks[need.week_label] || 0) + qty;
-        productMap[key].sppgSet.add(need.sppg_id);
+        productMap[key].posCabangSet.add(need.pos_id || need.sppg_id);
 
         const cat = item.category || "lainnya";
         categoryMap[cat] = (categoryMap[cat] || 0) + qty;
@@ -67,7 +67,7 @@ export default function DemandAnalytics() {
         name: p.name,
         total: Math.round(p.total),
         unit: p.unit,
-        sppgCount: p.sppgSet.size,
+        posCabangCount: p.posCabangSet.size,
         category: p.category,
         current: Math.round(p.weeks[currentWeek] || 0),
         prev: Math.round(p.weeks[prevWeek] || 0),
@@ -105,7 +105,7 @@ export default function DemandAnalytics() {
   }, [allNeeds]);
 
   const currentWeekLabel = getWeekLabel(0);
-  const totalSPPG = useMemo(() => new Set(allNeeds.map(n => n.sppg_id)).size, [allNeeds]);
+  const totalPosCabang = useMemo(() => new Set(allNeeds.map(n => n.pos_id || n.sppg_id)).size, [allNeeds]);
   const totalItems = useMemo(() => allNeeds.reduce((s, n) => s + (Array.isArray(n.items) ? n.items.length : 0), 0), [allNeeds]);
 
   if (loading) return (
@@ -118,7 +118,7 @@ export default function DemandAnalytics() {
     <Card className="border-dashed">
       <CardContent className="py-12 text-center text-muted-foreground">
         <BarChart2 className="w-10 h-10 mx-auto mb-2 opacity-30" />
-        <p className="text-sm">Belum ada data kebutuhan mingguan dari SPPG</p>
+        <p className="text-sm">Belum ada data kebutuhan mingguan dari Pos Cabang KKMP</p>
       </CardContent>
     </Card>
   );
@@ -128,7 +128,7 @@ export default function DemandAnalytics() {
       {/* Summary Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: "SPPG Aktif", value: totalSPPG, icon: "🏫", color: "bg-blue-50 border-blue-200 text-blue-700" },
+          { label: "Pos Cabang Aktif", value: totalPosCabang, icon: "🏢", color: "bg-blue-50 border-blue-200 text-blue-700" },
           { label: "Total Entri Kebutuhan", value: allNeeds.length, icon: "📋", color: "bg-emerald-50 border-emerald-200 text-emerald-700" },
           { label: "Jenis Bahan Diminta", value: topProducts.length, icon: "📦", color: "bg-purple-50 border-purple-200 text-purple-700" },
           { label: "Minggu Berjalan", value: currentWeekLabel, icon: "📅", color: "bg-orange-50 border-orange-200 text-orange-700" },
@@ -148,7 +148,7 @@ export default function DemandAnalytics() {
             <Package className="w-4 h-4 text-blue-600" />
             Top Bahan Pangan yang Paling Banyak Dibutuhkan
           </CardTitle>
-          <p className="text-xs text-muted-foreground">Akumulasi dari semua kebutuhan mingguan SPPG — prioritaskan stok untuk bahan ini</p>
+          <p className="text-xs text-muted-foreground">Akumulasi dari semua kebutuhan mingguan Pos Cabang KKMP — prioritaskan stok untuk bahan ini</p>
         </CardHeader>
         <CardContent>
           <div className="h-56">
@@ -166,7 +166,7 @@ export default function DemandAnalytics() {
                       <div className="bg-white border rounded-lg p-2 shadow text-xs">
                         <p className="font-bold">{d.name}</p>
                         <p>Total: <b>{d.total} {d.unit}</b></p>
-                        <p>SPPG: <b>{d.sppgCount}</b></p>
+                        <p>Pos Cabang: <b>{d.posCabangCount}</b></p>
                         <p>Minggu ini: <b>{d.current} {d.unit}</b></p>
                       </div>
                     );

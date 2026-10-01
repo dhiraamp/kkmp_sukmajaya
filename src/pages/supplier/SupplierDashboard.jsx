@@ -88,18 +88,20 @@ export default function SupplierDashboard() {
     await base44.entities.WeeklyNeeds.update(need.id, { status: "filled", has_supplier: true });
     // Buat PO otomatis
     const poNum = `PO-${Date.now().toString().slice(-8)}`;
+    const mitraName = need.pos_name || need.sppg_name || "Pos Cabang KKMP";
+    const mitraId = need.pos_id || need.sppg_id;
     await base44.entities.PurchaseOrder.create({
       po_number: poNum,
-      mitra_id: need.sppg_id,
-      mitra_name: need.sppg_name,
-      mitra_email: need.sppg_id,
+      mitra_id: mitraId,
+      mitra_name: mitraName,
+      mitra_email: mitraId,
       supplier_name: "Supplier Aktif",
       items: need.items || [],
       notes: need.notes || "",
       status: "diproses",
     });
     setWeeklyNeeds(prev => prev.filter(n => n.id !== need.id));
-    toast({ title: `Orderan dari ${need.sppg_name} diterima! PO otomatis dibuat.` });
+    toast({ title: `Orderan dari ${mitraName} diterima! PO otomatis dibuat.` });
     setUpdatingPO(null);
   };
 
@@ -175,7 +177,7 @@ export default function SupplierDashboard() {
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-bold text-sm flex items-center gap-1 text-emerald-950">
                           <Users className="w-3.5 h-3.5 text-emerald-600" />
-                          {need.sppg_name || need.pos_name || "Pos Cabang KKMP"}
+                          {need.pos_name || need.sppg_name || "Pos Cabang KKMP"}
                         </span>
                         <Badge className="text-xs bg-amber-100 text-amber-800">Butuh Pasokan</Badge>
                       </div>

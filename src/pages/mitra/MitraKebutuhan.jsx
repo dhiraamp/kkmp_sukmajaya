@@ -106,8 +106,10 @@ export default function MitraKebutuhan() {
 
       await base44.functions.invoke("checkStockAlerts", {
         items: warnings.map(w => w.nama),
+        pos_id: user?.email,
+        pos_name: user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya",
         sppg_id: user?.email,
-        sppg_name: user?.organization_name || user?.full_name,
+        sppg_name: user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya",
       });
       return;
     }
@@ -131,8 +133,10 @@ export default function MitraKebutuhan() {
       setPOHistory(prev => [newPO, ...prev]);
     } else {
       const newNeeds = await base44.entities.WeeklyNeeds.create({
+        pos_id: user?.email || "",
+        pos_name: user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya",
         sppg_id: user?.email || "",
-        sppg_name: user?.organization_name || user?.full_name || "Pos KKMP Beji Depok",
+        sppg_name: user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya",
         week_label: weekLabel,
         items: validItems,
         notes: poNotes,
@@ -142,8 +146,10 @@ export default function MitraKebutuhan() {
       setNeedsHistory(prev => [newNeeds, ...prev]);
       await base44.functions.invoke("checkStockAlerts", {
         items: validItems.map(i => i.nama),
+        pos_id: user?.email,
+        pos_name: user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya",
         sppg_id: user?.email,
-        sppg_name: user?.organization_name || user?.full_name || "Pos KKMP Beji Depok",
+        sppg_name: user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya",
       });
     }
 
@@ -160,7 +166,7 @@ export default function MitraKebutuhan() {
         <p className="text-muted-foreground">Isi pengajuan kebutuhan komoditas Pos Cabang ke Koperasi Induk Sukmajaya (Gudang Pusat Kota Depok)</p>
       </div>
 
-      <StockAlertBanner userEmail={user?.email} sppgName={user?.organization_name || user?.full_name || "Pos KKMP Beji Depok"} />
+      <StockAlertBanner userEmail={user?.email} posName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} sppgName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} />
 
       <Card>
         <CardHeader className="pb-3">

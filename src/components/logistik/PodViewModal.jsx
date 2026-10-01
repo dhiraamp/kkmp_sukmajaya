@@ -12,13 +12,13 @@ export default function PodViewModal({
   if (!open || !delivery) return null;
 
   const podUrl = delivery.pod_image_url || delivery.pod?.pod_image_url;
-  const recipientName = delivery.pod_recipient_name || delivery.pod?.pod_recipient_name || delivery.recipient_name || "Petugas Dapur SPPG";
-  const recipientRole = delivery.pod_recipient_role || delivery.pod?.pod_recipient_role || "Pengelola Dapur";
+  const recipientName = delivery.pod_recipient_name || delivery.pod?.pod_recipient_name || delivery.recipient_name || "Petugas Pos Cabang KKMP";
+  const recipientRole = delivery.pod_recipient_role || delivery.pod?.pod_recipient_role || "Pengelola Pos Cabang";
   const receivedAt = delivery.pod_received_at || delivery.pod?.pod_received_at || delivery.date;
   const notes = delivery.pod_notes || delivery.pod?.pod_notes || "Bahan baku diterima dalam kondisi baik & lengkap.";
   const driver = delivery.driver || delivery.driver_name || "Driver Logistik";
-  const destination = delivery.mitra || delivery.mitra_name || "Dapur SPPG";
-  const area = delivery.area || delivery.delivery_area || delivery.mitra_address || "Garut";
+  const destination = delivery.mitra || delivery.mitra_name || "Pos Cabang KKMP";
+  const area = delivery.area || delivery.delivery_area || delivery.mitra_address || "Kota Depok";
 
   const handleDownload = () => {
     if (!podUrl) return;

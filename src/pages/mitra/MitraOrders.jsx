@@ -77,8 +77,14 @@ export default function MitraOrders() {
     base44.entities.DriverRating.filter({ mitra_id: user.email }).then(ratings => {
       setRatedOrders(new Set(ratings.map(r => r.order_id)));
     });
-    base44.entities.SupplierRating.filter({ sppg_id: user.email }).then(ratings => {
-      setRatedSupplierOrders(new Set(ratings.map(r => r.order_id)));
+    base44.entities.SupplierRating.filter({ pos_id: user.email }).then(ratings => {
+      if (ratings && ratings.length > 0) {
+        setRatedSupplierOrders(new Set(ratings.map(r => r.order_id)));
+      } else {
+        base44.entities.SupplierRating.filter({ sppg_id: user.email }).then(legacyRatings => {
+          setRatedSupplierOrders(new Set(legacyRatings.map(r => r.order_id)));
+        });
+      }
     });
   }, [user?.email]);
 
@@ -262,6 +268,7 @@ export default function MitraOrders() {
         <RatingSupplierModal
           open={!!ratingSupplierOrder}
           order={ratingSupplierOrder}
+          posProfile={profile}
           sppgProfile={profile}
           onClose={() => setRatingSupplierOrder(null)}
           onSuccess={() => setRatedSupplierOrders(prev => new Set([...prev, ratingSupplierOrder.id]))}

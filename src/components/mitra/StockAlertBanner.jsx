@@ -3,13 +3,14 @@ import { base44 } from "@/api/base44Client";
 import { AlertTriangle, X, ChevronDown, ChevronUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
-export default function StockAlertBanner({ userEmail, sppgName }) {
+export default function StockAlertBanner({ userEmail, posName, sppgName }) {
+  const effectivePosName = posName || sppgName;
   const [alerts, setAlerts] = useState([]);
   const [dismissed, setDismissed] = useState({});
   const [expanded, setExpanded] = useState(true);
 
   useEffect(() => {
-    if (!userEmail && !sppgName) return;
+    if (!userEmail && !effectivePosName) return;
 
     // Get current week label
     const now = new Date();
@@ -19,17 +20,18 @@ export default function StockAlertBanner({ userEmail, sppgName }) {
 
     base44.entities.StockAlert.filter({ status: "active", week_label: currentWeekLabel }, "-created_date", 20)
       .then(data => {
-        // Filter only alerts that affect THIS sppg
+        // Filter only alerts that affect this Pos Cabang KKMP
         const relevant = data.filter(a => {
-          if (!Array.isArray(a.affected_sppg)) return false;
-          return a.affected_sppg.some(s =>
-            s.sppg_id === userEmail ||
-            (sppgName && s.sppg_name?.toLowerCase() === sppgName?.toLowerCase())
+          const list = a.affected_pos || a.affected_sppg;
+          if (!Array.isArray(list)) return false;
+          return list.some(s =>
+            (s.pos_id || s.sppg_id) === userEmail ||
+            (effectivePosName && (s.pos_name || s.sppg_name)?.toLowerCase() === effectivePosName?.toLowerCase())
           );
         });
         setAlerts(relevant);
       });
-  }, [userEmail, sppgName]);
+  }, [userEmail, effectivePosName]);
 
   if (alerts.length === 0) return null;
 
@@ -62,7 +64,7 @@ export default function StockAlertBanner({ userEmail, sppgName }) {
                   Stok <span className="underline">{alert.product_name}</span> tidak mencukupi!
                 </p>
                 <p className="text-xs text-red-600 mt-0.5">
-                  Dibutuhkan <strong>{alert.total_needed} {alert.unit}</strong> oleh {alert.sppg_count || 1} Pos KKMP Cabang,
+                  Dibutuhkan <strong>{alert.total_needed} {alert.unit}</strong> oleh {alert.pos_count || alert.sppg_count || 1} Pos Cabang KKMP,
                   hanya tersedia <strong>{alert.stock_available} {alert.unit}</strong>
                   {alert.shortage > 0 && ` (kurang ${alert.shortage} ${alert.unit})`}.
                 </p>

@@ -125,7 +125,7 @@ export default function SupplierRatings() {
                   <div key={r.id || i} className="p-4 rounded-xl border bg-muted/20 space-y-3">
                     <div className="flex items-start justify-between gap-3 flex-wrap">
                       <div>
-                        <p className="font-semibold text-sm">{r.sppg_name || "SPPG"}</p>
+                        <p className="font-semibold text-sm">{r.pos_name || r.sppg_name || "Pos Cabang KKMP"}</p>
                         <p className="text-xs text-muted-foreground">
                           PO: {r.po_number || "-"} · {r.created_date ? new Date(r.created_date).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : ""}
                         </p>

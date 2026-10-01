@@ -12,8 +12,8 @@ Status: Teridentifikasi untuk Pembersihan Total
 | No | Kategori | Jumlah File Terdampak | Status Eksekusi |
 |:---:|---|:---:|:---:|
 | **1** | Berkas Mati / Dead Code Bekas MBG (Dihapus) | 8 file | ✅ **SELESAI** (Commit `dab1016`) |
-| **2** | Peta Geospasial (GIS Map & GIS Service) | 4 file | ✅ **SELESAI** (100% Bersih & Teruji Build) |
-| **3** | Dashboard 5 Role (Logistik, Mitra, Supplier, Admin) | 7 file | ⏳ Menunggu Eksekusi (Fase 3) |
+| **2** | Peta Geospasial (GIS Map & GIS Service) | 4 file | ✅ **SELESAI** (Commit `50deb84`) |
+| **3** | Dashboard 5 Role (Logistik, Mitra, Supplier, Admin) | 10 file | ✅ **SELESAI** (100% Bebas Teks SPPG/Garut) |
 | **4** | Helper, Validasi, Store, & Seed Data | 6 file | ⏳ Menunggu Eksekusi (Fase 4) |
 | **5** | Konfigurasi Proxy & Scraper Berita Daerah Garut | 2 file | ⏳ Menunggu Eksekusi (Fase 5) |
 

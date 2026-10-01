@@ -31,7 +31,7 @@ function hitungJarak(lat1, lon1, lat2, lon2) {
 
 export default function PilihLogistik({ order, supplierProfile, open, onClose, onAssigned }) {
   const [logistikList, setLogistikList] = useState([]);
-  const [sppgProfile, setSppgProfile] = useState(null);
+  const [posProfile, setPosProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [assigning, setAssigning] = useState(null);
 
@@ -39,38 +39,38 @@ export default function PilihLogistik({ order, supplierProfile, open, onClose, o
     if (!open) return;
     setLoading(true);
 
-    // Ambil profil SPPG (mitra) berdasarkan mitra_id dari order
-    const fetchSppg = order?.mitra_id
+    // Ambil profil Pos Cabang KKMP (mitra) berdasarkan mitra_id dari order
+    const fetchPos = order?.mitra_id
       ? base44.entities.UserProfile.filter({ user_email: order.mitra_id }).then(d => d[0] || null)
       : Promise.resolve(null);
 
     Promise.all([
       base44.entities.UserProfile.filter({ role: "logistik" }),
-      fetchSppg,
-    ]).then(([allLogistik, sppg]) => {
+      fetchPos,
+    ]).then(([allLogistik, pos]) => {
       const data = allLogistik.filter(l => l.is_ready === true || l.is_ready === "true" || l.is_ready === 1);
-      setSppgProfile(sppg);
+      setPosProfile(pos);
 
-      // Hitung rata-rata jarak ke supplier + ke SPPG
+      // Hitung rata-rata jarak ke supplier + ke Pos Cabang KKMP
       const withJarak = data.map((l) => {
         const jarakKeSupplier = hitungJarak(
           supplierProfile?.latitude, supplierProfile?.longitude,
           l.latitude, l.longitude
         );
-        const jarakKeSppg = sppg
-          ? hitungJarak(sppg.latitude, sppg.longitude, l.latitude, l.longitude)
+        const jarakKePos = pos
+          ? hitungJarak(pos.latitude, pos.longitude, l.latitude, l.longitude)
           : null;
 
         let jarakTotal = null;
-        if (jarakKeSupplier !== null && jarakKeSppg !== null) {
-          jarakTotal = ((parseFloat(jarakKeSupplier) + parseFloat(jarakKeSppg)) / 2).toFixed(1);
+        if (jarakKeSupplier !== null && jarakKePos !== null) {
+          jarakTotal = ((parseFloat(jarakKeSupplier) + parseFloat(jarakKePos)) / 2).toFixed(1);
         } else if (jarakKeSupplier !== null) {
           jarakTotal = jarakKeSupplier;
-        } else if (jarakKeSppg !== null) {
-          jarakTotal = jarakKeSppg;
+        } else if (jarakKePos !== null) {
+          jarakTotal = jarakKePos;
         }
 
-        return { ...l, jarak: jarakTotal, jarakKeSupplier, jarakKeSppg };
+        return { ...l, jarak: jarakTotal, jarakKeSupplier, jarakKePos, jarakKeSppg: jarakKePos };
       });
 
       withJarak.sort((a, b) => {
@@ -130,7 +130,7 @@ export default function PilihLogistik({ order, supplierProfile, open, onClose, o
           <div className="space-y-3">
             <p className="text-xs text-muted-foreground">
               {logistikList.length} kurir siap mengantar
-              {(supplierProfile?.latitude || sppgProfile?.latitude) ? " · diurutkan berdasarkan jarak terdekat ke supplier & SPPG" : ""}
+              {(supplierProfile?.latitude || posProfile?.latitude) ? " · diurutkan berdasarkan jarak terdekat ke supplier & Pos Cabang KKMP" : ""}
             </p>
             {logistikList.map((l, i) => (
               <div
@@ -158,8 +158,8 @@ export default function PilihLogistik({ order, supplierProfile, open, onClose, o
                     {l.jarak !== null && (
                       <span className="text-xs text-muted-foreground flex items-center gap-0.5">
                         <MapPin className="w-3 h-3" /> ~{l.jarak} km
-                        {l.jarakKeSupplier && l.jarakKeSppg && (
-                          <span className="text-[10px] ml-0.5 opacity-70">(sup: {l.jarakKeSupplier} · sppg: {l.jarakKeSppg})</span>
+                        {l.jarakKeSupplier && l.jarakKePos && (
+                          <span className="text-[10px] ml-0.5 opacity-70">(sup: {l.jarakKeSupplier} · pos: {l.jarakKePos})</span>
                         )}
                       </span>
                     )}

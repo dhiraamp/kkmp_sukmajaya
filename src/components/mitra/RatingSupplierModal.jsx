@@ -41,7 +41,8 @@ function StarRating({ value, onChange, label, icon: Icon }) {
   );
 }
 
-export default function RatingSupplierModal({ open, order, sppgProfile, onClose, onSuccess }) {
+export default function RatingSupplierModal({ open, order, posProfile, sppgProfile, onClose, onSuccess }) {
+  const activeProfile = posProfile || sppgProfile;
   const [ratingKetepatan, setRatingKetepatan] = useState(0);
   const [ratingKualitas, setRatingKualitas] = useState(0);
   const [review, setReview] = useState("");
@@ -64,8 +65,10 @@ export default function RatingSupplierModal({ open, order, sppgProfile, onClose,
     await base44.entities.SupplierRating.create({
       order_id: order?.id || "",
       po_number: order?.order_number || order?.po_number || "",
-      sppg_id: sppgProfile?.user_email || sppgProfile?.email || "",
-      sppg_name: sppgProfile?.organization_name || sppgProfile?.full_name || "SPPG",
+      pos_id: activeProfile?.user_email || activeProfile?.email || "",
+      pos_name: activeProfile?.organization_name || activeProfile?.full_name || "Pos Cabang KKMP",
+      sppg_id: activeProfile?.user_email || activeProfile?.email || "",
+      sppg_name: activeProfile?.organization_name || activeProfile?.full_name || "Pos Cabang KKMP",
       supplier_id: order?.supplier_id || order?.supplier_name || "",
       supplier_name: order?.supplier_name || "-",
       rating_ketepatan: ratingKetepatan,

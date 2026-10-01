@@ -73,14 +73,14 @@ export default function StockAlertPanel() {
           </Button>
         </div>
         <p className="text-xs text-muted-foreground">
-          Deteksi otomatis bahan pangan yang stoknya tidak mencukupi kebutuhan SPPG minggu ini
+          Deteksi otomatis bahan pangan yang stoknya tidak mencukupi kebutuhan Pos Cabang KKMP minggu ini
         </p>
       </CardHeader>
       <CardContent>
         {alerts.length === 0 ? (
           <div className="text-center py-8 text-muted-foreground">
             <CheckCircle className="w-10 h-10 mx-auto mb-2 text-green-400" />
-            <p className="text-sm font-medium text-green-600">Semua stok mencukupi kebutuhan SPPG</p>
+            <p className="text-sm font-medium text-green-600">Semua stok mencukupi kebutuhan Pos Cabang KKMP</p>
             <p className="text-xs mt-1">Klik "Periksa Sekarang" untuk memperbarui analisis</p>
           </div>
         ) : (
@@ -119,13 +119,13 @@ export default function StockAlertPanel() {
 
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-2">
                   <Users className="w-3 h-3" />
-                  <span>{alert.sppg_count} SPPG membutuhkan bahan ini:</span>
+                  <span>{alert.pos_count ?? alert.sppg_count ?? 0} Pos Cabang KKMP membutuhkan bahan ini:</span>
                 </div>
-                {Array.isArray(alert.affected_sppg) && (
+                {Array.isArray(alert.affected_pos || alert.affected_sppg) && (
                   <div className="flex flex-wrap gap-1">
-                    {alert.affected_sppg.map((s, i) => (
+                    {(alert.affected_pos || alert.affected_sppg).map((s, i) => (
                       <Badge key={i} variant="outline" className="text-xs bg-white">
-                        {s.sppg_name} ({s.qty_needed} {alert.unit})
+                        {s.pos_name || s.sppg_name || "Pos Cabang KKMP"} ({s.qty_needed} {alert.unit})
                       </Badge>
                     ))}
                   </div>
@@ -133,7 +133,7 @@ export default function StockAlertPanel() {
 
                 <div className="mt-3 p-2 rounded-lg bg-amber-50 border border-amber-200">
                   <p className="text-xs text-amber-700 font-medium">
-                    ⚠️ Saran: Hubungi SPPG di atas untuk mengganti menu yang menggunakan <strong>{alert.product_name}</strong> dengan alternatif yang tersedia.
+                    ⚠️ Saran: Hubungi Pos Cabang KKMP di atas untuk berkoordinasi mengenai pasokan komoditas <strong>{alert.product_name}</strong> atau pengalihan ke pasokan alternatif.
                   </p>
                 </div>
               </div>
