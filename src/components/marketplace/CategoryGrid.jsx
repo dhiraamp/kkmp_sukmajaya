@@ -4,38 +4,38 @@ import { Grid } from "lucide-react";
 
 export const CATEGORIES = [
   {
-    name: "Sembako & Beras",
-    imageUrl: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&auto=format&fit=crop&q=80",
+    name: "Sembako & Pangan",
+    imageUrl: encodeURI("/images/Sari Roti Tawar Kupas Jumbo.jpg"),
     slug: "Sembako",
   },
   {
     name: "Warung Kelontong",
-    imageUrl: "https://images.unsplash.com/photo-1612927601601-6638404737ce?w=300&auto=format&fit=crop&q=80",
+    imageUrl: encodeURI("/images/Indomie Goreng Cabe Ijo Mie Instan.png"),
     slug: "Kelontong",
   },
   {
     name: "Minyak & Mentega",
-    imageUrl: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=300&auto=format&fit=crop&q=80",
+    imageUrl: encodeURI("/images/Blue Band Serbaguna Margarine Cup.jpg"),
     slug: "Minyak & Mentega",
   },
   {
     name: "Perawatan Diri",
-    imageUrl: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=300&auto=format&fit=crop&q=80",
+    imageUrl: encodeURI("/images/Buy 1 Get 1 Nice Living Facial Tissue Soft Pack 400+100.jpg"),
     slug: "Perawatan Diri",
   },
   {
     name: "Bumbu Dapur",
-    imageUrl: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&auto=format&fit=crop&q=80",
+    imageUrl: encodeURI("/images/Bango Kecap Manis Botol.jpg"),
     slug: "Bumbu",
   },
   {
     name: "Sayuran Segar",
-    imageUrl: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300&auto=format&fit=crop&q=80",
+    imageUrl: encodeURI("/images/Kentang - Astro Farm.png"),
     slug: "Sayuran",
   },
   {
     name: "Protein & Telur",
-    imageUrl: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=300&auto=format&fit=crop&q=80",
+    imageUrl: encodeURI("/images/Telur Ayam Negeri Astro Farm.jpg"),
     slug: "Protein",
   },
   {

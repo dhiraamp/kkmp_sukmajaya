@@ -11,10 +11,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/dataid": {
-        target: "https://data.go.id",
+      "/kemenag-depok-news": {
+        target: "https://depok.kemenag.go.id",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/dataid/, ""),
+        secure: false,
+        rewrite: (path) => path.replace(/^\/kemenag-depok-news/, ""),
       },
       "/fonnte-api": {
         target: "https://api.fonnte.com",
@@ -25,10 +26,11 @@ export default defineConfig({
   },
   preview: {
     proxy: {
-      "/dataid": {
-        target: "https://data.go.id",
+      "/kemenag-depok-news": {
+        target: "https://depok.kemenag.go.id",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/dataid/, ""),
+        secure: false,
+        rewrite: (path) => path.replace(/^\/kemenag-depok-news/, ""),
       },
       "/fonnte-api": {
         target: "https://api.fonnte.com",

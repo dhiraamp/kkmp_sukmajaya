@@ -16,24 +16,44 @@ export default function Marketplace() {
   const [selectedCategory, setSelectedCategory] = useState("Semua Kategori");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Gabungkan data dari DB dan Sample
+  // Gabungkan data: utamakan SAMPLE_PRODUCTS (27 produk ritel/sembako lokal KKMP Sukmajaya)
   const allProducts = useMemo(() => {
     if (dbProducts && dbProducts.length > 0) {
-      return dbProducts.map((p, idx) => ({
-        id: p.id || `db-${idx}`,
-        name: p.name,
-        category: p.category || "Sembako",
-        supplier_name: p.supplier_name || "Supplier Gudang Pusat Sukmajaya",
-        price: p.price || 15000,
-        member_price: p.member_price || Math.round((p.price || 15000) * 0.9),
-        unit: p.unit || "kg",
-        rating: 4.8,
-        stock: p.stock ?? 100,
-        image_url: p.image_url || SAMPLE_PRODUCTS[idx % SAMPLE_PRODUCTS.length].image_url,
-      }));
+      const sampleNames = new Set(SAMPLE_PRODUCTS.map((p) => p.name.toLowerCase()));
+      const legacyIds = new Set([
+        "ayam", "daging-sapi", "ikan-nila", "ikan-lele", "bayam", "kangkung",
+        "jagung", "wortel", "tomat", "tahu", "tempe", "beras", "minyak",
+        "gula", "tepung", "cabai-merah", "cabai-rawit", "bawang-merah", "bawang-putih"
+      ]);
+      const validDbProducts = dbProducts
+        .filter(
+          (p) =>
+            p.name &&
+            !sampleNames.has(p.name.toLowerCase()) &&
+            !legacyIds.has(String(p.id)) &&
+            !p.name.toLowerCase().includes("ayam potong") &&
+            p.image_url &&
+            !p.image_url.includes("unsplash.com") &&
+            p.image_url.startsWith("/images/")
+        )
+
+        .map((p, idx) => ({
+          id: p.id || `db-${idx}`,
+          name: p.name,
+          category: p.category || "Sembako",
+          supplier_name: p.supplier_name || "Supplier Gudang Pusat Sukmajaya",
+          price: p.price || 15000,
+          member_price: p.member_price || Math.round((p.price || 15000) * 0.9),
+          unit: p.unit || "pcs",
+          rating: 4.8,
+          stock: p.stock ?? 100,
+          image_url: p.image_url || SAMPLE_PRODUCTS[idx % SAMPLE_PRODUCTS.length].image_url,
+        }));
+      return [...SAMPLE_PRODUCTS, ...validDbProducts];
     }
     return SAMPLE_PRODUCTS;
   }, [dbProducts]);
+
 
   // Filter berdasarkan search query dan kategori yang dipilih
   const filteredProducts = useMemo(() => {
@@ -45,13 +65,13 @@ export default function Marketplace() {
       const matchCat =
         selectedCategory === "Semua Kategori" ||
         pCat === targetCat ||
-        (selectedCategory === "Sembako" && (pCat.includes("sembako") || pCat.includes("beras") || pName.includes("beras") || pName.includes("gula") || pName.includes("terigu"))) ||
-        (selectedCategory === "Kelontong" && (pCat.includes("kelontong") || pCat.includes("mie") || pCat.includes("kopi") || pCat.includes("teh") || pCat.includes("cuci") || pCat.includes("deterjen") || pCat.includes("umkm") || pName.includes("indomie") || pName.includes("sunlight") || pName.includes("rinso") || pName.includes("kopi"))) ||
-        (selectedCategory === "Minyak & Mentega" && (pCat.includes("mentega") || pCat.includes("minyak") || pName.includes("mentega") || pName.includes("blue band") || pName.includes("minyak"))) ||
-        (selectedCategory === "Perawatan Diri" && (pCat.includes("perawatan") || pCat.includes("shampo") || pCat.includes("sabun") || pName.includes("shampo") || pName.includes("dettol") || pName.includes("pepsodent") || pName.includes("pantene") || pName.includes("lifebuoy"))) ||
-        (selectedCategory === "Bumbu" && (pCat.includes("bumbu") || pName.includes("kecap") || pName.includes("garam") || pName.includes("cabai") || pName.includes("bawang"))) ||
-        (selectedCategory === "Sayuran" && (pCat.includes("sayur") || pCat.includes("pertanian") || pName.includes("sayur") || pName.includes("sop") || pName.includes("wortel") || pName.includes("kentang"))) ||
-        (selectedCategory === "Protein" && (pCat.includes("protein") || pCat.includes("segar") || pCat.includes("telur") || pCat.includes("daging") || pCat.includes("ikan") || pName.includes("telur") || pName.includes("ayam") || pName.includes("sapi") || pName.includes("ikan")));
+        (selectedCategory === "Sembako" && (pCat.includes("sembako") || pCat.includes("minyak") || pName.includes("sania") || pName.includes("roti") || pName.includes("aqua") || pName.includes("blue band"))) ||
+        (selectedCategory === "Kelontong" && (pCat.includes("kelontong") || pName.includes("indomie") || pName.includes("sedaap") || pName.includes("sunlight") || pName.includes("rinso") || pName.includes("molto") || pName.includes("kispray") || pName.includes("wipol") || pName.includes("ekonomi"))) ||
+        (selectedCategory === "Minyak & Mentega" && (pCat.includes("mentega") || pCat.includes("minyak") || pName.includes("sania") || pName.includes("blue band") || pName.includes("margarine") || pName.includes("minyak"))) ||
+        (selectedCategory === "Perawatan Diri" && (pCat.includes("perawatan") || pName.includes("tisu") || pName.includes("tissue") || pName.includes("nice") || pName.includes("shampo") || pName.includes("sabun"))) ||
+        (selectedCategory === "Bumbu" && (pCat.includes("bumbu") || pName.includes("bango") || pName.includes("royco") || pName.includes("totole") || pName.includes("racik") || pName.includes("kecap"))) ||
+        (selectedCategory === "Sayuran" && (pCat.includes("sayur") || pName.includes("kentang") || pName.includes("astro"))) ||
+        (selectedCategory === "Protein" && (pCat.includes("protein") || pName.includes("telur")));
 
       const matchSearch =
         !searchQuery ||

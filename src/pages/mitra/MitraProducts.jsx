@@ -106,11 +106,12 @@ export default function MitraProducts() {
           {filtered.map((p) => (
             <div key={p.id} className="border rounded-xl overflow-hidden hover:shadow-md transition-shadow bg-card">
               <img
-                src={p.image_url || "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80"}
+                src={p.image_url || encodeURI("/images/Sari Roti Tawar Kupas Jumbo.jpg")}
                 alt={p.name}
-                className="w-full h-32 object-cover"
-                onError={e => { e.target.onerror = null; e.target.src = "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80"; }}
+                className="w-full h-32 object-contain bg-slate-50 p-1"
+                onError={e => { e.target.onerror = null; e.target.src = encodeURI("/images/Sari Roti Tawar Kupas Jumbo.jpg"); }}
               />
+
               <div className="p-3">
                 <Badge variant="outline" className="text-xs mb-1 capitalize">{p.category}</Badge>
                 <p className="font-semibold text-sm leading-tight">{p.name}</p>

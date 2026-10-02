@@ -111,10 +111,11 @@ export default function WargaBeranda() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {PRODUCTS.slice(0, 8).map((p) => (
             <div key={p.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col">
-              <div className="relative h-28 bg-gray-100 overflow-hidden">
-                <img src={p.img} alt={p.name} referrerPolicy="no-referrer" loading="lazy" className="w-full h-full object-cover" />
+              <div className="relative h-36 bg-slate-50 p-2 flex items-center justify-center overflow-hidden">
+                <img src={p.img} alt={p.name} referrerPolicy="no-referrer" loading="lazy" className="w-full h-full object-contain" />
                 <span className="absolute bottom-1.5 left-1.5 text-[10px] font-medium text-white bg-black/50 backdrop-blur px-1.5 py-0.5 rounded capitalize">{p.category}</span>
               </div>
+
               <div className="p-3 flex flex-col flex-1">
                 <p className="text-sm font-semibold text-gray-900 line-clamp-1">{p.name}</p>
                 <p className="text-[11px] text-gray-500 flex items-center gap-0.5 mt-0.5 truncate">

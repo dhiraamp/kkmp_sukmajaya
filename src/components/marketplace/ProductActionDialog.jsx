@@ -17,14 +17,15 @@ export default function ProductActionDialog({ product, open, onClose, onAddToCar
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40" onClick={onClose}>
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden" onClick={(e) => e.stopPropagation()}>
-        <div className="relative h-44 bg-gray-100">
+        <div className="relative h-48 bg-slate-50 flex items-center justify-center p-3">
           {product.image_url || product.image ? (
             <img
               src={product.image_url || product.image}
               alt={product.name}
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
+
           ) : (
             <div className="w-full h-full flex items-center justify-center">
               <Package className="w-10 h-10 text-gray-300" />

@@ -20,7 +20,16 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 // Pastikan seed awal tersedia jika storage lokal belum terisi
 if (typeof window !== "undefined") {
   ensureSeed();
+  try {
+    const legacyOldIds = [
+      "ayam", "daging-sapi", "ikan-nila", "ikan-lele", "bayam", "kangkung",
+      "jagung", "wortel", "tomat", "tahu", "tempe", "beras", "minyak",
+      "gula", "tepung", "cabai-merah", "cabai-rawit", "bawang-merah", "bawang-putih"
+    ];
+    supabase.from("products").delete().in("id", legacyOldIds).then(() => {});
+  } catch (e) {}
 }
+
 
 function apiError(message, status = 400) {
   const err = new Error(message);
@@ -348,6 +357,20 @@ function cleanKkmpItems(name, list) {
   return list
     .filter((item) => {
       if (!item) return false;
+      if (name === "Product") {
+        const id = String(item.id || "");
+        const img = String(item.image_url || "");
+        const pName = String(item.name || "").toLowerCase();
+        // Hapus total produk lama (Ayam Potong, Daging Sapi, dll) dan gambar eksternal unsplash
+        if (img.includes("unsplash.com")) return false;
+        const legacyOldIds = new Set([
+          "ayam", "daging-sapi", "ikan-nila", "ikan-lele", "bayam", "kangkung",
+          "jagung", "wortel", "tomat", "tahu", "tempe", "beras", "minyak",
+          "gula", "tepung", "cabai-merah", "cabai-rawit", "bawang-merah", "bawang-putih"
+        ]);
+        if (legacyOldIds.has(id)) return false;
+        if (pName.includes("ayam potong") || pName === "ayam" || pName.includes("ikan nila") || pName.includes("jagung manis")) return false;
+      }
       if (name === "Order") {
         const num = String(item.order_number || "");
         const mitra = String(item.mitra_name || "");
@@ -376,6 +399,7 @@ function cleanKkmpItems(name, list) {
       return item;
     });
 }
+
 
 function makeEntity(name) {
   const table = TABLE_MAP[name];

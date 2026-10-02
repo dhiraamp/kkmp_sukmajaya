@@ -46,14 +46,15 @@ function ProductCard({ product, onView, onAddToCart, onBuyNow }) {
       whileHover={{ y: -4 }}
       className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-red-400 transition-all flex flex-col"
     >
-      <div className="relative h-28 bg-gray-100 overflow-hidden">
+      <div className="relative h-36 bg-slate-50 p-2 flex items-center justify-center overflow-hidden">
         <img
           src={product.img}
           alt={product.name}
           referrerPolicy="no-referrer"
           loading="lazy"
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
         />
+
         <span className="absolute top-1.5 left-1.5 text-[10px] font-semibold text-red-700 bg-white/90 backdrop-blur px-1.5 py-0.5 rounded flex items-center gap-0.5">
           <Leaf className="w-3 h-3 text-red-600" /> Segar
         </span>
@@ -302,8 +303,9 @@ export default function MarketplacePage() {
                 src={selected.img}
                 alt={selected.name}
                 referrerPolicy="no-referrer"
-                className="w-full h-44 object-cover rounded-lg"
+                className="w-full h-48 object-contain bg-slate-50 p-2 rounded-lg"
               />
+
               <div className="flex items-center justify-between text-sm">
                 <p className="text-red-600 font-bold">{formatRp(selected.price)} <span className="text-[10px] text-gray-400 font-normal">/{selected.unit}</span></p>
                 <p className="text-xs text-gray-500 flex items-center gap-1"><MapPin className="w-3 h-3" /> {selected.origin}</p>

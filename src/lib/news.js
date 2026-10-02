@@ -1,117 +1,262 @@
-const BADGE_COLORS = ["emerald", "orange", "blue"];
+// Modul Berita Resmi Kantor Kementerian Agama Kota Depok (depok.kemenag.go.id)
+// Disinkronkan untuk portal informasi warga & anggota Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya.
+
+export const KEMENAG_DEPOK_PORTAL_URL = "https://depok.kemenag.go.id/kategori/berita";
+const CACHE_KEY = "kkmp_kemenag_news_cache_v1";
+const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 jam
 
 export function stripHtml(html) {
-  const doc = new DOMParser().parseFromString(html || "", "text/html");
-  return doc.body.textContent || "";
+  if (!html) return "";
+  try {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  } catch {
+    return html.replace(/<[^>]*>?/gm, "");
+  }
 }
 
-export const KKMP_DEPOK_NEWS = [
+// Data awal riil yang bersumber langsung dari https://depok.kemenag.go.id/kategori/berita
+export const KEMENAG_DEPOK_NEWS_SEED = [
   {
-    tag: "Koperasi",
+    id: "audiensi-pmi-2026",
+    title: "Kankemenag Depok Terima Audiensi PMI, Bahas Tindak Lanjut Bulan Dana Kemanusiaan 2026",
+    url: "https://depok.kemenag.go.id/kankemenag-depok-terima-audiensi-pmi-bahas-tindak-lanjut-bulan-dana-kemanusiaan-2026",
+    img: "https://depok.kemenag.go.id/uploads/images/20261001_150258_f873329b1be96c081491.webp",
+    tag: "Kemanusiaan",
     color: "emerald",
-    time: "2 jam lalu",
-    title: "Koperasi Merah Putih Sukmajaya Perluas Jaringan Distribusi Pangan Pokok",
-    summary: "Gudang Induk Sukmajaya resmi mengintegrasikan distribusi sembako ke seluruh Pos Cabang KKMP kelurahan untuk jaminan keterjangkauan harga.",
-    img: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500",
-    url: "/berita",
-    source: "Humas KKMP Sukmajaya",
+    time: "1 hari yang lalu",
+    date: "Kamis, 01 Oktober 2026 • 10:55 WIB",
+    summary: "Kantor Kementerian Agama Kota Depok menerima audiensi Palang Merah Indonesia (PMI) Kota Depok dalam rangka penguatan sinergi tindak lanjut gerakan kemanusiaan Bulan Dana 2026 di satuan kerja keagamaan.",
+    source: "Kantor Kementerian Agama Kota Depok",
+    sourceUrl: KEMENAG_DEPOK_PORTAL_URL,
   },
   {
-    tag: "Pasar",
+    id: "kesaktian-pancasila-2026",
+    title: "Hari Kesaktian Pancasila, Kakankemenag Depok Ajak ASN Perkuat Nilai Persatuan",
+    url: "https://depok.kemenag.go.id/hari-kesaktian-pancasila-kakankemenag-depok-ajak-asn-perkuat-nilai-persatuan",
+    img: "https://depok.kemenag.go.id/uploads/images/20261001_145756_dc6992921ae5cac08500.webp",
+    tag: "Wawasan Kebangsaan",
     color: "orange",
-    time: "5 jam lalu",
-    title: "Stabilisasi Harga Komoditas Pokok Anggota Koperasi Kota Depok",
-    summary: "Pengurus Koperasi menjamin kestabilan harga beras premium, telur ayam, dan minyak goreng bagi seluruh anggota terdaftar di wilayah Kota Depok.",
-    img: "https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=500",
-    url: "/berita",
-    source: "Warta Pasar Depok",
+    time: "1 hari yang lalu",
+    date: "Kamis, 01 Oktober 2026 • 08:10 WIB",
+    summary: "Memperingati Hari Kesaktian Pancasila, Kakankemenag Kota Depok mengajak seluruh ASN Kemenag mengamalkan nilai luhur Pancasila dalam melayani umat dan memperkokoh persaudaraan kebangsaan.",
+    source: "Kantor Kementerian Agama Kota Depok",
+    sourceUrl: KEMENAG_DEPOK_PORTAL_URL,
   },
   {
-    tag: "Logistik",
+    id: "pembinaan-pesantren-pakis-2026",
+    title: "Kasi Pakis Depok Berikan Pembinaan kepada Lembaga Pesantren dan Pendidikan Keagamaan Islam",
+    url: "https://depok.kemenag.go.id/kasi-pakis-depok-berikan-pembinaan-kepada-lembaga-pesantren-dan-pendidikan-keagamaan-islam",
+    img: "https://depok.kemenag.go.id/uploads/images/20261001_145155_4c40225c0c1920fc6ef4.webp",
+    tag: "Pendidikan Agama",
     color: "blue",
-    time: "1 hari lalu",
-    title: "Penguatan Armada Distribusi Terjadwal ke Pos Cabang KKMP",
-    summary: "Armada logistik internal KKMP Sukmajaya menyiagakan rute pengiriman harian guna memastikan ketersediaan stok sembako tetap terjaga.",
-    img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500",
-    url: "/berita",
-    source: "Logistik KKMP Depok",
+    time: "2 hari yang lalu",
+    date: "Rabu, 30 September 2026 • 11:51 WIB",
+    summary: "Seksi Pendidikan Agama dan Keagamaan Islam Kemenag Depok menyelenggarakan pembinaan standarisasi kelembagaan pesantren, madin, dan LPQ guna memastikan mutu kurikulum dan legalitas formal di Depok.",
+    source: "Kantor Kementerian Agama Kota Depok",
+    sourceUrl: KEMENAG_DEPOK_PORTAL_URL,
   },
   {
-    tag: "Ketahanan Pangan",
+    id: "tindak-lanjut-pemeriksaan-2026",
+    title: "Kakankemenag Depok Tekankan Tindak Lanjut Hasil Pemeriksaan untuk Perkuat Akuntabilitas",
+    url: "https://depok.kemenag.go.id/kakankemenag-depok-tekankan-tindak-lanjut-hasil-pemeriksaan-untuk-perkuat-akuntabilitas",
+    img: "https://depok.kemenag.go.id/uploads/images/20261001_144026_5ded9a2271ea297ac97f.webp",
+    tag: "Tata Kelola",
     color: "emerald",
-    time: "2 hari lalu",
-    title: "Kemitraan Strategis KKMP Sukmajaya Bersama Gapoktan Jawa Barat",
-    summary: "Kerja sama langsung dengan sentra produsen dan gabungan kelompok tani guna memotong rantai pasok dan menjaga margin ramah warga.",
-    img: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=500",
-    url: "/berita",
-    source: "Agro Rantai Pasok",
+    time: "2 hari yang lalu",
+    date: "Rabu, 30 September 2026 • 09:11 WIB",
+    summary: "Rapat koordinasi pimpinan Kemenag Depok menekankan penyelesaian tindak lanjut temuan pengawasan internal sebagai wujud komitmen Zona Integritas dan akuntabilitas keuangan negara.",
+    source: "Kantor Kementerian Agama Kota Depok",
+    sourceUrl: KEMENAG_DEPOK_PORTAL_URL,
   },
   {
-    tag: "Teknologi",
+    id: "bantuan-sembako-bojongsari-2026",
+    title: "KUA Bojongsari dan BAZNAS Depok Salurkan Bantuan Sembako kepada 10 Duafa",
+    url: "https://depok.kemenag.go.id/kua-bojongsari-dan-baznas-depok-salurkan-bantuan-sembako-kepada-10-duafa",
+    img: "https://depok.kemenag.go.id/uploads/images/20261001_143138_365394c28500877cb979.webp",
+    tag: "Bantuan Sembako",
+    color: "orange",
+    time: "3 hari yang lalu",
+    date: "Selasa, 29 September 2026 • 14:00 WIB",
+    summary: "KUA Kecamatan Bojongsari berkolaborasi bersama BAZNAS Kota Depok menyerahkan paket bantuan sembako kebutuhan pangan pokok kepada keluarga mustahik dhuafa guna meringankan beban ekonomi warga.",
+    source: "Kantor Kementerian Agama Kota Depok",
+    sourceUrl: KEMENAG_DEPOK_PORTAL_URL,
+  },
+  {
+    id: "evaluasi-mutu-madrasah-2026",
+    title: "Kasi Penmad Depok: PKKM Jadi Instrumen Evaluasi dan Peningkatan Mutu Madrasah",
+    url: "https://depok.kemenag.go.id/kasi-penmad-depok-pkkm-jadi-instrumen-evaluasi-dan-peningkatan-mutu-madrasah",
+    img: "https://depok.kemenag.go.id/uploads/images/20261001_144723_5ea262629ef5ef1e38d9.webp",
+    tag: "Pendidikan Madrasah",
     color: "blue",
-    time: "3 hari lalu",
-    title: "Digitalisasi Pemesanan dan Transparansi Stok Pos Cabang Sukmajaya",
-    summary: "Aplikasi KKMP Sukmajaya memudahkan warga dan pelaku usaha mikro memantau ketersediaan komoditas secara real-time.",
-    img: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=500",
-    url: "/berita",
-    source: "Inovasi Digital KKMP",
+    time: "3 hari yang lalu",
+    date: "Selasa, 29 September 2026 • 11:46 WIB",
+    summary: "Penilaian Kinerja Kepala Madrasah (PKKM) di seluruh madrasah se-Kota Depok bertujuan memetakan standar manajerial kepemimpinan sekolah dan akselerasi transformasi mutu pendidikan digital.",
+    source: "Kantor Kementerian Agama Kota Depok",
+    sourceUrl: KEMENAG_DEPOK_PORTAL_URL,
+  },
+  {
+    id: "inovasi-dan-aset-asn-2026",
+    title: "Kakankemenag Depok Tekankan Inovasi Kerja dan Penertiban Aset dalam Pembinaan ASN",
+    url: "https://depok.kemenag.go.id/kakankemenag-depok-tekankan-inovasi-kerja-dan-penertiban-aset-dalam-pembinaan-asn",
+    img: "https://depok.kemenag.go.id/uploads/images/20260928_114508_1cef846f45438bce8be0.webp",
+    tag: "Manajemen ASN",
+    color: "emerald",
+    time: "4 hari yang lalu",
+    date: "Senin, 28 September 2026 • 08:44 WIB",
+    summary: "Pembinaan rutin aparatur sipil negara di lingkungan kantor Kemenag Depok untuk mendorong etos kerja inovatif, tertib administrasi BMN, dan peningkatan kualitas pelayanan ramah warga.",
+    source: "Kantor Kementerian Agama Kota Depok",
+    sourceUrl: KEMENAG_DEPOK_PORTAL_URL,
+  },
+  {
+    id: "pelayanan-kua-limo-2026",
+    title: "Kepala KUA Limo Tekankan Profesionalisme dan Pelayanan dalam Apel Pagi",
+    url: "https://depok.kemenag.go.id/kepala-kua-limo-tekankan-profesionalisme-dan-pelayanan-dalam-apel-pagi",
+    img: "https://depok.kemenag.go.id/uploads/images/20260928_132045_58254f62a6bc3a78a96b.webp",
+    tag: "Pelayanan Publik",
+    color: "blue",
+    time: "4 hari yang lalu",
+    date: "Senin, 28 September 2026 • 08:20 WIB",
+    summary: "Pengarahan apel pagi KUA Kecamatan Limo memfokuskan peningkatan kualitas layanan bimbingan perkawinan, konsultasi keluarga sakinah, serta kecepatan verifikasi administrasi keagamaan warga Depok.",
+    source: "Kantor Kementerian Agama Kota Depok",
+    sourceUrl: KEMENAG_DEPOK_PORTAL_URL,
   },
 ];
 
-export function mapKkmpNews(data) {
-  return (data?.blogs?.data || []).map((b, i) => ({
-    tag: b.grup?.name || "Berita",
-    color: BADGE_COLORS[i % BADGE_COLORS.length],
-    time: b.date_upload || "Baru-baru ini",
-    title: b.judul || "",
-    summary: stripHtml(b.deskripsi).slice(0, 160),
-    img: b.gambar || "",
-    url: b.slug ? `/berita?slug=${b.slug}` : "/berita",
-    source: "Portal Warta KKMP Sukmajaya",
-  }));
-}
-
-// Alias kompatibilitas ke belakang
-export const mapGarutNews = mapKkmpNews;
-
-export function parseDataGoIdNews(html) {
+// Parser dinamis HTML langsung dari web resmi https://depok.kemenag.go.id/kategori/berita
+export function parseKemenagDepokNews(html) {
   if (!html) return [];
-  const doc = new DOMParser().parseFromString(html || "", "text/html");
-  const items = [];
-  doc.querySelectorAll('a[href^="/news/"]').forEach((a) => {
-    const href = a.getAttribute("href") || "";
-    const title = (a.textContent || "").trim();
-    if (title.length < 10) return;
-    const slide = a.closest('[role="group"]');
-    const img = slide?.querySelector("img")?.src || "";
-    const time = slide?.querySelector("time")?.textContent?.trim() || "";
-    const desc = slide?.querySelector(".p-6.pt-0 div.line-clamp-2")?.textContent?.trim() || "";
-    const cat = slide?.querySelector(".mt-2 span")?.textContent?.trim() || "Warta Nasional";
-    items.push({
-      tag: cat,
-      color: BADGE_COLORS[items.length % BADGE_COLORS.length],
-      time,
-      title,
-      summary: desc,
-      img,
-      url: `https://data.go.id${href}`,
-      source: "data.go.id",
+  try {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const items = [];
+    const elements = doc.querySelectorAll(".kemenag-content-item");
+
+    elements.forEach((el, index) => {
+      const titleLink = el.querySelector(".kemenag-content-title-link, .kemenag-content-title a, h3 a");
+      const title = titleLink?.textContent?.trim() || "";
+      let href = titleLink?.getAttribute("href") || "";
+      if (href && !href.startsWith("http")) {
+        href = `https://depok.kemenag.go.id${href.startsWith("/") ? "" : "/"}${href}`;
+      }
+
+      if (!title || title.length < 5) return;
+
+      const imgEl = el.querySelector("img");
+      let img = imgEl?.getAttribute("src") || "";
+      if (img && !img.startsWith("http")) {
+        img = `https://depok.kemenag.go.id${img.startsWith("/") ? "" : "/"}${img}`;
+      }
+      if (img && img.includes("/uploads/images/")) {
+        img = img.split("?")[0];
+      }
+
+      const kicker = el.querySelector(".kemenag-content-kicker")?.textContent?.trim() || "Berita Depok";
+      const timeSpan =
+        el.querySelector(".kemenag-content-meta span[title]") ||
+        el.querySelector(".kemenag-content-meta span:last-child");
+      const time = timeSpan?.textContent?.trim() || "Terkini";
+      const fullDate = timeSpan?.getAttribute("title") || time;
+
+      const descEl = el.querySelector("p, .text-muted:not(.kemenag-content-meta)");
+      const summary = descEl?.textContent?.trim() ||
+        `Warta resmi Kantor Kementerian Agama Kota Depok: ${title}. Simak informasi selengkapnya di portal resmi Kemenag Kota Depok.`;
+
+      const colors = ["emerald", "blue", "orange"];
+
+      items.push({
+        id: href || `kemenag-depok-${index}`,
+        title,
+        url: href || KEMENAG_DEPOK_PORTAL_URL,
+        img: img || "https://depok.kemenag.go.id/uploads/branding/logo.webp",
+        tag: kicker,
+        color: colors[index % colors.length],
+        time,
+        date: fullDate,
+        summary,
+        source: "Kantor Kementerian Agama Kota Depok",
+        sourceUrl: KEMENAG_DEPOK_PORTAL_URL,
+      });
     });
-  });
-  return items;
+
+    return items;
+  } catch (err) {
+    console.warn("Gagal mengekstrak struktur HTML Kemenag Depok:", err);
+    return [];
+  }
 }
 
-export async function fetchAllNews() {
-  let portalNews = [];
-  try {
-    const res = await fetch("/dataid/");
-    if (res.ok) {
-      const html = await res.text();
-      portalNews = parseDataGoIdNews(html);
+/**
+ * Mengambil berita Kemenag Depok terkini setiap hari.
+ * Mendukung real-time update harian, caching cerdas, dan fallback otomatis.
+ */
+export async function fetchAllNews(forceRefresh = false) {
+  if (typeof window !== "undefined" && !forceRefresh) {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { timestamp, items } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_DURATION_MS && Array.isArray(items) && items.length > 0) {
+          return items;
+        }
+      }
+    } catch (e) {
+      // Abaikan error parse cache
     }
-  } catch (err) {
-    console.warn("Gagal memuat portal nasional data.go.id, menyajikan warta KKMP Sukmajaya:", err);
   }
 
-  return [...KKMP_DEPOK_NEWS, ...portalNews];
+  // Coba sumber real-time secara berurutan
+  const candidateUrls = [
+    "/kemenag-depok-news/kategori/berita", // Vite Proxy (Dev & Preview)
+    "https://api.allorigins.win/raw?url=" + encodeURIComponent("https://depok.kemenag.go.id/kategori/berita"),
+    "https://corsproxy.io/?url=" + encodeURIComponent("https://depok.kemenag.go.id/kategori/berita"),
+    KEMENAG_DEPOK_PORTAL_URL,
+  ];
+
+  for (const url of candidateUrls) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+      const res = await fetch(url, {
+        signal: controller.signal,
+        headers: { Accept: "text/html,application/xhtml+xml" },
+      });
+      clearTimeout(timeoutId);
+
+      if (res.ok) {
+        const html = await res.text();
+        const parsed = parseKemenagDepokNews(html);
+        if (parsed.length > 0) {
+          if (typeof window !== "undefined") {
+            try {
+              localStorage.setItem(
+                CACHE_KEY,
+                JSON.stringify({ timestamp: Date.now(), items: parsed })
+              );
+            } catch (err) {}
+          }
+          return parsed;
+        }
+      }
+    } catch (fetchErr) {
+      // Lanjut ke kandidat berikutnya
+    }
+  }
+
+  // Jika jaringan gagal, gunakan cache terakhir atau seed resmi yang selalu valid
+  if (typeof window !== "undefined") {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { items } = JSON.parse(cached);
+        if (Array.isArray(items) && items.length > 0) return items;
+      }
+    } catch {}
+  }
+
+  return KEMENAG_DEPOK_NEWS_SEED;
 }
+
+// Alias kompatibilitas
+export const fetchKemenagDepokNews = fetchAllNews;
+export const KKMP_DEPOK_NEWS = KEMENAG_DEPOK_NEWS_SEED;

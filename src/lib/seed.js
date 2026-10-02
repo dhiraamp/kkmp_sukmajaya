@@ -4,7 +4,7 @@
 
 import { PRODUCTS } from "@/lib/marketplace";
 
-const SEED_VERSION = "kkmp_sukmajaya_seed_v5_clean";
+const SEED_VERSION = "kkmp_sukmajaya_seed_v6_real_images";
 
 const now = () => new Date().toISOString();
 const daysAgo = (n) => new Date(Date.now() - n * 86400000).toISOString();
@@ -54,19 +54,22 @@ const COLLECTIONS = {
     created_date: daysAgo(i),
   })),
   WarehouseStock: [
-    { id: uid("ws"), product_id: "beras-5kg", product_name: "Beras Premium Setra Ramos 5kg", category: "sembako", quantity: 350, unit: "sak", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "mentega-blueband", product_name: "Mentega Margarin Blue Band 200g", category: "sembako", quantity: 250, unit: "sachet", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "shampo-lifebuoy", product_name: "Shampo Rambut Lifebuoy 170ml", category: "perawatan diri", quantity: 120, unit: "botol", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "shampo-pantene", product_name: "Shampo Pantene Total Damage 160ml", category: "perawatan diri", quantity: 90, unit: "botol", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "mie-indomie", product_name: "Mie Instan Indomie Goreng (Isi 5)", category: "kelontong", quantity: 400, unit: "paket", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "sabun-cuci-piring", product_name: "Sunlight Jeruk Nipis 750ml", category: "kelontong", quantity: 220, unit: "pouch", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "kopi-kapal-api", product_name: "Kopi Kapal Api Spesial Mix 10 Sachet", category: "kelontong", quantity: 210, unit: "renceng", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "deterjen-rinso", product_name: "Deterjen Rinso Anti Noda 770g", category: "kelontong", quantity: 180, unit: "pack", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "sabun-mandi", product_name: "Sabun Mandi Batang Dettol Original", category: "perawatan diri", quantity: 140, unit: "pack", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "minyak", product_name: "Minyak Goreng Sawit 2 Liter", category: "sembako", quantity: 260, unit: "pouch", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "gula", product_name: "Gula Pasir Kristal Putih 1kg", category: "sembako", quantity: 200, unit: "kg", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "telur", product_name: "Telur Ayam Negeri Segar", category: "protein", quantity: 150, unit: "kg", status: "active", updated_date: now(), created_date: daysAgo(2) },
-    { id: uid("ws"), product_id: "kecap-bango", product_name: "Kecap Manis Bango 520ml", category: "bumbu", quantity: 130, unit: "botol", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "sania-pouch-2l", product_name: "Sania Minyak Goreng Pouch 2L", category: "sembako", quantity: 320, unit: "pouch", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "sari-roti-jumbo", product_name: "Sari Roti Tawar Kupas Jumbo", category: "sembako", quantity: 150, unit: "pack", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "refill-aqua-galon", product_name: "Refill AQUA Air Mineral Galon 19L", category: "sembako", quantity: 200, unit: "galon", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "blueband-cup-250", product_name: "Blue Band Margarine Cup 250g", category: "sembako", quantity: 220, unit: "cup", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "bango-520", product_name: "Bango Kecap Manis Botol 520ml", category: "bumbu", quantity: 240, unit: "botol", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "royco-sapi-230", product_name: "Royco Bumbu Kaldu Sapi Ziplock 230g", category: "bumbu", quantity: 280, unit: "pouch", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "totole-jamur-200", product_name: "Totole Kaldu Rasa Jamur Granule 200g", category: "bumbu", quantity: 190, unit: "pouch", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "racik-ayam-goreng", product_name: "Indofood Bumbu Racik Ayam Goreng", category: "bumbu", quantity: 500, unit: "sachet", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "kentang-astro", product_name: "Kentang Segar Astro Farm 1kg", category: "sayuran", quantity: 180, unit: "kg", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "telur-astro-1kg", product_name: "Telur Ayam Negeri Segar Astro Farm 1kg", category: "protein", quantity: 220, unit: "kg", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "indomie-cabe-ijo", product_name: "Indomie Goreng Cabe Ijo (Isi 5 Pcs)", category: "kelontong", quantity: 380, unit: "paket", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "indomie-ayam-bawang", product_name: "Indomie Kuah Ayam Bawang (Isi 5 Pcs)", category: "kelontong", quantity: 400, unit: "paket", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "sunlight-nipis-750", product_name: "Sunlight Jeruk Nipis Refill 750ml", category: "kelontong", quantity: 300, unit: "pouch", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "bundle-rinso-molto-1500", product_name: "Bundle 2 Rinso Molto Cair 1500g", category: "kelontong", quantity: 150, unit: "paket", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "wipol-cemara-780", product_name: "Wipol Karbol Wangi Cemara 780ml", category: "kelontong", quantity: 210, unit: "pouch", status: "active", updated_date: now(), created_date: daysAgo(2) },
+    { id: uid("ws"), product_id: "tissue-nice-bogo", product_name: "Buy 1 Get 1 Nice Living Facial Tissue Soft Pack", category: "perawatan diri", quantity: 250, unit: "paket", status: "active", updated_date: now(), created_date: daysAgo(2) },
   ],
   Order: [
     {
@@ -78,10 +81,10 @@ const COLLECTIONS = {
       supplier_id: "supplier@demo.local",
       delivery_area: "Kecamatan Sukmajaya, Kota Depok",
       items: [
-        { product_id: "kentang", product_name: "Kentang Granola", quantity: 20, unit: "kg", price: 14000 },
-        { product_id: "beras", product_name: "Beras Premium Setra Ramos", quantity: 50, unit: "kg", price: 15500 },
+        { product_id: "kentang-astro", product_name: "Kentang Segar Astro Farm 1kg", quantity: 20, unit: "kg", price: 18500 },
+        { product_id: "sania-pouch-2l", product_name: "Sania Minyak Goreng Pouch 2L", quantity: 30, unit: "pouch", price: 37000 },
       ],
-      total: 1055000,
+      total: 1480000,
       delivery_fee: 12000,
       payment_method: "Transfer Bank",
       status: "delivered",
@@ -103,10 +106,10 @@ const COLLECTIONS = {
       supplier_id: "supplier@demo.local",
       delivery_area: "Kecamatan Sukmajaya, Kota Depok",
       items: [
-        { product_id: "ayam", product_name: "Ayam Potong", quantity: 30, unit: "kg", price: 35000 },
-        { product_id: "tomat", product_name: "Tomat Merah", quantity: 15, unit: "kg", price: 10000 },
+        { product_id: "indomie-cabe-ijo", product_name: "Indomie Goreng Cabe Ijo (Isi 5 Pcs)", quantity: 25, unit: "paket", price: 16500 },
+        { product_id: "telur-astro-1kg", product_name: "Telur Ayam Negeri Segar Astro Farm 1kg", quantity: 20, unit: "kg", price: 29500 },
       ],
-      total: 1200000,
+      total: 1002500,
       delivery_fee: 12000,
       payment_method: "QRIS",
       status: "shipping",
@@ -127,9 +130,10 @@ const COLLECTIONS = {
       supplier_id: "supplier@demo.local",
       delivery_area: "Kecamatan Sukmajaya, Kota Depok",
       items: [
-        { product_id: "daging-sapi", product_name: "Daging Sapi Segar", quantity: 10, unit: "kg", price: 135000 },
+        { product_id: "bango-520", product_name: "Bango Kecap Manis Botol 520ml", quantity: 15, unit: "botol", price: 24500 },
+        { product_id: "sunlight-nipis-750", product_name: "Sunlight Jeruk Nipis Refill 750ml", quantity: 20, unit: "pouch", price: 15000 },
       ],
-      total: 1350000,
+      total: 667500,
       delivery_fee: 12000,
       payment_method: "COD",
       status: "pending",
@@ -141,8 +145,9 @@ const COLLECTIONS = {
     },
   ],
   PurchaseOrder: [
-    { id: uid("po"), po_number: "PO-KKMP-2026-0001", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang KKMP Sukmajaya", supplier_email: "supplier@demo.local", supplier_name: "Gapoktan Sawangan Mandiri", items: [{ product_id: "kentang", product_name: "Kentang Granola", quantity: 20, unit: "kg" }], total: 280000, status: "diproses", has_supplier: true, created_date: daysAgo(1) },
-    { id: uid("po"), po_number: "PO-KKMP-2026-0002", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang KKMP Sukmajaya", supplier_email: "supplier@demo.local", supplier_name: "PT Berkah Jaya Supplier", items: [{ product_id: "ayam", product_name: "Ayam Potong", quantity: 30, unit: "kg" }], total: 1050000, status: "menunggu", has_supplier: true, created_date: daysAgo(1) },
+    { id: uid("po"), po_number: "PO-KKMP-2026-0001", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang KKMP Sukmajaya", supplier_email: "supplier@demo.local", supplier_name: "Gapoktan Sawangan Mandiri", items: [{ product_id: "kentang-astro", product_name: "Kentang Segar Astro Farm 1kg", quantity: 20, unit: "kg" }], total: 370000, status: "diproses", has_supplier: true, created_date: daysAgo(1) },
+    { id: uid("po"), po_number: "PO-KKMP-2026-0002", mitra_email: "mitra@demo.local", mitra_name: "Pos Cabang KKMP Sukmajaya", supplier_email: "supplier@demo.local", supplier_name: "PT Berkah Jaya Supplier", items: [{ product_id: "telur-astro-1kg", product_name: "Telur Ayam Negeri Segar Astro Farm 1kg", quantity: 30, unit: "kg" }], total: 885000, status: "menunggu", has_supplier: true, created_date: daysAgo(1) },
+
   ],
   Transaction: [
     {
@@ -529,8 +534,9 @@ export function ensureSeed() {
     // Purge seluruh kunci legacy yang mengandung MBG / SPPG
     const legacyKeys = [
       "kkmp_depok_seed_v1", "kkmp_depok_seed_v2", "kkmp_depok_seed_v3", "kkmp_depok_seed_v4",
-      "logistik_notifs"
+      "kkmp_sukmajaya_seed_v5_clean", "logistik_notifs"
     ];
+
     legacyKeys.forEach((k) => localStorage.removeItem(k));
 
     // Hapus semua key legacy smb_ dan cache order lama
@@ -545,12 +551,21 @@ export function ensureSeed() {
       console.warn("Purge legacy localStorage:", err);
     }
 
+    // Pastikan koleksi Product lokal selalu bersih dari produk dummy lama (ayam, unsplash, dsb)
+    try {
+      const prodRaw = localStorage.getItem("kkmp_collection_Product");
+      if (prodRaw && (prodRaw.includes("unsplash.com") || prodRaw.includes('"id":"ayam"'))) {
+        localStorage.setItem("kkmp_collection_Product", JSON.stringify(COLLECTIONS.Product));
+      }
+    } catch (e) {}
+
     if (localStorage.getItem(SEED_VERSION)) return;
 
     Object.entries(COLLECTIONS).forEach(([name, items]) => {
       localStorage.setItem(`kkmp_collection_${name}`, JSON.stringify(items));
     });
     localStorage.setItem(SEED_VERSION, "1");
+
   } catch (e) {
     console.error("Gagal seed data lokal:", e);
   }

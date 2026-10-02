@@ -5,153 +5,21 @@ import { Heart, ShoppingCart, Star, BadgePercent, ArrowRight } from "lucide-reac
 import { toast } from "sonner";
 import { useAuth } from "@/lib/AuthContext";
 import { base44 } from "@/api/base44Client";
+import { PRODUCTS } from "@/lib/marketplace";
 
-export const SAMPLE_PRODUCTS = [
-  {
-    id: "prod-1",
-    name: "Beras Premium Setra Ramos 5kg",
-    category: "Sembako",
-    supplier_name: "UD. Berkah Tani Depok",
-    price: 74500,
-    member_price: 68000,
-    unit: "sak",
-    rating: 4.9,
-    stock: 240,
-    image_url: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-2",
-    name: "Mentega Margarin Blue Band Serbaguna 200g",
-    category: "Minyak & Mentega",
-    supplier_name: "Gudang Pusat Sukmajaya",
-    price: 11500,
-    member_price: 10000,
-    unit: "sachet",
-    rating: 4.9,
-    stock: 250,
-    image_url: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-3",
-    name: "Shampo Rambut Lifebuoy Anti Dandruff 170ml",
-    category: "Perawatan Diri",
-    supplier_name: "Sentra Kelontong Sukmajaya",
-    price: 19500,
-    member_price: 17500,
-    unit: "botol",
-    rating: 4.8,
-    stock: 120,
-    image_url: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-4",
-    name: "Mie Instan Indomie Goreng Spesial (Isi 5 Pcs)",
-    category: "Kelontong",
-    supplier_name: "Gudang Induk Sukmajaya, Depok",
-    price: 16000,
-    member_price: 14500,
-    unit: "paket",
-    rating: 5.0,
-    stock: 400,
-    image_url: "https://images.unsplash.com/photo-1612927601601-6638404737ce?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-5",
-    name: "Minyak Goreng Sawit 2 Liter",
-    category: "Sembako",
-    supplier_name: "Gudang Pusat Sukmajaya",
-    price: 36000,
-    member_price: 32500,
-    unit: "pouch",
-    rating: 4.8,
-    stock: 180,
-    image_url: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-6",
-    name: "Sabun Cuci Piring Sunlight Jeruk Nipis 750ml",
-    category: "Kelontong",
-    supplier_name: "Gudang Pusat Sukmajaya",
-    price: 15000,
-    member_price: 13500,
-    unit: "pouch",
-    rating: 4.9,
-    stock: 220,
-    image_url: "https://images.unsplash.com/photo-1585421514738-01798e348b17?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-7",
-    name: "Kopi Kapal Api Spesial Mix (10 Sachet)",
-    category: "Kelontong",
-    supplier_name: "Pos Cabang Beji, Depok",
-    price: 14000,
-    member_price: 12500,
-    unit: "renceng",
-    rating: 4.8,
-    stock: 210,
-    image_url: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-8",
-    name: "Sabun Mandi Batang Dettol Original (Isi 3)",
-    category: "Perawatan Diri",
-    supplier_name: "Sentra Kelontong Sukmajaya",
-    price: 17500,
-    member_price: 15500,
-    unit: "pack",
-    rating: 4.9,
-    stock: 140,
-    image_url: "https://images.unsplash.com/photo-1607006314180-348e3671239c?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-9",
-    name: "Shampo Pantene Total Damage Care 160ml",
-    category: "Perawatan Diri",
-    supplier_name: "Distributor Sukmajaya Depok",
-    price: 24000,
-    member_price: 21500,
-    unit: "botol",
-    rating: 4.9,
-    stock: 90,
-    image_url: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-10",
-    name: "Deterjen Bubuk Rinso Anti Noda + Molto 770g",
-    category: "Kelontong",
-    supplier_name: "Distributor Kelontong Depok",
-    price: 21500,
-    member_price: 19000,
-    unit: "pack",
-    rating: 4.8,
-    stock: 180,
-    image_url: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-11",
-    name: "Telur Ayam Negeri Segar 1kg",
-    category: "Protein",
-    supplier_name: "Peternak Mandiri Depok",
-    price: 29000,
-    member_price: 26500,
-    unit: "kg",
-    rating: 4.8,
-    stock: 150,
-    image_url: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=500&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "prod-12",
-    name: "Kecap Manis Bango Botol 520ml",
-    category: "Bumbu",
-    supplier_name: "Distributor Sembako Sukmajaya",
-    price: 24500,
-    member_price: 22000,
-    unit: "botol",
-    rating: 4.9,
-    stock: 130,
-    image_url: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500&auto=format&fit=crop&q=80",
-  },
-];
+export const SAMPLE_PRODUCTS = PRODUCTS.map((p) => ({
+  id: p.id,
+  name: p.name,
+  category: p.category,
+  supplier_name: p.origin || "Gudang Induk Sukmajaya, Depok",
+  price: p.old_price || p.price,
+  member_price: p.price,
+  unit: p.unit,
+  rating: 4.9,
+  stock: p.stock,
+  image_url: p.img,
+}));
+
 
 export default function FeaturedProducts({ products = SAMPLE_PRODUCTS }) {
   const navigate = useNavigate();
@@ -231,12 +99,14 @@ export default function FeaturedProducts({ products = SAMPLE_PRODUCTS }) {
                 className="bg-white rounded-2xl border border-gray-200/90 overflow-hidden shadow-2xs hover:shadow-md hover:border-red-300 transition-all flex flex-col justify-between group"
               >
                 {/* Product Image Box */}
-                <div className="relative aspect-4/3 w-full bg-gray-100 overflow-hidden">
+                <div className="relative aspect-square w-full bg-slate-50 flex items-center justify-center p-3 overflow-hidden">
                   <img
                     src={p.image_url}
                     alt={p.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
+
 
                   {/* Wishlist Button */}
                   <button

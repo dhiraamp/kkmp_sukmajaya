@@ -163,7 +163,8 @@ export default function MitraDashboard() {
             {filtered.map(p => (
               <div key={p.id} className="border rounded-xl overflow-hidden hover:shadow-md transition-shadow">
                 <div className="relative">
-                  <img src={p.image_url || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop"} alt={p.name} className="w-full h-28 object-cover" onError={e => { e.target.onerror = null; e.target.src = `https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop`; }}/>
+                  <img src={p.image_url || encodeURI("/images/Sari Roti Tawar Kupas Jumbo.jpg")} alt={p.name} className="w-full h-28 object-contain bg-slate-50 p-1" onError={e => { e.target.onerror = null; e.target.src = encodeURI("/images/Sari Roti Tawar Kupas Jumbo.jpg"); }}/>
+
                   <span className="absolute bottom-1.5 left-1.5 text-[10px] font-medium text-white bg-black/50 backdrop-blur px-1.5 py-0.5 rounded capitalize">{p.category}</span>
                 </div>
                 <div className="p-3">

@@ -1,7 +1,16 @@
-import React from "react";
-import { ArrowRight, Truck, Store, Users, Building2, Handshake } from "lucide-react";
+import React, { useState } from "react";
+import { ArrowRight, Truck, Store, Users, Building2, Handshake, Network, Eye } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export default function SupplyChainFlow() {
+  const [showArchModal, setShowArchModal] = useState(false);
+
   const STEPS = [
     {
       roleId: "supplier",
@@ -59,13 +68,24 @@ export default function SupplyChainFlow() {
     <section className="py-5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="bg-white rounded-2xl border border-gray-200/90 p-4 sm:p-6 shadow-xs">
-          <div className="mb-4 text-center sm:text-left">
-            <h3 className="text-base sm:text-lg font-black text-gray-900 tracking-tight">
-              Alur Rantai Pasok Terintegrasi KKMP Kota Depok
-            </h3>
-            <p className="text-xs text-gray-500 mt-0.5">
-              Distribusi terstruktur dari supplier hingga ke tangan anggota koperasi melalui 8 pos cabang
-            </p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div>
+              <h3 className="text-base sm:text-lg font-black text-gray-900 tracking-tight">
+                Alur Rantai Pasok Terintegrasi KKMP Kota Depok
+              </h3>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Distribusi terstruktur dari supplier hingga ke tangan anggota koperasi melalui 8 pos cabang
+              </p>
+            </div>
+
+            <button
+              onClick={() => setShowArchModal(true)}
+              className="inline-flex items-center gap-1.5 self-start sm:self-auto px-3 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 text-xs font-bold border border-red-200 transition-colors shadow-2xs"
+            >
+              <Network className="w-3.5 h-3.5" />
+              <span>Lihat Mind Map Arsitektur</span>
+              <Eye className="w-3 h-3 text-red-500" />
+            </button>
           </div>
 
           {/* 5 Step Container */}
@@ -110,6 +130,30 @@ export default function SupplyChainFlow() {
           </div>
         </div>
       </div>
+
+      {/* Modal Mind Map Arsitektur Rantai Pasok */}
+      <Dialog open={showArchModal} onOpenChange={setShowArchModal}>
+        <DialogContent className="max-w-4xl w-[95vw] p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-lg font-bold text-gray-900 flex items-center gap-2">
+              <Network className="w-5 h-5 text-red-600" />
+              Mind Mapping Architecture Sistem Marketplace KKMP Kota Depok
+            </DialogTitle>
+            <DialogDescription className="text-xs text-gray-500">
+              Skema menyeluruh integrasi supplier, koperasi induk Sukmajaya, zonasi logistik, 8 cabang kelurahan, dan transaksi anggota.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="mt-3 rounded-xl border border-gray-200 overflow-hidden bg-slate-50 flex items-center justify-center">
+            <img
+              src="/images/alur.jpeg"
+              alt="Mind Mapping Architecture Sistem Marketplace Koperasi Merah Putih Kota Depok"
+              className="w-full h-auto object-contain rounded-lg"
+              loading="lazy"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
