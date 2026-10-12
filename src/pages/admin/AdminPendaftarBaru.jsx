@@ -121,13 +121,13 @@ export default function AdminPendaftarBaru() {
       case "mitra":
         return (
           <Badge className="bg-emerald-600/15 text-emerald-800 border-emerald-300 font-medium text-xs gap-1">
-            <Store className="w-3 h-3 text-emerald-600" /> Pos Cabang KKMP
+            <Store className="w-3 h-3 text-emerald-600" /> Pos Cabang PINBAS
           </Badge>
         );
       case "supplier":
         return (
           <Badge className="bg-blue-600/15 text-blue-800 border-blue-300 font-medium text-xs gap-1">
-            <Users className="w-3 h-3 text-blue-600" /> Supplier KKMP
+            <Users className="w-3 h-3 text-blue-600" /> Supplier PINBAS
           </Badge>
         );
       case "logistik":
@@ -140,7 +140,7 @@ export default function AdminPendaftarBaru() {
       case "penerima":
         return (
           <Badge className="bg-red-600/15 text-red-800 border-red-300 font-medium text-xs gap-1">
-            <UserCheck className="w-3 h-3 text-red-600" /> Anggota Koperasi
+            <UserCheck className="w-3 h-3 text-red-600" /> Anggota &amp; Komunitas
           </Badge>
         );
       default:
@@ -160,7 +160,7 @@ export default function AdminPendaftarBaru() {
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm">
-            Pantau dan verifikasi setiap pengguna baru yang mendaftar (Pos Cabang KKMP, Supplier, Logistik, dan Anggota Koperasi)
+            Pantau dan verifikasi setiap pengguna baru yang mendaftar (Pos Cabang PINBAS, Supplier, Logistik, dan Anggota Komunitas)
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={loadData} className="gap-2 shrink-0">

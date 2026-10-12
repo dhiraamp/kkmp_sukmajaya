@@ -14,6 +14,7 @@ import Portal from '@/pages/Portal';
 import Register from '@/pages/Register';
 import Career from '@/pages/Career';
 import CareerDetail from '@/pages/CareerDetail';
+import TentangKami from '@/pages/TentangKami';
 
 // Mitra
 import MitraLayout from '@/pages/mitra/MitraLayout';
@@ -115,6 +116,9 @@ const AuthenticatedApp = () => {
       <Route path="/portal" element={<Portal />} />
       <Route path="/register/:role" element={<Register />} />
       <Route path="/knowledge-center" element={<KnowledgeCenter />} />
+      <Route path="/tentang-kami" element={<TentangKami />} />
+      <Route path="/tentang" element={<Navigate to="/tentang-kami" replace />} />
+      <Route path="/about" element={<Navigate to="/tentang-kami" replace />} />
       <Route path="/berita" element={<Berita />} />
       <Route path="/career" element={<Career />} />
       <Route path="/career/:id" element={<CareerDetail />} />

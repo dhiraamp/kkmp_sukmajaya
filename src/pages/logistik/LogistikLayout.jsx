@@ -20,5 +20,5 @@ const menuItems = [
 ];
 
 export default function LogistikLayout() {
-  return <TopNavLayout menuItems={menuItems} title="Logistik & Distribusi Internal KKMP Kota Depok" />;
+  return <TopNavLayout menuItems={menuItems} title="Logistik & Distribusi Halal PINBAS MUI Kota Depok" />;
 }

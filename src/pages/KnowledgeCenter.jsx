@@ -6,7 +6,7 @@ import FooterStats from "@/components/marketplace/FooterStats";
 
 const CATEGORIES = [
   { key: "Semua", label: "Semua" },
-  { key: "pengembangan", label: "Pengembangan", color: "bg-red-600 text-white" },
+  { key: "pengembangan", label: "Pengembangan", color: "bg-emerald-600 text-white" },
   { key: "panduan", label: "Panduan", color: "bg-blue-600 text-white" },
   { key: "regulasi", label: "Regulasi", color: "bg-amber-600 text-white" },
   { key: "sumberdaya", label: "Sumber Daya", color: "bg-purple-600 text-white" },
@@ -17,124 +17,124 @@ const catColor = (key) => CATEGORIES.find((c) => c.key === key)?.color || "bg-gr
 
 const DATA = [
   {
-    id: "dev-1",
+    id: "pinbas-1",
     category: "pengembangan",
-    title: "Perjalanan & Perkembangan Koperasi Merah Putih di Kota Depok",
-    excerpt: "Perjalanan dan capaian KKMP sejak diluncurkan di Kota Depok, mulai dari pembentukan Gudang Pusat Sukmajaya hingga 8 pos cabang kelurahan.",
+    title: "PINBAS MUI Perkuat Sinergi Pengembangan Koperasi Syariah Berkelanjutan",
+    excerpt: "Rapat Kerja Forum Koperasi Syariah 2026 menegaskan komitmen menghadirkan ekosistem inkubasi bisnis syariah yang terintegrasi.",
     image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800",
-    date: "2026-09-20",
-    author: "Koperasi Induk Sukmajaya",
-    body: "Koperasi Kelurahan Merah Putih (KKMP) terus berkembang di Kota Depok. Kini pos cabang aktif melayani kebutuhan ribuan anggota dengan sembako dan komoditas bermutu tinggi langsung dari gudang pusat.",
+    date: "2026-01-07",
+    author: "Sekretariat PINBAS MUI",
+    body: "Pusat Inkubasi Bisnis Syariah (PINBAS) Majelis Ulama Indonesia terus memperkuat perannya dalam pengembangan ekonomi umat berbasis syariah. Melalui sinergi bersama 93 koperasi syariah (BMT, BTM, Kopsyah, Kopontren, KJKS), PINBAS berkomitmen menghadirkan ekosistem inkubasi bisnis syariah yang terintegrasi, mulai dari peningkatan kapasitas sumber daya manusia, pendampingan usaha, hingga penguatan kelembagaan agar mandiri, profesional, dan berdaya saing.",
   },
   {
-    id: "dev-2",
+    id: "pinbas-2",
     category: "pengembangan",
-    title: "Pemberdayaan Produk UMKM & Petani Komoditas Lokal Depok",
-    excerpt: "KKMP memprioritaskan penyerapan hasil bumi lokal seperti beras, telur ayam, sayuran, dan aneka olahan UMKM warga Depok.",
+    title: "Pemberdayaan Produk UMKM & Inkubasi Bisnis Syariah Berkeadilan",
+    excerpt: "PINBAS mendorong penguatan UMKM binaan melalui sertifikasi halal, standarisasi kemasan, dan perluasan akses pasar.",
     image: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800",
-    date: "2026-09-15",
-    author: "Tim Manajemen KKMP",
-    body: "Untuk memperkuat ekonomi kerakyatan, KKMP mengintegrasikan pasokan dari kelompok tani dan produsen UMKM lokal ke dalam katalog komoditas resmi.",
+    date: "2026-01-06",
+    author: "Deputi Pelayanan PINBAS",
+    body: "Pelaksanaan mandat organisasi PINBAS diwujudkan melalui pendampingan komprehensif bagi pelaku UMKM. Melalui kurasi mutu dan fasilitasi legalitas halal, produk lokal dapat diserap secara optimal oleh jaringan pos cabang dan marketplace syariah.",
   },
   {
-    id: "dev-3",
+    id: "pinbas-3",
     category: "pengembangan",
-    title: "Digitalisasi Rantai Pasok Koperasi Kelurahan Merah Putih",
-    excerpt: "Sistem digital KKMP mengintegrasikan alur supplier, gudang pusat, logistik distribusi, dan 8 cabang kelurahan secara transparan.",
+    title: "Digitalisasi Rantai Pasok Syariah & Fasilitasi Teknologi Terpadu",
+    excerpt: "Sistem digital PINBAS mengintegrasikan supplier halal, gudang pusat, logistik distribusi, dan pos cabang kelurahan secara transparan.",
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800",
-    date: "2026-09-10",
-    author: "Tim IT KKMP",
-    body: "Penerapan sistem terintegrasi mempermudah monitoring stok komoditas di gudang induk, penerbitan delivery order armada logistik, dan pelacakan pesanan anggota.",
+    date: "2026-01-05",
+    author: "Deputi Fasilitasi Teknologi PINBAS",
+    body: "Penerapan sistem digital terpadu mempermudah monitoring stok komoditas pangan halal, pemrosesan pesanan otomatis, pelacakan pengiriman logistik, dan akuntabilitas transaksi ekonomi umat.",
   },
   {
     id: "panduan-1",
     category: "panduan",
-    title: "Panduan Belanja Komoditas untuk Pos Cabang & Anggota",
-    excerpt: "Langkah-langkah memesan kebutuhan sembako dan komoditas pangan dari Gudang Pusat KKMP.",
+    title: "Panduan Sinergi & Kemitraan Forum Koperasi Syariah",
+    excerpt: "Mekanisme pengajuan kemitraan bagi BMT, BTM, Kopsyah, Kopontren, dan KJKS ke dalam jaringan PINBAS.",
     image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
-    date: "2026-07-10",
-    author: "Tim Layanan KKMP",
-    body: "1) Buka menu Belanja Anggota / Pos Cabang. 2) Pilih produk komoditas sembako dan masukkan ke keranjang. 3) Lanjutkan ke checkout dan konfirmasi alamat pos cabang / anggota di Kota Depok. 4) Pantau status pengiriman logistik hingga barang tiba.",
+    date: "2026-01-04",
+    author: "Deputi Pelayanan PINBAS",
+    body: "1) Daftarkan kelembagaan koperasi melalui portal peran. 2) Ikuti asesmen tata kelola dan kurasi produk binaan. 3) Hubungkan operasional pos cabang dengan platform distribusi PINBAS. 4) Salurkan kebutuhan pokok berharga hemat kepada anggota.",
   },
   {
     id: "panduan-2",
     category: "panduan",
-    title: "Panduan Melamar Karir & Kemitraan KKMP Depok",
-    excerpt: "Cara mencari posisi staf pos cabang, operator gudang, dan kurir logistik KKMP.",
-    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800",
-    date: "2026-07-05",
-    author: "Tim HRD KKMP",
-    body: "Kunjungi menu Peluang Kerja, cari posisi sesuai keahlian (Pos Cabang, Logistik, Gudang Pusat), lalu ajukan pendaftaran dengan akun anggota KKMP Anda.",
+    title: "Panduan Standardisasi Mutu Halal & Higienitas Komoditas",
+    excerpt: "Prosedur penjaminan mutu beras, minyak goreng, telur, dan daging di jaringan rantai pasok PINBAS.",
+    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800",
+    date: "2026-01-03",
+    author: "Tim Mutu Syariah PINBAS",
+    body: "Setiap komoditas yang disalurkan melalui PINBAS wajib memenuhi kriteria halal dan thayyib. Pemeriksaan berkala dilakukan pada asal-usul pasokan, tanggal kedaluwarsa, dan higienitas penyimpanan gudang.",
   },
   {
     id: "panduan-3",
     category: "panduan",
-    title: "Panduan Manajemen Simpanan & Manfaat Anggota",
-    excerpt: "Manfaat menjadi anggota resmi Koperasi Merah Putih Sukmajaya - Kota Depok.",
+    title: "Panduan Keanggotaan & Manfaat Belanja Hemat Komunitas",
+    excerpt: "Manfaat menjadi anggota terdaftar PINBAS MUI untuk belanja sembako dan komoditas bermutu.",
     image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800",
-    date: "2026-06-28",
-    author: "Pengurus Koperasi KKMP",
-    body: "Anggota resmi mendapatkan harga sembako lebih murah, dividen SHU akhir tahun, serta akses prioritas pengiriman komoditas kebutuhan harian melalui 8 pos cabang kelurahan.",
+    date: "2026-01-02",
+    author: "Sekretariat PINBAS",
+    body: "Anggota resmi PINBAS menikmati harga hemat di bawah harga pasar, kepastian ketersediaan komoditas halal, serta prioritas mengikuti pelatihan kewirausahaan dan inkubasi usaha mandiri.",
   },
   {
     id: "regulasi-1",
     category: "regulasi",
-    title: "Anggaran Dasar & Regulasi Koperasi Merah Putih",
-    excerpt: "Landasan hukum UU Perkoperasian dan AD/ART Koperasi Kelurahan Merah Putih Kota Depok.",
+    title: "Mandat Kelembagaan Majelis Ulama Indonesia dalam Ekonomi Umat",
+    excerpt: "Landasan amanat PINBAS sebagai badan inkubasi ekonomi syariah yang berkeadilan dan inklusif.",
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800",
-    date: "2026-06-20",
-    author: "Pengawas Koperasi",
-    body: "KKMP beroperasi berlandaskan UU No. 25 Tahun 1992 tentang Perkoperasian dan regulasi tata kelola pangan daerah Kota Depok demi kesejahteraan anggota.",
+    date: "2026-01-01",
+    author: "Dewan Pengawas PINBAS",
+    body: "PINBAS menjalankan mandat MUI untuk mewujudkan kemandirian ekonomi umat melalui sinergi kelembagaan, perlindungan konsumen syariah, serta pemberdayaan usaha mikro berbasis nilai-nilai Islam.",
   },
   {
     id: "regulasi-2",
     category: "regulasi",
-    title: "Standar Mutu Komoditas & Distribusi Rantai Pasok",
-    excerpt: "Pedoman standar kualitas beras, telur, minyak goreng, dan daging di Gudang Pusat KKMP.",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800",
-    date: "2026-06-12",
-    author: "Quality Control KKMP",
-    body: "Setiap komoditas yang masuk dari supplier diperiksa kualitas dan masa kedaluwarsanya di Gudang Pusat Sukmajaya sebelum didistribusikan armada logistik ke 8 pos cabang kelurahan.",
+    title: "Prinsip Akad Muamalah & Keadilan Transaksi Bebas Riba",
+    excerpt: "Ketentuan fikih muamalah yang melandasi transaksi rantai pasok dan pembiayaan koperasi syariah.",
+    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
+    date: "2025-12-28",
+    author: "Dewan Syariah PINBAS",
+    body: "Seluruh alur perdagangan diatur dengan akad jual beli yang transparan (murabahah, salam) tanpa unsur maisir, gharar, riba, dan tadlis, guna menjaga kemurnian rezeki dan keberkahan usaha.",
   },
   {
     id: "regulasi-3",
     category: "regulasi",
-    title: "Kebijakan Kemitraan Supplier Komoditas KKMP",
-    excerpt: "Pedoman kerja sama antara petani, peternak, dan distributor rekanan KKMP Depok.",
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
-    date: "2026-06-01",
-    author: "Divisi Pengadaan KKMP",
-    body: "Kemitraan supplier diatur dengan transparansi harga acuan pasar, mekanisme Purchase Order (PO), dan pembayaran terpadu melalui Koperasi Induk Sukmajaya.",
+    title: "Tata Kelola Kelembagaan Koperasi Syariah yang Akuntabel (GCG)",
+    excerpt: "Pedoman profesionalisme bagi pengurus BMT, Kopsyah, dan Kopontren dalam mengelola amanah anggota.",
+    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800",
+    date: "2025-12-20",
+    author: "Sekretariat PINBAS",
+    body: "Penerapan Good Cooperative Governance mencakup transparansi pelaporan keuangan, audit syariah berkala, serta kepatuhan pada regulasi perkoperasian nasional demi ketahanan usaha jangka panjang.",
   },
   {
     id: "sumber-1",
     category: "sumberdaya",
-    title: "Template Laporan & Form Pengajuan Pos Cabang",
-    excerpt: "Format laporan stok komoditas dan pengajuan pengiriman dari pos cabang ke gudang pusat.",
+    title: "Modul Peningkatan Kapasitas SDM & Pengelola Koperasi",
+    excerpt: "Bahan ajar pelatihan literasi keuangan syariah, pembukuan digital, dan pelayanan konsumen prima.",
     image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800",
-    date: "2026-05-25",
-    author: "Tim Manajemen KKMP",
-    body: "Template digital tersedia bagi pengelola 8 pos cabang untuk memonitor stok lokal dan mengajukan pesanan restock harian secara otomatis.",
+    date: "2025-12-15",
+    author: "Divisi Diklat PINBAS",
+    body: "Modul digital tersedia bagi pengelola pos cabang untuk mengasah kecakapan manajerial, pencatatan stok barang, dan pemanfaatan sistem POS kasir secara efektif.",
   },
   {
     id: "sumber-2",
     category: "sumberdaya",
-    title: "Pusat Layanan Bantuan & Kontak Pos Cabang Depok",
-    excerpt: "Daftar kontak 8 Pos Cabang KKMP (Beji, Sukmajaya, Cimanggis, dll.) dan Customer Service.",
+    title: "Pusat Layanan Konsultasi & Sekretariat PINBAS Depok",
+    excerpt: "Akses kontak pendampingan UMKM, kemitraan pos cabang, dan layanan informasi publik.",
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-    date: "2026-05-18",
-    author: "Customer Care KKMP",
-    body: "Layanan informasi dan bantuan operasional KKMP siap melayani anggota dan mitra setiap hari kerja melalui WhatsApp dan pusat bantuan kantor Sukmajaya.",
+    date: "2025-12-10",
+    author: "Customer Service PINBAS",
+    body: "Layanan konsultasi PINBAS terbuka di Gedung MUI Kota Depok, Jl. Nusantara Raya No. 1, serta melalui email sekretariat@pinbas-depok.id untuk seluruh pegiat usaha dan koperasi syariah.",
   },
   {
     id: "sumber-3",
     category: "sumberdaya",
-    title: "Jadwal Sosialisasi & Rapat Anggota Tahunan (RAT)",
-    excerpt: "Kalender kegiatan pelatihan kewirausahaan dan agenda tahunan Koperasi Merah Putih.",
+    title: "Kalender Temu Bisnis & Sosialisasi Forum Koperasi Syariah",
+    excerpt: "Jadwal temu usaha supplier-pos cabang, bazar komoditas halal, dan workshop inkubasi tahunan.",
     image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800",
-    date: "2026-05-10",
-    author: "Sekretariat KKMP",
-    body: "Ikuti kegiatan rutin pelatihan literasi keuangan, bazar sembako murah, dan Rapat Anggota Tahunan (RAT) untuk transparansi pembagian SHU.",
+    date: "2025-12-05",
+    author: "Sekretariat PINBAS",
+    body: "Agenda berkala temu bisnis menghubungkan produsen komoditas halal dengan pengurus pos cabang kelurahan demi menjamin kelancaran pasokan dan stabilitas harga sembako masyarakat.",
   },
 ];
 
@@ -163,16 +163,16 @@ export default function KnowledgeCenter() {
       <section className="relative border-b border-gray-200 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-red-950/90 via-red-900/85 to-rose-900/80" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/95 via-emerald-900/90 to-teal-900/85" />
         </div>
         <div className="relative max-w-full mx-auto px-4 py-12">
-          <span className="flex items-center gap-1.5 text-xs font-semibold text-red-100 bg-red-500/20 border border-red-400/30 px-3 py-1.5 rounded-full w-fit">
-            <BookOpen className="w-3.5 h-3.5" /> Pusat Edukasi Koperasi Merah Putih Depok
+          <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-100 bg-emerald-500/20 border border-emerald-400/30 px-3 py-1.5 rounded-full w-fit">
+            <BookOpen className="w-3.5 h-3.5" /> Pusat Edukasi &amp; Inkubasi Bisnis Syariah
           </span>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3">Pusat Pengetahuan Koperasi</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3">Pusat Pengetahuan PINBAS</h1>
           <p className="text-sm text-white/80 mt-1.5 max-w-2xl">
-            Panduan, regulasi, pengembangan program, dan sumber daya untuk mendukung operasional
-            Koperasi Kelurahan Merah Putih (KKMP) di Kota Depok.
+            Panduan syariah, regulasi, pengembangan usaha, dan materi pembinaan UMKM
+            Pusat Inkubasi Bisnis Syariah (PINBAS) MUI Kota Depok.
           </p>
 
           <div className="mt-6 flex items-stretch bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden max-w-2xl">
@@ -194,7 +194,7 @@ export default function KnowledgeCenter() {
                 onClick={() => setCategory(c.key)}
                 className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${
                   category === c.key
-                    ? "bg-red-600 text-white border-red-600"
+                    ? "bg-emerald-600 text-white border-emerald-600"
                     : "bg-white/10 text-white/85 border-white/30 hover:bg-white/20"
                 }`}
               >
@@ -225,7 +225,7 @@ export default function KnowledgeCenter() {
                 key={d.id}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setSelected(d)}
-                className="bg-white rounded-2xl border border-gray-200 p-0 text-left hover:border-red-400 hover:shadow-md transition-all overflow-hidden flex flex-col"
+                className="bg-white rounded-2xl border border-gray-200 p-0 text-left hover:border-emerald-400 hover:shadow-md transition-all overflow-hidden flex flex-col"
               >
                 <div className="relative h-36 overflow-hidden">
                   <img src={d.image} alt={d.title} className="w-full h-full object-cover" />

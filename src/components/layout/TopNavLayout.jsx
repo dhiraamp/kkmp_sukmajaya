@@ -34,8 +34,8 @@ export default function TopNavLayout({ menuItems = [], title = "" }) {
     switch (currentRole) {
       case "admin":
         return {
-          brand: "KKMP INDUK",
-          subBrand: "Koperasi Induk Sukmajaya",
+          brand: "PINBAS INDUK",
+          subBrand: "Pusat Inkubasi Bisnis Syariah MUI Depok",
           roleBadge: "Gudang Pusat",
           badgeColor: "bg-red-50 text-red-700 border-red-300",
           logoBg: "bg-gradient-to-br from-red-600 to-rose-700",
@@ -48,8 +48,8 @@ export default function TopNavLayout({ menuItems = [], title = "" }) {
         };
       case "mitra":
         return {
-          brand: "KKMP CABANG",
-          subBrand: "Pos Cabang Beji",
+          brand: "PINBAS MITRA",
+          subBrand: "Pos Cabang Mitra Usaha Syariah",
           roleBadge: "Pos Cabang",
           badgeColor: "bg-orange-50 text-orange-700 border-orange-300",
           logoBg: "bg-gradient-to-br from-orange-600 to-amber-600",
@@ -62,8 +62,8 @@ export default function TopNavLayout({ menuItems = [], title = "" }) {
         };
       case "supplier":
         return {
-          brand: "KKMP PEMASOK",
-          subBrand: "Portal Mitra Pemasok",
+          brand: "PINBAS PEMASOK",
+          subBrand: "Portal Mitra Pemasok Syariah",
           roleBadge: "Supplier & UMKM",
           badgeColor: "bg-teal-50 text-teal-700 border-teal-300",
           logoBg: "bg-gradient-to-br from-teal-600 to-emerald-700",
@@ -76,8 +76,8 @@ export default function TopNavLayout({ menuItems = [], title = "" }) {
         };
       case "logistik":
         return {
-          brand: "KKMP LOGISTIK",
-          subBrand: "Armada Distribusi",
+          brand: "PINBAS LOGISTIK",
+          subBrand: "Armada Distribusi Halal",
           roleBadge: "Distribusi Depok",
           badgeColor: "bg-blue-50 text-blue-700 border-blue-300",
           logoBg: "bg-gradient-to-br from-blue-600 to-indigo-700",
@@ -90,9 +90,9 @@ export default function TopNavLayout({ menuItems = [], title = "" }) {
         };
       default:
         return {
-          brand: "KOPERASI MERAH PUTIH",
-          subBrand: "Sukmajaya Kota Depok",
-          roleBadge: "KKMP",
+          brand: "PINBAS MUI KOTA DEPOK",
+          subBrand: "Pusat Inkubasi Bisnis Syariah",
+          roleBadge: "PINBAS",
           badgeColor: "bg-red-50 text-red-700 border-red-300",
           logoBg: "bg-gradient-to-br from-red-600 to-rose-700",
           activeText: "text-red-700",
@@ -159,13 +159,15 @@ export default function TopNavLayout({ menuItems = [], title = "" }) {
       {/* Top bar */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto h-16 flex items-center gap-3 px-4">
-          <button onClick={goHome} className="flex items-center gap-2.5 shrink-0 cursor-pointer text-left">
-            <div className={`w-10 h-10 rounded-xl ${roleTheme.logoBg} flex items-center justify-center shadow-md shrink-0 text-white`}>
-              <RoleIcon className="w-5 h-5 text-white" />
-            </div>
-            <div className="leading-tight text-left hidden sm:block">
+          <button onClick={goHome} className="flex items-center gap-3 shrink-0 cursor-pointer text-left">
+            <img
+              src="/images/logo_pinbas.png"
+              alt="PINBAS MUI Kota Depok"
+              className="h-9 md:h-10 w-auto object-contain shrink-0"
+            />
+            <div className="leading-tight text-left hidden sm:block border-l border-gray-200 pl-3">
               <div className="flex items-center gap-1.5">
-                <p className="text-base font-black text-gray-900 whitespace-nowrap tracking-tight">{roleTheme.brand}</p>
+                <p className="text-sm font-black text-gray-900 whitespace-nowrap tracking-tight">{roleTheme.brand}</p>
                 <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md border ${roleTheme.badgeColor}`}>
                   {roleTheme.roleBadge}
                 </span>

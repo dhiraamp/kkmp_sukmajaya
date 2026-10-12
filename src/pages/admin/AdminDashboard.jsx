@@ -134,8 +134,8 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Dashboard Koperasi Induk Sukmajaya</h2>
-          <p className="text-muted-foreground text-sm">Ringkasan rantai pasok Gudang Pusat dan 8 Pos Cabang KKMP Kota Depok</p>
+          <h2 className="text-2xl font-bold tracking-tight">Dashboard PINBAS Induk (MUI Kota Depok)</h2>
+          <p className="text-muted-foreground text-sm">Ringkasan ekosistem rantai pasok Gudang Pusat dan 8 Pos Cabang Mitra Kota Depok</p>
         </div>
         <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
           <Button

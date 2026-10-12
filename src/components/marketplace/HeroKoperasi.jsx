@@ -62,17 +62,17 @@ export default function HeroKoperasi({ onSearch }) {
               transition={{ duration: 0.5 }}
               className="space-y-2.5"
             >
-              <p className="text-xs sm:text-sm font-semibold text-red-600 tracking-wide">
-                Dari Koperasi, Untuk Anggota, Membangun Depok
+              <p className="text-xs sm:text-sm font-semibold text-emerald-700 tracking-wide">
+                Pusat Inkubasi Bisnis Syariah &bull; MUI Kota Depok
               </p>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight">
-                Koperasi Merah Putih <br className="hidden sm:inline" />
-                <span className="text-red-600">Sukmajaya</span>
+                PINBAS <br className="hidden sm:inline" />
+                <span className="text-emerald-700">MUI Kota Depok</span>
               </h1>
 
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-xl">
-                Marketplace resmi Koperasi Merah Putih Kota Depok. Menyediakan kebutuhan pokok, produk UMKM, dan komoditas berkualitas untuk seluruh anggota koperasi.
+                Pusat Inkubasi Bisnis Syariah (PINBAS) MUI Kota Depok. <span className="font-semibold italic text-emerald-800">Empowering People and Connecting</span> — Menyediakan kebutuhan pokok, sembako berkualitas, dan pemberdayaan produk UMKM binaan syariah.
               </p>
             </motion.div>
 
@@ -97,10 +97,21 @@ export default function HeroKoperasi({ onSearch }) {
 
               <button
                 onClick={() => navigate("/register/penerima")}
-                className="flex items-center gap-2 bg-white hover:bg-red-50 text-red-600 border-2 border-red-500 font-bold text-sm px-6 py-3 rounded-xl transition-all cursor-pointer shadow-xs"
+                className="flex items-center gap-2 bg-white hover:bg-red-50 text-red-600 border-2 border-red-500 font-bold text-sm px-5 py-3 rounded-xl transition-all cursor-pointer shadow-xs"
               >
                 <UserPlus className="w-4 h-4" />
                 <span>Daftar Anggota</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  const el = document.getElementById("tentang-kami");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                  else navigate("/tentang-kami");
+                }}
+                className="flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-semibold text-sm px-4 py-3 rounded-xl transition-all cursor-pointer shadow-xs"
+              >
+                <span>Tentang PINBAS</span>
               </button>
             </motion.div>
 
@@ -145,25 +156,25 @@ export default function HeroKoperasi({ onSearch }) {
             >
               <img
                 src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1000&auto=format&fit=crop&q=80"
-                alt="Koperasi Merah Putih Sukmajaya Depok"
+                alt="PINBAS Pusat Inkubasi Bisnis Syariah MUI Kota Depok"
                 className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-35"
               />
 
               {/* Overlay Badge & Description */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-6 sm:p-7 text-white">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-red-600 text-white tracking-wider border border-white/30">
-                    Koperasi Induk Sukmajaya
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-emerald-700 text-white tracking-wider border border-white/30">
+                    PINBAS Induk Depok
                   </span>
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/20 text-white backdrop-blur-xs">
-                    Gudang Pusat Kota Depok
+                    MUI Kota Depok
                   </span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black leading-tight text-white drop-shadow-md">
-                  Pusat Distribusi Komoditas & Pangan Rakyat
+                  Pusat Inkubasi Bisnis Syariah &amp; Distribusi Komoditas
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-200 mt-1 max-w-md drop-shadow">
-                  Menghubungkan supplier lokal dengan 8 pos cabang kelurahan di seluruh Kota Depok.
+                  Empowering People and Connecting — Menghubungkan produsen halal dengan pos cabang di seluruh Kota Depok.
                 </p>
               </div>
 

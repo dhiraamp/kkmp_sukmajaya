@@ -7,6 +7,7 @@ import StatsBanner from "@/components/marketplace/StatsBanner";
 import SupplyChainFlow from "@/components/marketplace/SupplyChainFlow";
 import FeaturedProducts, { SAMPLE_PRODUCTS } from "@/components/marketplace/FeaturedProducts";
 import NewsSection from "@/components/marketplace/NewsSection";
+import TentangKamiSection from "@/components/marketplace/TentangKamiSection";
 import { useProductsQuery } from "@/lib/query-client";
 import { Link } from "react-router-dom";
 import { ShieldCheck, Truck, Percent, Leaf, Heart, ArrowUp } from "lucide-react";
@@ -123,6 +124,9 @@ export default function Marketplace() {
         {/* 4. Bar Statistik Koperasi & Ajakan Daftar Anggota */}
         <StatsBanner />
 
+        {/* 4b. Bagian Tentang Kami: Mandat Organisasi & Ekosistem Inkubasi Bisnis Syariah PINBAS MUI */}
+        <TentangKamiSection />
+
         {/* 5. Diagram Alur Rantai Pasok (Supply Chain Flow) */}
         <SupplyChainFlow />
 
@@ -144,18 +148,14 @@ export default function Marketplace() {
             {/* Col 1: Identity */}
             <div className="space-y-3">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-red-600 flex items-center justify-center font-bold text-white shadow-sm">
-                  <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white">
-                    <path d="M20 6L6 17H11V32H29V17H34L20 6Z" fill="white" />
-                  </svg>
-                </div>
-                <div className="leading-tight">
-                  <p className="text-sm font-black text-red-500 uppercase tracking-wider">KOPERASI MERAH PUTIH</p>
-                  <p className="text-xs font-bold text-white uppercase tracking-widest">SUKMAJAYA &bull; DEPOK</p>
-                </div>
+                <img
+                  src="/images/logo_pinbas.png"
+                  alt="PINBAS MUI Kota Depok"
+                  className="h-12 w-auto object-contain bg-white rounded-xl p-1.5 shadow-sm"
+                />
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Marketplace resmi Koperasi Kelurahan Merah Putih (KKMP) Kota Depok. Menghubungkan supplier komoditas dengan pos cabang dan seluruh anggota keluarga koperasi.
+                Marketplace resmi Pusat Inkubasi Bisnis Syariah (PINBAS) MUI Kota Depok. <span className="text-slate-300 italic">Empowering People and Connecting</span> — Menghubungkan supplier halal, UMKM binaan, dengan pos cabang dan seluruh masyarakat.
               </p>
             </div>
 
@@ -165,11 +165,12 @@ export default function Marketplace() {
                 Layanan & Menu
               </h4>
               <ul className="space-y-2 text-xs text-slate-400">
-                <li><Link to="/marketplace" className="hover:text-red-400 transition-colors">Marketplace Komoditas</Link></li>
-                <li><Link to="/peta" className="hover:text-red-400 transition-colors">Peta 8 Cabang Depok</Link></li>
-                <li><Link to="/portal" className="hover:text-red-400 transition-colors">Portal Akses Peran</Link></li>
-                <li><Link to="/register/penerima" className="hover:text-red-400 transition-colors">Daftar Anggota Koperasi</Link></li>
-                <li><Link to="/berita" className="hover:text-red-400 transition-colors">Berita & Pengumuman</Link></li>
+                <li><Link to="/tentang-kami" className="hover:text-emerald-400 transition-colors font-semibold text-emerald-300">Tentang Kami (PINBAS)</Link></li>
+                <li><Link to="/marketplace" className="hover:text-emerald-400 transition-colors">Marketplace Komoditas</Link></li>
+                <li><Link to="/peta" className="hover:text-emerald-400 transition-colors">Peta 8 Cabang Depok</Link></li>
+                <li><Link to="/portal" className="hover:text-emerald-400 transition-colors">Portal Akses Peran</Link></li>
+                <li><Link to="/knowledge-center" className="hover:text-emerald-400 transition-colors">Pusat Edukasi &amp; Pengetahuan</Link></li>
+                <li><Link to="/berita" className="hover:text-emerald-400 transition-colors">Berita & Pengumuman</Link></li>
               </ul>
             </div>
 
@@ -179,24 +180,24 @@ export default function Marketplace() {
                 Peran Rantai Pasok
               </h4>
               <ul className="space-y-2 text-xs text-slate-400">
-                <li><span className="text-red-400">&bull;</span> Koperasi Induk (Gudang Pusat)</li>
-                <li><span className="text-orange-400">&bull;</span> Koperasi Cabang (8 Pos Depok)</li>
-                <li><span className="text-emerald-400">&bull;</span> Supplier & Pemasok Bahan</li>
-                <li><span className="text-blue-400">&bull;</span> Logistik & Armada Pengiriman</li>
-                <li><span className="text-purple-400">&bull;</span> Anggota Koperasi</li>
+                <li><span className="text-emerald-400">&bull;</span> PINBAS Induk (MUI Depok)</li>
+                <li><span className="text-orange-400">&bull;</span> Pos Cabang Mitra (8 Pos Depok)</li>
+                <li><span className="text-teal-400">&bull;</span> Supplier &amp; Produsen Halal</li>
+                <li><span className="text-blue-400">&bull;</span> Logistik &amp; Armada Distribusi</li>
+                <li><span className="text-purple-400">&bull;</span> Anggota &amp; Komunitas</li>
               </ul>
             </div>
 
             {/* Col 4: Contact & Office */}
             <div>
               <h4 className="text-xs font-extrabold uppercase text-slate-300 tracking-wider mb-3">
-                Kantor Pusat Sukmajaya
+                Sekretariat PINBAS Depok
               </h4>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Jl. Raya Sukmajaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16411
+                Gedung MUI Kota Depok, Jl. Nusantara Raya No. 1, Kota Depok, Jawa Barat
               </p>
               <p className="text-xs text-slate-400 mt-2">
-                Email: <span className="text-slate-300">sekretariat@kkmp-depok.id</span>
+                Email: <span className="text-slate-300">sekretariat@pinbas-depok.id</span>
               </p>
               <p className="text-xs text-slate-400 mt-0.5">
                 Jam Operasional: Senin - Sabtu (08:00 - 17:00 WIB)
@@ -205,7 +206,7 @@ export default function Marketplace() {
           </div>
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-            <p>&copy; 2026 <strong>Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya</strong> &bull; Kota Depok. Seluruh hak cipta dilindungi.</p>
+            <p>&copy; 2026 <strong>PINBAS MUI Kota Depok</strong> &bull; Pusat Inkubasi Bisnis Syariah. Seluruh hak cipta dilindungi.</p>
             <button
               onClick={scrollToTop}
               className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"

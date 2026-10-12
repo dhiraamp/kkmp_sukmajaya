@@ -172,7 +172,7 @@ export default function AdminLogistik() {
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm">
-            Kelola supir, kurir, dan armada distribusi internal Koperasi Merah Putih Sukmajaya - Kota Depok
+            Kelola supir, kurir, dan armada distribusi halal PINBAS MUI Kota Depok
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={loadData} className="gap-2 shrink-0">

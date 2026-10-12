@@ -30,5 +30,5 @@ const menuItems = [
 ];
 
 export default function MitraLayout() {
-  return <TopNavLayout menuItems={menuItems} title="Koperasi Cabang Depok / Pos KKMP" />;
+  return <TopNavLayout menuItems={menuItems} title="PINBAS Pos Cabang & Mitra Usaha Depok" />;
 }

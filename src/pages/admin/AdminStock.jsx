@@ -8,9 +8,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Search, AlertTriangle, Pencil, Trash2, Package, TrendingDown, BarChart2, Store } from "lucide-react";
+import { Search, AlertTriangle, Pencil, Trash2, Package, TrendingDown, BarChart2, Store, ShieldCheck, CheckCircle2, Calculator } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { toast } from "@/components/ui/use-toast";
+import { curatePricePipeline, PLATFORM_MARGIN_RATE } from "@/lib/pricing";
 
 const perishableLabels = { cepat_busuk: "Cepat Busuk", sedang: "Sedang", tahan_lama: "Tahan Lama" };
 const perishableColors = { cepat_busuk: "bg-red-50 text-red-700", sedang: "bg-yellow-50 text-yellow-700", tahan_lama: "bg-green-50 text-green-700" };
@@ -126,8 +127,8 @@ export default function AdminStock() {
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h2 className="text-2xl font-bold">Manajemen Stok Gudang Pusat KKMP</h2>
-          <p className="text-muted-foreground">Kelola inventaris komoditas Gudang Pusat Sukmajaya Kota Depok secara real-time</p>
+          <h2 className="text-2xl font-bold">Manajemen Stok Gudang Pusat PINBAS</h2>
+          <p className="text-muted-foreground">Kelola inventaris komoditas Gudang Pusat PINBAS MUI Kota Depok secara real-time</p>
         </div>
 
       </div>
@@ -247,6 +248,31 @@ export default function AdminStock() {
         </TabsContent>
 
         <TabsContent value="supplier" className="space-y-4">
+          {/* Banner Penjelasan Modul 3.2 Kurasi Harga & Margin */}
+          <div className="bg-emerald-50/80 border border-emerald-200 rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-emerald-950">
+            <div className="flex items-start gap-3">
+              <div className="p-2 rounded-lg bg-emerald-600 text-white shrink-0 mt-0.5">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-sm text-emerald-900">
+                  Modul Kurasi Harga & Otomasi Margin (Sistem KGN / PINBAS MUI)
+                </h4>
+                <p className="text-xs text-emerald-800 mt-0.5">
+                  Setiap harga penawaran supplier melalui verifikasi algoritmik 5 tahap, kalkulasi otomatis margin <strong>25%</strong>, dan pemindaian plafon regulasi HET komoditas wilayah Kota Depok sebelum terbit di marketplace.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-semibold shrink-0">
+              <Badge variant="outline" className="bg-white text-emerald-800 border-emerald-300">
+                Margin Standar: 25%
+              </Badge>
+              <Badge variant="outline" className="bg-white text-emerald-800 border-emerald-300">
+                Plafon: HET Bapanas
+              </Badge>
+            </div>
+          </div>
+
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input placeholder="Cari produk supplier..." value={productSearch} onChange={(e) => setProductSearch(e.target.value)} className="pl-9" />
@@ -269,41 +295,73 @@ export default function AdminStock() {
                       <TableHead>Supplier</TableHead>
                       <TableHead>Kategori</TableHead>
                       <TableHead>Stok</TableHead>
-                      <TableHead>Harga Supplier</TableHead>
-                      <TableHead>Harga Jual</TableHead>
-                      <TableHead>Ketahanan</TableHead>
-                      <TableHead>Kedaluwarsa</TableHead>
+                      <TableHead>Penawaran Awal</TableHead>
+                      <TableHead>Margin (+25%)</TableHead>
+                      <TableHead>Plafon HET</TableHead>
+                      <TableHead>Harga Terbit</TableHead>
+                      <TableHead>Kepatuhan HET</TableHead>
                       <TableHead>Status</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredProducts.map((p) => (
-                      <TableRow key={p.id}>
-                        <TableCell className="font-medium">{p.name}</TableCell>
-                        <TableCell>{p.supplier_name || "-"}</TableCell>
-                        <TableCell className="capitalize">{p.category}</TableCell>
-                        <TableCell>{p.stock ?? 0} {p.unit}</TableCell>
-                        <TableCell>{p.base_price ? formatRp(p.base_price) : "-"}</TableCell>
-                        <TableCell>{p.price ? formatRp(p.price) : "-"}</TableCell>
-                        <TableCell>
-                          {p.perishable_level ? (
-                            <Badge variant="outline" className={perishableColors[p.perishable_level]}>{perishableLabels[p.perishable_level]}</Badge>
-                          ) : "-"}
-                        </TableCell>
-                        <TableCell className="text-xs">{p.expired_date || "-"}</TableCell>
-                        <TableCell>
-                          {p.status === "expired" ? (
-                            <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">Kedaluwarsa</Badge>
-                          ) : p.status === "out_of_stock" ? (
-                            <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-200">Habis</Badge>
-                          ) : p.status === "inactive" ? (
-                            <Badge variant="outline" className="bg-gray-50 text-gray-700 border-gray-200">Nonaktif</Badge>
-                          ) : (
-                            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">Aktif</Badge>
-                          )}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {filteredProducts.map((p) => {
+                      const rawBase = p.base_price || p.price;
+                      const curation = curatePricePipeline({
+                        basePrice: rawBase,
+                        productName: p.name,
+                        category: p.category,
+                      });
+                      const hetLimit = p.het_limit || curation.stage4_het_scan.het_limit;
+                      const hetStatus = p.het_status || curation.stage4_het_scan.status_label;
+                      const marginNominal = curation.stage3_calculation.margin_nominal;
+
+                      return (
+                        <TableRow key={p.id}>
+                          <TableCell className="font-medium">{p.name}</TableCell>
+                          <TableCell>{p.supplier_name || "-"}</TableCell>
+                          <TableCell className="capitalize">{p.category}</TableCell>
+                          <TableCell>{p.stock ?? 0} {p.unit}</TableCell>
+                          <TableCell className="font-semibold text-gray-700">
+                            {formatRp(rawBase)}
+                          </TableCell>
+                          <TableCell className="text-emerald-700 font-medium text-xs">
+                            +{formatRp(marginNominal)}
+                          </TableCell>
+                          <TableCell className="text-xs text-muted-foreground">
+                            {hetLimit ? formatRp(hetLimit) : "Fleksibel"}
+                          </TableCell>
+                          <TableCell className="font-bold text-emerald-800">
+                            {formatRp(p.price || curation.stage5_publication.final_price)}
+                          </TableCell>
+                          <TableCell>
+                            {hetStatus === "Disesuaikan ke HET" ? (
+                              <Badge variant="outline" className="bg-amber-50 text-amber-800 border-amber-300 text-[11px]">
+                                Batas HET
+                              </Badge>
+                            ) : hetStatus === "Melebihi HET" ? (
+                              <Badge variant="outline" className="bg-red-50 text-red-800 border-red-300 text-[11px]">
+                                Di Atas HET
+                              </Badge>
+                            ) : (
+                              <Badge variant="outline" className="bg-emerald-50 text-emerald-800 border-emerald-300 text-[11px]">
+                                <CheckCircle2 className="w-3 h-3 mr-1 inline" /> HET Aman
+                              </Badge>
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            {p.status === "expired" ? (
+                              <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">Kedaluwarsa</Badge>
+                            ) : p.status === "out_of_stock" ? (
+                              <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-200">Habis</Badge>
+                            ) : p.status === "inactive" ? (
+                              <Badge variant="outline" className="bg-gray-50 text-gray-700 border-gray-200">Nonaktif</Badge>
+                            ) : (
+                              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">Aktif</Badge>
+                            )}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               )}

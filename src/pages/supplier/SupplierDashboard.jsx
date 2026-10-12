@@ -110,8 +110,8 @@ export default function SupplierDashboard() {
       <PullToRefreshIndicator pullDistance={pullDistance} isRefreshing={isRefreshing} />
       <div className="flex items-start justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Dashboard Pemasok Komoditas</h2>
-          <p className="text-muted-foreground">Portal manajemen pasokan komoditas ke Koperasi Induk Sukmajaya (Gudang Pusat Kota Depok)</p>
+          <h2 className="text-2xl font-bold">Dashboard Pemasok Komoditas PINBAS</h2>
+          <p className="text-muted-foreground">Portal manajemen pasokan komoditas ke PINBAS Induk (Gudang Pusat MUI Kota Depok)</p>
         </div>
         {poList.filter(p => p.status === "menunggu").length > 0 && (
           <div className="flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-xl px-3 py-2 animate-pulse">

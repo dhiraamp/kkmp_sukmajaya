@@ -27,10 +27,10 @@ export default function GisPetaPage() {
             </div>
 
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-3">
-              Peta Persebaran Jaringan Pos & Cabang Koperasi
+              Peta Persebaran Jaringan Pos &amp; Cabang PINBAS Depok
             </h1>
             <p className="text-rose-100 text-sm sm:text-base leading-relaxed mb-4">
-              Pemetaan geospasial rantai pasok Koperasi Kelurahan Merah Putih (KKMP) Kota Depok. Menghubungkan Gudang Pusat Sukmajaya dengan 8 pos cabang kelurahan (Beji, Margonda, Pancoran Mas, Sukmajaya, Cilodong, Cimanggis, Sawangan, Tapos) dan rute logistik pengantaran komoditas.
+              Pemetaan geospasial rantai pasok Pusat Inkubasi Bisnis Syariah (PINBAS) MUI Kota Depok. Menghubungkan Gudang Pusat dengan 8 pos cabang mitra (Beji, Margonda, Pancoran Mas, Sukmajaya, Cilodong, Cimanggis, Sawangan, Tapos) dan rute armada logistik distribusi komoditas halal.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-rose-200 pt-2 border-t border-red-600/60">

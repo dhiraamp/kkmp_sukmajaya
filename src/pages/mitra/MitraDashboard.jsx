@@ -101,8 +101,8 @@ export default function MitraDashboard() {
       <PullToRefreshIndicator pullDistance={pullDistance} isRefreshing={isRefreshing} />
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Dashboard Pos KKMP Cabang</h2>
-          <p className="text-muted-foreground">Selamat datang di portal Koperasi Cabang / Pos KKMP Kota Depok</p>
+          <h2 className="text-2xl font-bold">Dashboard Pos Cabang PINBAS</h2>
+          <p className="text-muted-foreground">Selamat datang di portal Pos Cabang Mitra Syariah PINBAS Kota Depok</p>
         </div>
         {totalItems > 0 && (
           <Button onClick={() => navigate("/mitra/cart")} className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white">
@@ -118,7 +118,7 @@ export default function MitraDashboard() {
         <StatCard title="Pengaduan Aktif" value="2" icon={AlertCircle} color="red" />
       </div>
 
-      <StockAlertBanner userEmail={user?.email} posName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} sppgName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} />
+      <StockAlertBanner userEmail={user?.email} posName={user?.organization_name || user?.full_name || "Pos Cabang Mitra PINBAS"} sppgName={user?.organization_name || user?.full_name || "Pos Cabang Mitra PINBAS"} />
 
       {/* Rekomendasi Pintar Komoditas Pangan */}
       <RekomendasiPangan userEmail={user?.email} onAddToCart={handleAddClick} />

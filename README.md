@@ -1,12 +1,12 @@
-# 🇮🇩 Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya — Kota Depok
+# 🇮🇩 PINBAS MUI Kota Depok — Pusat Inkubasi Bisnis Syariah
 
-Platform digital terpadu **Koperasi Kelurahan Merah Putih (KKMP)** Kota Depok yang mengintegrasikan ekosistem rantai pasok pangan, marketplace komoditas sembako & warung kelontong, manajemen 8 Pos Cabang Kelurahan, hingga distribusi logistik rakyat.
+Platform digital terpadu **Pusat Inkubasi Bisnis Syariah (PINBAS)** MUI Kota Depok yang mengintegrasikan ekosistem rantai pasok pangan halal, marketplace komoditas sembako, manajemen 8 Pos Cabang Mitra Usaha Syariah, hingga distribusi logistik rakyat.
 
 ---
 
 ## 👥 Akun Demo & Kredensial Pengujian (Dummy Accounts)
 
-Semua akun pengujian di bawah ini dapat langsung digunakan untuk masuk melalui **Portal Login** ([http://localhost:5173/portal](http://localhost:5173/portal)).
+Semua akun pengujian di bawah ini dapat langsung digunakan untuk masuk melalui **Portal Login** ([http://localhost:5174/portal](http://localhost:5174/portal)).
 
 ### 🔑 Sandi Standar untuk Seluruh Akun:
 ```text
@@ -70,7 +70,7 @@ npm install
 npm run dev
 
 # 4. Buka di browser
-# http://localhost:5173
+# http://localhost:5174
 ```
 
 ---
@@ -103,4 +103,4 @@ kkmp-sukmajaya/
 ---
 
 ## 📄 Hak Cipta
-Hak cipta © 2026 **Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya — Kota Depok**. Seluruh hak dilindungi undang-undang.
+Hak cipta © 2026 **PINBAS MUI Kota Depok — Pusat Inkubasi Bisnis Syariah**. Seluruh hak dilindungi undang-undang.

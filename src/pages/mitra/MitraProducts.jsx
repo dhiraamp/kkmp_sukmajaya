@@ -59,7 +59,7 @@ export default function MitraProducts() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold">Katalog Komoditas Pangan</h2>
-          <p className="text-muted-foreground">Pilih dan ajukan kebutuhan komoditas pos cabang dari Gudang Pusat KKMP</p>
+          <p className="text-muted-foreground">Pilih dan ajukan kebutuhan komoditas pos cabang dari Gudang Pusat PINBAS</p>
         </div>
         {totalItems > 0 && (
           <Button onClick={() => navigate("/mitra/cart")} className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white">

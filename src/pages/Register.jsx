@@ -36,19 +36,20 @@ export default function Register() {
       >
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-lg border border-red-200">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-600">
-                <path d="M20 6L6 17H11V32H29V17H34L20 6Z" fill="#dc2626" />
-                <circle cx="20" cy="20" r="2.8" fill="white" />
-                <path d="M15 28C15 24.5 17 23.5 20 23.5C23 23.5 25 24.5 25 28" stroke="white" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </div>
+            <img
+              src="/images/logo_pinbas.png"
+              alt="PINBAS MUI Kota Depok"
+              className="h-16 w-auto object-contain bg-white rounded-2xl p-2 shadow-xl border border-white/40"
+            />
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight drop-shadow-sm">
-            KOPERASI MERAH PUTIH
+            PINBAS MUI KOTA DEPOK
           </h1>
           <p className="text-white/90 mt-1 text-xs sm:text-sm font-semibold tracking-wide">
-            SUKMAJAYA &bull; KOTA DEPOK
+            PUSAT INKUBASI BISNIS SYARIAH
+          </p>
+          <p className="text-white/75 text-xs italic mt-0.5">
+            Empowering People and Connecting
           </p>
         </div>
 
@@ -77,7 +78,7 @@ export default function Register() {
           </CardContent>
         </Card>
         <p className="text-center text-white/80 text-xs mt-4">
-          &copy; 2026 Koperasi Kelurahan Merah Putih (KKMP) Sukmajaya &bull; Kota Depok
+          &copy; 2026 PINBAS MUI Kota Depok &bull; Pusat Inkubasi Bisnis Syariah
         </p>
       </motion.div>
     </div>

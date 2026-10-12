@@ -82,14 +82,14 @@ export default function WargaBeranda() {
         <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200" alt="" className="absolute inset-0 w-full h-full object-cover" referrerPolicy="no-referrer" />
         <div className="absolute inset-0 bg-gradient-to-r from-red-950/85 via-red-900/70 to-transparent" />
         <div className="relative p-5">
-          <span className="flex items-center gap-1 text-[11px] font-semibold text-red-100">
-            <Leaf className="w-3 h-3" /> Koperasi Merah Putih Sukmajaya
+          <span className="flex items-center gap-1 text-[11px] font-semibold text-emerald-100">
+            <Leaf className="w-3 h-3" /> PINBAS MUI Kota Depok
           </span>
           <h3 className="text-lg font-bold text-white mt-1 max-w-xs leading-snug">
-            Belanja Hemat & Berkualitas untuk Anggota Koperasi
+            Belanja Hemat &amp; Berkualitas untuk Anggota Komunitas
           </h3>
           <p className="text-xs text-red-100/90 mt-1 max-w-xs">
-            Dapatkan harga khusus anggota langsung dari jaringan koperasi Kota Depok.
+            Dapatkan harga khusus anggota langsung dari jaringan ekosistem syariah Kota Depok.
           </p>
           <button
             onClick={() => navigate("/marketplace")}

@@ -34,5 +34,5 @@ export default function SupplierLayout() {
     { path: "/supplier/digital-services", label: "Layanan Digital", icon: Smartphone },
   ];
 
-  return <TopNavLayout menuItems={menuItems} title="Supplier & Pemasok Komoditas KKMP" />;
+  return <TopNavLayout menuItems={menuItems} title="Supplier & Mitra Pemasok Syariah PINBAS" />;
 }

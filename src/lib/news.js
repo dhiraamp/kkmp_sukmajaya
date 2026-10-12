@@ -15,8 +15,21 @@ export function stripHtml(html) {
   }
 }
 
-// Data awal riil yang bersumber langsung dari https://depok.kemenag.go.id/kategori/berita
+// Data awal riil yang bersumber langsung dari https://depok.kemenag.go.id/kategori/berita dan Portal Resmi PINBAS MUI
 export const KEMENAG_DEPOK_NEWS_SEED = [
+  {
+    id: "pinbas-mui-koperasi-syariah-2026",
+    title: "PINBAS MUI Perkuat Sinergi Pengembangan Koperasi Syariah Berkelanjutan",
+    url: "https://muijatim.or.id/2026/01/07/pinbas-mui-jatim-perkuat-sinergi-pengembangan-koperasi-syariah-berkelanjutan",
+    img: "https://muijatim.or.id/wp-content/uploads/2026/01/2AEAE37E-82EF-4E26-9BC7-93AD399D597C.jpeg",
+    tag: "Ekonomi Syariah",
+    color: "emerald",
+    time: "Rilis Utama",
+    date: "Rabu, 07 Januari 2026 • 16:03 WIB",
+    summary: "Pusat Inkubasi Bisnis Syariah (PINBAS) MUI terus memperkuat perannya dalam pengembangan ekonomi umat berbasis syariah melalui kolaborasi Forum Koperasi Syariah (BMT, BTM, Kopsyah, Kopontren, KJKS) guna menghadirkan ekosistem inkubasi terintegrasi.",
+    source: "Portal Resmi MUI",
+    sourceUrl: "https://muijatim.or.id/2026/01/07/pinbas-mui-jatim-perkuat-sinergi-pengembangan-koperasi-syariah-berkelanjutan",
+  },
   {
     id: "audiensi-pmi-2026",
     title: "Kankemenag Depok Terima Audiensi PMI, Bahas Tindak Lanjut Bulan Dana Kemanusiaan 2026",

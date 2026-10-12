@@ -128,13 +128,13 @@ export default function AdminSuppliers() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold tracking-tight">Manajemen Supplier & Pemasok KKMP</h2>
-            <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
+            <h2 className="text-2xl font-bold tracking-tight">Manajemen Supplier & Pemasok PINBAS</h2>
+            <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200">
               {suppliers.length} Supplier Terdaftar
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm">
-            Kelola pemasok komoditas pangan segar, beras, dan sembako untuk jaringan Koperasi Merah Putih Sukmajaya - Kota Depok
+            Kelola pemasok komoditas pangan halal, beras, dan sembako untuk jaringan PINBAS MUI Kota Depok
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={load} className="gap-2 shrink-0">

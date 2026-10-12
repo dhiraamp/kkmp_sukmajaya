@@ -12,14 +12,14 @@ import { ShoppingCart, Upload, FileText, CheckCircle, Plus, Trash2, AlertTriangl
 import StockAlertBanner from "@/components/mitra/StockAlertBanner";
 
 const SUPPLIER_LIST = [
-  "Gudang Pusat KKMP Sukmajaya (Induk)",
+  "Gudang Pusat PINBAS Depok (Induk)",
   "Pemasok Beras Cilodong Depok",
   "Peternakan Ayam Sawangan",
   "Distributor Sembako Sukmajaya",
   "Pemasok Sayur Sukmajaya",
   "Pemasok Ikan & Segar Beji",
   "CV Bumbu Nusantara Depok",
-  "PT Pangan Merah Putih Depok",
+  "PT Pangan Berkah Syariah Depok",
 ];
 
 const statusPO = {
@@ -163,10 +163,10 @@ export default function MitraKebutuhan() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold">Pengajuan Komoditas & PO Pos Cabang</h2>
-        <p className="text-muted-foreground">Isi pengajuan kebutuhan komoditas Pos Cabang ke Koperasi Induk Sukmajaya (Gudang Pusat Kota Depok)</p>
+        <p className="text-muted-foreground">Isi pengajuan kebutuhan komoditas Pos Cabang ke PINBAS Induk (Gudang Pusat MUI Kota Depok)</p>
       </div>
 
-      <StockAlertBanner userEmail={user?.email} posName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} sppgName={user?.organization_name || user?.full_name || "Pos Cabang KKMP Sukmajaya"} />
+      <StockAlertBanner userEmail={user?.email} posName={user?.organization_name || user?.full_name || "Pos Cabang Mitra PINBAS"} sppgName={user?.organization_name || user?.full_name || "Pos Cabang Mitra PINBAS"} />
 
       <Card>
         <CardHeader className="pb-3">

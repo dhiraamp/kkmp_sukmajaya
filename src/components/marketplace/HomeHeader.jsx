@@ -49,9 +49,9 @@ export default function HomeHeader({ onSearchClick }) {
     { label: "Produk", path: "/marketplace", match: "/marketplace" },
     { label: "Untuk Anggota", path: "/portal", match: "/portal" },
     { label: "Koperasi Cabang", path: "/peta", match: "/peta" },
-    { label: "Tentang Kami", path: "/knowledge-center", match: "/knowledge-center" },
+    { label: "Tentang Kami", path: "/tentang-kami", match: "/tentang-kami" },
     { label: "Berita", path: "/berita", match: "/berita" },
-    { label: "Bantuan", path: "/knowledge-center", match: null },
+    { label: "Pusat Edukasi", path: "/knowledge-center", match: "/knowledge-center" },
   ];
 
   const DEPOK_DISTRICTS = [
@@ -99,47 +99,16 @@ export default function HomeHeader({ onSearchClick }) {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-4">
-        {/* Logo Koperasi Merah Putih Sukmajaya - Exactly as in skema_web_kkmp_sukamaja.jpeg */}
+        {/* Logo PINBAS MUI Kota Depok */}
         <div
           className="flex items-center gap-3 cursor-pointer shrink-0"
           onClick={() => navigate("/")}
         >
-          {/* Custom Red House Silhouette Logo */}
-          <div className="w-11 h-11 rounded-xl bg-red-600 flex items-center justify-center shadow-md relative overflow-hidden shrink-0">
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-7 h-7 text-white"
-            >
-              <path
-                d="M20 6L6 17H11V32H29V17H34L20 6Z"
-                fill="white"
-                fillOpacity="0.95"
-              />
-              <circle cx="20" cy="20" r="2.8" fill="#dc2626" />
-              <path
-                d="M15 28C15 24.5 17 23.5 20 23.5C23 23.5 25 24.5 25 28"
-                stroke="#dc2626"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <circle cx="14" cy="21.5" r="2" fill="#dc2626" />
-              <circle cx="26" cy="21.5" r="2" fill="#dc2626" />
-            </svg>
-          </div>
-
-          <div className="leading-tight select-none">
-            <div className="text-[12px] font-black tracking-wider text-red-600 uppercase">
-              KOPERASI
-            </div>
-            <div className="text-[12px] font-black tracking-wider text-red-600 uppercase">
-              MERAH PUTIH
-            </div>
-            <div className="text-[10px] font-extrabold tracking-widest text-slate-800 uppercase">
-              SUKMAJAYA
-            </div>
-          </div>
+          <img
+            src="/images/logo_pinbas.png"
+            alt="PINBAS - Pusat Inkubasi Bisnis Syariah MUI Kota Depok"
+            className="h-11 md:h-12 w-auto object-contain"
+          />
         </div>
 
         {/* Menu Navigasi Tengah */}

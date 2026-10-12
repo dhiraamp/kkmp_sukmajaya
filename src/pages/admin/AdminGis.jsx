@@ -45,14 +45,14 @@ export default function AdminGis() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold tracking-tight">Peta Geospasial Jaringan Pos Cabang KKMP Kota Depok</h2>
-            <Badge className="bg-red-50 text-red-700 border-red-300 gap-1 text-xs">
-              <Globe className="w-3.5 h-3.5 text-red-600" />
-              KKMP Kota Depok
+            <h2 className="text-2xl font-bold tracking-tight">Peta Geospasial Jaringan Pos Cabang PINBAS Depok</h2>
+            <Badge className="bg-emerald-50 text-emerald-700 border-emerald-300 gap-1 text-xs">
+              <Globe className="w-3.5 h-3.5 text-emerald-600" />
+              PINBAS MUI Kota Depok
             </Badge>
           </div>
           <p className="text-muted-foreground text-sm mt-1">
-            Manajemen data spasial Gudang Induk Sukmajaya, Pos Cabang, dan Rute Logistik se-Kota Depok
+            Manajemen data spasial Gudang Pusat PINBAS, Pos Cabang, dan Rute Logistik Distribusi Halal se-Kota Depok
           </p>
         </div>
 

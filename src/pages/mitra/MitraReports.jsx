@@ -29,10 +29,10 @@ export default function MitraReports() {
 
       doc.setFont("helvetica", "bold");
       doc.setFontSize(16);
-      doc.text("Laporan Bulanan Pos Cabang KKMP", startX, 20);
+      doc.text("Laporan Bulanan Pos Cabang PINBAS", startX, 20);
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10);
-      doc.text("KKMP KOTA DEPOK - Koperasi Kelurahan Merah Putih Sukmajaya", startX, 27);
+      doc.text("PINBAS MUI KOTA DEPOK - Pusat Inkubasi Bisnis Syariah", startX, 27);
 
       let y = 40;
       const cols = ["Bulan", "Pendapatan", "Pengeluaran", "Selisih"];
@@ -79,7 +79,7 @@ export default function MitraReports() {
       doc.text(`Total Pengeluaran : ${formatRp(totalPengeluaran)}`, startX, y); y += 5;
       doc.text(`Selisih           : ${formatRp(totalPendapatan - totalPengeluaran)}`, startX, y);
 
-      doc.save("laporan_pos_cabang_kkmp.pdf");
+      doc.save("laporan_pos_cabang_pinbas.pdf");
       toast.success("Berhasil", { description: "File PDF laporan telah diunduh." });
     } catch (err) {
       toast.error("Gagal Mengunduh", { description: err.message || "Terjadi kesalahan." });

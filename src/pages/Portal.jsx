@@ -28,51 +28,51 @@ import { toast } from "sonner";
 export const ROLES = [
   {
     id: "admin",
-    label: "Koperasi Induk Sukmajaya",
-    shortLabel: "Koperasi Induk",
+    label: "PINBAS Induk (MUI Kota Depok)",
+    shortLabel: "PINBAS Induk",
     icon: Award,
     color: "from-red-700 to-rose-900",
     borderActive: "border-red-700 ring-2 ring-red-700/20 bg-red-50/60",
-    desc: "Pengelola Gudang Pusat KKMP (Manajemen produk, stok dan order)",
+    desc: "Pengelola Gudang Pusat PINBAS (Manajemen produk, stok dan order)",
     defaultEmail: "admin.induk@kkmp-depok.id",
     defaultPassword: "demo 1 2 3 4",
   },
   {
     id: "mitra",
-    label: "Koperasi Cabang / Pos KKMP",
-    shortLabel: "Koperasi Cabang",
+    label: "Pos Cabang / Mitra Syariah",
+    shortLabel: "Pos Cabang",
     icon: Store,
     color: "from-orange-600 to-red-600",
     borderActive: "border-orange-600 ring-2 ring-orange-600/20 bg-orange-50/60",
-    desc: "Pengelola 8 cabang/pos koperasi lokal Kota Depok (Penerimaan & distribusi produk)",
+    desc: "Pengelola 8 cabang/pos mitra binaan lokal Kota Depok (Penerimaan & distribusi produk)",
     defaultEmail: "cabang.beji@kkmp-depok.id",
     defaultPassword: "demo 1 2 3 4",
   },
   {
     id: "penerima",
-    label: "Anggota Koperasi",
+    label: "Anggota & Komunitas",
     shortLabel: "Anggota",
     icon: ShieldCheck,
     color: "from-purple-600 to-indigo-700",
     borderActive: "border-purple-600 ring-2 ring-purple-600/20 bg-purple-50/60",
-    desc: "Anggota resmi terdaftar Koperasi Merah Putih untuk belanja hemat",
+    desc: "Anggota terdaftar PINBAS & Komunitas Syariah untuk belanja hemat",
     defaultEmail: "anggota.depok@kkmp-depok.id",
     defaultPassword: "demo 1 2 3 4",
   },
   {
     id: "supplier",
-    label: "Supplier & Produsen",
+    label: "Supplier & Produsen Syariah",
     shortLabel: "Supplier",
     icon: Users,
     color: "from-emerald-600 to-teal-700",
     borderActive: "border-emerald-600 ring-2 ring-emerald-600/20 bg-emerald-50/60",
-    desc: "Pemasok komoditas & produk UMKM anggota/non-anggota ke Gudang Pusat",
+    desc: "Pemasok komoditas halal & produk UMKM binaan syariah ke Gudang Pusat",
     defaultEmail: "supplier.pangan@kkmp-depok.id",
     defaultPassword: "demo 1 2 3 4",
   },
   {
     id: "logistik",
-    label: "Logistik & Distribusi",
+    label: "Logistik & Armada Halal",
     shortLabel: "Logistik",
     icon: Truck,
     color: "from-blue-600 to-indigo-700",
@@ -165,23 +165,21 @@ export default function Portal() {
 
       {/* Top Header Navbar */}
       <header className="relative z-20 w-full border-b border-white/10 bg-slate-950/70 backdrop-blur-md px-4 sm:px-8 py-3.5 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center shadow-lg border border-white/20">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white">
-              <path d="M20 6L6 17H11V32H29V17H34L20 6Z" fill="white" fillOpacity="0.95" />
-              <circle cx="20" cy="20" r="2.8" fill="#dc2626" />
-              <path d="M15 28C15 24.5 17 23.5 20 23.5C23 23.5 25 24.5 25 28" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </div>
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")}>
+          <img
+            src="/images/logo_pinbas.png"
+            alt="PINBAS MUI Kota Depok"
+            className="h-10 sm:h-11 w-auto object-contain bg-white rounded-xl px-2 py-1 shadow-md"
+          />
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-base tracking-tight text-white">KOPERASI MERAH PUTIH</span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-500/20 text-red-300 border border-red-500/30">
-                Sukmajaya &bull; Kota Depok
+              <span className="font-extrabold text-base tracking-tight text-white">PINBAS</span>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                MUI Kota Depok
               </span>
             </div>
             <p className="text-[11px] text-white/60 hidden sm:block">
-              Sistem Integrasi Rantai Pasok Koperasi Kelurahan Merah Putih (KKMP)
+              Pusat Inkubasi Bisnis Syariah — Empowering People and Connecting
             </p>
           </div>
         </div>
@@ -191,12 +189,12 @@ export default function Portal() {
             to="/marketplace"
             className="text-xs font-semibold text-white/90 hover:text-white flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors"
           >
-            <ShoppingBag className="w-4 h-4 text-red-400" />
+            <ShoppingBag className="w-4 h-4 text-emerald-400" />
             <span>Marketplace</span>
           </Link>
-          <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/80 border border-red-500/30 text-[11px] text-red-200">
-            <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
-            8 Cabang Depok Aktif
+          <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-[11px] text-emerald-200">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            8 Pos Cabang Aktif
           </div>
         </div>
       </header>
@@ -212,18 +210,18 @@ export default function Portal() {
               transition={{ duration: 0.5 }}
               className="space-y-3"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-300 text-xs font-semibold">
-                <Sparkles className="w-3.5 h-3.5 text-red-400" />
-                Portal Resmi Koperasi Merah Putih Sukmajaya
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                Portal Resmi PINBAS MUI Kota Depok
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
-                Dari Koperasi, Untuk Anggota, Membangun Depok
+                Empowering People and Connecting
               </h1>
 
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                Pusat integrasi rantai pasok antara <strong>Supplier</strong>, <strong>Gudang Pusat Sukmajaya</strong>, 
-                <strong>Armada Logistik</strong>, <strong>8 Cabang Depok</strong>, dan <strong>Seluruh Anggota Koperasi</strong>.
+                Pusat Inkubasi Bisnis Syariah (PINBAS) MUI Kota Depok — Pusat integrasi ekosistem perdagangan antara <strong>Supplier Syariah</strong>, <strong>Gudang Pusat PINBAS</strong>, 
+                <strong>Armada Logistik</strong>, <strong>8 Pos Cabang Depok</strong>, dan <strong>Seluruh Anggota Komunitas</strong>.
               </p>
             </motion.div>
 

@@ -25,7 +25,7 @@ export default function SupplyChainFlow() {
     {
       roleId: "admin",
       step: 2,
-      title: "Koperasi Induk Sukmajaya",
+      title: "PINBAS Induk (MUI Kota Depok)",
       desc: "Manajemen produk, stok dan order",
       color: "border-red-200 bg-red-50/60 text-red-900",
       badgeColor: "bg-red-600 text-white",
@@ -45,7 +45,7 @@ export default function SupplyChainFlow() {
     {
       roleId: "mitra",
       step: 4,
-      title: "Koperasi Cabang (8 Cabang Depok)",
+      title: "Pos Cabang Mitra (8 Cabang Depok)",
       desc: "Penerimaan dan distribusi produk",
       color: "border-orange-200 bg-orange-50/60 text-orange-900",
       badgeColor: "bg-orange-600 text-white",

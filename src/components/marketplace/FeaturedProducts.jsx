@@ -13,7 +13,11 @@ export const SAMPLE_PRODUCTS = PRODUCTS.map((p) => ({
   category: p.category,
   supplier_name: p.origin || "Gudang Induk Sukmajaya, Depok",
   price: p.old_price || p.price,
-  member_price: p.price,
+  market_price: p.price,
+  member_price: p.member_price || p.price,
+  base_price: p.base_price,
+  het: p.het,
+  het_status: p.het_status,
   unit: p.unit,
   rating: 4.9,
   stock: p.stock,
@@ -138,9 +142,14 @@ export default function FeaturedProducts({ products = SAMPLE_PRODUCTS }) {
                       <span className="text-[11px] text-gray-400 line-through">
                         Rp {p.price.toLocaleString("id-ID")}
                       </span>
-                      <div className="flex items-center gap-0.5 text-amber-500 font-bold text-[10px]">
-                        <Star className="w-3 h-3 fill-amber-400" />
-                        <span>{p.rating}</span>
+                      <div className="flex items-center gap-1">
+                        <span className="text-[9px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1 py-0.2 rounded" title={p.het_status || "Sesuai HET Regulasi"}>
+                          {p.het_status ? "HET Aman" : "Terkurasi"}
+                        </span>
+                        <div className="flex items-center gap-0.5 text-amber-500 font-bold text-[10px]">
+                          <Star className="w-3 h-3 fill-amber-400" />
+                          <span>{p.rating}</span>
+                        </div>
                       </div>
                     </div>
 

@@ -1,45 +1,53 @@
 import path from 'node:path'
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 
 // https://vite.dev/config/
-export default defineConfig({
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
-    },
-  },
-  server: {
-    proxy: {
-      "/kemenag-depok-news": {
-        target: "https://depok.kemenag.go.id",
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/kemenag-depok-news/, ""),
-      },
-      "/fonnte-api": {
-        target: "https://api.fonnte.com",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/fonnte-api/, ""),
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const port = parseInt(env.VITE_PORT || env.PORT || '5174', 10);
+
+  return {
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "src"),
       },
     },
-  },
-  preview: {
-    proxy: {
-      "/kemenag-depok-news": {
-        target: "https://depok.kemenag.go.id",
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/kemenag-depok-news/, ""),
-      },
-      "/fonnte-api": {
-        target: "https://api.fonnte.com",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/fonnte-api/, ""),
+    server: {
+      port,
+      host: true,
+      proxy: {
+        "/kemenag-depok-news": {
+          target: "https://depok.kemenag.go.id",
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/kemenag-depok-news/, ""),
+        },
+        "/fonnte-api": {
+          target: "https://api.fonnte.com",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/fonnte-api/, ""),
+        },
       },
     },
-  },
-  plugins: [
-    react(),
-  ]
+    preview: {
+      port,
+      proxy: {
+        "/kemenag-depok-news": {
+          target: "https://depok.kemenag.go.id",
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/kemenag-depok-news/, ""),
+        },
+        "/fonnte-api": {
+          target: "https://api.fonnte.com",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/fonnte-api/, ""),
+        },
+      },
+    },
+    plugins: [
+      react(),
+    ]
+  };
 });

@@ -1,3 +1,5 @@
+import { curatePricePipeline, PLATFORM_MARGIN_RATE } from "./pricing";
+
 const localImg = (fileName) => encodeURI(`/images/${fileName}`);
 
 export const CATEGORIES = [
@@ -10,14 +12,13 @@ export const CATEGORIES = [
   "Protein",
 ];
 
-export const PRODUCTS = [
+export const RAW_PRODUCTS_DATA = [
   // ─── SEMBAKO & MINYAK ───────────────────────────────────────────
   {
     id: "sania-pouch-2l",
     name: "Sania Minyak Goreng Pouch 2 Liter",
     category: "Sembako",
-    price: 37000,
-    old_price: 40000,
+    base_price: 29600, // Harga penawaran awal supplier
     unit: "pouch",
     stock: 320,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -29,8 +30,7 @@ export const PRODUCTS = [
     id: "sari-roti-jumbo",
     name: "Sari Roti Tawar Kupas Jumbo",
     category: "Sembako",
-    price: 17500,
-    old_price: 19500,
+    base_price: 14000,
     unit: "pack",
     stock: 150,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -42,8 +42,7 @@ export const PRODUCTS = [
     id: "refill-aqua-galon",
     name: "Refill AQUA Air Mineral Galon 19 Liter",
     category: "Sembako",
-    price: 22000,
-    old_price: 25000,
+    base_price: 17600,
     unit: "galon",
     stock: 200,
     origin: "Sentra Distribusi Aqua Sukmajaya",
@@ -55,8 +54,7 @@ export const PRODUCTS = [
     id: "blueband-cup-250",
     name: "Blue Band Serbaguna Margarine Cup 250g",
     category: "Sembako",
-    price: 16500,
-    old_price: 18500,
+    base_price: 13200,
     unit: "cup",
     stock: 220,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -70,8 +68,7 @@ export const PRODUCTS = [
     id: "bango-520",
     name: "Bango Kecap Manis Botol 520ml",
     category: "Bumbu",
-    price: 24500,
-    old_price: 27500,
+    base_price: 19600,
     unit: "botol",
     stock: 240,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -83,8 +80,7 @@ export const PRODUCTS = [
     id: "royco-sapi-230",
     name: "Royco Bumbu Kaldu Sapi Ziplock 230g",
     category: "Bumbu",
-    price: 11500,
-    old_price: 13500,
+    base_price: 9200,
     unit: "pouch",
     stock: 280,
     origin: "Distributor Bumbu Sukmajaya",
@@ -96,8 +92,7 @@ export const PRODUCTS = [
     id: "totole-jamur-200",
     name: "Totole Kaldu Rasa Jamur Granule 200g",
     category: "Bumbu",
-    price: 22500,
-    old_price: 25500,
+    base_price: 18000,
     unit: "pouch",
     stock: 190,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -109,8 +104,7 @@ export const PRODUCTS = [
     id: "racik-ayam-goreng",
     name: "Indofood Bumbu Racik Ayam Goreng",
     category: "Bumbu",
-    price: 3000,
-    old_price: 3500,
+    base_price: 2400,
     unit: "sachet",
     stock: 500,
     origin: "Pos Cabang Beji, Depok",
@@ -122,8 +116,7 @@ export const PRODUCTS = [
     id: "racik-sayur-asem",
     name: "Indofood Bumbu Racik Sayur Asem",
     category: "Bumbu",
-    price: 3000,
-    old_price: 3500,
+    base_price: 2400,
     unit: "sachet",
     stock: 450,
     origin: "Pos Cabang Beji, Depok",
@@ -135,8 +128,7 @@ export const PRODUCTS = [
     id: "racik-tempe-goreng",
     name: "Indofood Bumbu Racik Tempe Goreng",
     category: "Bumbu",
-    price: 3000,
-    old_price: 3500,
+    base_price: 2400,
     unit: "sachet",
     stock: 480,
     origin: "Pos Cabang Beji, Depok",
@@ -150,8 +142,7 @@ export const PRODUCTS = [
     id: "kentang-astro",
     name: "Kentang Segar Astro Farm 1kg",
     category: "Sayuran",
-    price: 18500,
-    old_price: 21000,
+    base_price: 14800,
     unit: "kg",
     stock: 180,
     origin: "Astro Farm — Sukmajaya Fresh Hub",
@@ -165,8 +156,7 @@ export const PRODUCTS = [
     id: "telur-astro-1kg",
     name: "Telur Ayam Negeri Segar Astro Farm 1kg",
     category: "Protein",
-    price: 29500,
-    old_price: 32500,
+    base_price: 23600,
     unit: "kg",
     stock: 220,
     origin: "Astro Farm — Peternak Depok",
@@ -180,8 +170,7 @@ export const PRODUCTS = [
     id: "indomie-cabe-ijo",
     name: "Indomie Goreng Cabe Ijo Mie Instan (Isi 5 Pcs)",
     category: "Kelontong",
-    price: 16500,
-    old_price: 18500,
+    base_price: 13200,
     unit: "paket",
     stock: 380,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -193,8 +182,7 @@ export const PRODUCTS = [
     id: "indomie-rendang",
     name: "Indomie Goreng Rendang Mie Instan (Isi 5 Pcs)",
     category: "Kelontong",
-    price: 16500,
-    old_price: 18500,
+    base_price: 13200,
     unit: "paket",
     stock: 360,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -206,8 +194,7 @@ export const PRODUCTS = [
     id: "indomie-ayam-bawang",
     name: "Indomie Kuah Ayam Bawang Mie Instan (Isi 5 Pcs)",
     category: "Kelontong",
-    price: 15500,
-    old_price: 17500,
+    base_price: 12400,
     unit: "paket",
     stock: 400,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -219,8 +206,7 @@ export const PRODUCTS = [
     id: "indomie-ayam-spesial",
     name: "Indomie Kuah Ayam Spesial Mie Instan (Isi 5 Pcs)",
     category: "Kelontong",
-    price: 15500,
-    old_price: 17500,
+    base_price: 12400,
     unit: "paket",
     stock: 390,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -232,8 +218,7 @@ export const PRODUCTS = [
     id: "sedaap-goreng-isi5",
     name: "Mie Sedaap Goreng Isi 5 Pcs",
     category: "Kelontong",
-    price: 15500,
-    old_price: 17500,
+    base_price: 12400,
     unit: "paket",
     stock: 350,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -245,8 +230,7 @@ export const PRODUCTS = [
     id: "sunlight-nipis-750",
     name: "Sunlight Jeruk Nipis Cairan Pencuci Piring Refill 750ml",
     category: "Kelontong",
-    price: 15000,
-    old_price: 17500,
+    base_price: 12000,
     unit: "pouch",
     stock: 300,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -258,8 +242,7 @@ export const PRODUCTS = [
     id: "bundle-rinso-molto-1500",
     name: "Bundle 2 Rinso Molto Anti Noda Rose Fresh 1500g",
     category: "Kelontong",
-    price: 68000,
-    old_price: 76000,
+    base_price: 54400,
     unit: "paket",
     stock: 150,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -271,8 +254,7 @@ export const PRODUCTS = [
     id: "rinso-kapsul-sakura",
     name: "Rinso Kapsul Matic Sakura Bloom 16 Kapsul",
     category: "Kelontong",
-    price: 35000,
-    old_price: 40000,
+    base_price: 28000,
     unit: "box",
     stock: 130,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -284,8 +266,7 @@ export const PRODUCTS = [
     id: "rinso-matic-front-1600",
     name: "Rinso Matic Front Load Deterjen Cair 1.6L",
     category: "Kelontong",
-    price: 49500,
-    old_price: 56000,
+    base_price: 39600,
     unit: "pouch",
     stock: 110,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -297,8 +278,7 @@ export const PRODUCTS = [
     id: "bundle-molto-morning",
     name: "Bundle Isi 2 Molto Morning Fresh Pelembut Pakaian",
     category: "Kelontong",
-    price: 45000,
-    old_price: 52000,
+    base_price: 36000,
     unit: "paket",
     stock: 160,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -310,8 +290,7 @@ export const PRODUCTS = [
     id: "molto-baby-720",
     name: "Molto Pure Baby Soft & Gentle Pelembut Pakaian 720ml",
     category: "Kelontong",
-    price: 26000,
-    old_price: 30000,
+    base_price: 20800,
     unit: "pouch",
     stock: 140,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -323,8 +302,7 @@ export const PRODUCTS = [
     id: "kispray-gold-300",
     name: "Kispray Glamorous Gold Pelicin Pakaian Refill 300ml",
     category: "Kelontong",
-    price: 7500,
-    old_price: 9000,
+    base_price: 6000,
     unit: "pouch",
     stock: 220,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -336,8 +314,7 @@ export const PRODUCTS = [
     id: "wipol-cemara-780",
     name: "Wipol Karbol Wangi Cemara Pouch 780ml",
     category: "Kelontong",
-    price: 18000,
-    old_price: 21000,
+    base_price: 14400,
     unit: "pouch",
     stock: 210,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -349,8 +326,7 @@ export const PRODUCTS = [
     id: "sabun-ekonomi-citrus",
     name: "Sabun Colek Krim Ekonomi Fresh Citrus 380g",
     category: "Kelontong",
-    price: 5500,
-    old_price: 6500,
+    base_price: 4400,
     unit: "pot",
     stock: 350,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -364,8 +340,7 @@ export const PRODUCTS = [
     id: "tissue-nice-bogo",
     name: "Buy 1 Get 1 Nice Living Facial Tissue Soft Pack 400+100",
     category: "Perawatan Diri",
-    price: 28500,
-    old_price: 34000,
+    base_price: 22800,
     unit: "paket",
     stock: 250,
     origin: "Gudang Induk Sukmajaya, Depok",
@@ -374,6 +349,38 @@ export const PRODUCTS = [
     nutrition: { kalori: 0, protein: 0, karbo: 0, lemak: 0 },
   },
 ];
+
+// ════════════════════════════════════════════════════════════════════════════
+// PRODUK DENGAN KALKULASI KURASI HARGA & OTOMASI MARGIN (5 TAHAP)
+// ════════════════════════════════════════════════════════════════════════════
+export const PRODUCTS = RAW_PRODUCTS_DATA.map((item) => {
+  const curation = curatePricePipeline({
+    basePrice: item.base_price,
+    category: item.category,
+    productName: item.name,
+    customMarginRate: PLATFORM_MARGIN_RATE,
+  });
+
+  const finalSellingPrice = curation.finalPrice;
+  // Harga anggota mendapatkan diskon kemaslahatan (~7-10% di bawah harga jual)
+  const memberPrice = Math.round(finalSellingPrice * 0.92);
+  // Harga pasar acuan (old_price)
+  const oldPrice = Math.round(finalSellingPrice * 1.1);
+
+  return {
+    ...item,
+    base_price: item.base_price, // Tahap 1: Input Penawaran Awal
+    margin_rate: curation.marginRate, // Tahap 3: Margin 25%
+    margin_amount: curation.stage3.marginAmount,
+    het: curation.hetLimit, // Tahap 4: Pemindaian HET
+    het_status: curation.stage4.statusLabel,
+    is_het_capped: curation.isHETCapped,
+    price: finalSellingPrice, // Tahap 5: Harga Terbit Marketplace
+    member_price: memberPrice,
+    old_price: oldPrice,
+    curation_summary: curation,
+  };
+});
 
 export function formatRp(n) {
   return "Rp " + (n || 0).toLocaleString("id-ID");
